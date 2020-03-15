@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withFirebase } from '../Firebase';
-
+import { SHEET_DB } from '../../constants/routes'
 
 const HomePage = () => (
 	<div>
@@ -8,11 +8,9 @@ const HomePage = () => (
 	</div>
 );
 
-
 const INITIAL_STATE = {
 	currentGroup: '',
 	maxGroup: '',
-	loading: false
 };
 
 class HomeLandingBase extends Component {
@@ -21,7 +19,7 @@ class HomeLandingBase extends Component {
   async componentDidMount() {
 		this.keepCount()
 	}
-	setCount(state) {
+	async sendToSheet(state) {
 		let { currentGroup, maxGroup } = this.state;
 		
 		if (currentGroup === maxGroup) {
@@ -29,16 +27,11 @@ class HomeLandingBase extends Component {
 		} else {
 			currentGroup = currentGroup + 1;
 		}
-		this.updateDbCount(currentGroup)
-		
+		await this.updateDbCount(currentGroup)	
+		this.getCellNumbers(currentGroup)
 	}
 
-	updateDbCount(currentGroup) {
-		this.props.firebase.currentGroupCount().update({count: currentGroup});
-		alert(`Please donate to ${currentGroup}`)
-	}
-
-	async keepCount() {
+		async keepCount() {
 		await this.props.firebase.currentGroupCount().on('value', snapshot => {
 			this.setState({
 				currentGroup: snapshot.val().count,
@@ -51,26 +44,33 @@ class HomeLandingBase extends Component {
 		})
 	}
 
-	countListener() {
-		this.props.firebase.currentGroupCount().on('value', snapshot => {
-			this.setState({
-				currentGroup: snapshot.val().count,
-			})
-		})
+	updateDbCount(currentGroup) {
+		this.props.firebase.currentGroupCount().update({count: currentGroup});
 	}
-  
-  render() {
-		
-    return (
-			// <div>
-			// 	<p>Get group below</p>
-  			// <input id="btn" value="Click here for group number" type="button" onClick={() => { this.setCount(this.state) }}/>
-			// 	<p>Current Group</p>
-			// 	<p>{this.state.currentGroup}</p>
-			// 	<p>Max Group</p>
-			// 	<p>{this.state.maxGroup}</p>
 
-			// </div>
+	getCellNumbers(currentGroup) {
+		let cellNumbers = [2,11];
+		let multiplier = currentGroup * 10;
+		cellNumbers[0] = cellNumbers[0] + multiplier - 10;
+		cellNumbers[1] = cellNumbers[1] + multiplier -10;
+		this.getSheetRoute(cellNumbers);
+	}
+
+	getSheetRoute(cellNumbers) {
+		let firstRowStr = cellNumbers[0].toString()
+		let secondRowStr = cellNumbers[1].toString()
+		let endRoute = `H${firstRowStr}:H${secondRowStr}`;
+		const link = SHEET_DB + endRoute;
+		this.openInNewTab(link)
+	}
+
+	openInNewTab(link) {
+		var win = window.open(link, '_blank');
+		win.focus();
+	}
+
+  render() {
+    return (
 			<div className="wrapper">
 			<header>
 			  <img src="./leveler-logo.png" alt="Logo img" />
@@ -91,7 +91,7 @@ class HomeLandingBase extends Component {
 				<li>Repeat Steps 1 and 2 as many times as you wish. </li>
 			  </ol>
 			  <div className="btn-wrap">
-				<button onClick={() => { this.setCount(this.state) }}>distribute</button>
+				<button onClick={() => { this.sendToSheet(this.state) }}>distribute</button>
 			  </div>
 			</section>
 			<footer>
