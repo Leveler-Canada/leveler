@@ -18,6 +18,7 @@ class HomeLandingBase extends Component {
 
   async componentDidMount() {
 		this.keepCount()
+		document.title = "Leveler"
 	}
 	async sendToSheet(state) {
 		let { currentGroup, maxGroup } = this.state;
