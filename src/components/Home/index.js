@@ -11,6 +11,7 @@ const HomePage = () => (
 const INITIAL_STATE = {
 	currentGroup: '',
 	maxGroup: '',
+	isMobile: ''
 };
 
 class HomeLandingBase extends Component {
@@ -19,14 +20,31 @@ class HomeLandingBase extends Component {
   async componentDidMount() {
 		this.keepCount()
 		document.title = "Leveler"
+		this.getWindowWidth()
+	}
+
+	getWindowWidth() {
+		let width = window.screen.width
+		if (width < 450) {
+			this.setState({
+				isMobile: true
+			})
+		} else {
+			this.setState({
+				isMobile: false
+			})
+		}
 	}
 	async sendToSheet(state) {
-		let { currentGroup, maxGroup } = this.state;
-		
+		let { currentGroup, maxGroup, isMobile } = this.state;
+
 		if (currentGroup === maxGroup) {
 			currentGroup = 1;
 		} else {
 			currentGroup = currentGroup + 1;
+		}
+		if (isMobile) {
+			alert('please donate to group ', currentGroup)
 		}
 		await this.updateDbCount(currentGroup)	
 		this.getCellNumbers(currentGroup)
