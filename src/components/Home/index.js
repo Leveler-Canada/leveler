@@ -67,7 +67,9 @@ class HomeLandingBase extends Component {
 
 	openInNewTab(link) {
 		var win = window.open(link, '_blank');
-		win.focus();
+		if (win != null) {
+			win.focus();
+		}
 	}
 
   render() {
