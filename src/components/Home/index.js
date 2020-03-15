@@ -29,7 +29,13 @@ class HomeLandingBase extends Component {
 		} else {
 			currentGroup = currentGroup + 1;
 		}
-		console.log('donate to group ', currentGroup)
+		this.updateDbCount(currentGroup)
+		
+	}
+
+	updateDbCount(currentGroup) {
+		this.props.firebase.currentGroupCount().update({count: currentGroup});
+		alert(`Please donate to ${currentGroup}`)
 	}
 
 	async keepCount() {
@@ -85,7 +91,7 @@ class HomeLandingBase extends Component {
 				<li>Repeat Steps 1 and 2 as many times as you wish. </li>
 			  </ol>
 			  <div className="btn-wrap">
-				<button onClick={this.handleClick}>distribute</button>
+				<button onClick={() => { this.setCount(this.state) }}>distribute</button>
 			  </div>
 			</section>
 			<footer>
