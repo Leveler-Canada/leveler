@@ -43,8 +43,9 @@ class HomeLandingBase extends Component {
 		} else {
 			currentGroup = currentGroup + 1;
 		}
+
 		if (isMobile) {
-			alert('please donate to group ', currentGroup)
+			alert(`Payment link located on the right side, please distribute to Group ${currentGroup}`)
 		}
 		await this.updateDbCount(currentGroup)	
 		this.getCellNumbers(currentGroup)
