@@ -44,5 +44,4 @@ class Firebase {
 	currentGroupCount = () => this.db.ref('currentGroup')
 	maxGroupCount = () => this.db.ref('maxGroup');
 }
-console.log(Firebase)
 export default Firebase;
