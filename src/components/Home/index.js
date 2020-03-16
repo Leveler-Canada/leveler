@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withFirebase } from '../Firebase';
 import { SHEET_DB } from '../../constants/routes'
 import ReactGA from 'react-ga';
-// gtag('config', 'UA-160733498-1');
+
 const HomePage = () => (
 	<div>
 		<HomeLanding  />
@@ -50,8 +50,14 @@ class HomeLandingBase extends Component {
 		if (isMobile) {
 			alert(`Payment link located on the right side, please distribute to Group ${currentGroup}`)
 		}
+		ReactGA.event({
+			category: 'User',
+			action: 'Clicked Distribute'
+		});
+		
 		await this.updateDbCount(currentGroup)	
 		this.getCellNumbers(currentGroup)
+		
 	}
 
 		async keepCount() {
