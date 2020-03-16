@@ -12,7 +12,8 @@ const HomePage = () => (
 const INITIAL_STATE = {
 	currentGroup: '',
 	maxGroup: '',
-	isMobile: ''
+	isMobile: '',
+	distributeClicks: ''
 };
 
 class HomeLandingBase extends Component {
@@ -54,7 +55,7 @@ class HomeLandingBase extends Component {
 			category: 'User',
 			action: 'Clicked Distribute'
 		});
-		
+
 		await this.updateDbCount(currentGroup)	
 		this.getCellNumbers(currentGroup)
 		
@@ -71,10 +72,16 @@ class HomeLandingBase extends Component {
 				maxGroup: snapshot.val().count,
 			})
 		})
+		this.props.firebase.distributeClicks().on('value', snapshot => {
+			this.setState({
+				distributeClicks: snapshot.val().clicks,
+			})
+		})
 	}
 
 	updateDbCount(currentGroup) {
 		this.props.firebase.currentGroupCount().update({count: currentGroup});
+		this.props.firebase.distributeClicks().update({clicks: this.state.distributeClicks + 1});
 	}
 
 	getCellNumbers(currentGroup) {
