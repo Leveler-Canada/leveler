@@ -109,7 +109,7 @@ class HomeLandingBase extends Component {
 			  <h3>How it works. SHOULD BE DONE ON A MOBILE DEVICE: </h3>
 			  <ol>
 					<li>Click the button below to be assigned to a Group of 10 people. </li>
-					<li>Pay each of the people in your assigned group $5.00. Put "leveler" in the memo.</li>
+					<li>Pay each of the people in your assigned group an equal amount of money. Put "leveler" in the memo.</li>
 					<li>Repeat Steps 1 and 2 as many times as you wish. </li>
 			  </ol>
 			  <div className="btn-wrap">
