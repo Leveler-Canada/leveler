@@ -146,7 +146,7 @@ class HomeLandingBase extends Component {
 				  href="https://docs.google.com/document/d/1zyTKTN55fOQHiB5XKtkIVu42_oCtSq7WbFAsLB4blD8/edit?usp=sharing"
 				  target="_blank"
 				>
-				  donate to admins
+				  contribute
 				</a>
 			  </div>
 			</footer>
