@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { withFirebase } from '../Firebase';
 import { SHEET_DB } from '../../constants/routes'
-
+import ReactGA from 'react-ga';
+// gtag('config', 'UA-160733498-1');
 const HomePage = () => (
 	<div>
 		<HomeLanding  />
@@ -18,9 +19,11 @@ class HomeLandingBase extends Component {
 	state = { ...INITIAL_STATE };
 
   async componentDidMount() {
-		this.keepCount()
 		document.title = "Leveler"
+		this.keepCount()
 		this.getWindowWidth()
+		ReactGA.initialize('UA-160733498-01');
+		ReactGA.pageview(window.location.pathname + window.location.search);
 	}
 
 	getWindowWidth() {
