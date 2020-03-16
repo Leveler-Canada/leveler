@@ -106,11 +106,11 @@ class HomeLandingBase extends Component {
 				restrictions (venue closures, shift/gig/commission cancellations
 				etc).
 			  </p>
-			  <h3>How it works. MUST BE DONE ON A MOBILE DEVICE: </h3>
+			  <h3>How it works. SHOULD BE DONE ON A MOBILE DEVICE: </h3>
 			  <ol>
-				<li>Click the button below to be assigned 10 people. </li>
-				<li>Pay each of those people $5.00. Put "leveler" in the memo.</li>
-				<li>Repeat Steps 1 and 2 as many times as you wish. </li>
+					<li>Click the button below to be assigned to a Group of 10 people. </li>
+					<li>Pay each of the people in your assigned group $5.00. Put "leveler" in the memo.</li>
+					<li>Repeat Steps 1 and 2 as many times as you wish. </li>
 			  </ol>
 			  <div className="btn-wrap">
 				<button onClick={() => { this.sendToSheet(this.state) }}>distribute</button>
@@ -150,6 +150,7 @@ class HomeLandingBase extends Component {
 				</a>
 			  </div>
 			</footer>
+
 		  </div>
     );
   }
