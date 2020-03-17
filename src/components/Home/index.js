@@ -95,7 +95,7 @@ class HomeLandingBase extends Component {
 	getSheetRoute(cellNumbers) {
 		let firstRowStr = cellNumbers[0].toString()
 		let secondRowStr = cellNumbers[1].toString()
-		let endRoute = `H${firstRowStr}:H${secondRowStr}`;
+		let endRoute = `F${firstRowStr}:F${secondRowStr}`;
 		const link = SHEET_DB + endRoute;
 		this.openInNewTab(link)
 	}
