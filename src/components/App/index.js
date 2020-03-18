@@ -10,7 +10,9 @@ const App = () => (
   <Router>
     <div>
       <hr />
-      <Route path={ROUTES.HOME} component={HomePage} />
+      <Route exact path={ROUTES.HOME} component={HomePage} />
+      {/* <Route path={ROUTES.SIGNUP} component={} />
+      <Route path={ROUTES.DISTRIBUTE} component={} /> */}
     </div>
   </Router>
 );
