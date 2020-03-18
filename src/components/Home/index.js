@@ -59,6 +59,7 @@ class HomeLandingBase extends Component {
 	// 	await this.updateDbCount(currentGroup)	
 	// 	this.getCellNumbers(currentGroup)
 		
+
 	// }
 
 	// 	async keepCount() {
