@@ -6,8 +6,10 @@ import FooterNav from '../FooterNav';
 import ReactGA from 'react-ga';
 
 const HomePage = () => (
-	<div>
+	<div className="wrapper">
+		<Header />
 		<HomeLanding  />
+		<FooterNav />
 	</div>
 );
 
@@ -99,8 +101,6 @@ class HomeLandingBase extends Component {
 
   render() {
     return (
-			<div className="wrapper">
-			<Header />
 			<section>
 			  <p className="info">
 					The leveler is a tool for salaried workers to distribute wealth
@@ -119,10 +119,6 @@ class HomeLandingBase extends Component {
 				<button onClick={() => { this.sendToSheet(this.state) }}>distribute</button>
 			  </div>
 			</section>
-			
-			<FooterNav />
-			
-		  </div>
     );
   }
 };
@@ -132,7 +128,3 @@ const HomeLanding = withFirebase(HomeLandingBase);
 export default HomePage;
 
 export { HomeLanding };
-
-
-
-
