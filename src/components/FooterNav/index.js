@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import * as ROUTES from '../../constants/routes';
+import * as ROUTES from '../../constants/routes';
 const FooterNav = () => (
 	<footer>
 		<div>
@@ -20,12 +20,7 @@ const FooterNav = () => (
 		</a>
 		</div>
 		<div>
-		<a
-			href="https://docs.google.com/forms/d/1pYA60eG7qG4ekLWf7kEUwJuwJnS6sc8KAH_RPdawvJU/edit#responses"
-			target="_blank"
-		>
-			join the database
-		</a>
+	    <Link to={ROUTES.SIGNUP}>join the database</Link>
 		</div>
 		<div>
 		<a

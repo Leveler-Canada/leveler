@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withFirebase } from '../Firebase';
 import { SHEET_DB } from '../../constants/routes'
+import Header from '../Header';
 import FooterNav from '../FooterNav';
 import ReactGA from 'react-ga';
 
@@ -99,10 +100,7 @@ class HomeLandingBase extends Component {
   render() {
     return (
 			<div className="wrapper">
-			<header>
-			  <img src="./leveler-logo.png" alt="Logo img" />
-			  <p className="top">peer to peer wealth distribution</p>
-			</header>
+			<Header />
 			<section>
 			  <p className="info">
 					The leveler is a tool for salaried workers to distribute wealth
