@@ -14,7 +14,7 @@ const validationSchema = Yup.object({
     social_url: Yup.string().url()
 });
 
-const Registration = () => (
+const Registration = (props) => (
     <Formik
       initialValues={{ 
           email: "", 
@@ -22,10 +22,8 @@ const Registration = () => (
           city: "",
           state_or_country: "", 
           industry: "",
-          situation_description: "",
-          suggestion: "",
-          social_url: "",
-          payment_methods: {}
+          description: "",
+          suggestion: ""
         }}
       validationSchema={validationSchema}
       onSubmit={values => {
@@ -35,16 +33,18 @@ const Registration = () => (
             delete values.other_industry;
         }
         console.log(values);
+        // pushes into 'entries' node in firebase
+        props.firebase.entriesNode().push(values)
       }}
     >
         {({ handleSubmit, handleChange, values, errors }) => (
         <form onSubmit={handleSubmit}>
             <label htmlFor="email">Email</label>  
             <input
-                type="text"
-                onChange={handleChange}
-                value={values.email}
-                name="email"
+              type="text"
+              onChange={handleChange}
+              value={values.email}
+              name="email"
             />
             {errors.email}
             <label htmlFor="city">City</label>
@@ -57,8 +57,8 @@ const Registration = () => (
             {errors.city}
             <label htmlFor="state_or_country">State (or Country)</label>
             <Field as="select" name="state_or_country">
-                <option value="">----</option>
-                <option value="AL">Alabama</option>
+              <option value="">----</option>
+              <option value="AL">Alabama</option>
 	            <option value="AK">Alaska</option>
 	            <option value="AZ">Arizona</option>
 	            <option value="AR">Arkansas</option>
@@ -112,26 +112,26 @@ const Registration = () => (
             </Field>
             <label>Industry</label>
             <Field as="select" name="industry">
-                <option value="">----</option>
-                <option value="nightlife">Nightlife</option>
-                <option value="arts">Arts</option>
-                <option value="music">Music</option>
-                <option value="production">Production</option>
-                <option value="food_service">Food Service & Hospitality</option>
-                <option value="other">not listed here</option>
+              <option value="">----</option>
+              <option value="Nightlife">Nightlife</option>
+              <option value="Arts">Arts</option>
+              <option value="Music">Music</option>
+              <option value="Production">Production</option>
+              <option value="Food Service">Food Service & Hospitality</option>
+              <option value="Other">Not listed here</option>
             </Field>
-            {values.industry === "other" && (
-                <div>
-                    <label>Industry Name</label>
-                    <input type="text" onChange={handleChange} value={values.custom_industry} name="other_industry"></input>
-                </div>
+            {values.industry === "Other" && (
+              <div>
+                  <label>Industry Name</label>
+                  <input type="text" onChange={handleChange} value={values.custom_industry} name="other_industry"></input>
+              </div>
             )}
             <label>Describe your situation</label>
             <input
               type="text"
               onChange={handleChange}
-              value={values.situation_description}
-              name="situation_description"
+              value={values.description}
+              name="description"
             />
             <div>
             <label>Enter your preferred payment methods</label>
