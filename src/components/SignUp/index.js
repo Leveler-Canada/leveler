@@ -25,7 +25,7 @@ class SignUpFormBase extends Component {
 				Submit this form to add your name to the list. <br />
 				If we need to reach you, we'll use either your email or your social handle.
 				</p>
-				<Registration />
+				<Registration firebase={this.props.firebase}/>
 			</div>
 		)
 	}
