@@ -15,6 +15,7 @@ const SignUpPage = () => (
 
 class SignUpFormBase extends Component {
 	componentDidMount() {
+		document.title = "Leveler: Sign Up"
 		ReactGA.initialize('UA-160733498-01');
 		ReactGA.pageview(window.location.pathname + window.location.search);
 	}
