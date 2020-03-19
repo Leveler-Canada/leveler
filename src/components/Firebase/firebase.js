@@ -55,5 +55,11 @@ class Firebase {
     this.dbFs = app.firestore();
     this.entriesCollection = this.dbFs.collection("entries");
   }
+<<<<<<< HEAD
+=======
+  currentGroupCount = () => this.db.ref("currentGroup");
+  maxGroupCount = () => this.db.ref("maxGroup");
+  entriesNode = () => this.db.ref("entries");
+>>>>>>> added entriesNode to firebase.js, added firebase props to <Registration> function component, wrote push (to DB) call in registration component
 }
 export default Firebase;
