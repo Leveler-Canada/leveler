@@ -10,7 +10,8 @@ const validationSchema = Yup.object({
     paypal: Yup.string().url(),
     venmo: Yup.string().url(),
     cashapp: Yup.string().url(),
-    patreon: Yup.string().url()
+    patreon: Yup.string().url(),
+    social_url: Yup.string().url()
 });
 
 const Registration = () => (
@@ -23,6 +24,7 @@ const Registration = () => (
           industry: "",
           situation_description: "",
           suggestion: "",
+          social_url: "",
           payment_methods: {}
         }}
       validationSchema={validationSchema}
@@ -170,6 +172,14 @@ const Registration = () => (
                 </div>
             )}
             </div>
+            <label htmlFor="social_url">A URL where we can find you on social media</label>
+            <input
+              type="text"
+              onChange={handleChange}
+              value={values.social_url}
+              name="social_url"
+            />
+            {errors.social_url}
             <label>Any suggestions for us?</label>
             <input
               type="text"
