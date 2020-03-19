@@ -22,10 +22,15 @@ const Registration = (props) => (
           city: "",
           state_or_country: "", 
           industry: "",
+<<<<<<< HEAD
           situation_description: "",
           suggestion: "",
           social_url: "",
           payment_methods: {}
+=======
+          description: "",
+          suggestion: ""
+>>>>>>> added constants/signupForm.js to eventually take out all static data in registration.js, updated value 'situation_descriotion' to just 'description'
         }}
       validationSchema={validationSchema}
       onSubmit={values => {
@@ -120,7 +125,7 @@ const Registration = (props) => (
               <option value="Music">Music</option>
               <option value="Production">Production</option>
               <option value="Food Service">Food Service & Hospitality</option>
-              <option value="Other">not listed here</option>
+              <option value="Other">Not listed here</option>
             </Field>
             {values.industry === "Other" && (
               <div>
@@ -132,8 +137,8 @@ const Registration = (props) => (
             <input
               type="text"
               onChange={handleChange}
-              value={values.situation_description}
-              name="situation_description"
+              value={values.description}
+              name="description"
             />
             <div>
             <label>Enter your preferred payment methods</label>
