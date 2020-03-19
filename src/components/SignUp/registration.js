@@ -6,7 +6,11 @@ const validationSchema = Yup.object({
     email: Yup.string().email().required("Required"),
     city: Yup.string().required("Required"),
     state_or_country: Yup.string().min(1).required("Required"),
-    industry: Yup.string().min(1)
+    industry: Yup.string().min(1),
+    paypal: Yup.string().url(),
+    venmo: Yup.string().url(),
+    cashapp: Yup.string().url(),
+    patreon: Yup.string().url()
 });
 
 const Registration = () => (
@@ -18,7 +22,8 @@ const Registration = () => (
           state_or_country: "", 
           industry: "",
           situation_description: "",
-          suggestion: ""
+          suggestion: "",
+          payment_methods: {}
         }}
       validationSchema={validationSchema}
       onSubmit={values => {
@@ -126,6 +131,45 @@ const Registration = () => (
               value={values.situation_description}
               name="situation_description"
             />
+            <div>
+            <label>Enter your preferred payment methods</label>
+            <Field type="checkbox" name="paypal"></Field>
+            <label htmlFor="paypal">PayPal</label>
+            {values.paypal && (
+                <div>
+                    <label>PayPal URL</label>
+                    <input type="text" onChange={handleChange} value={values.paypal} name="paypal"></input>
+                    {errors.paypal}
+                </div>
+            )}
+            <Field type="checkbox" name="venmo"></Field>
+            <label htmlFor="venmo">venmo</label>
+            {values.venmo && (
+                <div>
+                    <label>venmo URL</label>
+                    <input type="text" onChange={handleChange} value={values.venmo} name="venmo"></input>
+                    {errors.venmo}
+                </div>
+            )}
+            <Field type="checkbox" name="cashapp"></Field>
+            <label htmlFor="cashapp">cashapp</label>
+            {values.cashapp && (
+                <div>
+                    <label>cashapp URL</label>
+                    <input type="text" onChange={handleChange} value={values.cashapp} name="cashapp"></input>
+                    {errors.cashapp}
+                </div>
+            )}
+            <Field type="checkbox" name="patreon"></Field>
+            <label htmlFor="patreon">patreon</label>
+            {values.patreon && (
+                <div>
+                    <label>patreon URL</label>
+                    <input type="text" onChange={handleChange} value={values.patreon} name="patreon"></input>
+                    {errors.patreon}
+                </div>
+            )}
+            </div>
             <label>Any suggestions for us?</label>
             <input
               type="text"
