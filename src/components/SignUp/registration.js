@@ -17,7 +17,7 @@ const Registration = (props) => (
           city: "",
           state_or_country: "", 
           industry: "",
-          situation_description: "",
+          description: "",
           suggestion: ""
         }}
       validationSchema={validationSchema}
@@ -113,7 +113,7 @@ const Registration = (props) => (
               <option value="Music">Music</option>
               <option value="Production">Production</option>
               <option value="Food Service">Food Service & Hospitality</option>
-              <option value="Other">not listed here</option>
+              <option value="Other">Not listed here</option>
             </Field>
             {values.industry === "Other" && (
               <div>
@@ -125,8 +125,8 @@ const Registration = (props) => (
             <input
               type="text"
               onChange={handleChange}
-              value={values.situation_description}
-              name="situation_description"
+              value={values.description}
+              name="description"
             />
             <label>Any suggestions for us?</label>
             <input
