@@ -60,16 +60,16 @@ class HomeLandingBase extends Component {
 	}
 
 		async keepCount() {
-		await this.props.firebase.currentGroupCount().on('value', snapshot => {
-			this.setState({
-				currentGroup: snapshot.val().count,
+			await this.props.firebase.currentGroupCount().on('value', snapshot => {
+				this.setState({
+					currentGroup: snapshot.val().count,
+				})
 			})
-		})
-		this.props.firebase.maxGroupCount().on('value', snapshot => {
-			this.setState({
-				maxGroup: snapshot.val().count,
+			this.props.firebase.maxGroupCount().on('value', snapshot => {
+				this.setState({
+					maxGroup: snapshot.val().count,
+				})
 			})
-		})
 	}
 
 	updateDbCount(currentGroup) {
