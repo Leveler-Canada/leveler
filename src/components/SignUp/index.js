@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
+import Registration from './registration';
 import ReactGA from 'react-ga';
 
 const SignUpPage = () => (
@@ -20,7 +21,11 @@ class SignUpFormBase extends Component {
 	render() {
 		return (
 			<div>
-				SIGNUP
+				<p>
+				Submit this form to add your name to the list. <br />
+				If we need to reach you, we'll use either your email or your social handle.
+				</p>
+				<Registration />
 			</div>
 		)
 	}

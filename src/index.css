@@ -50,7 +50,7 @@ section ol {
   font-weight: bold;
 }
 
-section div button {
+.btn {
   padding: 4px 14px;
   border: 2px solid black;
   background: white;
@@ -62,7 +62,7 @@ section div button {
   cursor: pointer;
 }
 
-section div button:hover {
+.btn:hover {
   background: black;
   color: white;
 }
@@ -104,6 +104,16 @@ footer a {
 
 .card-footer a {
   padding-right: 20px;
+}
+
+form input {
+  display: block;
+  width: 100%;
+}
+
+form label {
+  font-size: 18px;
+  display: block;
 }
 
 @media (max-width: 690px) {

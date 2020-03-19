@@ -44,9 +44,13 @@ class HomeLandingBase extends Component {
 					<li>Repeat Steps 1 and 2 as many times as you wish. </li>
 			  </ol>
 			  <div className="btn-wrap">
+<<<<<<< HEAD
 					<Link to="/distribute">
 						<button>distribute</button>
 					</Link>
+=======
+				<button className="btn" onClick={() => { this.sendToSheet(this.state) }}>distribute</button>
+>>>>>>> first skeleton of form
 			  </div>
 			</section>
     );
