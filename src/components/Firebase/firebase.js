@@ -1,5 +1,6 @@
 import app from "firebase/app";
 import "firebase/database";
+import 'firebase/firestore';
 
 const {
   REACT_APP_prod_apiKey,
@@ -51,9 +52,8 @@ class Firebase {
   constructor() {
     app.initializeApp(config);
     this.db = app.database();
+    this.dbFs = app.firestore();
+    this.entriesCollection = this.dbFs.collection("entries");
   }
-  currentGroupCount = () => this.db.ref("currentGroup");
-  maxGroupCount = () => this.db.ref("maxGroup");
-  entriesNode = () => this.db.ref("entries");
 }
 export default Firebase;
