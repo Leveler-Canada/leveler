@@ -6,8 +6,11 @@ const paymentLinks = [ 'venmo.com/sam', 'paypal.com/sam' ]
 const DistributeCard = (props) => (
 	<div className="card-container">
 		<div className="card-header">
-			{/* <div><b>{props.entry.location}</b></div> */}
-			<div><b>{props.entry.city}</b></div>
+			{props.entry.location.state ? (
+				<div><b>{props.entry.location.city}, {props.entry.location.state}</b></div>
+			): (
+				<div><b>{props.entry.location.city}, {props.entry.location.country}</b></div>
+			)}
 			<div><b>{props.entry.industry}</b></div>
 		</div>
 
@@ -16,7 +19,7 @@ const DistributeCard = (props) => (
 		</div>
 
 		<div className="card-footer">
-			{paymentLinks.map(link => (
+			{props.entry.payment_url.map(link => (
 				<DistributeLink
 					key={link}
 					link={link}
