@@ -21,13 +21,13 @@ class SignUpFormBase extends Component {
 	}
 	render() {
 		return (
-			<div>
-				<p>
-				Submit this form to add your name to the list. <br />
-				If we need to reach you, we'll use either your email or your social handle.
-				</p>
+			<section className="signup-form">
+				<p><b>Please submit your name only if you are DIRECTLY compromised</b> i.e. your next job got cancelled, or your pay just got cut due to health and safety restrictions.</p>
+				<p>Once you submit, an admin in your area will add you to the list.</p>
+				<p><i>If you feel that you have received what you need, please email <a href="mailto:dbastudionyc@gmail.com">our team</a> so that we may take you off the list and allow for distribution to those in need.</i></p>
+				<p>*fields with an asterisk will be made public.</p>
 				<Registration firebase={this.props.firebase}/>
-			</div>
+			</section>
 		)
 	}
 }
