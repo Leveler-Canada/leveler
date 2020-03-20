@@ -100,7 +100,6 @@ const Registration = (props) => (
         }}
       validationSchema={validationSchema}
       onSubmit={values => {
-        values.timestamp = new Date().toISOString();
         if(values.industry === 'other'){
             values.industry = values.other_industry;
             delete values.other_industry;
@@ -114,13 +113,25 @@ const Registration = (props) => (
           values.payment_method.push(values.payment_3)
           delete values.payment_3;
         } 
-        console.log(values);
+        var payload = {
+          entry: {
+            description: values.description,
+            email: values.email,
+            industry: values.industry,
+            location: values.location,
+            payment_url: values.payment_method,
+            social_url: values.social_url
+          },
+          timestamp: new Date().toISOString(),
+          random: "XXXXXXX"
+        }
+        console.log(payload);
         // pushes into 'entries' collection in firebase
-        props.firebase.entriesNode().push(values, function (error) {
+        props.firebase.entriesNode().push(payload, function (error) {
           if (error) {
             alert("Data could not be saved." + error);
           } else {
-            successHandler(values);
+            successHandler(payload);
           }
         });
       }}
