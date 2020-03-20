@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
+import { Loading } from '../Animations'
 import DistributeCard from './DistributeCard';
 import FooterNav from '../FooterNav';
 import ReactGA from 'react-ga';
@@ -14,7 +15,8 @@ const DistributePage = () => (
 )
 
 const INITIAL_STATE = {
-	entries: []
+	entries: [],
+	loading: true
 };
 
 class DistributeTableBase extends Component {
@@ -42,7 +44,8 @@ class DistributeTableBase extends Component {
 					})
 					if (entries) {
 						this.setState({
-							entries
+							entries,
+							loading: false
 						})
 					}
 				})
@@ -56,6 +59,7 @@ class DistributeTableBase extends Component {
 		return (
 			<div>
 				<p id="distribute-header">Send the same amount of money to each of these people</p>
+				{this.state.loading && <Loading height="100" width="100"/>}
 				{entries.map(entry => (
 					<DistributeCard
 						entry={entry}

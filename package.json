@@ -15,7 +15,8 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "svgr": "svgr -d src/components/Icons/ src/assets/icons",
+    "svgr-icons": "svgr -d src/components/Icons/ src/assets/icons",
+    "svgr-animations": "svgr -d src/components/Animations/ src/assets/animations",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
