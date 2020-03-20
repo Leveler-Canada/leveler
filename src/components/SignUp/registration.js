@@ -7,7 +7,10 @@ const validationSchema = Yup.object({
     email: Yup.string().email().required("Required"),
     industry: Yup.string().min(1),
     location: Yup.object(),
-    social_url: Yup.string().url()
+    social_url: Yup.string().url(),
+    payment: Yup.string().url().required("Required"),
+    payment_2: Yup.string().url(),
+    payment_3: Yup.string().url()
 });
 
 const Registration = (props) => (
@@ -17,6 +20,7 @@ const Registration = (props) => (
           timestamp: "", 
           industry: "",
           description: "",
+          payment_method: [],
           suggestion: ""
         }}
       validationSchema={validationSchema}
@@ -26,6 +30,15 @@ const Registration = (props) => (
             values.industry = values.other_industry;
             delete values.other_industry;
         }
+        values.payment_method = [values.payment]
+        if (values.payment_2) {
+          values.payment_method.push(values.payment_2);
+          delete values.payment_2;
+        }
+        if (values.payment_3) {
+          values.payment_method.push(values.payment_3)
+          delete values.payment_3;
+        } 
         console.log(values);
         // pushes into 'entries' node in firebase
         props.firebase.entriesNode().push(values)
@@ -71,52 +84,21 @@ const Registration = (props) => (
             <span className="description">tell us what you feel comfortable sharing about your situation</span>
             <textarea
               type="text"
-              maxlength="300"
+              maxLength="300"
               onChange={handleChange}
               value={values.description}
               name="description"
             />
           </fieldset>
           <fieldset>
-            <div>
-            <label>Enter your preferred payment methods</label>
-            <Field type="checkbox" name="paypal"></Field>
-            <label htmlFor="paypal">PayPal</label>
-            {values.paypal && (
-                <div>
-                    <label>PayPal URL</label>
-                    <input type="text" onChange={handleChange} value={values.paypal} name="paypal"></input>
-                    {errors.paypal}
-                </div>
-            )}
-            <Field type="checkbox" name="venmo"></Field>
-            <label htmlFor="venmo">venmo</label>
-            {values.venmo && (
-                <div>
-                    <label>venmo URL</label>
-                    <input type="text" onChange={handleChange} value={values.venmo} name="venmo"></input>
-                    {errors.venmo}
-                </div>
-            )}
-            <Field type="checkbox" name="cashapp"></Field>
-            <label htmlFor="cashapp">cashapp</label>
-            {values.cashapp && (
-                <div>
-                    <label>cashapp URL</label>
-                    <input type="text" onChange={handleChange} value={values.cashapp} name="cashapp"></input>
-                    {errors.cashapp}
-                </div>
-            )}
-            <Field type="checkbox" name="patreon"></Field>
-            <label htmlFor="patreon">patreon</label>
-            {values.patreon && (
-                <div>
-                    <label>patreon URL</label>
-                    <input type="text" onChange={handleChange} value={values.patreon} name="patreon"></input>
-                    {errors.patreon}
-                </div>
-            )}
-            </div>
+            <label htmlFor="payment">payment*</label>
+            <span className="description">please post the full public url to your preferred payment method(s)</span>
+            <input type="text" onChange={handleChange} value={values.payment} name="payment"></input>
+            <span className="error">{errors.payment}</span>
+            <input type="text" onChange={handleChange} value={values.payment_2} name="payment_2" className="hidden"></input>
+            <span className="error">{errors.payment_2}</span>
+            <input type="text" onChange={handleChange} value={values.payment_3} name="payment_3" className="hidden"></input>
+            <span className="error">{errors.payment_3}</span>
           </fieldset>
           <fieldset>
             <label htmlFor="social_url">social</label>

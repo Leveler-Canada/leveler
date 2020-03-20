@@ -112,6 +112,7 @@ fieldset label {
 fieldset .description {
   font-family: "HelveticaNeue-UltraLight", Arial, Helvetica, sans-serif;
   font-size: 18px;
+  display: block;
 }
 
 fieldset input {
@@ -121,6 +122,10 @@ fieldset input {
   border: none;
   border-bottom: 2px solid black;
   font-size: 22px;
+}
+
+fieldset input.hidden {
+  display: none;
 }
 
 fieldset textarea {
