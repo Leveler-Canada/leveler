@@ -25,8 +25,20 @@ class FormikPlacesAutoComplete extends Component {
   };
 
   handleSelect = location => {
+    console.log(location);
+    var payload = {};
+    var fragments = location.split(',');
+    if (fragments.length === 3) {
+      payload.city = fragments[0];
+      payload.state = fragments[1];
+      payload.country = fragments[2];
+    } else {
+      payload.city = fragments[0];
+      payload.state = "";
+      payload.country = fragments[1];
+    }
     this.setState(() => {
-      this.props.form.setFieldValue(this.state.name, location)
+      this.props.form.setFieldValue(this.state.name, payload);
     });
   };
 
@@ -60,7 +72,7 @@ class FormikPlacesAutoComplete extends Component {
           <div>
             <input
               {...getInputProps({
-                placeholder: "Search Places ...",
+                placeholder: "search for your city",
                 className: "location-search-input form-control"
               })}
             />

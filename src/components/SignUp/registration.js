@@ -6,10 +6,7 @@ import FormikPlacesAutocomplete from "./FormikPlacesAutocomplete.jsx";
 const validationSchema = Yup.object({
     email: Yup.string().email().required("Required"),
     industry: Yup.string().min(1),
-    paypal: Yup.string().url(),
-    venmo: Yup.string().url(),
-    cashapp: Yup.string().url(),
-    patreon: Yup.string().url(),
+    location: Yup.object(),
     social_url: Yup.string().url()
 });
 
@@ -36,16 +33,22 @@ const Registration = (props) => (
     >
         {({ handleSubmit, handleChange, values, errors }) => (
         <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Email</label>  
+          <fieldset>
+            <label htmlFor="email">email:</label>  
+            <span className="error">{errors.email}</span>
             <input
               type="text"
               onChange={handleChange}
               value={values.email}
               name="email"
             />
-            {errors.email}
-            <label htmlFor="location">Location</label>
+          </fieldset>
+          <fieldset>
+            <label htmlFor="location">*location</label>
+            <span className="description">begin typing your city to select the appropriate state and/or country</span>
             <Field name="location" component={FormikPlacesAutocomplete} />
+          </fieldset>
+          <fieldset>
             <label>Industry</label>
             <Field as="select" name="industry">
               <option value="">----</option>
@@ -62,13 +65,18 @@ const Registration = (props) => (
                   <input type="text" onChange={handleChange} value={values.custom_industry} name="other_industry"></input>
               </div>
             )}
-            <label>Describe your situation</label>
+          </fieldset>
+          <fieldset>
+            <label>*context</label>
+            <span className="description">tell us what you feel comfortable sharing about your situation</span>
             <input
               type="text"
               onChange={handleChange}
               value={values.description}
               name="description"
             />
+          </fieldset>
+          <fieldset>
             <div>
             <label>Enter your preferred payment methods</label>
             <Field type="checkbox" name="paypal"></Field>
@@ -108,6 +116,8 @@ const Registration = (props) => (
                 </div>
             )}
             </div>
+          </fieldset>
+          <fieldset>
             <label htmlFor="social_url">A URL where we can find you on social media</label>
             <input
               type="text"
@@ -116,6 +126,8 @@ const Registration = (props) => (
               name="social_url"
             />
             {errors.social_url}
+          </fieldset>
+          <fieldset>
             <label>Any suggestions for us?</label>
             <input
               type="text"
@@ -123,7 +135,8 @@ const Registration = (props) => (
               value={values.suggestion}
               name="suggestion"
             />
-            <button className="btn" type="submit">Submit</button>
+          </fieldset>  
+          <button className="btn" type="submit">Submit</button>
         </form>
       )}
     </Formik>
