@@ -13,6 +13,11 @@ const validationSchema = Yup.object({
     payment_2: Yup.string().url(),
     payment_3: Yup.string().url()
 });
+
+function successHandler(payload) {
+  alert("Data successfully submitted.");
+}
+
 // Input feedback
 const InputFeedback = ({ error }) =>
   error ? <div className={classNames("input-feedback")}>{error}</div> : null;
@@ -111,7 +116,13 @@ const Registration = (props) => (
         } 
         console.log(values);
         // pushes into 'entries' collection in firebase
-        props.firebase.entriesNode().push(values)
+        props.firebase.entriesNode().push(values, function (error) {
+          if (error) {
+            alert("Data could not be saved." + error);
+          } else {
+            successHandler(values);
+          }
+        });
       }}
     >
         {({ handleSubmit, handleChange, values, touched, errors }) => (
