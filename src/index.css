@@ -102,8 +102,8 @@ footer a {
   padding-bottom: 1rem;
 }
 
-.card-footer svg {
-  width: 2.5rem;
+.card-footer a {
+  padding-right: 20px;
 }
 
 @media (max-width: 690px) {
