@@ -44,12 +44,12 @@ const Registration = (props) => (
             />
           </fieldset>
           <fieldset>
-            <label htmlFor="location">*location</label>
+            <label htmlFor="location">location*</label>
             <span className="description">begin typing your city to select the appropriate state and/or country</span>
             <Field name="location" component={FormikPlacesAutocomplete} />
           </fieldset>
           <fieldset>
-            <label>Industry</label>
+            <label>industry*</label>
             <Field as="select" name="industry">
               <option value="">----</option>
               <option value="Nightlife">Nightlife</option>
@@ -61,16 +61,17 @@ const Registration = (props) => (
             </Field>
             {values.industry === "Other" && (
               <div>
-                  <label>Industry Name</label>
+                  <label>industry name</label>
                   <input type="text" onChange={handleChange} value={values.custom_industry} name="other_industry"></input>
               </div>
             )}
           </fieldset>
           <fieldset>
-            <label>*context</label>
+            <label>context*</label>
             <span className="description">tell us what you feel comfortable sharing about your situation</span>
-            <input
+            <textarea
               type="text"
+              maxlength="300"
               onChange={handleChange}
               value={values.description}
               name="description"
@@ -118,7 +119,8 @@ const Registration = (props) => (
             </div>
           </fieldset>
           <fieldset>
-            <label htmlFor="social_url">A URL where we can find you on social media</label>
+            <label htmlFor="social_url">social</label>
+            <span className="description">please provide full url for your social media handle. Will not be made public, however you may get DM'ed by an admin to verify your identity.</span>
             <input
               type="text"
               onChange={handleChange}
@@ -128,8 +130,9 @@ const Registration = (props) => (
             {errors.social_url}
           </fieldset>
           <fieldset>
-            <label>Any suggestions for us?</label>
-            <input
+            <label>suggestions</label>
+            <span className="description">let us know if you see room for improvement or have ideas on how to help make leveler better.</span>
+            <textarea
               type="text"
               onChange={handleChange}
               value={values.suggestion}
