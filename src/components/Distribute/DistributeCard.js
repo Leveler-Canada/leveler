@@ -1,8 +1,6 @@
 import React from 'react';
 import DistributeLink from './DistributeLink';
 
-const paymentLinks = [ 'venmo.com/sam', 'paypal.com/sam' ]
-
 const DistributeCard = (props) => (
 	<div className="card-container">
 		<div className="card-header">
