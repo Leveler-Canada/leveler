@@ -2,6 +2,7 @@ import React from "react";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import FormikPlacesAutocomplete from "./FormikPlacesAutocomplete.jsx";
+import classNames from 'classnames';
 
 const validationSchema = Yup.object({
     email: Yup.string().email().required("Required"),
@@ -12,6 +13,64 @@ const validationSchema = Yup.object({
     payment_2: Yup.string().url(),
     payment_3: Yup.string().url()
 });
+// Input feedback
+const InputFeedback = ({ error }) =>
+  error ? <div className={classNames("input-feedback")}>{error}</div> : null;
+
+const RadioButton = ({
+  field: { name, value, onChange, onBlur },
+  id,
+  label,
+  className,
+  ...props
+}) => {
+  return (
+    <div className="radio-button-group">
+      <input
+        name={name}
+        id={id}
+        type="radio"
+        value={id} // could be something else for output?
+        checked={id === value}
+        onChange={onChange}
+        onBlur={onBlur}
+        className={classNames("radio-button")}
+        {...props}
+      />
+      <label htmlFor={id}>{label}</label>
+    </div>
+  );
+};
+
+// Radio group
+const RadioButtonGroup = ({
+  value,
+  error,
+  touched,
+  id,
+  label,
+  className,
+  children
+}) => {
+  const classes = classNames(
+    "input-field",
+    {
+      "is-success": value || (!error && touched), // handle prefilled or user-filled
+      "is-error": !!error && touched
+    },
+    className
+  );
+
+  return (
+    <div className={classes}>
+      <fieldset>
+        <legend>{label}</legend>
+        {children}
+        {touched && <InputFeedback error={error} />}
+      </fieldset>
+    </div>
+  );
+};
 
 const Registration = (props) => (
     <Formik
@@ -21,7 +80,7 @@ const Registration = (props) => (
           industry: "",
           description: "",
           payment_method: [],
-          suggestion: ""
+          suggestion: "",
         }}
       validationSchema={validationSchema}
       onSubmit={values => {
@@ -40,11 +99,11 @@ const Registration = (props) => (
           delete values.payment_3;
         } 
         console.log(values);
-        // pushes into 'entries' node in firebase
+        // pushes into 'entries' collection in firebase
         props.firebase.entriesNode().push(values)
       }}
     >
-        {({ handleSubmit, handleChange, values, errors }) => (
+        {({ handleSubmit, handleChange, values, touched, errors }) => (
         <form onSubmit={handleSubmit}>
           <fieldset>
             <label htmlFor="email">email:</label>  
@@ -61,24 +120,55 @@ const Registration = (props) => (
             <span className="description">begin typing your city to select the appropriate state and/or country</span>
             <Field name="location" component={FormikPlacesAutocomplete} />
           </fieldset>
-          <fieldset>
-            <label>industry*</label>
-            <Field as="select" name="industry">
-              <option value="">----</option>
-              <option value="Nightlife">Nightlife</option>
-              <option value="Arts">Arts</option>
-              <option value="Music">Music</option>
-              <option value="Production">Production</option>
-              <option value="Food Service">Food Service & Hospitality</option>
-              <option value="Other">Not listed here</option>
-            </Field>
-            {values.industry === "Other" && (
+          <RadioButtonGroup
+            id="radioGroup"
+            label="industry*"
+            value={values.industry}
+            error={errors.industry}
+            touched={touched.industry}
+          >
+            <Field
+              component={RadioButton}
+              name="industry"
+              id="arts"
+              label="arts"
+            />
+            <Field
+              component={RadioButton}
+              name="industry"
+              id="nightlife"
+              label="nightlife"
+            />
+            <Field
+              component={RadioButton}
+              name="industry"
+              id="production"
+              label="production"
+            />
+            <Field
+              component={RadioButton}
+              name="industry"
+              id="food_service"
+              label="hospitality"
+            />
+            <Field
+              component={RadioButton}
+              name="industry"
+              id="music"
+              label="music"
+            />
+            <Field
+              component={RadioButton}
+              name="industry"
+              id="other"
+              label="other"
+            />
+            {values.industry === "other" && (
               <div>
-                  <label>industry name</label>
-                  <input type="text" onChange={handleChange} value={values.custom_industry} name="other_industry"></input>
+                  <input type="text" onChange={handleChange} value={values.custom_industry} name="other_industry" placeholder="other industry here"></input>
               </div>
             )}
-          </fieldset>
+          </RadioButtonGroup>
           <fieldset>
             <label>context*</label>
             <span className="description">tell us what you feel comfortable sharing about your situation</span>
@@ -109,13 +199,14 @@ const Registration = (props) => (
               value={values.social_url}
               name="social_url"
             />
-            {errors.social_url}
+            <span className="error">{errors.social_url}</span>
           </fieldset>
           <fieldset>
             <label>suggestions</label>
             <span className="description">let us know if you see room for improvement or have ideas on how to help make leveler better.</span>
             <textarea
               type="text"
+              maxLength="300"
               onChange={handleChange}
               value={values.suggestion}
               name="suggestion"
