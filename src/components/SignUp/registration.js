@@ -5,14 +5,14 @@ import { withFirebase } from '../Firebase';
 import FormikPlacesAutocomplete from "./FormikPlacesAutocomplete.jsx";
 import classNames from 'classnames';
 
+const URL_REGEX = /^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/;
+
 const validationSchema = Yup.object({
     email: Yup.string().email().required("Required"),
     industry: Yup.string().min(1),
     location: Yup.object(),
-    social_url: Yup.string().url(),
-    payment: Yup.string().url().required("Required"),
-    payment_2: Yup.string().url(),
-    payment_3: Yup.string().url()
+    social_url: Yup.string().matches(URL_REGEX, "we need a real URL here"),
+    payment: Yup.string().matches(URL_REGEX, "we need a real URL here").required("Required")
 });
 
 function successHandler(payload) {
@@ -205,10 +205,6 @@ const Registration = (props) => (
             <span className="description">please post the full public url to your preferred payment method(s)</span>
             <input type="text" onChange={handleChange} value={values.payment} name="payment"></input>
             <span className="error">{errors.payment}</span>
-            <input type="text" onChange={handleChange} value={values.payment_2} name="payment_2" className="hidden"></input>
-            <span className="error">{errors.payment_2}</span>
-            <input type="text" onChange={handleChange} value={values.payment_3} name="payment_3" className="hidden"></input>
-            <span className="error">{errors.payment_3}</span>
           </fieldset>
           <fieldset>
             <label htmlFor="social_url">social</label>
