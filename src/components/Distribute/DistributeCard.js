@@ -31,10 +31,12 @@ export default class DistributeCard extends Component {
 						)}
 						<div><p><b>{entry.industry}</b></p></div>
 					</div>
-
+					
+					{this.state.linkClicked ? (
 					<div>
 						<a>report error</a>
 					</div>
+					) : (null)}
 					
 				</div>
 
