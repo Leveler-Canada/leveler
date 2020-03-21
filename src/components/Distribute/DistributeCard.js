@@ -3,13 +3,20 @@ import DistributeLink from './DistributeLink';
 
 const DistributeCard = (props) => (
 	<div className="card-container">
-		<div className="card-header">
-			{props.entry.location.state ? (
-				<div><p><b>{props.entry.location.city}, {props.entry.location.state}</b></p></div>
-			): (
-				<div><p><b>{props.entry.location.city}, {props.entry.location.country}</b></p></div>
-			)}
-			<div className="overflow ellipsis"><p><b>{props.entry.industry}</b></p></div>
+		<div className="card-header"> 
+			<div>
+				{props.entry.location.state ? (
+					<div><p><b>{props.entry.location.city}, {props.entry.location.state}</b></p></div>
+				): (
+					<div><p><b>{props.entry.location.city}, {props.entry.location.country}</b></p></div>
+				)}
+				<div><p><b>{props.entry.industry}</b></p></div>
+			</div>
+
+			<div>
+				<a>report error</a>
+			</div>
+			
 		</div>
 
 		<div className="card-body">

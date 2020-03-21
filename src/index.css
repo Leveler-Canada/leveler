@@ -96,6 +96,11 @@ footer a {
   font-size: 1rem;
 }
 
+.card-header a {
+  color: red;
+  text-decoration: underline
+}
+
 .overflow {
   margin-left: 1rem;
   white-space: nowrap;
