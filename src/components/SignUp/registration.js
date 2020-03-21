@@ -103,7 +103,10 @@ const Registration = (props) => (
           values.payment_method.push(values.payment_3)
           delete values.payment_3;
         } 
+        const { entriesCollection } = props.firebase;
+        const random = entriesCollection.doc().id;
         var payload = {
+          random: random,
           entry: {
             description: values.description,
             email: values.email,
@@ -116,8 +119,6 @@ const Registration = (props) => (
         }
         console.log(payload);
         // pushes into 'entries' document in firebase
-        const { entriesCollection } = props.firebase;
-        const random = entriesCollection.doc().id;
         console.log(random);
         entriesCollection.doc(random).set(payload).then(successHandler);
       }}
