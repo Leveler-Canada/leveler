@@ -56,7 +56,7 @@ export default class DistributeCard extends Component {
 					{this.state.linkClicked ? (
 						<Checkbox
 							contributeChecked={this.state.contributeChecked}
-            	onChange={this.handleCheckboxChange}
+							onChange={this.handleCheckboxChange}
           	/>
 					): (null)}
 				</div>
@@ -66,7 +66,11 @@ export default class DistributeCard extends Component {
 }
 const Checkbox = props => (
 	<span className="contributed-container">
-	<p><b>I contributed</b></p>
+	{props.contributeChecked ? (
+		<p>🙌🏼<b>Thanks!</b></p>
+	) : (
+		<p><b>I contributed</b></p>
+	)}
 	<label id="checkbox-container">
 		<input name="contributed" type="checkbox" {...props}/>
 		<span id="custom-checkmark"></span>
