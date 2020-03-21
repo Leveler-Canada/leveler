@@ -3,7 +3,7 @@ import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
 import ReactGA from 'react-ga';
-
+import { Link } from 'react-router-dom';
 
 const HomePage = () => (
 	<div className="wrapper">
@@ -43,7 +43,9 @@ class HomeLandingBase extends Component {
 					<li>Repeat Steps 1 and 2 as many times as you wish. </li>
 			  </ol>
 			  <div className="btn-wrap">
-				<button className="btn" onClick={() => { this.sendToSheet(this.state) }}>distribute</button>
+			  	<Link to="/distribute">
+				  <button className="btn">distribute</button>
+				</Link>
 			  </div>
 			</section>
     );
