@@ -20,7 +20,15 @@ const FooterNav = () => (
 			</a>
 		</div>
 		<div>
-	    <Link to={ROUTES.SIGNUP}>join the database</Link>
+		<div>
+				<a
+				  href="https://docs.google.com/forms/d/1pYA60eG7qG4ekLWf7kEUwJuwJnS6sc8KAH_RPdawvJU/edit#responses"
+				  target="_blank"
+				>
+				  join the database
+				</a>
+			  </div>
+	    {/* <Link to={ROUTES.SIGNUP}>join the database</Link> */}
 		</div>
 		<div>
 			<a
