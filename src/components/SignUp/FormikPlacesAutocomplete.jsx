@@ -39,6 +39,7 @@ class FormikPlacesAutoComplete extends Component {
     }
     this.setState(() => {
       this.props.form.setFieldValue(this.state.name, payload);
+      return { location };
     });
   };
 
