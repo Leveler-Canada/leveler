@@ -74,7 +74,7 @@ class DistributeTableBase extends Component {
 				{entries.map(entry => (
 					<DistributeCard
 						entry={entry}
-						key={entry.random}
+						key={entry.social_url}
 					/>
 					))}
 			</div>
