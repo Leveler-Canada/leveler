@@ -80,14 +80,14 @@ const RadioButtonGroup = ({
 
 const Registration = (props) => (
     <Formik
-    initialValues={{ 
-      email: "", 
-      timestamp: "", 
-      industry: "",
-      description: "",
-      payment_method: [],
-      suggestion: "",
-    }}
+      initialValues={{ 
+          email: "", 
+          timestamp: "", 
+          industry: "",
+          description: "",
+          payment_method: [],
+          suggestion: "",
+        }}
       validationSchema={validationSchema}
       onSubmit={values => {
         if(values.industry === 'other'){
