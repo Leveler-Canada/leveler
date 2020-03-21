@@ -80,8 +80,8 @@ footer a {
 
 /* Distribute index.js */
 #distribute-header {
-  font-size: 1.25rem;
-  padding-bottom: 1.25rem;
+  font-size: 1.1rem;
+  padding: 1.25rem .25rem;
 }
 /* DistributeCard.js */
 .card-container {
@@ -94,6 +94,16 @@ footer a {
   justify-content: space-between;
   padding-bottom: 1rem;
   font-size: 1rem;
+}
+
+.overflow {
+  margin-left: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
 }
 
 .card-body {
@@ -141,5 +151,18 @@ footer a {
     width: 100%;
     line-height: 1.6em;
     text-align: left;
+  }
+  /* DistributeCard.js */
+  .card-container {
+    padding:  .625rem 1.25rem ;
+    margin-bottom: 20px;
+    border: 1px solid black;
+  }
+
+  .card-header {
+    font-size: .9rem;
+  }
+  .card-body {
+    font-size: 1rem;
   }
 }

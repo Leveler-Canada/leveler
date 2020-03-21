@@ -58,7 +58,7 @@ class DistributeTableBase extends Component {
 		const { entries } = this.state;
 		return (
 			<div>
-				<p id="distribute-header">Send the same amount of money to each of these people</p>
+				<p id="distribute-header">Below are 10 people <b><i>chosen at random</i></b>, send the <b><i>same amount</i></b> to each person</p>
 				{this.state.loading && <Loading height="100" width="100"/>}
 				{entries.map(entry => (
 					<DistributeCard
