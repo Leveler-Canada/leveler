@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
@@ -44,13 +43,7 @@ class HomeLandingBase extends Component {
 					<li>Repeat Steps 1 and 2 as many times as you wish. </li>
 			  </ol>
 			  <div className="btn-wrap">
-<<<<<<< HEAD
-					<Link to="/distribute">
-						<button>distribute</button>
-					</Link>
-=======
 				<button className="btn" onClick={() => { this.sendToSheet(this.state) }}>distribute</button>
->>>>>>> first skeleton of form
 			  </div>
 			</section>
     );

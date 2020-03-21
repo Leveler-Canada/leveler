@@ -1,6 +1,7 @@
 import React from "react";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
+import { withFirebase } from '../Firebase';
 import FormikPlacesAutocomplete from "./FormikPlacesAutocomplete.jsx";
 import classNames from 'classnames';
 
@@ -79,25 +80,14 @@ const RadioButtonGroup = ({
 
 const Registration = (props) => (
     <Formik
-      initialValues={{ 
-          email: "", 
-          timestamp: "", 
-          industry: "",
-<<<<<<< HEAD
-          situation_description: "",
-          suggestion: "",
-          social_url: "",
-          payment_methods: {}
-=======
-          description: "",
-          payment_method: [],
-<<<<<<< HEAD
-          suggestion: ""
->>>>>>> added constants/signupForm.js to eventually take out all static data in registration.js, updated value 'situation_descriotion' to just 'description'
-=======
-          suggestion: "",
->>>>>>> changed industry to radio button
-        }}
+    initialValues={{ 
+      email: "", 
+      timestamp: "", 
+      industry: "",
+      description: "",
+      payment_method: [],
+      suggestion: "",
+    }}
       validationSchema={validationSchema}
       onSubmit={values => {
         if(values.industry === 'other'){
@@ -122,18 +112,14 @@ const Registration = (props) => (
             payment_url: values.payment_method,
             social_url: values.social_url
           },
-          timestamp: new Date().toISOString(),
-          random: "XXXXXXX"
+          timestamp: new Date().toISOString()
         }
         console.log(payload);
-        // pushes into 'entries' collection in firebase
-        props.firebase.entriesNode().push(payload, function (error) {
-          if (error) {
-            alert("Data could not be saved." + error);
-          } else {
-            successHandler(payload);
-          }
-        });
+        // pushes into 'entries' document in firebase
+        const { entriesCollection } = props.firebase;
+        const random = entriesCollection.doc().id;
+        console.log(random);
+        entriesCollection.doc(random).set(payload).then(successHandler);
       }}
     >
         {({ handleSubmit, handleChange, values, touched, errors }) => (
