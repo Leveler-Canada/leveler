@@ -78,6 +78,44 @@ footer a {
   color: blue;
 }
 
+/* Distribute index.js */
+#distribute-header {
+  font-size: 1.3rem;
+  padding: 1.25rem .25rem;
+}
+/* DistributeCard.js */
+.card-container {
+  padding:  .625rem 1rem;
+  margin-bottom: 20px;
+  border: 1px solid black;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.overflow {
+  margin-left: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+}
+
+.card-body {
+  font-size: 1.1rem;
+  font-style: italic;
+  padding-bottom: 1rem;
+}
+
+.card-footer a {
+  padding-right: 20px;
+}
+
 @media (max-width: 690px) {
   footer {
     display: flex;
@@ -113,5 +151,17 @@ footer a {
     width: 100%;
     line-height: 1.6em;
     text-align: left;
+  }
+  /* Distribute index.js */
+  #distribute-header {
+    font-size: 1.1rem;
+  }
+
+  /* DistributeCard.js */
+  .card-header {
+    font-size: .9rem;
+  }
+  .card-body {
+    font-size: 1rem;
   }
 }
