@@ -53,6 +53,7 @@ class Firebase {
     app.initializeApp(config);
     this.db = app.database();
     this.dbFs = app.firestore();
+    this.fieldValue = app.firestore.FieldValue;
     this.entriesCollection = this.dbFs.collection("entries");
   }
 }

@@ -41,6 +41,7 @@ class DistributeTableBase extends Component {
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
 						entries.push(doc.data().entry);
+						this.updateShownCount(doc.data().random)
 					})
 					if (entries) {
 						this.setState({
@@ -50,6 +51,16 @@ class DistributeTableBase extends Component {
 					}
 				})
 		} catch(e) {
+			console.log(e.message)
+		}
+	}
+
+	async updateShownCount(docId) {
+		const { fieldValue, entriesCollection } = this.props.firebase;
+		const docRef = entriesCollection.doc(docId)
+		try {
+			await docRef.update({shown: fieldValue.increment(1)})
+		} catch (e) {
 			console.log(e.message)
 		}
 	}
