@@ -6,17 +6,12 @@ import classNames from 'classnames';
 
 const URL_REGEX = /^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/;
 
-const validationSchema = Yup.object({
-    email: Yup.string().email().required("Required"),
+const validationSchema = Yup.object().shape({
+    email: Yup.string().email().required("required"),
     industry: Yup.string().min(1),
-    location: Yup.object(),
     social_url: Yup.string().matches(URL_REGEX, "we need a real URL here"),
     payment: Yup.string().matches(URL_REGEX, "we need a real URL here").required("Required")
 });
-
-function successHandler(payload) {
-  alert("Data successfully submitted.");
-}
 
 // Input feedback
 const InputFeedback = ({ error }) =>
@@ -119,7 +114,7 @@ const Registration = (props) => (
         console.log(payload);
         // pushes into 'entries' document in firebase
         console.log(random);
-        entriesCollection.doc(random).set(payload).then(successHandler);
+        entriesCollection.doc(random).set(payload);
       }}
     >
         {({ handleSubmit, handleChange, values, touched, errors }) => (
@@ -138,6 +133,7 @@ const Registration = (props) => (
             <label htmlFor="location">location*</label>
             <span className="description">begin typing your city to select the appropriate state and/or country</span>
             <Field name="location" component={FormikPlacesAutocomplete} />
+            <span className="error">{errors.location}</span>
           </fieldset>
           <RadioButtonGroup
             id="radioGroup"
@@ -149,31 +145,31 @@ const Registration = (props) => (
             <Field
               component={RadioButton}
               name="industry"
-              id="arts"
+              id="Arts"
               label="arts"
             />
             <Field
               component={RadioButton}
               name="industry"
-              id="nightlife"
+              id="Nightlife"
               label="nightlife"
             />
             <Field
               component={RadioButton}
               name="industry"
-              id="production"
+              id="Production"
               label="production"
             />
             <Field
               component={RadioButton}
               name="industry"
-              id="food_service"
+              id="Food Service/Hospitality"
               label="hospitality"
             />
             <Field
               component={RadioButton}
               name="industry"
-              id="music"
+              id="Music"
               label="music"
             />
             <Field
