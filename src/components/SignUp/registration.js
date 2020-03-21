@@ -1,7 +1,6 @@
 import React from "react";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
-import { withFirebase } from '../Firebase';
 import FormikPlacesAutocomplete from "./FormikPlacesAutocomplete.jsx";
 import classNames from 'classnames';
 
