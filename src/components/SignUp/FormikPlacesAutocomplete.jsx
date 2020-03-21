@@ -45,15 +45,12 @@ class FormikPlacesAutoComplete extends Component {
 
   render() {
     const {
-      field: { name, ...field }, // { name, value, onChange, onBlur }
-      form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+      field: { name }, // { name, value, onChange, onBlur }
       classes,
       label,
       ...props
     } = this.props;
 
-    const error = errors[name];
-    const touch = touched[name];
     const searchOptions = {
       types: ['(cities)']
      }
