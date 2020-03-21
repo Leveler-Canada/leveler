@@ -145,7 +145,7 @@ fieldset .description {
 
 fieldset input {
   display: block;
-  width: 100%;  
+  width: 60%;  
   margin-top:44px;
   border: none;
   border-bottom: 2px solid black;
@@ -180,10 +180,6 @@ fieldset select {
   padding-left: 6px;
 }
 
-fieldset .autocomplete-dropdown-container {
-  border: 1px solid grey;
-}
-
 form .input-field {
   margin-bottom: 22px;
 }
@@ -199,6 +195,12 @@ input[type="radio"] + label {
   width: auto;
 }
 
+input[name="other_industry"] {
+  float: right;
+  width: 200px;
+  margin-right: 36%;
+}
+
 @media (max-width: 690px) {
   footer {
     display: flex;
@@ -209,6 +211,16 @@ input[type="radio"] + label {
   footer div {
     width: 50%;
     text-align: center;
+  }
+
+  fieldset input {
+    width: 100%;
+  }
+
+  input[name="other_industry"] {
+    float: right;
+    width: 100%;
+    margin-right: 0;
   }
 }
 
