@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import DistributeLink from './DistributeLink';
 
+const INITIAL_STATE = {
+	linkClicked: false,
+	contributeChecked: false
+};
+
 export default class DistributeCard extends Component {
-	state = {
-		linkClicked: false,
-		contributeChecked: false
-	}
+	state = { ...INITIAL_STATE };
 
 	setClicked() {
 		this.setState({
@@ -13,8 +15,23 @@ export default class DistributeCard extends Component {
 		})
 	}
 
-  handleCheckboxChange = event =>
-    this.setState({ contributeChecked: event.target.checked })
+	async updateLikelyContribution() {
+		const { fieldValue, entriesCollection } = this.props;
+		const { id } = this.props.entry;
+		const docRef = entriesCollection.doc(id);
+		try {
+			await docRef.update({potential_contrib: fieldValue.increment(1)});
+		} catch (e) {
+			console.log(e.message)
+		}
+	}
+
+  handleCheckboxChange = event => {
+		this.setState({ contributeChecked: event.target.checked })
+		if (event.target.checked) {
+			this.updateLikelyContribution();
+		}
+	}
 	
 
 	render() {
@@ -55,7 +72,7 @@ export default class DistributeCard extends Component {
 					))}
 					{this.state.linkClicked ? (
 						<Checkbox
-							contributeChecked={this.state.contributeChecked}
+							checked={this.state.contributeChecked}
 							onChange={this.handleCheckboxChange}
           	/>
 					): (null)}
@@ -66,7 +83,7 @@ export default class DistributeCard extends Component {
 }
 const Checkbox = props => (
 	<span className="contributed-container">
-	{props.contributeChecked ? (
+	{props.checked ? (
 		<p>🙌🏼<b>Thanks!</b></p>
 	) : (
 		<p><b>I contributed</b></p>
