@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import { Loading } from '../Animations'
+import DistributeHeader from './DistributeHeader';
 import DistributeCard from './DistributeCard';
 import FooterNav from '../FooterNav';
 import ReactGA from 'react-ga';
@@ -67,14 +68,17 @@ class DistributeTableBase extends Component {
 
 	render() {
 		const { entries } = this.state;
+		const { fieldValue, entriesCollection } = this.props.firebase;
 		return (
 			<div>
-				<p id="distribute-header">Below are 10 people <b><i>chosen at random</i></b>, send the <b><i>same amount</i></b> to each person</p>
+				<DistributeHeader />
 				{this.state.loading && <Loading height="100" width="100"/>}
 				{entries.map(entry => (
 					<DistributeCard
 						entry={entry}
-						key={entry.social_url}
+						key={entry.id}
+						fieldValue={fieldValue}
+						entriesCollection={entriesCollection}
 					/>
 					))}
 			</div>

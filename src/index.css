@@ -79,8 +79,15 @@ footer a {
 }
 
 /* Distribute index.js */
-#distribute-header {
+.distribute-header-main {
+  padding: .3rem .25rem;
+  margin-bottom: .5rem;
+}
+.distribute-header {
   font-size: 1.3rem;
+  padding: .3rem .25rem;
+}
+.distribute-header:last-child {
   padding: 1.25rem .25rem;
 }
 /* DistributeCard.js */
@@ -96,14 +103,9 @@ footer a {
   font-size: 1rem;
 }
 
-.overflow {
-  margin-left: 1rem;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.ellipsis {
-  text-overflow: ellipsis;
+.card-header a {
+  color: red;
+  text-decoration: underline;
 }
 
 .card-body {
@@ -112,8 +114,95 @@ footer a {
   padding-bottom: 1rem;
 }
 
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .card-footer a {
   padding-right: 20px;
+}
+
+.contributed-container {
+  display: flex;
+}
+.contributed-container p {
+  font-size: 1.1rem;
+}
+/* Customize the label (the container) */
+#checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#checkbox-container#text {
+  margin-right: 100px;
+}
+
+/* Hide the browser's default checkbox */
+#checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+#custom-checkmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 25px;
+  width: 25px;
+  border: 1px solid black;
+  /* background-color: #eee; */
+}
+
+/* On mouse-over, add a grey background color */
+#checkbox-container:hover input ~ #custom-checkmark {
+  background-color: #ccc;
+  border: 0;
+}
+
+/* When the checkbox is checked, add a blue background */
+#checkbox-container input:checked ~ #custom-checkmark {
+  background-color: #2196F3;
+  border: 0;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+#custom-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+#checkbox-container input:checked ~ #custom-checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+#checkbox-container #custom-checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 @media (max-width: 690px) {
@@ -153,8 +242,13 @@ footer a {
     text-align: left;
   }
   /* Distribute index.js */
-  #distribute-header {
+  .distribute-header {
     font-size: 1.1rem;
+    padding: .5rem .25rem;
+  }
+
+  .distribute-header:last-child {
+    padding: 1.25rem .25rem;
   }
 
   /* DistributeCard.js */
@@ -162,6 +256,11 @@ footer a {
     font-size: .9rem;
   }
   .card-body {
+    font-size: 1rem;
+  }
+
+  /* Contributed Checkbox */
+  .contributed-container p {
     font-size: 1rem;
   }
 }
