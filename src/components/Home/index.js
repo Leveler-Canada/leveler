@@ -24,7 +24,7 @@ class HomeLandingBase extends Component {
 		document.title = "Leveler"
 		ReactGA.initialize('UA-160733498-01');
 		ReactGA.pageview(window.location.pathname + window.location.search);
-		this.getEntryCount();
+		this.getEntryCount(); 
 	}
 
 	async getEntryCount() {
