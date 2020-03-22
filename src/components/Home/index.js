@@ -5,7 +5,6 @@ import Header from '../Header';
 import FooterNav from '../FooterNav';
 import ReactGA from 'react-ga';
 
-
 const HomePage = () => (
 	<div className="wrapper">
 		<Header />
@@ -15,7 +14,7 @@ const HomePage = () => (
 );
 
 const INITIAL_STATE = {
-	entries: []
+	entryCount: ''
 };
 
 class HomeLandingBase extends Component {
@@ -25,14 +24,18 @@ class HomeLandingBase extends Component {
 		document.title = "Leveler"
 		ReactGA.initialize('UA-160733498-01');
 		ReactGA.pageview(window.location.pathname + window.location.search);
+		this.getEntryCount();
+	}
+
+	async getEntryCount() {
+		await this.props.firebase.entriesIndexCollection.get().then(snap => {
+			this.setState({
+				entryCount: snap.size
+			})
+		})
 	}
 
   render() {
-		// THIS DOES NOT WORK
-		// How to make async play nicely?
-		console.log(this.props.firebase.entriesIndexCollection.get().then(snap => {
-			size = snap.size
-		}))
 
     return (
 			<section>
