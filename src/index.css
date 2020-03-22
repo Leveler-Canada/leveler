@@ -45,6 +45,10 @@ section h3 {
   margin: 20px 0;
 }
 
+section p.info {
+  margin-bottom: 22px;
+}
+
 section ol {
   padding-left: 22px;
   font-weight: bold;
@@ -199,6 +203,16 @@ input[name="other_industry"] {
   float: right;
   width: 200px;
   margin-right: 36%;
+}
+
+#mc_embed_signup { 
+  background:#fff; 
+  clear:left; 
+  font:14px Helvetica,Arial,sans-serif; 
+}
+
+#mc_embed_signup form {
+  padding-left: 0%;
 }
 
 @media (max-width: 690px) {
