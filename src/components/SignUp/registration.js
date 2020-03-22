@@ -5,12 +5,14 @@ import FormikPlacesAutocomplete from "./FormikPlacesAutocomplete.jsx";
 import classNames from 'classnames';
 
 const URL_REGEX = /^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/;
+const REQUIRED_ERROR = "required";
 
 const validationSchema = Yup.object().shape({
-    email: Yup.string().email().required("required"),
+    email: Yup.string().email().required(REQUIRED_ERROR),
     industry: Yup.string().min(1),
+    description: Yup.string().min(1).required(REQUIRED_ERROR),
     social_url: Yup.string().matches(URL_REGEX, "we need a real URL here"),
-    payment: Yup.string().matches(URL_REGEX, "we need a real URL here").required("Required")
+    payment: Yup.string().matches(URL_REGEX, "we need a real URL here").required(REQUIRED_ERROR)
 });
 
 // Input feedback
@@ -194,6 +196,7 @@ const Registration = (props) => (
               value={values.description}
               name="description"
             />
+            <span className="error">{errors.description}</span>
           </fieldset>
           <fieldset>
             <label htmlFor="payment">payment*</label>
