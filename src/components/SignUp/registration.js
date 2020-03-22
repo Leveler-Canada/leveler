@@ -98,7 +98,7 @@ const Registration = props => {
         email: values.email.trim(),
         industry: values.industry.trim(),
         location: values.location.trim(),
-        payment_url: values.payment_method.trim(),
+        payment_url: values.payment_method,
         social_url: values.social_url.trim()
       },
       timestamp: new Date().toISOString()
