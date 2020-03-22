@@ -117,7 +117,7 @@ const Registration = (props) => (
         entriesCollection.doc(random).set(payload);
       }}
     >
-        {({ handleSubmit, handleChange, values, touched, errors }) => (
+        {({ handleSubmit, handleChange, values, touched, errors, dirty, isValid }) => (
         <form onSubmit={handleSubmit}>
           <fieldset>
             <label htmlFor="email">email:</label>  
@@ -223,7 +223,7 @@ const Registration = (props) => (
               name="suggestion"
             />
           </fieldset>  
-          <button className="btn" type="submit">Submit</button>
+          <button className="btn" type="submit" disabled={!(dirty && isValid)}>Submit</button>
         </form>
       )}
     </Formik>
