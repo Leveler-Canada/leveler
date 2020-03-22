@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React, { Component } from 'react'
 import DistributeLink from './DistributeLink';
 
@@ -51,7 +52,11 @@ export default class DistributeCard extends Component {
 					
 					{this.state.linkClicked ? (
 					<div>
-						<a>report error</a>
+						<a 
+							href="https://docs.google.com/forms/d/e/1FAIpQLSefrgYTWlmWYtO6l0rJJKTzxnHPLKThX5QazeMHIAkq6Qnh-Q/viewform?usp=sf_link"
+							target="_blank"
+							rel="noopener noreferrer"
+							>report error</a>
 					</div>
 					) : (null)}
 					
@@ -84,7 +89,7 @@ export default class DistributeCard extends Component {
 const Checkbox = props => (
 	<span className="contributed-container">
 	{props.checked ? (
-		<p>🙌🏼<b>Thanks!</b></p>
+		<p>span🙌🏼<b>Thanks!</b></p>
 	) : (
 		<p><b>I contributed</b></p>
 	)}
