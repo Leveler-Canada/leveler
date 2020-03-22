@@ -8,7 +8,7 @@ const URL_REGEX = /^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\.)[A-Za-z0-9_-]+\.
 const REQUIRED_ERROR = "required";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().email().required(REQUIRED_ERROR),
+  email: Yup.string().email().trim().required(REQUIRED_ERROR),
   industry: Yup.string().min(1),
   description: Yup.string().min(1).required(REQUIRED_ERROR),
   social_url: Yup.string().matches(URL_REGEX, "we need a real URL here"),
@@ -94,12 +94,12 @@ const Registration = props => {
     var payload = {
       random: random,
       entry: {
-        description: values.description,
-        email: values.email,
-        industry: values.industry,
-        location: values.location,
-        payment_url: values.payment_method,
-        social_url: values.social_url
+        description: values.description.trim(),
+        email: values.email.trim(),
+        industry: values.industry.trim(),
+        location: values.location.trim(),
+        payment_url: values.payment_method.trim(),
+        social_url: values.social_url.trim()
       },
       timestamp: new Date().toISOString()
     };
