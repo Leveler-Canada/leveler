@@ -62,7 +62,7 @@ class FormikPlacesAutoComplete extends Component {
         onSelect={this.handleSelect}
         onError={this.handleError}
         searchOptions={searchOptions}
-        shouldFetchSuggestions={location.length > 2}
+        shouldFetchSuggestions={location.length >= 2}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
