@@ -89,7 +89,7 @@ export default class DistributeCard extends Component {
 const Checkbox = props => (
 	<span className="contributed-container">
 	{props.checked ? (
-		<p>span🙌🏼<b>Thanks!</b></p>
+		<p>🙌🏼<b>Thanks!</b></p>
 	) : (
 		<p><b>I contributed</b></p>
 	)}
