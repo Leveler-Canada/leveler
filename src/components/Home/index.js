@@ -28,6 +28,12 @@ class HomeLandingBase extends Component {
 	}
 
   render() {
+		// THIS DOES NOT WORK
+		// How to make async play nicely?
+		console.log(this.props.firebase.entriesIndexCollection.get().then(snap => {
+			size = snap.size
+		}))
+
     return (
 			<section>
 			  <p className="info">
