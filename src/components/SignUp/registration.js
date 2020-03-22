@@ -2,17 +2,17 @@ import React from "react";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import FormikPlacesAutocomplete from "./FormikPlacesAutocomplete.jsx";
-import classNames from 'classnames';
+import classNames from "classnames";
 
 const URL_REGEX = /^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/;
 const REQUIRED_ERROR = "required";
 
 const validationSchema = Yup.object().shape({
-    email: Yup.string().email().required(REQUIRED_ERROR),
-    industry: Yup.string().min(1),
-    description: Yup.string().min(1).required(REQUIRED_ERROR),
-    social_url: Yup.string().matches(URL_REGEX, "we need a real URL here"),
-    payment: Yup.string().matches(URL_REGEX, "we need a real URL here").required(REQUIRED_ERROR)
+  email: Yup.string().email().required(REQUIRED_ERROR),
+  industry: Yup.string().min(1),
+  description: Yup.string().min(1).required(REQUIRED_ERROR),
+  social_url: Yup.string().matches(URL_REGEX, "we need a real URL here"),
+  payment: Yup.string().matches(URL_REGEX, "we need a real URL here").required(REQUIRED_ERROR)
 });
 
 // Input feedback
@@ -74,55 +74,66 @@ const RadioButtonGroup = ({
   );
 };
 
-const Registration = (props) => (
+const Registration = props => {
+  const onSubmit = (values, { resetForm }) => {
+    if (values.industry === "other") {
+      values.industry = values.other_industry;
+      delete values.other_industry;
+    }
+    values.payment_method = [values.payment];
+    if (values.payment_2) {
+      values.payment_method.push(values.payment_2);
+      delete values.payment_2;
+    }
+    if (values.payment_3) {
+      values.payment_method.push(values.payment_3);
+      delete values.payment_3;
+    }
+    const { entriesCollection } = props.firebase;
+    const random = entriesCollection.doc().id;
+    var payload = {
+      random: random,
+      entry: {
+        description: values.description,
+        email: values.email,
+        industry: values.industry,
+        location: values.location,
+        payment_url: values.payment_method,
+        social_url: values.social_url
+      },
+      timestamp: new Date().toISOString()
+    };
+    // pushes into 'entries' document in firebase
+    entriesCollection.doc(random).set(payload);
+    resetForm({});
+  };
+
+  return (
     <Formik
-      initialValues={{ 
-          email: "", 
-          timestamp: "", 
-          industry: "",
-          description: "",
-          payment_method: [],
-          suggestion: "",
-        }}
-      validationSchema={validationSchema}
-      onSubmit={values => {
-        if(values.industry === 'other'){
-            values.industry = values.other_industry;
-            delete values.other_industry;
-        }
-        values.payment_method = [values.payment]
-        if (values.payment_2) {
-          values.payment_method.push(values.payment_2);
-          delete values.payment_2;
-        }
-        if (values.payment_3) {
-          values.payment_method.push(values.payment_3)
-          delete values.payment_3;
-        } 
-        const { entriesCollection } = props.firebase;
-        const random = entriesCollection.doc().id;
-        var payload = {
-          random: random,
-          entry: {
-            description: values.description,
-            email: values.email,
-            industry: values.industry,
-            location: values.location,
-            payment_url: values.payment_method,
-            social_url: values.social_url
-          },
-          timestamp: new Date().toISOString()
-        }
-        console.log(payload);
-        // pushes into 'entries' document in firebase
-        console.log(random);
-        entriesCollection.doc(random).set(payload);
+      initialValues={{
+        email: "",
+        industry: "",
+        description: "",
+        payment: "",
+        suggestion: "",
+        location: "",
+        social_url: ""
       }}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
     >
-        {({ handleSubmit, handleChange, values, touched, errors, dirty, isValid }) => (
+      {({
+        handleSubmit,
+        handleChange,
+        values,
+        touched,
+        errors,
+        dirty,
+        isValid
+      }) => (
         <form onSubmit={handleSubmit}>
           <fieldset>
-            <label htmlFor="email">email:</label>  
+            <label htmlFor="email">email:</label>
             <span className="error">{errors.email}</span>
             <input
               type="text"
@@ -133,8 +144,15 @@ const Registration = (props) => (
           </fieldset>
           <fieldset>
             <label htmlFor="location">location*</label>
-            <span className="description">begin typing your city to select the appropriate state and/or country</span>
-            <Field name="location" component={FormikPlacesAutocomplete} />
+            <span className="description">
+              begin typing your city to select the appropriate state and/or
+              country
+            </span>
+            <Field
+              name="location"
+              component={FormikPlacesAutocomplete}
+              value={values.location}
+            />
             <span className="error">{errors.location}</span>
           </fieldset>
           <RadioButtonGroup
@@ -182,13 +200,21 @@ const Registration = (props) => (
             />
             {values.industry === "other" && (
               <div>
-                  <input type="text" onChange={handleChange} value={values.custom_industry} name="other_industry" placeholder="other industry here"></input>
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  value={values.custom_industry}
+                  name="other_industry"
+                  placeholder="other industry here"
+                ></input>
               </div>
             )}
           </RadioButtonGroup>
           <fieldset>
             <label>context*</label>
-            <span className="description">tell us what you feel comfortable sharing about your situation</span>
+            <span className="description">
+              tell us what you feel comfortable sharing about your situation
+            </span>
             <textarea
               type="text"
               maxLength="300"
@@ -200,13 +226,25 @@ const Registration = (props) => (
           </fieldset>
           <fieldset>
             <label htmlFor="payment">payment*</label>
-            <span className="description">please post the full public url to your preferred payment method(s)</span>
-            <input type="text" onChange={handleChange} value={values.payment} name="payment"></input>
+            <span className="description">
+              please post the full public url to your preferred payment
+              method(s)
+            </span>
+            <input
+              type="text"
+              onChange={handleChange}
+              value={values.payment}
+              name="payment"
+            ></input>
             <span className="error">{errors.payment}</span>
           </fieldset>
           <fieldset>
             <label htmlFor="social_url">social</label>
-            <span className="description">please provide full url for your social media handle. Will not be made public, however you may get DM'ed by an admin to verify your identity.</span>
+            <span className="description">
+              please provide full url for your social media handle. Will not be
+              made public, however you may get DM'ed by an admin to verify your
+              identity.
+            </span>
             <input
               type="text"
               onChange={handleChange}
@@ -217,7 +255,10 @@ const Registration = (props) => (
           </fieldset>
           <fieldset>
             <label>suggestions</label>
-            <span className="description">let us know if you see room for improvement or have ideas on how to help make leveler better.</span>
+            <span className="description">
+              let us know if you see room for improvement or have ideas on how
+              to help make leveler better.
+            </span>
             <textarea
               type="text"
               maxLength="300"
@@ -225,11 +266,18 @@ const Registration = (props) => (
               value={values.suggestion}
               name="suggestion"
             />
-          </fieldset>  
-          <button className="btn" type="submit" disabled={!(dirty && isValid)}>Submit</button>
+          </fieldset>
+          <button
+            className="btn"
+            type="submit"
+            disabled={!(dirty && isValid)}
+          >
+            Submit
+          </button>
         </form>
       )}
     </Formik>
-);
+  );
+};
 
 export default Registration;

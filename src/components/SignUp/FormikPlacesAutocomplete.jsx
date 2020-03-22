@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PlacesAutocomplete from "react-places-autocomplete";
 
+const ERROR_MESSAGE = "No places found.";
+
 class FormikPlacesAutoComplete extends Component {
   constructor(props) {
     super(props);
@@ -11,35 +13,31 @@ class FormikPlacesAutoComplete extends Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.value !== prevState.location && nextProps.length === 0) {
+      return { location: nextProps.value };
+    }
+    return null;
+  }
+
   handleError = error => {
-    this.props.form.setFieldError(this.state.name, error);
+    this.props.form.setFieldError(this.state.name, ERROR_MESSAGE);
   };
 
   handleChange = location => {
-    this.setState(() => {
+    this.setState({ location }, () => {
       this.props.form.setFieldTouched(`${this.state.name}.value`);
       this.props.form.setFieldTouched(`${this.state.name}.location`);
-      this.props.form.setFieldValue(this.state.name, { value: location });
-      return { location };
+      this.props.form.setFieldValue(this.state.name, location);
     });
   };
 
   handleSelect = location => {
-    console.log(location);
-    var payload = {};
-    var fragments = location.split(',');
-    if (fragments.length === 3) {
-      payload.city = fragments[0];
-      payload.state = fragments[1];
-      payload.country = fragments[2];
-    } else {
-      payload.city = fragments[0];
-      payload.state = "";
-      payload.country = fragments[1];
-    }
-    this.setState(() => {
-      this.props.form.setFieldValue(this.state.name, payload);
-      return { location };
+    let fragments = location.split(",");
+    fragments = fragments.filter(el => el.trim() !== "USA" && el.trim() !== "US");
+    const formattedLocation = fragments.join(",").trim();
+    this.setState({ location: formattedLocation }, () => {
+      this.props.form.setFieldValue(this.state.name, formattedLocation);
     });
   };
 
@@ -50,21 +48,21 @@ class FormikPlacesAutoComplete extends Component {
       label,
       ...props
     } = this.props;
-
+    const { location } = this.state;
     const searchOptions = {
-      types: ['(cities)']
-     }
+      types: ["(cities)"]
+    };
     return (
       <PlacesAutocomplete
         name={name}
         id={name}
         {...props}
-        value={this.state.location}
+        value={location}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
         onError={this.handleError}
         searchOptions={searchOptions}
-        shouldFetchSuggestions={this.state.location.length > 2}
+        shouldFetchSuggestions={location.length > 2}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
