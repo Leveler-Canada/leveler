@@ -20,7 +20,7 @@ const INITIAL_STATE = {
 class HomeLandingBase extends Component {
 	state = { ...INITIAL_STATE };
 
-  async componentDidMount() {
+  	async componentDidMount() {
 		document.title = "Leveler"
 		ReactGA.initialize('UA-160733498-01');
 		ReactGA.pageview(window.location.pathname + window.location.search);
@@ -36,7 +36,6 @@ class HomeLandingBase extends Component {
 	}
 
   render() {
-
     return (
 			<section>
 			  <p className="info">
@@ -52,14 +51,17 @@ class HomeLandingBase extends Component {
 				<br />
 				<p className="info">This is a <b>mobile-first</b> tool. Please participate from your phone instead of your computer.</p>
 			  <div className="btn-wrap">
-					<Link to="/distribute" class="dist-btn">
+					<Link to="/distribute" class="dist-btn" onClick={this.onDistributeClick}>
 						<button>distribute</button>
 					</Link>
 					<a
 						href="https://docs.google.com/forms/d/1pYA60eG7qG4ekLWf7kEUwJuwJnS6sc8KAH_RPdawvJU/edit#responses"
 						target="_blank"
-						rel="noopener noreferrer"
-					><button>receive</button></a>
+            rel="noopener noreferrer"
+            onClick={this.onReceiveClick}
+					>
+            <button>receive</button>
+          </a>
 					{/* <Link to="/signup">
 						<button>receive</button>
 					</Link> */}
@@ -67,7 +69,17 @@ class HomeLandingBase extends Component {
 			</section>
     );
   }
-};
+
+  onReceiveClick = () => {
+    const { logEvent } = this.props.firebase;
+    logEvent("receive_clicked");
+  };
+
+  onDistributeClick = () => {
+    const { logEvent } = this.props.firebase;
+    logEvent("distribute_clicked");
+  };
+}
 
 const HomeLanding = withFirebase(HomeLandingBase);
 
