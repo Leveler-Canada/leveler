@@ -54,6 +54,7 @@ class Firebase {
     this.db = app.database();
     this.dbFs = app.firestore();
     this.entriesCollection = this.dbFs.collection("entries");
+    this.entriesIndexCollection = this.dbFs.collection("entriesIndex");
   }
 }
 export default Firebase;

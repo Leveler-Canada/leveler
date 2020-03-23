@@ -89,24 +89,37 @@ const Registration = props => {
       values.payment_method.push(values.payment_3);
       delete values.payment_3;
     }
-    const { entriesCollection } = props.firebase;
+    const { entriesCollection, entriesIndexCollection } = props.firebase;
     const random = entriesCollection.doc().id;
-    var payload = {
+    const entriesCollectionPayload = {
+      location: values.location.trim(),
+      industry: values.industry.trim(),
+      description: values.description.trim(),
+      payment_url: values.payment_method,
+      suggestion: values.suggestion.trim(),
       random: random,
-      entry: {
-        description: values.description.trim(),
-        email: values.email.trim(),
-        industry: values.industry.trim(),
-        location: values.location.trim(),
-        payment_url: values.payment_method,
-        social_url: values.social_url.trim()
-      },
-      timestamp: new Date().toISOString()
+      // TODO FORMAT created FOR FIREBASE
+      // created: fieldValue.serverTimestamp(),
+      created: new Date().toISOString()
     };
-    // pushes into 'entries' document in firebase
-    entriesCollection.doc(random).set(payload);
+    const entriesIndexPayload = {
+      parent_id: random,
+      email: values.email.trim(),
+      social_url: values.social_url.trim(),
+      shown: 0,
+      potential_contrib: 0,
+      created: new Date().toISOString()
+    }
+    entriesCollection.doc(random).set(entriesCollectionPayload).then(() => {
+      addToEntriesIndex(entriesIndexPayload, entriesIndexCollection);
+    })
     resetForm({});
   };
+
+  const addToEntriesIndex = (entriesIndexPayload, entriesIndexCollection) => {
+    const id = entriesIndexCollection.doc().id;
+    entriesIndexCollection.doc(id).set(entriesIndexPayload);
+  }
 
   return (
     <Formik
