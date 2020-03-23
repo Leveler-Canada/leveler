@@ -71,7 +71,7 @@ class HomeLandingBase extends Component {
   }
 
 	onReceiveClick = () => {
-		const { logEvent } = this.props.firebase;
+    const { logEvent } = this.props.firebase;
 	  logEvent("receive_clicked");
 	}
 
