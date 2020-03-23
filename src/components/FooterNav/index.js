@@ -21,17 +21,8 @@ const FooterNav = () => (
 				updates
 			</a>
 		</div>
-		<div>
-		<div>
-				<a
-				  href="https://docs.google.com/forms/d/1pYA60eG7qG4ekLWf7kEUwJuwJnS6sc8KAH_RPdawvJU/edit#responses"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-				  join the database
-				</a>
-			  </div>
-	    {/* <Link to={ROUTES.SIGNUP}>join the database</Link> */}
+		<div>			  
+	    <Link to={ROUTES.SIGNUP}>join the database</Link>
 		</div>
 		<div>
 			<a

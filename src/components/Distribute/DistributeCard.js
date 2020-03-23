@@ -42,12 +42,7 @@ export default class DistributeCard extends Component {
 			<div className="card-container">
 				<div className="card-header"> 
 					<div>
-						{entry.location.state ? (
-							<div><p><b>{entry.location.city}, {entry.location.state}</b></p></div>
-						): (
-							<div><p><b>{entry.location.city}, {entry.location.country}</b></p></div>
-						)}
-						<div><p><b>{entry.industry}</b></p></div>
+						<div><p><b>{entry.location}</b></p></div>
 					</div>
 					
 					{this.state.linkClicked ? (

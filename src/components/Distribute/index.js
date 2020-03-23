@@ -41,7 +41,7 @@ class DistributeTableBase extends Component {
 				.get()
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
-						entries.push(doc.data().entry);
+						entries.push(doc.data());
 						this.updateShownCount(doc.data().random)
 					})
 					if (entries) {
