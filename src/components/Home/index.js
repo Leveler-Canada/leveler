@@ -58,7 +58,7 @@ class HomeLandingBase extends Component {
 						href="https://docs.google.com/forms/d/1pYA60eG7qG4ekLWf7kEUwJuwJnS6sc8KAH_RPdawvJU/edit#responses"
 						target="_blank"
             rel="noopener noreferrer"
-            onClick={this.onSignUpClick}
+            onClick={this.onReceiveClick}
 					>
             <button>receive</button>
           </a>
@@ -70,9 +70,9 @@ class HomeLandingBase extends Component {
     );
   }
 
-	onSignUpClick = () => {
+	onReceiveClick = () => {
 		const { logEvent } = this.props.firebase;
-	  logEvent("signup_clicked");
+	  logEvent("receive_clicked");
 	}
 
 	onDistributeClick = () => {
