@@ -40,22 +40,29 @@ class HomeLandingBase extends Component {
     return (
 			<section>
 			  <p className="info">
-					The leveler is a tool for salaried workers to distribute wealth
-					evenly across a database of freelancers, service industry and gig
-					economy folks who are impacted by COVID-19 health and safety
-					restrictions (venue closures, shift/gig/commission cancellations
-					etc).
+					Leveler is a tool for people with job security to help people whose work status 
+					has been impacted by COVID-19.
+					The list includes freelancers, service industry, and gig economy workers.
 			  </p>
-			  <h3>How it works. SHOULD BE DONE ON A MOBILE DEVICE: </h3>
-			  <ol>
-					<li>Click the button below to be assigned to a Group of 10 people. </li>
-					<li>Pay each of the people in your assigned group an equal amount of money. Put "leveler" in the memo.</li>
-					<li>Repeat Steps 1 and 2 as many times as you wish. </li>
-			  </ol>
+				<br />
+			  <p className="info">				
+					Click <b>distribute</b> below to be shown 10 individuals to contribute to. Click the payment link 
+					for each one, and hit send. We recommend sending each person $5.00 to $10.00.
+				</p>
+				<br />
+				<p className="info">This is a <b>mobile-first</b> tool. Please participate from your phone instead of your computer.</p>
 			  <div className="btn-wrap">
-					<Link to="/distribute">
+					<Link to="/distribute" class="dist-btn">
 						<button>distribute</button>
 					</Link>
+					<a
+						href="https://docs.google.com/forms/d/1pYA60eG7qG4ekLWf7kEUwJuwJnS6sc8KAH_RPdawvJU/edit#responses"
+						target="_blank"
+						rel="noopener noreferrer"
+					><button>receive</button></a>
+					{/* <Link to="/signup">
+						<button>receive</button>
+					</Link> */}
 			  </div>
 			</section>
     );
