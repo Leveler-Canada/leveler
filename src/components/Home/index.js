@@ -20,7 +20,7 @@ const INITIAL_STATE = {
 class HomeLandingBase extends Component {
 	state = { ...INITIAL_STATE };
 
-  async componentDidMount() {
+  	async componentDidMount() {
 		document.title = "Leveler"
 		ReactGA.initialize('UA-160733498-01');
 		ReactGA.pageview(window.location.pathname + window.location.search);
@@ -36,7 +36,6 @@ class HomeLandingBase extends Component {
 	}
 
   render() {
-
     return (
 			<section>
 			  <p className="info">
@@ -53,13 +52,19 @@ class HomeLandingBase extends Component {
 					<li>Repeat Steps 1 and 2 as many times as you wish. </li>
 			  </ol>
 			  <div className="btn-wrap">
-					<Link to="/distribute">
+					<Link to="/distribute" onClick={this.onDistributeClick}>
 						<button>distribute</button>
 					</Link>
 			  </div>
 			</section>
     );
   }
+
+	onDistributeClick = () => {
+	  const { logEvent } = this.props.firebase;
+	  logEvent("distribute_clicked");
+  }
+
 };
 
 const HomeLanding = withFirebase(HomeLandingBase);
