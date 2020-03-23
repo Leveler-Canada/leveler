@@ -70,16 +70,16 @@ class HomeLandingBase extends Component {
     );
   }
 
-	onReceiveClick = () => {
+  onReceiveClick = () => {
     const { logEvent } = this.props.firebase;
-	  logEvent("receive_clicked");
-	}
+    logEvent("receive_clicked");
+  };
 
-	onDistributeClick = () => {
-	  const { logEvent } = this.props.firebase;
-	  logEvent("distribute_clicked");
-  }
-};
+  onDistributeClick = () => {
+    const { logEvent } = this.props.firebase;
+    logEvent("distribute_clicked");
+  };
+}
 
 const HomeLanding = withFirebase(HomeLandingBase);
 
