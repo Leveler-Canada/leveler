@@ -30,15 +30,17 @@ class SuccessLandingBase extends Component {
 
   render() {
     return (
-        <section>
-            <h3>Success!</h3>
-            <p className="info">You've added yourself to the leveler database.</p>
-            <p className="info">
-                If you'd like us to keep in touch with you on updates to the platform, sign up below.  
-                It's completely voluntary and doesn't effect your placement in the database at all.
+      <section>
+        <h3>Success!</h3>
+        <p className="info">You've added yourself to the leveler database.</p>
+        <p className="info">
+          If you'd like us to keep in touch with you on updates to the platform, sign up below.
+          It's completely voluntary and doesn't effect your placement in the database at all.
             </p>
-            <MailchimpSubscribe url={MAILCHIMP_URL}/>
-		</section>
+        <div className="mailchimp-form">
+          <MailchimpSubscribe url={MAILCHIMP_URL} />
+        </div>
+      </section>
     );
   }
 };
