@@ -1,0 +1,72 @@
+/* Distribute index.js */
+.distribute-header-main {
+  padding: 0.3rem 0.25rem;
+  margin-bottom: 0.5rem;
+}
+.distribute-header {
+  font-size: 1.3rem;
+  padding: 0.3rem 0.25rem;
+  @media (max-width: 450px) {
+    font-size: 1.1rem;
+    padding: 0.5rem 0.25rem;
+  }
+
+  &:last-child {
+    padding: 1.25rem 0.25rem;
+    @media (max-width: 450px) {
+      font-size: 1rem;
+    }
+  }
+}
+/* DistributeCard.js */
+.card-container {
+  padding: 0.625rem 1rem;
+  margin-bottom: 20px;
+  border: 1px solid black;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  font-size: 1rem;
+
+  a {
+    color: red;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 450px) {
+    font-size: 0.9rem;
+  }
+}
+
+.card-body {
+  font-size: 1.1rem;
+  font-style: italic;
+  padding-bottom: 1rem;
+  @media (max-width: 450px) {
+    font-size: 1rem;
+  }
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    padding-right: 20px;
+  }
+}
+
+.contributed-container {
+  display: flex;
+
+  p {
+    font-size: 1.1rem;
+    @media (max-width: 450px) {
+      font-size: 1rem;
+    }
+  }
+}
