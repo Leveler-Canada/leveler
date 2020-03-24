@@ -26,7 +26,7 @@ class SignUpFormBase extends Component {
 			<section className="signup-form">
 				<p><b>GUIDELINES:</b></p>
 				<ol>
-					<li><b>Only submit to the database if you are directly impacted.</b></li>
+					<li className="bold">Only submit to the database if you are directly impacted.</li>
 					<li>If you got what you need, ask to be removed by emailing leveler.info@gmail.com</li>
 					<li>If you've received too much, consider redistributing it.</li>
 				</ol>
