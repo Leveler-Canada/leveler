@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import FormikPlacesAutocomplete from "./FormikPlacesAutocomplete.jsx";
-import classNames from "classnames";
+import RadioButton from "./RadioButton"
+import RadioButtonGroup from "./RadioButtonGroup"
+import { Redirect } from 'react-router-dom';
 
 const URL_REGEX = /^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/;
 const REQUIRED_ERROR = "required";
@@ -15,66 +17,9 @@ const validationSchema = Yup.object().shape({
   payment: Yup.string().matches(URL_REGEX, "we need a real URL here").required(REQUIRED_ERROR)
 });
 
-// Input feedback
-const InputFeedback = ({ error }) =>
-  error ? <div className={classNames("input-feedback")}>{error}</div> : null;
-
-const RadioButton = ({
-  field: { name, value, onChange, onBlur },
-  id,
-  label,
-  className,
-  ...props
-}) => {
-  return (
-    <div className="radio-button-group">
-      <input
-        name={name}
-        id={id}
-        type="radio"
-        value={id} // could be something else for output?
-        checked={id === value}
-        onChange={onChange}
-        onBlur={onBlur}
-        className={classNames("radio-button")}
-        {...props}
-      />
-      <label htmlFor={id}>{label}</label>
-    </div>
-  );
-};
-
-// Radio group
-const RadioButtonGroup = ({
-  value,
-  error,
-  touched,
-  id,
-  label,
-  className,
-  children
-}) => {
-  const classes = classNames(
-    "input-field",
-    {
-      "is-success": value || (!error && touched), // handle prefilled or user-filled
-      "is-error": !!error && touched
-    },
-    className
-  );
-
-  return (
-    <div className={classes}>
-      <fieldset>
-        <legend>{label}</legend>
-        {children}
-        {touched && <InputFeedback error={error} />}
-      </fieldset>
-    </div>
-  );
-};
-
 const Registration = props => {
+  const [submitted, setSubmitted] = useState(false);
+
   const onSubmit = (values, { resetForm }) => {
     if (values.industry === "other") {
       values.industry = values.other_industry;
@@ -114,6 +59,7 @@ const Registration = props => {
       addToEntriesIndex(entriesIndexPayload, entriesIndexCollection);
     })
     resetForm({});
+    setSubmitted(true);
   };
 
   const addToEntriesIndex = (entriesIndexPayload, entriesIndexCollection) => {
@@ -287,6 +233,7 @@ const Registration = props => {
           >
             Submit
           </button>
+          {submitted ? <Redirect to="/success" /> : null}
         </form>
       )}
     </Formik>
