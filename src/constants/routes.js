@@ -4,3 +4,4 @@ export const SHEET_DB = 'https://docs.google.com/spreadsheets/d/1FIwWOdiLQh4nLsY
 export const HOME = '/';
 export const SIGNUP = '/signup'
 export const DISTRIBUTE = '/distribute'
+export const SUCCESS = '/success'

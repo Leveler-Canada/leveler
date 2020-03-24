@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
 import ReactGA from 'react-ga';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => (
 	<div className="wrapper">
@@ -51,20 +51,12 @@ class HomeLandingBase extends Component {
 				<br />
 				<p className="info">This is a <b>mobile-first</b> tool. Please participate from your phone instead of your computer.</p>
 			  <div className="btn-wrap">
-					<Link to="/distribute" class="dist-btn" onClick={this.onDistributeClick}>
-						<button>distribute</button>
+			  	<Link to="/distribute" className="dist-btn" onClick={this.onDistributeClick}>
+				    <button className="btn">distribute</button>
+				  </Link>
+          <Link to="/signup" onClick={this.onReceiveClick}>
+						<button className="btn">receive</button>
 					</Link>
-					<a
-						href="https://docs.google.com/forms/d/1pYA60eG7qG4ekLWf7kEUwJuwJnS6sc8KAH_RPdawvJU/edit#responses"
-						target="_blank"
-            rel="noopener noreferrer"
-            onClick={this.onReceiveClick}
-					>
-            <button>receive</button>
-          </a>
-					{/* <Link to="/signup">
-						<button>receive</button>
-					</Link> */}
 			  </div>
 			</section>
     );
