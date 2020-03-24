@@ -56,9 +56,6 @@ class HomeLandingBase extends Component {
 			  	<Link to="/distribute">
 				  <button className="btn">distribute</button>
 				</Link>
-				<Link to="/signup">
-				<button className="btn">receive</button>
-				</Link>
 			  </div>
 			</section>
     );
