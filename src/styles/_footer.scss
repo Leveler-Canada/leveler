@@ -1,0 +1,30 @@
+footer {
+  max-width: 250px;
+  display: block;
+  padding-top: 30px;
+  div {
+    width: 100%;
+    line-height: 1.6em;
+    text-align: left;
+  }
+  a {
+    color: blue;
+  }
+  @media (min-width: 450px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    div {
+      width: 50%;
+    }
+  }
+
+  @media (min-width: 690px) {
+    max-width: 800px;
+    justify-content: space-between;
+    div {
+      width: 25%;
+      text-align: center;
+    }
+  }
+}

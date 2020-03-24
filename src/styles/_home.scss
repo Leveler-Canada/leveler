@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  line-height: 1.3em;
+  font-size: 22px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+*,
+html {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  padding: 15px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+header {
+  img {
+    margin-left: -12px;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .top {
+    margin: 5px 0 20px 0;
+  }
+}
+
+section {
+  h3 {
+    margin: 20px 0;
+  }
+
+  p.info {
+    margin-bottom: 22px;
+  }
+
+  ol {
+    padding-left: 22px;
+    font-weight: bold;
+  }
+}
+
+.btn {
+  padding: 4px 14px;
+  border: 2px solid black;
+  background: white;
+  outline: none;
+  font-size: 25px;
+  margin: 20px 0;
+  font-weight: bold;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+
+  &:disabled {
+    border: 2px solid silver;
+  }
+
+  &:hover:enabled {
+    background: black;
+    color: white;
+  }
+}
+@media (max-width: 450px) {
+  .wrapper {
+    padding: 20px;
+  }
+
+  section h3 {
+    font-size: 22px;
+  }
+
+  section ol {
+    font-size: 20px;
+  }
+}
