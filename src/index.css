@@ -86,6 +86,15 @@ footer a {
   color: blue;
 }
 
+/* Home index.js main text */
+.info {
+  font-size: 1.1rem;
+}
+
+.dist-btn {
+  margin-right: 20px;
+}
+
 /* Distribute index.js */
 .distribute-header-main {
   padding: .3rem .25rem;
@@ -341,6 +350,7 @@ input[name="other_industry"] {
 }
 
 @media (max-width: 450px) {
+
   .wrapper {
     padding: 20px;
   }

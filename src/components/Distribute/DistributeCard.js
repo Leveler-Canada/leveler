@@ -63,7 +63,7 @@ export default class DistributeCard extends Component {
 
 				<div className="card-footer">
 					{entry.payment_url.map(link => (
-						<span onClick={() => {this.setState({linkClicked: true})}}>
+						<span onClick={() => this.onPaymentLinkClick(link)}>
 							<DistributeLink
 								key={link}
 								link={link}
@@ -79,6 +79,12 @@ export default class DistributeCard extends Component {
 				</div>
 			</div>
 		)
+	}
+
+	onPaymentLinkClick = (link) => {
+		const { logEvent } = this.props;
+		logEvent("payment_link_clicked", { link });
+		this.setState({ linkClicked: true });
 	}
 }
 const Checkbox = props => (

@@ -1,6 +1,7 @@
 import app from "firebase/app";
 import "firebase/database";
 import 'firebase/firestore';
+import 'firebase/analytics';
 
 const {
   REACT_APP_prod_apiKey,
@@ -54,6 +55,8 @@ class Firebase {
     this.db = app.database();
     this.dbFs = app.firestore();
     this.fieldValue = app.firestore.FieldValue;
+    this.analytics = app.analytics();
+    this.logEvent = app.analytics().logEvent;
     this.entriesCollection = this.dbFs.collection("entries");
     this.entriesIndexCollection = this.dbFs.collection("entriesIndex");
   }
