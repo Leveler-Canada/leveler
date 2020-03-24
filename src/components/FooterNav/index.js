@@ -21,9 +21,6 @@ const FooterNav = () => (
 				updates
 			</a>
 		</div>
-		<div>			  
-	    <Link to={ROUTES.SIGNUP}>join the database</Link>
-		</div>
 		<div>
 			<a
 				href="https://docs.google.com/document/d/1zyTKTN55fOQHiB5XKtkIVu42_oCtSq7WbFAsLB4blD8/edit?usp=sharing"
