@@ -1,22 +1,25 @@
 import React from "react";
 import { withFirebase } from "../Firebase";
+import { Link } from 'react-router-dom';
+
 const FooterNav = (props) => {
 
 	const onContributeClick = () => {
 		const { logEvent } = props.firebase;
 		logEvent("contribute_clicked");
-	}
+  }
+  
+  const onAboutClick = () => {
+    const { logEvent } = props.firebase;
+		logEvent("about_clicked");
+  }
 
   return (
     <footer>
       <div>
-        <a
-          href="https://docs.google.com/document/d/1q4BHgMRKO3W6-gRpGPB6EFXFfvyDLGaCsj7kny7CTG4/edit?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          about the leveler
-        </a>
+        <Link to="/about" onClick={onAboutClick}>
+        about the leveler
+        </Link>
       </div>
       <div>
         <a

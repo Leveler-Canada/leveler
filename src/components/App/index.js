@@ -7,6 +7,7 @@ import HomePage from '../Home';
 import SignUpPage from '../SignUp';
 import DistributePage from '../Distribute'
 import SuccessPage from '../Success'
+import AboutPage from '../About'
 import * as ROUTES from '../../constants/routes';
 
 const App = () => (
@@ -17,6 +18,7 @@ const App = () => (
       <Route path={ROUTES.SIGNUP} component={SignUpPage} />
       <Route path={ROUTES.DISTRIBUTE} component={DistributePage} />
       <Route path={ROUTES.SUCCESS} component={SuccessPage} />
+      <Route path={ROUTES.ABOUT} component={AboutPage} />
     </div>
   </Router>
 );
