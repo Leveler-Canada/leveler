@@ -10,21 +10,12 @@ footer {
   a {
     color: blue;
   }
-  @media (min-width: 450px) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    div {
-      width: 50%;
-    }
-  }
-
-  @media (min-width: 690px) {
+  @media (min-width: 480px) {
     max-width: 800px;
-    justify-content: space-between;
     div {
-      width: 25%;
-      text-align: center;
+      width: auto;
+      float: left;
+      margin-right: 24px;
     }
   }
 }
