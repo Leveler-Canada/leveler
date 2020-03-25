@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
-import {Paypal} from '../Icons/'
+import { Paypal } from '../Icons/'
 
 const ContributePage = () => (
   <div className="wrapper">
@@ -10,17 +10,17 @@ const ContributePage = () => (
     <FooterNav />
   </div>
 );
-
-const ContributeBody = () => {
+	
 	return ( 
 		<section>
 			<h3>
 				Contribute to Leveler
 			</h3>
 			<p>
-				Leveler is entirely run by volunteers. We are not currenly funded, and have plans to expand.
-				If you are in a position to contribute to the volunteer team, please do so by clicking the 
-				button below:
+				Leveler is entirely run by volunteers. We are not funded, and are currently organizing 
+				communities outside of the United States.
+				If you are in a position to contribute to the volunteer team, please do so by clicking 
+				the button below:
 			</p>
 			<a href="http://paypal.me/studiodba"
 				target="_blank"
@@ -38,9 +38,11 @@ const ContributeBody = () => {
 			<p>
 				* Developers (Javascript/React/Firebase)
 			</p>
+
 			<p>
-				* Operations
+				* Operations/Support
 			</p>
+
 			<p>
 				* Marketing
 			</p>

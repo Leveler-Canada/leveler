@@ -31,7 +31,10 @@ const FooterNav = (props) => {
         </a>
       </div>
       <div>
-        <Link to="/contribute">
+        <Link 
+          to="/contribute"
+          onClick={onContributeClick}
+        >
           contribute
         </Link>
       </div>
