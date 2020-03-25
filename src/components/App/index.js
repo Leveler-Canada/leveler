@@ -9,11 +9,12 @@ import DistributePage from '../Distribute'
 import SuccessPage from '../Success'
 import AboutPage from '../About'
 import * as ROUTES from '../../constants/routes';
+import ContributeBand from '../Header/ContributeBand'
 
 const App = () => (
   <Router>
     <div>
-      <hr />
+      <ContributeBand/> 
       <Route exact path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.SIGNUP} component={SignUpPage} />
       <Route path={ROUTES.DISTRIBUTE} component={DistributePage} />
