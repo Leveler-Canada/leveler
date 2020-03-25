@@ -31,14 +31,9 @@ const FooterNav = (props) => {
         </a>
       </div>
       <div>
-        <a
-          onClick={onContributeClick}
-          href="https://docs.google.com/document/d/1zyTKTN55fOQHiB5XKtkIVu42_oCtSq7WbFAsLB4blD8/edit?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link to="/contribute">
           contribute
-        </a>
+        </Link>
       </div>
     </footer>
   );
