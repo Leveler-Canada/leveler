@@ -24,10 +24,13 @@ class SignUpFormBase extends Component {
 	render() {
 		return (
 			<section className="signup-form">
-				<p className="big"><b>Please submit your name only if you are DIRECTLY compromised.</b> i.e. your next job got cancelled, or your pay just got cut due to health and safety restrictions.</p>
-				<p>Once you submit, an admin in your area will add you to the list.</p>
-				<p><i>If you feel that you have received what you need, please email our team at dbastudionyc@gmail.com so that we may take you off the list and allow for distribution to those in need.</i></p>
-				<p>*fields with an asterisk will be made public.</p>
+				<p><b>GUIDELINES:</b></p>
+				<ol>
+					<li className="bold">Only submit to the database if you are directly impacted.</li>
+					<li>If you got what you need, ask to be removed by emailing leveler.info@gmail.com</li>
+					<li>If you've received too much, consider redistributing it.</li>
+				</ol>
+				<p className="legend">* fields with an asterisk will be made public.</p>
 				<Registration firebase={this.props.firebase}/>
 			</section>
 		)

@@ -6,8 +6,29 @@
 
   p {
     padding-bottom: 12px;
-    &.big {
-      font-size: 22px;
+  }
+  ol {
+    margin: 0 0 1.5em;
+    padding: 0;
+    counter-reset: item;
+    & > li {
+      margin: 0;
+      padding: 0 0 0 2em;
+      text-indent: -2em;
+      font-weight: normal;
+      list-style-type: none;
+      counter-increment: item;
+      &.bold {
+        font-weight: bold;
+      }
+      &:before {
+        display: inline-block;
+        width: 1em;
+        padding-right: 0.5em;
+        font-weight: bold;
+        text-align: right;
+        content: counter(item) ".";
+      }
     }
   }
 }
