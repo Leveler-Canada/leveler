@@ -21,7 +21,7 @@ class HomeLandingBase extends Component {
 	state = { ...INITIAL_STATE };
 
   	async componentDidMount() {
-		document.title = "Leveler"
+		document.title = "leveler"
 		ReactGA.initialize('UA-160733498-01');
 		ReactGA.pageview(window.location.pathname + window.location.search);
 		this.getEntryCount(); 
@@ -39,7 +39,7 @@ class HomeLandingBase extends Component {
     return (
 		<section>
 			<p className="info">
-				Leveler is a tool for people with job security to help people whose work status
+				leveler is a tool for people with job security to help people whose work status
 				has been impacted by COVID-19.
 				The list includes freelancers, service industry, and gig economy workers.
 			  </p>
