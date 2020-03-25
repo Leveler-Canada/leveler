@@ -6,7 +6,7 @@ import {
 import ContributeBand from '../Header/ContributeBand'
 import HomePage from '../Home';
 import SignUpPage from '../SignUp';
-import ContributePage from '../contribute/'
+import ContributePage from '../Contribute/'
 import DistributePage from '../Distribute'
 import SuccessPage from '../Success'
 import AboutPage from '../About'
