@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
-import ReactGA from 'react-ga';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => (
@@ -22,8 +21,6 @@ class HomeLandingBase extends Component {
 
   	async componentDidMount() {
 		document.title = "leveler"
-		ReactGA.initialize('UA-160733498-01');
-		ReactGA.pageview(window.location.pathname + window.location.search);
 		this.getEntryCount(); 
 	}
 

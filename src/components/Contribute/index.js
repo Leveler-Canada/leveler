@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
-import { Paypal } from '../Icons/'
+import {Paypal} from '../Icons/'
 
 const ContributePage = () => (
   <div className="wrapper">
@@ -10,6 +10,8 @@ const ContributePage = () => (
     <FooterNav />
   </div>
 );
+
+const ContributeBody = (props) => {
 	
 	return ( 
 		<section>
@@ -53,6 +55,6 @@ const ContributePage = () => (
 	)
 }
 
-export default ContributePage;
+export default (ContributePage);
 
 export { ContributeBody };

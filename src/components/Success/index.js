@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
-import ReactGA from 'react-ga';
 import MailchimpSubscribe from 'react-mailchimp-subscribe';
 
 const SuccessPage = () => (
@@ -24,8 +23,6 @@ class SuccessLandingBase extends Component {
 
   async componentDidMount() {
 		document.title = "Leveler: Welcome"
-		ReactGA.initialize('UA-160733498-01');
-		ReactGA.pageview(window.location.pathname + window.location.search);
 	}
 
   render() {

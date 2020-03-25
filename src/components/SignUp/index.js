@@ -3,7 +3,6 @@ import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
 import Registration from './registration';
-import ReactGA from 'react-ga';
 
 const SignUpPage = () => (
 	<div className="wrapper">
@@ -17,8 +16,6 @@ class SignUpFormBase extends Component {
 
 	componentDidMount() {
 		document.title = "Leveler: Sign Up"
-		ReactGA.initialize('UA-160733498-01');
-		ReactGA.pageview(window.location.pathname + window.location.search);
 	}
 
 	render() {
