@@ -16,12 +16,11 @@ const FooterNav = (props) => {
 
   return (
     <footer>
-      <div>
+
         <Link to="/about" onClick={onAboutClick}>
-        about the leveler
+        about leveler
         </Link>
-      </div>
-      <div>
+
         <a
           href="https://docs.google.com/document/d/1OqjFn7f5YRxzD71v-ieGSruQUdTST5K3woPl-yrDDkc/edit?usp=sharing"
           target="_blank"
@@ -29,15 +28,14 @@ const FooterNav = (props) => {
         >
           updates
         </a>
-      </div>
-      <div>
+
         <Link 
           to="/contribute"
           onClick={onContributeClick}
         >
           contribute
         </Link>
-      </div>
+
     </footer>
   );
 };
