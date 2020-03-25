@@ -6,7 +6,7 @@ import * as ROUTES from '../../constants/routes';
 const ContributeBand = () => (
 	<div className="contribute-band">
 		<Link to={ROUTES.CONTRIBUTE}>
-				📢 Leveler is volunteer-led. <b><u>Click here</u></b> to contribute to the team ❤️
+				📢 leveler is volunteer-led. <b><u>Click here</u></b> to contribute to the team ❤️
 		</Link>
 	</div>
 )

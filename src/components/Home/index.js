@@ -36,7 +36,7 @@ class HomeLandingBase extends Component {
     return (
 		<section>
 			<p className="info">
-				leveler is a tool for people with job security to help people whose work status
+				<b>leveler</b> is a tool for people with job security to help people whose work status
 				has been impacted by COVID-19.
 				The list includes freelancers, service industry, and gig economy workers.
 			  </p>
@@ -45,7 +45,7 @@ class HomeLandingBase extends Component {
 					for each one, and hit send. We recommend sending each person $5.00 to $10.00.
 				</p>
 			<p className="info">This is a <b>mobile-first</b> tool. Please participate from your phone instead of your computer.</p>
-			<div className="btn-wrap">
+			<div>
 				<Link to="/distribute" className="dist-btn" onClick={this.onDistributeClick}>
 					<button className="btn">distribute</button>
 				</Link>

@@ -22,7 +22,7 @@ class SuccessLandingBase extends Component {
 	state = { ...INITIAL_STATE };
 
   async componentDidMount() {
-		document.title = "Leveler: Welcome"
+		document.title = "leveler: Welcome"
 	}
 
   render() {

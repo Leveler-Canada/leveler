@@ -57,9 +57,6 @@ section {
   h4, p {
     padding-bottom: 20px;
   }
-  p.info {
-    margin-bottom: 22px;
-  }
 
   ol {
     padding-left: 22px;
@@ -88,7 +85,10 @@ section {
     color: white;
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 480px) {
+  .contribute-band {
+    font-size: 12px;
+  }
   .wrapper {
     padding: 20px;
   }

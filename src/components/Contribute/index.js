@@ -16,10 +16,10 @@ const ContributeBody = (props) => {
 	return ( 
 		<section>
 			<h3>
-				Contribute to Leveler
+				contribute to leveler
 			</h3>
 			<p>
-				Leveler is entirely run by volunteers. We are not funded, and are currently organizing 
+				leveler is run by volunteers. We are not funded, and are currently organizing 
 				communities outside of the United States.
 				If you are in a position to contribute to the volunteer team, please do so by clicking 
 				the button below:
@@ -30,7 +30,7 @@ const ContributeBody = (props) => {
 				<Paypal width="45" />
 			</a>
 			<h3>
-				Volunteer for Leveler
+				Volunteer for leveler
 			</h3>
 
 			<p>

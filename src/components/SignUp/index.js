@@ -15,7 +15,7 @@ const SignUpPage = () => (
 class SignUpFormBase extends Component {
 
 	componentDidMount() {
-		document.title = "Leveler: Sign Up"
+		document.title = "leveler: Sign Up"
 	}
 
 	render() {
