@@ -34,26 +34,26 @@ class HomeLandingBase extends Component {
 
   render() {
     return (
-		<section>
-			<p>
-				<b>leveler</b> is a tool for people with job security to help people whose work status
-				has been impacted by COVID-19.
-				The list includes freelancers, service industry, and gig economy workers.
-			  </p>
-			<p>
-				Click <b>distribute</b> below to be shown 10 individuals to contribute to. Click the payment link
-					for each one, and hit send. We recommend sending each person $5.00 to $10.00.
-				</p>
-			<p>This is a <b>mobile-first</b> tool. Please participate from your phone instead of your computer.</p>
-			<div>
-				<Link to="/distribute" className="dist-btn" onClick={this.onDistributeClick}>
-					<button className="btn">distribute</button>
-				</Link>
-				<Link to="/signup" onClick={this.onReceiveClick}>
-					<button className="btn">receive</button>
-				</Link>
-			</div>
-		</section>
+      <section>
+        <p>
+          <b>leveler</b> is a tool for people with job security to help people whose work status
+          has been impacted by COVID-19.
+          The list includes freelancers, service industry, and gig economy workers.
+          </p>
+        <p>
+          Click <b>distribute</b> below to be shown 10 individuals to contribute to. Click the payment link
+            for each one, and hit send. We recommend sending each person $5.00 to $10.00.
+          </p>
+        <p>This is a <b>mobile-first</b> tool. Please participate from your phone instead of your computer.</p>
+        <div>
+          <Link to="/distribute" className="dist-btn" onClick={this.onDistributeClick}>
+            <button className="btn">distribute</button>
+          </Link>
+          <Link to="/signup" onClick={this.onReceiveClick}>
+            <button className="btn">receive</button>
+          </Link>
+        </div>
+      </section>
     );
   }
 
