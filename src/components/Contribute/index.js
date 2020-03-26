@@ -21,8 +21,7 @@ const ContributeBody = (props) => {
 			<p>
 				leveler is run by volunteers. We are not funded, and are currently organizing 
 				communities outside of the United States.
-				If you are in a position to contribute to the volunteer team, please do so by clicking 
-				the button below:
+				If you like this project and would like to help us, please contribute below:
 			</p>
 			<a href="http://paypal.me/studiodba"
 				target="_blank"
