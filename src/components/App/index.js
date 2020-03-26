@@ -10,6 +10,7 @@ import ContributePage from '../Contribute/'
 import DistributePage from '../Distribute'
 import SuccessPage from '../Success'
 import AboutPage from '../About'
+import ResourcesPage from '../Resources'
 import * as ROUTES from '../../constants/routes';
 
 const App = () => (
@@ -22,6 +23,7 @@ const App = () => (
       <Route path={ROUTES.DISTRIBUTE} component={DistributePage} />
       <Route path={ROUTES.SUCCESS} component={SuccessPage} />
       <Route path={ROUTES.ABOUT} component={AboutPage} />
+      <Route path={ROUTES.RESOURCES} component={ResourcesPage} />
     </div>
   </Router>
 );

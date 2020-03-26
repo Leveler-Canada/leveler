@@ -5,5 +5,6 @@ export const HOME = '/';
 export const SIGNUP = '/signup';
 export const CONTRIBUTE = '/contribute';
 export const DISTRIBUTE = '/distribute';
-export const SUCCESS = '/success';
+export const SUCCESS = '/success'; // signup success page
 export const ABOUT = '/about';
+export const RESOURCES = '/resources'
