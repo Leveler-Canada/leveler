@@ -29,28 +29,6 @@ const ContributeBody = (props) => {
 				rel="noopener noreferrer">
 				<Paypal width="45" />
 			</a>
-			<h3>
-				Volunteer for leveler
-			</h3>
-
-			<p>
-				If you're looking to help and any of the following apply to you, please contact us:
-			</p>
-
-			<p>
-				* Developers (Javascript/React/Firebase)
-			</p>
-
-			<p>
-				* Operations/Support
-			</p>
-
-			<p>
-				* Marketing
-			</p>
-			<a href="google.com">
-				Sign Up
-			</a>
 		</section>
 	)
 }
