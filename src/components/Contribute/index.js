@@ -11,7 +11,7 @@ const ContributePage = () => (
   </div>
 );
 
-const ContributeBody = (props) => {
+const ContributeBody = () => {
 	
 	return ( 
 		<section>
