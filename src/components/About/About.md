@@ -31,3 +31,18 @@ The leveler database is made up of freelancers/gig economy/service industry work
 
 #### I want to help
 If you are a dev that can help, or can be an admin for your locale, please email: [leveler.info@gmail.com](mailto:leveler.info@gmail.com)
+
+#### our team
+leveler’s team is based in NY, NY.  
+
+Alessandra - [linkedin](https://www.linkedin.com/in/alessandra-de-benedetti-0895548/) | [twitter](https://www.twitter.com/oftheblessed)
+Brand studio and startup cofounder, left startup world in 2019 to focus on other impact and sustainability projects
+
+Sam - [linkedin](https://www.linkedin.com/in/samuel-mlodozeniec-ab1b9323/)
+Product developer working in emerging technologies
+
+Sabina - [linkedin](https://www.linkedin.com/in/sabinamamedova/)
+Agency-side product, with a focus on tech for Good, currently at Originate
+
+Adam - [website](https://www.adamklevy.com) | [twitter](https://www.twitter.com/adamklevy)
+Writer, digital artist, and product manager in news media
