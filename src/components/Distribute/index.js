@@ -5,7 +5,6 @@ import { Loading } from '../Animations'
 import DistributeHeader from './DistributeHeader';
 import DistributeCard from './DistributeCard';
 import FooterNav from '../FooterNav';
-import ReactGA from 'react-ga';
 
 const DistributePage = () => (
 	<div className="wrapper">
@@ -24,8 +23,6 @@ class DistributeTableBase extends Component {
 	state = { ...INITIAL_STATE };
 
 	async componentDidMount() {
-		ReactGA.initialize('UA-160733498-01');
-		ReactGA.pageview(window.location.pathname + window.location.search);
 		await this.getEntries()
 	}
 
@@ -86,7 +83,6 @@ class DistributeTableBase extends Component {
 		)
 	}
 }
-
 
 const DistributeTable = withFirebase(DistributeTableBase);
 

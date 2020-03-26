@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
-import ReactGA from 'react-ga';
 import MailchimpSubscribe from 'react-mailchimp-subscribe';
 
 const SuccessPage = () => (
@@ -23,17 +22,15 @@ class SuccessLandingBase extends Component {
 	state = { ...INITIAL_STATE };
 
   async componentDidMount() {
-		document.title = "Leveler: Welcome"
-		ReactGA.initialize('UA-160733498-01');
-		ReactGA.pageview(window.location.pathname + window.location.search);
+		document.title = "leveler: Welcome"
 	}
 
   render() {
     return (
       <section>
         <h3>Success!</h3>
-        <p className="info">You've added yourself to the leveler database.</p>
-        <p className="info">
+        <p>You've added yourself to the leveler database.</p>
+        <p>
           If you'd like us to keep in touch with you on updates to the platform, sign up below.
           It's completely voluntary and doesn't effect your placement in the database at all.
             </p>
