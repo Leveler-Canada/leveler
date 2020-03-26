@@ -1,4 +1,4 @@
-### About the Leveler
+### About leveler
 
 The leveler database was created to help out my friends in the creative community and service industry who are currently being hit hard by COVID health and safety restrictions (venue closures/tour cancellations/shifts lost/commissions canceled/etc and so on).
 

@@ -19,6 +19,17 @@ html {
   box-sizing: border-box;
 }
 
+.contribute-band {
+  text-align: center;
+  background-color: gray;
+  font-size:1.1rem;
+  a {
+    width: 100vw;
+    color: white;
+    text-decoration: none;
+  }
+}
+
 .wrapper {
   padding: 15px;
   max-width: 1000px;
@@ -43,9 +54,8 @@ section {
   h3 {
     margin: 20px 0;
   }
-
-  p.info {
-    margin-bottom: 22px;
+  h4, p {
+    padding-bottom: 20px;
   }
 
   ol {
@@ -75,7 +85,10 @@ section {
     color: white;
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 480px) {
+  .contribute-band {
+    font-size: 12px;
+  }
   .wrapper {
     padding: 20px;
   }

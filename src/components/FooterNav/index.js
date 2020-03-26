@@ -16,30 +16,24 @@ const FooterNav = (props) => {
 
   return (
     <footer>
-      <div>
-        <Link to="/about" onClick={onAboutClick}>
-        about the leveler
-        </Link>
-      </div>
-      <div>
-        <a
-          href="https://docs.google.com/document/d/1OqjFn7f5YRxzD71v-ieGSruQUdTST5K3woPl-yrDDkc/edit?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          updates
-        </a>
-      </div>
-      <div>
-        <a
-          onClick={onContributeClick}
-          href="https://docs.google.com/document/d/1zyTKTN55fOQHiB5XKtkIVu42_oCtSq7WbFAsLB4blD8/edit?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          contribute
-        </a>
-      </div>
+      <Link to="/about" onClick={onAboutClick}>
+        about leveler
+      </Link>
+
+      <a
+        href="https://docs.google.com/document/d/1OqjFn7f5YRxzD71v-ieGSruQUdTST5K3woPl-yrDDkc/edit?usp=sharing"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        updates
+      </a>
+
+      <Link 
+        to="/contribute"
+        onClick={onContributeClick}
+      >
+        contribute
+      </Link>
     </footer>
   );
 };

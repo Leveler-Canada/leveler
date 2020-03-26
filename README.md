@@ -1,4 +1,4 @@
-# Leveler 2.0 Development Branch
+# leveler 2.0 Development Branch
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
