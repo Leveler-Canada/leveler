@@ -39,8 +39,7 @@ const FooterNav = (props) => {
 };
 
 FooterNav.propTypes = {
-  logEvent: PropTypes.func.isRequired,
-  firebase: PropTypes.objectOf(PropTypes.func).isRequired,
+  firebase: PropTypes.object.isRequired,
 };
 
 export default withFirebase(FooterNav);
