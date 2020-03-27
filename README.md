@@ -1,6 +1,14 @@
-# leveler 2.0 Development Branch
+[![Netlify Status](https://api.netlify.com/api/v1/badges/69888120-4b5d-4de1-b776-336daa71feab/deploy-status)](https://app.netlify.com/sites/stoic-haibt-cb6b0c/deploys)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# leveler 2.0 
+
+## master branch
+
+The master branch deploys direct to leveler.info
+
+## staging branch
+The staging branch is used to test all new branches before pushing to master.
+The staging url is [https://eager-darwin-19a12c.netlify.com/](https://eager-darwin-19a12c.netlify.com/)
 
 ## Available Scripts
 
