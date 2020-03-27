@@ -6,12 +6,12 @@ import { withFirebase } from '../Firebase';
 const FooterNav = (props) => {
   const onContributeClick = () => {
     const { logEvent } = props.firebase;
-    logEvent('contribute_url_clicked_footer');
+    logEvent('contribute_url_clicked_footer_nav');
   };
 
   const onAboutClick = () => {
     const { logEvent } = props.firebase;
-    logEvent('about_url_clicked_footer');
+    logEvent('contribute_url_clicked_footer_nav');
   };
 
   return (
