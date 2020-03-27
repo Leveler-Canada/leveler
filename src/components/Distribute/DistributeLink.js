@@ -22,6 +22,13 @@ const DistributeLink = (props) => (
     {props.link.includes('patreon') ? (
       <Patreon height="40" />
     ) : null}
+
+    {!props.link.includes('paypal')
+		 && !props.link.includes('venmo')
+		 && !props.link.includes('cash')
+		 && !props.link.includes('patreon') ? (
+  <QuestionMark height="40" />
+		  ) : null}
   </a>
 );
 
