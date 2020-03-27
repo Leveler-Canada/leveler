@@ -83,7 +83,7 @@ export default class DistributeCard extends Component {
 
 	onPaymentLinkClick = (link) => {
 		const { logEvent } = this.props;
-		logEvent("payment_link_clicked", { link });
+		logEvent("p2p_link_clicked", { link });
 		this.setState({ linkClicked: true });
 	}
 }
