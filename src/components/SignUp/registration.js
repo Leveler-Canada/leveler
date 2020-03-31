@@ -1,27 +1,33 @@
-import React, {useState} from "react";
-import { Field, Formik } from "formik";
-import * as Yup from "yup";
-import FormikPlacesAutocomplete from "./FormikPlacesAutocomplete.jsx";
-import RadioButton from "./RadioButton"
-import RadioButtonGroup from "./RadioButtonGroup"
+/* eslint-disable react/jsx-filename-extension */
+import React, { useState } from 'react';
+import { Field, Formik } from 'formik';
+import * as Yup from 'yup';
 import { Redirect } from 'react-router-dom';
+import FormikPlacesAutocomplete from './FormikPlacesAutocomplete.jsx';
+import RadioButton from './RadioButton';
+import RadioButtonGroup from './RadioButtonGroup';
 
 const URL_REGEX = /^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/;
-const REQUIRED_ERROR = "required";
+const REQUIRED_ERROR = 'required';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().trim().required(REQUIRED_ERROR),
   industry: Yup.string().min(1),
   description: Yup.string().min(1).required(REQUIRED_ERROR),
-  social_url: Yup.string().matches(URL_REGEX, "we need a real URL here"),
-  payment: Yup.string().matches(URL_REGEX, "we need a real URL here").required(REQUIRED_ERROR)
+  social_url: Yup.string().matches(URL_REGEX, 'we need a real URL here'),
+  payment: Yup.string().matches(URL_REGEX, 'we need a real URL here').required(REQUIRED_ERROR),
 });
 
-const Registration = props => {
+const Registration = (props) => {
   const [submitted, setSubmitted] = useState(false);
 
+  const addToEntriesIndex = (entriesIndexPayload, entriesIndexCollection) => {
+    const { id } = entriesIndexCollection.doc();
+    entriesIndexCollection.doc(id).set(entriesIndexPayload);
+  };
+
   const onSubmit = (values, { resetForm }) => {
-    if (values.industry === "other") {
+    if (values.industry === 'other') {
       values.industry = values.other_industry;
       delete values.other_industry;
     }
@@ -34,7 +40,7 @@ const Registration = props => {
       values.payment_method.push(values.payment_3);
       delete values.payment_3;
     }
-    const { entriesCollection, entriesIndexCollection } = props.firebase;
+    const { fieldValue, entriesCollection, entriesIndexCollection } = props.firebase;
     const random = entriesCollection.doc().id;
     const entriesCollectionPayload = {
       location: values.location.trim(),
@@ -42,10 +48,8 @@ const Registration = props => {
       description: values.description.trim(),
       payment_url: values.payment_method,
       suggestion: values.suggestion.trim(),
-      random: random,
-      // TODO FORMAT created FOR FIREBASE
-      // created: fieldValue.serverTimestamp(),
-      created: new Date().toISOString()
+      random,
+      created: fieldValue.serverTimestamp(),
     };
     const entriesIndexPayload = {
       parent_id: random,
@@ -53,30 +57,25 @@ const Registration = props => {
       social_url: values.social_url.trim(),
       shown: 0,
       potential_contrib: 0,
-      created: new Date().toISOString()
-    }
+      created: fieldValue.serverTimestamp(),
+    };
     entriesCollection.doc(random).set(entriesCollectionPayload).then(() => {
       addToEntriesIndex(entriesIndexPayload, entriesIndexCollection);
-    })
+    });
     resetForm({});
     setSubmitted(true);
   };
 
-  const addToEntriesIndex = (entriesIndexPayload, entriesIndexCollection) => {
-    const id = entriesIndexCollection.doc().id;
-    entriesIndexCollection.doc(id).set(entriesIndexPayload);
-  }
-
   return (
     <Formik
       initialValues={{
-        email: "",
-        industry: "",
-        description: "",
-        payment: "",
-        suggestion: "",
-        location: "",
-        social_url: ""
+        email: '',
+        industry: '',
+        description: '',
+        payment: '',
+        suggestion: '',
+        location: '',
+        social_url: '',
       }}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
@@ -88,7 +87,7 @@ const Registration = props => {
         touched,
         errors,
         dirty,
-        isValid
+        isValid,
       }) => (
         <form onSubmit={handleSubmit}>
           <fieldset>
@@ -157,7 +156,7 @@ const Registration = props => {
               id="other"
               label="other"
             />
-            {values.industry === "other" && (
+            {values.industry === 'other' && (
               <div>
                 <input
                   type="text"
@@ -165,7 +164,7 @@ const Registration = props => {
                   value={values.custom_industry}
                   name="other_industry"
                   placeholder="other industry here"
-                ></input>
+                />
               </div>
             )}
           </RadioButtonGroup>
@@ -194,7 +193,7 @@ const Registration = props => {
               onChange={handleChange}
               value={values.payment}
               name="payment"
-            ></input>
+            />
             <span className="error">{errors.payment}</span>
           </fieldset>
           <fieldset>
