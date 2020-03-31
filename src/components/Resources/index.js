@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import { Loading } from '../Animations'
+import ResourceItem from './ResourceItem'
 import FooterNav from '../FooterNav';
 
 const ResourcesPage = () => (
@@ -71,30 +72,16 @@ class ResourcesContainerBase extends Component {
 				</nav>
 				<div className="resources-body">
 				{items.map(item => (
-					<div id={item.id} className="resources-item-container">
-						<div className="resources-item-votes">
-							<a>⬆️</a><p>{item.score}</p>
-						</div>
-						<div className="resources-item-title">
-							<a href={item.url}>{item.title}</a>
-						</div>
-						<div className="resources-item-detail">
-							<p>posted by {item.createdBy}, 2 days ago</p>
-						</div>
-					</div>
-				))}
-
-				</div>
-				{/* {this.state.loading && <Loading height="100" width="100"/>} */}
-				{/* {entries.map(entry => (
-					<DistributeCard
-						entry={entry}
-						key={entry.id}
-						fieldValue={fieldValue}
-						entriesCollection={entriesCollection}
-						logEvent={logEvent}
+					<ResourceItem
+						id={item.id}
+						score={item.score}
+						title={item.title}
+						url={item.url}
+						createdBy={item.createdBy}
 					/>
-					))} */}
+				))}
+				{/* {this.state.loading && <Loading height="100" width="100"/>} */}
+				</div>
 			</div>
 		)
 	}
