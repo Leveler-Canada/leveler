@@ -17,6 +17,7 @@ export default class DistributeCard extends Component {
 	}
 
 	async updateLikelyContribution() {
+		// add to DB
 		const { fieldValue, entriesCollection } = this.props;
 		const { id } = this.props.entry;
 		const docRef = entriesCollection.doc(id);
@@ -25,6 +26,9 @@ export default class DistributeCard extends Component {
 		} catch (e) {
 			console.log(e.message)
 		}
+		// fire off GA event
+		const { logEvent } = this.props;
+		logEvent("likely_contrib_dist_card", { link });
 	}
 
   handleCheckboxChange = event => {
