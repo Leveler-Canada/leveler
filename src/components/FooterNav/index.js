@@ -1,18 +1,18 @@
-import React from "react";
-import { withFirebase } from "../Firebase";
+import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { withFirebase } from '../Firebase';
 
 const FooterNav = (props) => {
+  const onContributeClick = () => {
+    const { logEvent } = props.firebase;
+    logEvent('contribute_url_clicked_footer_nav');
+  };
 
-	const onContributeClick = () => {
-		const { logEvent } = props.firebase;
-		logEvent("contribute_clicked");
-  }
-  
   const onAboutClick = () => {
     const { logEvent } = props.firebase;
-		logEvent("about_clicked");
-  }
+    logEvent('contribute_url_clicked_footer_nav');
+  };
 
   return (
     <footer>
@@ -28,7 +28,7 @@ const FooterNav = (props) => {
         updates
       </a>
 
-      <Link 
+      <Link
         to="/contribute"
         onClick={onContributeClick}
       >
@@ -37,4 +37,9 @@ const FooterNav = (props) => {
     </footer>
   );
 };
+
+FooterNav.propTypes = {
+  firebase: PropTypes.object.isRequired,
+};
+
 export default withFirebase(FooterNav);

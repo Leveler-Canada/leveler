@@ -59,12 +59,12 @@ class HomeLandingBase extends Component {
 
   onReceiveClick = () => {
     const { logEvent } = this.props.firebase;
-    logEvent("receive_clicked");
+    logEvent("receive_btn_clicked_home");
   };
 
   onDistributeClick = () => {
     const { logEvent } = this.props.firebase;
-    logEvent("distribute_clicked");
+    logEvent("distribute_btn_clicked_home");
   };
 }
 
