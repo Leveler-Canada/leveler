@@ -33,13 +33,6 @@ class ResourcesContainerBase extends Component {
 			],
 			loading: false
 		})
-		console.log(this.state.items[0])
-	}
-	
-	upvote = (index, score) => {
-		const { items } = this.state;
-		items[index].score = score;
-		this.forceUpdate()
 	}
 
 	async getLinks() {
@@ -72,6 +65,13 @@ class ResourcesContainerBase extends Component {
 	render() {
 
 		const { items } = this.state;
+
+		const upvote = async (index, score) => {
+			const { items } = this.state;
+			items[index].score = score;
+			await this.forceUpdate()
+		}
+
 		const renderItems = items.map((item, index) =>
 			<ResourceItem
 				index={index}
@@ -81,12 +81,12 @@ class ResourcesContainerBase extends Component {
 				title={item.title}
 				url={item.url}
 				createdBy={item.createdBy}
-				upvote={this.upvote}
+				upvote={upvote}
 			/>
 		);
 
 		return (
-			<div>
+			<>
 				<nav className="resources-header">
 					<ul>
 						<li>leveler</li>
@@ -96,10 +96,10 @@ class ResourcesContainerBase extends Component {
 					</ul>
 				</nav>
 				<div className="resources-body">
+					{this.state.loading && <Loading height="100" width="100"/>}
 					{renderItems}
-				{/* {this.state.loading && <Loading height="100" width="100"/>} */}
 				</div>
-			</div>
+			</>
 		)
 	}
 }
