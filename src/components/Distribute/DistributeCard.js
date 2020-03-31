@@ -16,6 +16,19 @@ export default class DistributeCard extends Component {
 		})
 	}
 
+	onPaymentLinkClick = (link) => {
+		const { logEvent } = this.props;
+		logEvent("p2p_link_clicked_dist_card", { link });
+		this.setState({ linkClicked: true });
+	}
+
+  handleCheckboxChange = event => {
+		this.setState({ contributeChecked: event.target.checked })
+		if (event.target.checked) {
+			this.updateLikelyContribution();
+		}
+	}
+
 	async updateLikelyContribution() {
 		// add to DB
 		const { fieldValue, entriesCollection } = this.props;
@@ -28,16 +41,8 @@ export default class DistributeCard extends Component {
 		}
 		// fire off GA event
 		const { logEvent } = this.props;
-		logEvent("likely_contrib_dist_card", { link });
+		logEvent("likely_contrib_dist_card");
 	}
-
-  handleCheckboxChange = event => {
-		this.setState({ contributeChecked: event.target.checked })
-		if (event.target.checked) {
-			this.updateLikelyContribution();
-		}
-	}
-	
 
 	render() {
 		const { entry } = this.props;
@@ -83,12 +88,6 @@ export default class DistributeCard extends Component {
 				</div>
 			</div>
 		)
-	}
-
-	onPaymentLinkClick = (link) => {
-		const { logEvent } = this.props;
-		logEvent("p2p_link_clicked_dist_card", { link });
-		this.setState({ linkClicked: true });
 	}
 }
 const Checkbox = props => (
