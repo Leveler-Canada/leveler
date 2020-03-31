@@ -13,12 +13,12 @@ const ResourcesPage = () => (
 )
 
 const INITIAL_STATE = {
-	categories: ['News', 'Government','Business', 'Medical'],
-	links: [
-		{id: 1, roomId: 1, title: 'NYC Bars Shut Down', url: 'www.nyc.gov', category: 'News'},
-		{id: 2, roomId: 2, title: '$2T Stimulus Bill Passed', url: 'www.nyc.gov', category: 'Government'},
-		{id: 3, roomId: 3, title: 'Stonks down', url: 'www.nyc.gov', category: 'Business'},
-		{id: 4, roomId: 4, title: 'Cases going down', url: 'www.nyc.gov', category: 'Medical'},
+	items: [
+		{id: 1, title: 'NYC Bars Shut Down', url: 'www.nyc.gov', type: 'story', score: 24, createdBy: 'sam'},
+		{id: 2, title: '$2T Stimulus Bill Passed', url: 'www.nyc.gov', type: 'story', score: 18, createdBy: 'adam'},
+		{id: 3, title: 'Stonks down', url: 'www.nyc.gov', type: 'story', score: 25, createdBy: 'sabina'},
+		{id: 4, title: 'Cases going down', url: 'www.nyc.gov', type: 'story', score: 77, createdBy: 'alessandra'},
+		{id: 5, title: 'Cuomo is whatever, really who cares?', url: 'www.nyc.gov', type: 'story', score: 4, createdBy: 'michael'},
 	],
 	loading: true
 };
@@ -58,9 +58,33 @@ class ResourcesContainerBase extends Component {
 	}
 
 	render() {
+		const { items } = INITIAL_STATE;
 		return (
-			<section>
-				<p>hi</p>
+			<div>
+				<nav className="resources-header">
+					<ul>
+						<li>leveler</li>
+						<li>top</li>
+						<li>new</li>
+						<li>submit</li>
+					</ul>
+				</nav>
+				<div className="resources-body">
+				{items.map(item => (
+					<div id={item.id} className="resources-item-container">
+						<div className="resources-item-votes">
+							<a>⬆️</a><p>{item.score}</p>
+						</div>
+						<div className="resources-item-title">
+							<a href={item.url}>{item.title}</a>
+						</div>
+						<div className="resources-item-detail">
+							<p>posted by {item.createdBy}, 2 days ago</p>
+						</div>
+					</div>
+				))}
+
+				</div>
 				{/* {this.state.loading && <Loading height="100" width="100"/>} */}
 				{/* {entries.map(entry => (
 					<DistributeCard
@@ -71,7 +95,7 @@ class ResourcesContainerBase extends Component {
 						logEvent={logEvent}
 					/>
 					))} */}
-			</section>
+			</div>
 		)
 	}
 }

@@ -1,0 +1,41 @@
+.resources-header {
+	background-color: gray;
+	ul {
+		padding: 5px;
+		list-style: none;
+	}
+	li {
+		display: inline-flex;
+		padding: 0 15px;
+		font-size: 1.2rem;
+		color: white;
+	}
+}
+
+.resources-body {
+	background-color: lightgrey;
+	font-size: 1.2rem;
+}
+
+.resources-item {
+	&-container {
+		display: flex;
+		padding: 5px 10px;
+		align-items: baseline;
+
+		& > div {
+			margin-right: 15px;
+		}
+
+		.resources-item-votes {
+			display: flex;
+			font-size: 1rem;
+		}
+		.resources-item-title a {
+			color: black;
+		}
+		.resources-item-detail {
+			font-size: 0.9rem;
+		}
+	}
+}
