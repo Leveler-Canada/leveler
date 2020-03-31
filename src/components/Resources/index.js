@@ -14,13 +14,7 @@ const ResourcesPage = () => (
 )
 
 const INITIAL_STATE = {
-	items: [
-		{id: 1, title: 'NYC Bars Shut Down', url: 'www.nyc.gov', type: 'story', score: 24, createdBy: 'sam'},
-		{id: 2, title: '$2T Stimulus Bill Passed', url: 'www.nyc.gov', type: 'story', score: 18, createdBy: 'adam'},
-		{id: 3, title: 'Stonks down', url: 'www.nyc.gov', type: 'story', score: 25, createdBy: 'sabina'},
-		{id: 4, title: 'Cases going down', url: 'www.nyc.gov', type: 'story', score: 77, createdBy: 'alessandra'},
-		{id: 5, title: 'Cuomo is whatever, really who cares?', url: 'www.nyc.gov', type: 'story', score: 4, createdBy: 'michael'},
-	],
+	items: [],
 	loading: true
 };
 
@@ -29,6 +23,23 @@ class ResourcesContainerBase extends Component {
 
 	async componentDidMount() {
 		// await this.getEntries()
+		await this.setState({
+			items: [
+				{id: 1, title: 'NYC Bars Shut Down', url: 'www.nyc.gov', type: 'story', score: 24, createdBy: 'sam'},
+				{id: 2, title: '$2T Stimulus Bill Passed', url: 'www.nyc.gov', type: 'story', score: 18, createdBy: 'adam'},
+				{id: 3, title: 'Stonks down', url: 'www.nyc.gov', type: 'story', score: 25, createdBy: 'sabina'},
+				{id: 4, title: 'Cases going down', url: 'www.nyc.gov', type: 'story', score: 77, createdBy: 'alessandra'},
+				{id: 5, title: 'Cuomo is whatever, really who cares?', url: 'www.nyc.gov', type: 'story', score: 4, createdBy: 'michael'},
+			],
+			loading: false
+		})
+		console.log(this.state.items[0])
+	}
+	
+	upvote = (index, score) => {
+		const { items } = this.state;
+		items[index].score = score;
+		this.forceUpdate()
 	}
 
 	async getLinks() {
@@ -59,7 +70,21 @@ class ResourcesContainerBase extends Component {
 	}
 
 	render() {
-		const { items } = INITIAL_STATE;
+
+		const { items } = this.state;
+		const renderItems = items.map((item, index) =>
+			<ResourceItem
+				index={index}
+				key={item.id}
+				id={item.id}
+				score={item.score}
+				title={item.title}
+				url={item.url}
+				createdBy={item.createdBy}
+				upvote={this.upvote}
+			/>
+		);
+
 		return (
 			<div>
 				<nav className="resources-header">
@@ -71,15 +96,7 @@ class ResourcesContainerBase extends Component {
 					</ul>
 				</nav>
 				<div className="resources-body">
-				{items.map(item => (
-					<ResourceItem
-						id={item.id}
-						score={item.score}
-						title={item.title}
-						url={item.url}
-						createdBy={item.createdBy}
-					/>
-				))}
+					{renderItems}
 				{/* {this.state.loading && <Loading height="100" width="100"/>} */}
 				</div>
 			</div>
