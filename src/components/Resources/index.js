@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import * as timeago from 'timeago.js';
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import { Loading } from '../Animations'
@@ -41,9 +42,12 @@ class ResourcesContainerBase extends Component {
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
 						let link = doc.data();
+						// SET UP ID
 						link.id = doc.id;
-						
-						
+						// SET UP TIMEAGO
+						const date = doc.data().created.toDate()
+						link.created = timeago.format(date)
+						// PUSH TO STATE
 						links.push(link)
 					})
 				})
@@ -73,7 +77,12 @@ class ResourcesContainerBase extends Component {
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
 						let link = doc.data();
+						// SET UP ID
 						link.id = doc.id;
+						// SET UP TIMEAGO
+						const date = doc.data().created.toDate()
+						link.created = timeago.format(date)
+						// PUSH TO STATE
 						links.push(link)
 					})
 				})
@@ -118,21 +127,24 @@ class ResourcesContainerBase extends Component {
 				</nav>
 				<div className="resources-body">
 					{this.state.loading && <Loading height="100" width="100"/>}
-
-					{this.state.links.map((item, index) =>
-						<ResourceItem
-							index={index}
-							key={item.id}
-							id={item.id}
-							score={item.score}
-							title={item.title}
-							url={item.url}
-							createdBy={item.createdBy}
-							upvote={upvote}
-							active={this.state.links[index].active}
-						/>
-					)}
-
+					
+					{!this.state.loading ? (
+						this.state.links.map((item, index) =>
+							<ResourceItem
+								index={index}
+								key={item.id}
+								id={item.id}
+								score={item.score}
+								title={item.title}
+								url={item.url}
+								createdBy={item.createdBy}
+								created={item.created}
+								upvote={upvote}
+								active={this.state.links[index].active}
+							/>
+						)
+					): null}
+						
 				</div>
 			</>
 		)

@@ -19,7 +19,7 @@ const ResourceItem = (props) => {
 			</a>
 		</div>
 		<div className="resources-item-detail">
-			<p>posted by {props.createdBy}, 2 days ago</p>
+			<p>posted by {props.createdBy}, {props.created}</p>
 			<button>💬</button>
 		</div>
 	</div>
