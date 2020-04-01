@@ -59,6 +59,7 @@ class Firebase {
     this.logEvent = app.analytics().logEvent;
     this.entriesCollection = this.dbFs.collection("entries");
     this.entriesIndexCollection = this.dbFs.collection("entriesIndex");
+    this.resourcesCollection = this.dbFs.collection("resources");
   }
 }
 export default Firebase;

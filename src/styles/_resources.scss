@@ -20,6 +20,7 @@
 .resources-item {
 	&-container {
 		display: flex;
+		align-items: baseline;
 		padding: 5px 10px;
 		border-bottom: 1px solid darkgray;
 		&:last-child {

@@ -14,78 +14,54 @@ const ResourcesPage = () => (
 )
 
 const INITIAL_STATE = {
-	items: [],
+	links: [],
 	loading: true
 };
 
 class ResourcesContainerBase extends Component {
 	state = { ...INITIAL_STATE };
 
-	async componentDidMount() {
-		// await this.getEntries()
-		await this.setState({
-			items: [
-				{id: 1, title: 'NYC Bars Shut Down', url: 'www.nyc.gov', type: 'story', score: 24, createdBy: 'sam', active: false},
-				{id: 2, title: '$2T Stimulus Bill Passed', url: 'www.nyc.gov', type: 'story', score: 18, createdBy: 'adam', active: false},
-				{id: 3, title: 'Stonks down', url: 'www.nyc.gov', type: 'story', score: 25, createdBy: 'sabina', active: false},
-				{id: 4, title: 'Cases going down', url: 'www.nyc.gov', type: 'story', score: 77, createdBy: 'alessandra', active: false},
-				{id: 5, title: 'Cuomo is whatever, really who cares?', url: 'www.nyc.gov', type: 'story', score: 4, createdBy: 'michael', active: false},
-			],
-			loading: false
-		})
+	componentDidMount() {
+		this.getLinks()
 	}
 
 	async getLinks() {
-		// let entries = [];
-		// const { entriesCollection } = this.props.firebase;
-		// const random = entriesCollection.doc().id;
-		// try {
-		// 	await entriesCollection
-		// 		.where("random", ">=", random)
-		// 		.orderBy("random")
-		// 		.limit(10)
-		// 		.get()
-		// 		.then((querySnapshot) => {
-		// 			querySnapshot.forEach((doc) => {
-		// 				entries.push(doc.data());
-		// 				this.updateShownCount(doc.data().random)
-		// 			})
-		// 			if (entries) {
-		// 				this.setState({
-		// 					entries,
-		// 					loading: false
-		// 				})
-		// 			}
-		// 		})
-		// } catch(e) {
-		// 	console.log(e.message)
-		// }
+		this.setState({
+			loading: true
+		})
+		let links = [];
+		const { resourcesCollection } = this.props.firebase;
+		try {
+			await resourcesCollection
+				.orderBy("score")
+				.limit(30)
+				.get()
+				.then((querySnapshot) => {
+					querySnapshot.forEach((doc) => {
+						let link = doc.data();
+						link.id = doc.id;
+						links.push(link)
+					})
+				})
+				if (links) {
+					this.setState({
+						links,
+						loading: false
+					})
+				}
+		} catch(e) {
+			console.log(e.message)
+		}
 	}
 
 	render() {
 
-		const { items } = this.state;
-
 		const upvote = async (index, score) => {
-			const { items } = this.state;
-			items[index].score = score;
-			items[index].active = true;
+			const { links } = this.state;
+			links[index].score = score;
+			links[index].active = true;
 			await this.forceUpdate()
 		}
-
-		const renderItems = items.map((item, index) =>
-			<ResourceItem
-				index={index}
-				key={item.id}
-				id={item.id}
-				score={item.score}
-				title={item.title}
-				url={item.url}
-				createdBy={item.createdBy}
-				upvote={upvote}
-				active={this.state.items[index].active}
-			/>
-		);
 
 		return (
 			<>
@@ -99,7 +75,21 @@ class ResourcesContainerBase extends Component {
 				</nav>
 				<div className="resources-body">
 					{this.state.loading && <Loading height="100" width="100"/>}
-					{renderItems}
+
+					{this.state.links.map((item, index) =>
+						<ResourceItem
+							index={index}
+							key={item.id}
+							id={item.id}
+							score={item.score}
+							title={item.title}
+							url={item.url}
+							createdBy={item.createdBy}
+							upvote={upvote}
+							active={this.state.links[index].active}
+						/>
+					)}
+
 				</div>
 			</>
 		)

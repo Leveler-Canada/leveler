@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { withFirebase } from '../Firebase';
 
 const ResourceItem = (props) => {
-
+ 
 	return (
 	<div id={props.id} className="resources-item-container">
 		<div className="resources-item-votes">
@@ -11,7 +11,12 @@ const ResourceItem = (props) => {
 		{props.active && <><p>👍🏼 {props.score}</p></>}
 		</div>
 		<div className="resources-item-title">
-			<a href={props.url}>{props.title}</a>
+			<a 
+				href={props.url}
+				target="_blank"
+				rel="noopener noreferrer">
+				{props.title}
+			</a>
 		</div>
 		<div className="resources-item-detail">
 			<p>posted by {props.createdBy}, 2 days ago</p>
