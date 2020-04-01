@@ -33,7 +33,8 @@ class ResourcesContainerBase extends Component {
 		const { resourcesCollection } = this.props.firebase;
 		try {
 			await resourcesCollection
-				.orderBy("score")
+				.where("type", "==", "story")
+				.orderBy("score", "desc")
 				.limit(30)
 				.get()
 				.then((querySnapshot) => {
