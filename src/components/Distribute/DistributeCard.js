@@ -16,15 +16,10 @@ export default class DistributeCard extends Component {
 		})
 	}
 
-	async updateLikelyContribution() {
-		const { fieldValue, entriesCollection } = this.props;
-		const { id } = this.props.entry;
-		const docRef = entriesCollection.doc(id);
-		try {
-			await docRef.update({potential_contrib: fieldValue.increment(1)});
-		} catch (e) {
-			console.log(e.message)
-		}
+	onPaymentLinkClick = (link) => {
+		const { logEvent } = this.props;
+		logEvent("p2p_link_clicked_dist_card", { link });
+		this.setState({ linkClicked: true });
 	}
 
   handleCheckboxChange = event => {
@@ -33,7 +28,21 @@ export default class DistributeCard extends Component {
 			this.updateLikelyContribution();
 		}
 	}
-	
+
+	async updateLikelyContribution() {
+		// add to DB
+		const { fieldValue, entriesCollection } = this.props;
+		const { id } = this.props.entry;
+		const docRef = entriesCollection.doc(id);
+		try {
+			await docRef.update({potential_contrib: fieldValue.increment(1)});
+		} catch (e) {
+			console.log(e.message)
+		}
+		// fire off GA event
+		const { logEvent } = this.props;
+		logEvent("likely_contrib_dist_card");
+	}
 
 	render() {
 		const { entry } = this.props;
@@ -79,12 +88,6 @@ export default class DistributeCard extends Component {
 				</div>
 			</div>
 		)
-	}
-
-	onPaymentLinkClick = (link) => {
-		const { logEvent } = this.props;
-		logEvent("payment_link_clicked", { link });
-		this.setState({ linkClicked: true });
 	}
 }
 const Checkbox = props => (
