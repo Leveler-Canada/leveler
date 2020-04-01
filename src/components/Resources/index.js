@@ -58,10 +58,19 @@ class ResourcesContainerBase extends Component {
 	render() {
 
 		const upvote = async (index, score) => {
+			const { fieldValue, resourcesCollection } = this.props.firebase;
+
 			const { links } = this.state;
 			links[index].score = score;
 			links[index].active = true;
-			await this.forceUpdate()
+			await this.forceUpdate();
+			// UPDATE DB SCORE
+			const docRef = resourcesCollection.doc(links[index].id);
+			try {
+				await docRef.update({score: fieldValue.increment(1)});
+			} catch (e) {
+				console.log(e.message)
+			}
 		}
 
 		return (
