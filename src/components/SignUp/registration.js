@@ -31,14 +31,8 @@ const Registration = (props) => {
       values.industry = values.other_industry;
       delete values.other_industry;
     }
-    values.payment_method = [values.payment];
-    if (values.payment_2) {
-      values.payment_method.push(values.payment_2);
-      delete values.payment_2;
-    }
-    if (values.payment_3) {
-      values.payment_method.push(values.payment_3);
-      delete values.payment_3;
+    if (values.payment.search(/https?:\/\//) === -1) {
+      values.payment = 'https://' + values.payment;
     }
     const { fieldValue, entriesCollection, entriesIndexCollection } = props.firebase;
     const random = entriesCollection.doc().id;
@@ -46,7 +40,7 @@ const Registration = (props) => {
       location: values.location.trim(),
       industry: values.industry.trim(),
       description: values.description.trim(),
-      payment_url: values.payment_method,
+      payment_url: [values.payment],
       suggestion: values.suggestion.trim(),
       random,
       created: fieldValue.serverTimestamp(),
