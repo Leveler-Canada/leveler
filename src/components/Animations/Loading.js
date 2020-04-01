@@ -5,7 +5,7 @@ function SvgLoading(props) {
     <svg
       style={{
         margin: "auto",
-        background: "#fff"
+        background: "transparent"
       }}
       width={200}
       height={200}

@@ -1,4 +1,5 @@
 export { default as Cash } from './Cash'
+export { default as Leveler } from './Leveler'
 export { default as Patreon } from './Patreon'
 export { default as Paypal } from './Paypal'
 export { default as Venmo } from './Venmo'

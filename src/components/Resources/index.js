@@ -4,6 +4,7 @@ import * as timeago from 'timeago.js';
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import { Loading } from '../Animations'
+import { Leveler } from '../Icons'
 import ResourceItem from './ResourceItem'
 import FooterNav from '../FooterNav';
 
@@ -119,7 +120,7 @@ class ResourcesContainerBase extends Component {
 			<>
 				<nav className="resources-header">
 					<ul>
-						<Link to="/">leveler</Link>
+						<Link to="/" id="leveler-icon"><Leveler /></Link>
 						<li onClick={() => {this.getTopLinks()}}>top</li>
 						<li onClick={() => {this.getNewLinks()}}>new</li>
 						<li>submit</li>
@@ -127,7 +128,7 @@ class ResourcesContainerBase extends Component {
 				</nav>
 				<div className="resources-body">
 					{this.state.loading && <Loading height="100" width="100"/>}
-					
+
 					{!this.state.loading ? (
 						this.state.links.map((item, index) =>
 							<ResourceItem
@@ -144,7 +145,6 @@ class ResourcesContainerBase extends Component {
 							/>
 						)
 					): null}
-						
 				</div>
 			</>
 		)
