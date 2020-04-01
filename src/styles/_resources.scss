@@ -7,7 +7,7 @@
 	li {
 		display: inline-flex;
 		padding: 0 15px;
-		font-size: 1.2rem;
+		font-size: 1.1rem;
 		color: white;
 	}
 }
@@ -21,19 +21,21 @@
 	&-container {
 		display: flex;
 		padding: 5px 10px;
-		align-items: baseline;
-
+		border-bottom: 1px solid darkgray;
+		&:last-child {
+			border-bottom: 0;
+		}
 		& > div {
-			margin-right: 15px;
+			margin-right: 10px;
+			align-items: baseline;
 		}
 
 		.resources-item-votes {
 			display: flex;
-			font-size: 1rem;
-			button {
+			p {
 				cursor: pointer;
 				background-color: transparent;
-				border: 0px;
+				border: 0;
 				&:focus {
 					outline:0;
 				}
@@ -43,7 +45,18 @@
 			color: black;
 		}
 		.resources-item-detail {
-			font-size: 0.9rem;
+			display: flex;
+			font-size: 0.8rem;
+
+			button {
+				cursor: pointer;
+				background-color: transparent;
+				font-size: 1rem;
+					border: 0;
+					&:focus {
+						outline:0;
+					}
+			}
 		}
 	}
 }

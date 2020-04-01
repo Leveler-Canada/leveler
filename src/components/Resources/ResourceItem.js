@@ -7,14 +7,15 @@ const ResourceItem = (props) => {
 	return (
 	<div id={props.id} className="resources-item-container">
 		<div className="resources-item-votes">
-			{/* <span onClick={() => this.onPaymentLinkClick(link)}> */}
-			<button onClick={() => props.upvote(props.index, props.score + 1)}>⬆️</button><p>{props.score}</p>
+		{!props.active && <><p onClick={() => props.upvote(props.index, props.score + 1)}>⬆️</p><p>{props.score}</p></>}
+		{props.active && <><p>👍🏼 {props.score}</p></>}
 		</div>
 		<div className="resources-item-title">
 			<a href={props.url}>{props.title}</a>
 		</div>
 		<div className="resources-item-detail">
 			<p>posted by {props.createdBy}, 2 days ago</p>
+			<button>💬</button>
 		</div>
 	</div>
 	)

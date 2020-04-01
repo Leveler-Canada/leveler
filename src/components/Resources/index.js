@@ -25,11 +25,11 @@ class ResourcesContainerBase extends Component {
 		// await this.getEntries()
 		await this.setState({
 			items: [
-				{id: 1, title: 'NYC Bars Shut Down', url: 'www.nyc.gov', type: 'story', score: 24, createdBy: 'sam'},
-				{id: 2, title: '$2T Stimulus Bill Passed', url: 'www.nyc.gov', type: 'story', score: 18, createdBy: 'adam'},
-				{id: 3, title: 'Stonks down', url: 'www.nyc.gov', type: 'story', score: 25, createdBy: 'sabina'},
-				{id: 4, title: 'Cases going down', url: 'www.nyc.gov', type: 'story', score: 77, createdBy: 'alessandra'},
-				{id: 5, title: 'Cuomo is whatever, really who cares?', url: 'www.nyc.gov', type: 'story', score: 4, createdBy: 'michael'},
+				{id: 1, title: 'NYC Bars Shut Down', url: 'www.nyc.gov', type: 'story', score: 24, createdBy: 'sam', active: false},
+				{id: 2, title: '$2T Stimulus Bill Passed', url: 'www.nyc.gov', type: 'story', score: 18, createdBy: 'adam', active: false},
+				{id: 3, title: 'Stonks down', url: 'www.nyc.gov', type: 'story', score: 25, createdBy: 'sabina', active: false},
+				{id: 4, title: 'Cases going down', url: 'www.nyc.gov', type: 'story', score: 77, createdBy: 'alessandra', active: false},
+				{id: 5, title: 'Cuomo is whatever, really who cares?', url: 'www.nyc.gov', type: 'story', score: 4, createdBy: 'michael', active: false},
 			],
 			loading: false
 		})
@@ -69,6 +69,7 @@ class ResourcesContainerBase extends Component {
 		const upvote = async (index, score) => {
 			const { items } = this.state;
 			items[index].score = score;
+			items[index].active = true;
 			await this.forceUpdate()
 		}
 
@@ -82,6 +83,7 @@ class ResourcesContainerBase extends Component {
 				url={item.url}
 				createdBy={item.createdBy}
 				upvote={upvote}
+				active={this.state.items[index].active}
 			/>
 		);
 
