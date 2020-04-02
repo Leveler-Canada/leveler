@@ -12,25 +12,11 @@ const HomePage = () => (
 	</div>
 );
 
-const INITIAL_STATE = {
-	entryCount: ''
-};
-
 class HomeLandingBase extends Component {
-	state = { ...INITIAL_STATE };
 
-  	async componentDidMount() {
-		document.title = "leveler"
-		this.getEntryCount(); 
-	}
-
-	async getEntryCount() {
-		await this.props.firebase.entriesIndexCollection.get().then(snap => {
-			this.setState({
-				entryCount: snap.size
-			})
-		})
-	}
+  	componentDidMount() {
+		  document.title = "leveler"
+    }
 
   render() {
     return (
