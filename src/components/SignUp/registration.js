@@ -19,26 +19,24 @@ const validationSchema = Yup.object().shape({
   payment: Yup.string()
     .transform((value) => (/^https?:\/\//.test(value) ? value : `https://${value}`))
     .url('we need a real URL here')
-    .test('validPaymentLink', "⛔️ looks like you're not adding a valid payment link", function(value) {
+    .test('validPaymentLink', '', function(value) {
       if (!value) return false;
 
       const hostname = value.split('/')[2];
       const path = value.split('/')[3];
 
-      switch (hostname) {
-        case 'paypal.me':
-          return (
-            (path && /^.+$/.test(path)) ? true :
-            this.createError({message: "⛔️ looks like you're adding a Paypal link improperly - instructions"})
-          );
-        case 'venmo.com':
-          return (
-            (path && /^code\?user_id=[0-9]{19}$/.test(path)) ? true :
-            this.createError({message: "⛔️ looks like you're adding a Venmo link improperly - instructions"})
-          );
-        default:
-          return false;
-      }
+      const [regex, errMsg] = (function(hostname) {
+        switch(hostname) {
+          case 'paypal.me':
+            return [/^.+$/, "⛔️ looks like you're adding a Paypal link improperly - instructions"];
+          case 'venmo.com':
+            return [/^code\?user_id=[0-9]{19}$/, "⛔️ looks like you're adding a Venmo link improperly - instructions"];
+          default:
+            return [null, "⛔️ looks like you're not adding a valid payment link"];
+        }
+      })(hostname);
+
+      return (!!path && !!regex && regex.test(path)) ? true : this.createError({ message: errMsg });
     })
     .required(REQUIRED_ERROR),
 });
