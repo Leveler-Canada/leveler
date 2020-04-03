@@ -23,6 +23,21 @@ const validationSchema = Yup.object().shape({
       return /^https?:\/\//.test(value) ? value : 'https://' + value;
     })
     .url('we need a real URL here')
+    .test('validPaymentLink', 'we need a valid payment link', function(value) {
+      if (!value) return false;
+
+      let hostname = value.split('/')[2];
+      let path = value.split('/')[3];
+
+      switch (hostname) {
+        case 'paypal.me':
+          return /^.+$/.test(path);
+        case 'venmo.com':
+          return /^code\?user_id=[0-9]{19}$/.test(path);
+        default:
+          return false;
+      }
+    })
     .required(REQUIRED_ERROR),
 });
 
