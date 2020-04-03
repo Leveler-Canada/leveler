@@ -19,7 +19,7 @@ const validationSchema = Yup.object().shape({
   payment: Yup.string()
     .transform((value) => (/^https?:\/\//.test(value) ? value : `https://${value}`))
     .url('we need a real URL here')
-    .test('validPaymentLink', 'we need a valid payment link', (value) => {
+    .test('validPaymentLink', "⛔️ looks like you're not adding a valid payment link", function(value) {
       if (!value) return false;
 
       const hostname = value.split('/')[2];
@@ -27,9 +27,15 @@ const validationSchema = Yup.object().shape({
 
       switch (hostname) {
         case 'paypal.me':
-          return /^.+$/.test(path);
+          return (
+            (path && /^.+$/.test(path)) ? true :
+            this.createError({message: "⛔️ looks like you're adding a Paypal link improperly - instructions"})
+          );
         case 'venmo.com':
-          return /^code\?user_id=[0-9]{19}$/.test(path);
+          return (
+            (path && /^code\?user_id=[0-9]{19}$/.test(path)) ? true :
+            this.createError({message: "⛔️ looks like you're adding a Venmo link improperly - instructions"})
+          );
         default:
           return false;
       }
@@ -207,22 +213,7 @@ const Registration = (props) => {
               value={values.payment}
               name="payment"
             />
-            {values.payment.includes('venmo') && errors.payment && (
-              <span className="error">
-                <p>⛔️ looks like you're adding a Venmo link improperly - instructions</p>
-              </span>
-            )}
-            {values.payment.includes('paypal') && errors.payment && (
-              <span className="error">
-                <p>⛔️ looks like you're adding a Paypal link improperly - instructions</p>
-              </span>
-            )}
-            {!values.payment.includes('venmo') && !values.payment.includes('paypal') && errors.payment && (
-              <span className="error">
-                <p>⛔️ looks like you're not adding a valid payment link</p>
-              </span>
-            )}
-            {/* <span className="error">{errors.payment}</span> */}
+            <span className="error">{errors.payment}</span>
           </fieldset>
           <fieldset>
             <label htmlFor="social_url">social</label>
