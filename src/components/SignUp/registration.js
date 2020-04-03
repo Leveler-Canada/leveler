@@ -7,15 +7,23 @@ import FormikPlacesAutocomplete from './FormikPlacesAutocomplete.jsx';
 import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
 
-const URL_REGEX = /^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/;
 const REQUIRED_ERROR = 'required';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().trim().required(REQUIRED_ERROR),
   industry: Yup.string().min(1),
   description: Yup.string().min(1).required(REQUIRED_ERROR),
-  social_url: Yup.string().matches(URL_REGEX, 'we need a real URL here'),
-  payment: Yup.string().matches(URL_REGEX, 'we need a real URL here').required(REQUIRED_ERROR),
+  social_url: Yup.string()
+    .transform((value) => {
+      return /^https?:\/\//.test(value) ? value : 'https://' + value;
+    })
+    .url('we need a real URL here'),
+  payment: Yup.string()
+    .transform((value) => {
+      return /^https?:\/\//.test(value) ? value : 'https://' + value;
+    })
+    .url('we need a real URL here')
+    .required(REQUIRED_ERROR),
 });
 
 const Registration = (props) => {
