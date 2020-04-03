@@ -32,6 +32,7 @@ const validationSchema = Yup.object().shape({
           case 'cash.app':
             return [/^\$[a-zA-Z]+$/, "⛔️ looks like you're adding a Cash App link improperly - instructions"]
           case 'paypal.me':
+          case 'www.paypal.me':
             return [/^.+$/, "⛔️ looks like you're adding a Paypal link improperly - instructions"];
           case 'venmo.com':
             return [/^code\?user_id=[0-9]{19}$/, "⛔️ looks like you're adding a Venmo link improperly - instructions"];
