@@ -14,20 +14,16 @@ const validationSchema = Yup.object().shape({
   industry: Yup.string().min(1),
   description: Yup.string().min(1).required(REQUIRED_ERROR),
   social_url: Yup.string()
-    .transform((value) => {
-      return /^https?:\/\//.test(value) ? value : 'https://' + value;
-    })
+    .transform((value) => (/^https?:\/\//.test(value) ? value : `https://${value}`))
     .url('we need a real URL here'),
   payment: Yup.string()
-    .transform((value) => {
-      return /^https?:\/\//.test(value) ? value : 'https://' + value;
-    })
+    .transform((value) => (/^https?:\/\//.test(value) ? value : `https://${value}`))
     .url('we need a real URL here')
-    .test('validPaymentLink', 'we need a valid payment link', function(value) {
+    .test('validPaymentLink', 'we need a valid payment link', (value) => {
       if (!value) return false;
 
-      let hostname = value.split('/')[2];
-      let path = value.split('/')[3];
+      const hostname = value.split('/')[2];
+      const path = value.split('/')[3];
 
       switch (hostname) {
         case 'paypal.me':
@@ -55,7 +51,7 @@ const Registration = (props) => {
       delete values.other_industry;
     }
     if (values.payment.search(/https?:\/\//) === -1) {
-      values.payment = 'https://' + values.payment;
+      values.payment = `https://${values.payment}`;
     }
     const { fieldValue, entriesCollection, entriesIndexCollection } = props.firebase;
     const random = entriesCollection.doc().id;
@@ -211,7 +207,22 @@ const Registration = (props) => {
               value={values.payment}
               name="payment"
             />
-            <span className="error">{errors.payment}</span>
+            {values.payment.includes('venmo') && errors.payment && (
+              <span className="error">
+                <p>⛔️ looks like you're adding a Venmo link improperly - instructions</p>
+              </span>
+            )}
+            {values.payment.includes('paypal') && errors.payment && (
+              <span className="error">
+                <p>⛔️ looks like you're adding a Paypal link improperly - instructions</p>
+              </span>
+            )}
+            {!values.payment.includes('venmo') && !values.payment.includes('paypal') && errors.payment && (
+              <span className="error">
+                <p>⛔️ looks like you're not adding a valid payment link</p>
+              </span>
+            )}
+            {/* <span className="error">{errors.payment}</span> */}
           </fieldset>
           <fieldset>
             <label htmlFor="social_url">social</label>
