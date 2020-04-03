@@ -9,15 +9,17 @@ import RadioButtonGroup from './RadioButtonGroup';
 
 const REQUIRED_ERROR = 'required';
 
+const addURLScheme = (url) => (/^https?:\/\//.test(url) ? url : `https://${url}`);
+
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().trim().required(REQUIRED_ERROR),
   industry: Yup.string().min(1),
   description: Yup.string().min(1).required(REQUIRED_ERROR),
   social_url: Yup.string()
-    .transform((value) => (/^https?:\/\//.test(value) ? value : `https://${value}`))
+    .transform(addURLScheme)
     .url('we need a real URL here'),
   payment: Yup.string()
-    .transform((value) => (/^https?:\/\//.test(value) ? value : `https://${value}`))
+    .transform(addURLScheme)
     .url('we need a real URL here')
     .test('validPaymentLink', '', function(value) {
       if (!value) return false;
@@ -54,9 +56,7 @@ const Registration = (props) => {
       values.industry = values.other_industry;
       delete values.other_industry;
     }
-    if (values.payment.search(/https?:\/\//) === -1) {
-      values.payment = `https://${values.payment}`;
-    }
+    values.payment = addURLScheme(values.payment);
     const { fieldValue, entriesCollection, entriesIndexCollection } = props.firebase;
     const random = entriesCollection.doc().id;
     const entriesCollectionPayload = {
