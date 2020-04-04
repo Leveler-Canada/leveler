@@ -4,6 +4,7 @@ import { Field, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import FormikPlacesAutocomplete from './FormikPlacesAutocomplete.jsx';
+import PaymentInstruction from '../Modal/PaymentInstruction.js';
 import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
 
@@ -21,16 +22,16 @@ const validationSchema = Yup.object().shape({
   payment: Yup.string()
     .transform(addURLScheme)
     .url('we need a real URL here')
-    .test('validPaymentLink', '', function(value) {
+    .test('validPaymentLink', '', function (value) {
       if (!value) return false;
 
       const hostname = value.split('/')[2];
       const path = value.split('/')[3];
 
-      const [regex, errMsg] = (function(hostname) {
-        switch(hostname) {
+      const [regex, errMsg] = (function (hostname) {
+        switch (hostname) {
           case 'cash.app':
-            return [/^\$[a-zA-Z]+$/, "⛔️ looks like you're adding a Cash App link improperly - instructions"]
+            return [/^\$[a-zA-Z]+$/, "⛔️ looks like you're adding a Cash App link improperly - instructions"];
           case 'paypal.me':
           case 'www.paypal.me':
             return [/^.+$/, "⛔️ looks like you're adding a Paypal link improperly - instructions"];
@@ -39,7 +40,7 @@ const validationSchema = Yup.object().shape({
           default:
             return [null, "⛔️ looks like you're not adding a valid payment link"];
         }
-      })(hostname);
+      }(hostname));
 
       return (!!path && !!regex && regex.test(path)) ? true : this.createError({ message: errMsg });
     })
@@ -48,7 +49,17 @@ const validationSchema = Yup.object().shape({
 
 const Registration = (props) => {
   const [submitted, setSubmitted] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
+  // MODAL STATE MANAGEMENT
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  // ADD ENTRY TO entriesIndex UPON SUBMISSION
   const addToEntriesIndex = (entriesIndexPayload, entriesIndexCollection) => {
     const { id } = entriesIndexCollection.doc();
     entriesIndexCollection.doc(id).set(entriesIndexPayload);
@@ -215,6 +226,8 @@ const Registration = (props) => {
               name="payment"
             />
             <span className="error">{errors.payment}</span>
+            <button onClick={openModal}>instructions</button>
+            <PaymentInstruction isOpen={modalIsOpen} data={errors.payment} />
           </fieldset>
           <fieldset>
             <label htmlFor="social_url">social</label>
