@@ -24,7 +24,7 @@ const validationSchema = Yup.object().shape({
     .test('validPaymentLink', '', function(value) {
       if (!value) return false;
 
-      const hostname = value.split('/')[2];
+      const hostname = value.split('/')[2].toLowerCase();
       const path = value.split('/')[3];
 
       const [regex, errMsg] = (function(hostname) {
