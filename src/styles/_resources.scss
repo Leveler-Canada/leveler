@@ -41,7 +41,7 @@
 			button {
 				cursor: pointer;
 				background-color: transparent;
-				font-size: 1rem;
+				font-size: 1.1rem;
 					border: 0;
 					&:focus {
 						outline:0;}
@@ -57,6 +57,7 @@
 		.resources-item-title {
 			display: flex;
 			a {
+				font-size: 1.1rem;
 				color: black;
 			}
 			p {
@@ -76,11 +77,14 @@
 			.resources-item-votes {
 				align-self: center;
 				p {
-					font-size: 1.2rem;
+					font-size: 1rem;
 				}
 			}
 			.resources-item-title {
 				display: block;
+				a {
+					font-size: 1rem;
+				}
 				p {
 					margin-left: 0;
 				}
