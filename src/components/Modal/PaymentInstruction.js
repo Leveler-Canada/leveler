@@ -45,7 +45,6 @@ const PaymentInstruction = (props) => (
               <b>paypal.me/yourusername </b>
               <p>or </p>
               <b>https://paypal.me/yourusername </b>
-
             </>
           )}
           {props.data.includes('Cash')
