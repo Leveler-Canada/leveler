@@ -19,8 +19,10 @@ const PaymentInstruction = (props) => (
                 Click the “send” icon and then “copy” to copy your payment URL.
                 Paste this url into the payment field we provide.
               </p>
-              <p>Your url will look like:
-                https://venmo.com/code?user_id=12345678…</b>
+              <p>
+                Your url will look like:
+              </p>
+              <b>https://venmo.com/code?user_id=12345678…</b>
             </>
           )}
           {props.data.includes('Paypal')
@@ -42,9 +44,13 @@ const PaymentInstruction = (props) => (
               <p>
                 Please remember to post the full url, it should look like:
               </p>
-              <b>paypal.me/yourusername </b>
-              <p>or </p>
-              <b>https://paypal.me/yourusername </b>
+              <p>
+                <b>paypal.me/yourusername </b>
+                <br />
+                or
+                <br />
+                <b>https://paypal.me/yourusername </b>
+              </p>
             </>
           )}
           {props.data.includes('Cash')
