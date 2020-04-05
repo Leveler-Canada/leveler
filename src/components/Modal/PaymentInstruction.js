@@ -64,16 +64,16 @@ const PaymentInstruction = (props) => (
               <b>cash.app/$yourcashtag</b>
             </>
           )}
-          {props.data.includes('valid payment link') || props.data.includes('real URL')
+          {props.data.includes('not adding a valid payment link') || props.data.includes('we need a real URL here')
           || props.data.includes('required')
-          && (
-            <>
-              <h4>Whoops!</h4>
-              <p>Looks like you're trying to add a link we dont recognize.</p>
-              <p>Please add your payment link, from one of the following three platforms:</p>
-              <p>Venmo, Paypal, Cash</p>
-            </>
-          )}
+            ? (
+              <>
+                <h4>Whoops!</h4>
+                <p>Looks like you're trying to add a link we dont recognize.</p>
+                <p>Please add your payment link, from one of the following three platforms:</p>
+                <p>Venmo, Paypal, Cash</p>
+              </>
+            ) : null}
         </div>
         <div className="modal-overlay" onClick={() => props.closeModal()} />
       </>
