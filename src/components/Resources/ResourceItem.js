@@ -1,10 +1,8 @@
 /* eslint-disable no-unused-expressions */
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { withFirebase } from '../Firebase';
 
-const ResourceItem = (props) => {
- 
-	return (
+const ResourceItem = (props) => (
 	<div id={props.id} className="resources-item-container">
 		<div className="resources-item-votes">
 		{!props.active && <><p onClick={() => props.upvote(props.index, props.score + 1)}>⬆️</p><p>{props.score}</p></>}
@@ -23,6 +21,5 @@ const ResourceItem = (props) => {
 			<button>💬</button>
 		</div>
 	</div>
-	)
-}
+	);
 export default withFirebase(ResourceItem);
