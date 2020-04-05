@@ -31,12 +31,12 @@ const validationSchema = Yup.object().shape({
       const [regex, errMsg] = (function (hostname) {
         switch (hostname) {
           case 'cash.app':
-            return [/^\$[a-zA-Z]+$/, "⛔️ looks like you're adding a Cash App link improperly - instructions"];
+            return [/^\$[a-zA-Z]+$/, "⛔️ looks like you're adding a Cash App link improperly"];
           case 'paypal.me':
           case 'www.paypal.me':
-            return [/^.+$/, "⛔️ looks like you're adding a Paypal link improperly - instructions"];
+            return [/^.+$/, "⛔️ looks like you're adding a Paypal link improperly"];
           case 'venmo.com':
-            return [/^code\?user_id=[0-9]{19}$/, "⛔️ looks like you're adding a Venmo link improperly - instructions"];
+            return [/^code\?user_id=[0-9]{19}$/, "⛔️ looks like you're adding a Venmo link improperly"];
           default:
             return [null, "⛔️ looks like you're not adding a valid payment link"];
         }
@@ -225,9 +225,21 @@ const Registration = (props) => {
               value={values.payment}
               name="payment"
             />
-            <span className="error">{errors.payment}</span>
-            <button onClick={openModal}>instructions</button>
-            <PaymentInstruction isOpen={modalIsOpen} data={errors.payment} />
+
+            {errors.payment && (
+            <>
+              <span className="error">
+                {errors.payment}
+                <button className="instructions-btn" onClick={openModal}>instructions</button>
+              </span>
+            </>
+            )}
+            <PaymentInstruction
+              openModal={openModal}
+              closeModal={closeModal}
+              isOpen={modalIsOpen}
+              data={errors.payment}
+            />
           </fieldset>
           <fieldset>
             <label htmlFor="social_url">social</label>
