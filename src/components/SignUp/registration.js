@@ -216,8 +216,7 @@ const Registration = (props) => {
           <fieldset>
             <label htmlFor="payment">payment*</label>
             <span className="description">
-              please post the full public url to your preferred payment
-              method(s)
+              please post the full url to your venmo, paypal, or cashapp payment method
             </span>
             <input
               type="text"
