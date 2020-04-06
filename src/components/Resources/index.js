@@ -162,7 +162,7 @@ class ResourcesContainerBase extends Component {
 					</ul>
 				</nav>
 				<div className="resources-body">
-					{this.state.loading && <Loading height="100" width="100"/>}
+					{this.state.loading && <Loading height="70" width="70"/>}
 
 					{!this.state.loading ? (
 						this.state.links.map((item, index) =>
