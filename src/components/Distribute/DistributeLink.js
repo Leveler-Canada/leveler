@@ -1,26 +1,39 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { Paypal, Venmo, Patreon, Cash } from '../Icons'
+import {
+  Paypal, Venmo, Patreon, Cash, QuestionMark,
+} from '../Icons';
 
-const DistributeLink = props => (
-	<a 
-		href={props.link}
-		target="_blank"
-		rel="noopener noreferrer"
-		className="payment-link"
-	>
-		{props.link.includes('paypal') ? (
-			<Paypal height="35" width="40" />
-		): null}
-		{props.link.includes('venmo') ? (
-			<Venmo height="40" />
-		): null}
-		{props.link.includes('cash') ? (
-			<Cash height="40" />
-		): null}
-		{props.link.includes('patreon') ? (
-			<Patreon height="40" />
-		): null}
-	</a>
-)
+const DistributeLink = (props) => {
+  const { link } = props;
+  return (
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="payment-link"
+    >
+      {link.includes('paypal') ? (
+        <Paypal height="35" width="40" />
+      ) : null}
+      {link.includes('venmo') ? (
+        <Venmo height="40" />
+      ) : null}
+      {link.includes('cash') ? (
+        <Cash height="40" />
+      ) : null}
+      {link.includes('patreon') ? (
+        <Patreon height="40" />
+      ) : null}
+
+      {!link.includes('paypal')
+		 && !link.includes('venmo')
+		 && !link.includes('cash')
+		 && !link.includes('patreon') ? (
+  <QuestionMark height="40" />
+		  ) : null}
+    </a>
+  );
+};
 
 export default DistributeLink;

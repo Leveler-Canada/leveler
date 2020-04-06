@@ -1,5 +1,5 @@
-import app from "firebase/app";
-import "firebase/database";
+import app from 'firebase/app';
+import 'firebase/database';
 import 'firebase/firestore';
 import 'firebase/analytics';
 
@@ -11,7 +11,7 @@ const {
   REACT_APP_prod_storageBucket,
   REACT_APP_prod_messagingSenderId,
   REACT_APP_prod_appId,
-  REACT_APP_prod_measurementId
+  REACT_APP_prod_measurementId,
 } = process.env;
 
 const {
@@ -22,7 +22,7 @@ const {
   REACT_APP_dev_storageBucket,
   REACT_APP_dev_messagingSenderId,
   REACT_APP_dev_appId,
-  REACT_APP_dev_measurementId
+  REACT_APP_dev_measurementId,
 } = process.env;
 
 const prodConfig = {
@@ -33,7 +33,7 @@ const prodConfig = {
   storageBucket: REACT_APP_prod_storageBucket,
   messagingSenderId: REACT_APP_prod_messagingSenderId,
   appId: REACT_APP_prod_appId,
-  measurementId: REACT_APP_prod_measurementId
+  measurementId: REACT_APP_prod_measurementId,
 };
 
 const devConfig = {
@@ -44,10 +44,10 @@ const devConfig = {
   storageBucket: REACT_APP_dev_storageBucket,
   messagingSenderId: REACT_APP_dev_messagingSenderId,
   appId: REACT_APP_dev_appId,
-  measurementId: REACT_APP_dev_measurementId
+  measurementId: REACT_APP_dev_measurementId,
 };
 
-const config = process.env.NODE_ENV === "production" ? prodConfig : devConfig;
+const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
 
 class Firebase {
   constructor() {
