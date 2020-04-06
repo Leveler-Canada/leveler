@@ -73,7 +73,7 @@ class ResourcesContainerBase extends Component {
 			await resourcesCollection
 				.where("type", "==", "story")
 				.orderBy("created", "desc")
-				.limit(30)
+				.limit(50)
 				.get()
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
