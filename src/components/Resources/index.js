@@ -106,6 +106,8 @@ class ResourcesContainerBase extends Component {
 			const { links } = this.state;
 			links[index].score = score;
 			links[index].active = true;
+
+			updateUserKarma(links[index].by)
 			// UPDATE DB SCORE
 			const docRef = resourcesCollection.doc(links[index].id);
 			try {
@@ -114,6 +116,17 @@ class ResourcesContainerBase extends Component {
 				console.log(e.message)
 			}
 			await this.forceUpdate();
+		}
+
+		const updateUserKarma = async (uid) => {
+			const { fieldValue, userCollection } = this.props.firebase;			
+			const user = userCollection.where('id', '==', uid);
+			await user.get().then(function (querySnapshot) {
+			querySnapshot.forEach(function (doc) {
+				const userRef = userCollection.doc(doc.id)
+				userRef.update({karma: fieldValue.increment(1)});
+				});
+			})
 		}
 
 		const getByCategory = async (category) => {
