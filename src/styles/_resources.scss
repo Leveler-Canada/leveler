@@ -37,7 +37,6 @@
 		}
 
 		.resources-item-votes {
-			display: flex;
 			button {
 				cursor: pointer;
 				background-color: transparent;
@@ -49,20 +48,34 @@
 			p {
 				font-size: 1rem;
 				&:last-child {
-					margin-left: 10px;
+					text-align: center;
+					margin-left: -3px;
 				}
 			}
 		}
-
+		
+		
 		.resources-item-title {
-			display: flex;
+			display: block;
+			width:100%;
 			a {
 				font-size: 1.1rem;
 				color: black;
 			}
 			p {
-				margin-left: 5px;
 				font-size: 0.8rem;
+			}
+		}
+		.resources-item-footer {
+			display: flex;
+			align-self: center;
+			button {
+				position: relative;
+				top: -25px;
+				border: 1px solid black;
+				background-color: transparent;
+				align-self: center;
+				margin-left: auto;
 			}
 		}
 	}
@@ -80,15 +93,25 @@
 					font-size: 1rem;
 				}
 			}
+
+			// display: block;
 			.resources-item-title {
-				display: block;
-				a {
-					font-size: 1rem;
-				}
-				p {
-					margin-left: 0;
-				}
+					display: block;
+					a {
+						font-size: 1rem;
+					}
+					p {
+						margin-left: 0;
+					}
+					.resources-item-footer {
+						display: block;
+						button {
+							position: relative;
+							top: 0;
+							margin-left: 0;
+						}
+					}
+				}		
 			}
-		}
 	}
 }

@@ -11,12 +11,13 @@ const ResourceItem = (props) => {
 				<>
 					<button onClick={() => props.upvote(props.index, props.score + 1)}>⬆️</button>
 					<p>{props.score}</p>
-					<button>💬</button>
 				</>}
 			{props.active && 
 				<>
-					<p>👍🏼 {props.score}</p>
-					<button>💬</button>
+					<button>👍🏼</button>
+					<p>{props.score}</p>
+
+					{/* <button>💬</button> */}
 				</>}
 		</div>
 		<div className="resources-item-title">
@@ -26,8 +27,14 @@ const ResourceItem = (props) => {
 				rel="noopener noreferrer">
 				{props.title}
 			</a>
-			<p>by {props.createdBy}, {props.created}</p>
+			<div className="resources-item-footer">
+				<p>by {props.by}, {props.created}</p>
+				<button><b>{props.category}</b></button>
+			</div>
 		</div>
+		{/* <div className="resources-item-category"> */}
+			
+		{/* </div> */}
 	</div>
 	)
 }

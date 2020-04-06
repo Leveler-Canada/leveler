@@ -106,7 +106,6 @@ class ResourcesContainerBase extends Component {
 			const { links } = this.state;
 			links[index].score = score;
 			links[index].active = true;
-			await this.forceUpdate();
 			// UPDATE DB SCORE
 			const docRef = resourcesCollection.doc(links[index].id);
 			try {
@@ -114,6 +113,7 @@ class ResourcesContainerBase extends Component {
 			} catch (e) {
 				console.log(e.message)
 			}
+			await this.forceUpdate();
 		}
 
 		return (
@@ -138,7 +138,8 @@ class ResourcesContainerBase extends Component {
 								score={item.score}
 								title={item.title}
 								url={item.url}
-								createdBy={item.createdBy}
+								by={item.by}
+								category={item.category}
 								created={item.created}
 								upvote={upvote}
 								active={this.state.links[index].active}
