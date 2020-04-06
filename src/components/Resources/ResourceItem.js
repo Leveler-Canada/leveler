@@ -29,7 +29,7 @@ const ResourceItem = (props) => {
 			</a>
 			<div className="resources-item-footer">
 				<p>by {props.by}, {props.created}</p>
-				<button><b>{props.category}</b></button>
+				<button onClick={() => props.getByCategory(props.category)}><b>{props.category}</b></button>
 			</div>
 		</div>
 		{/* <div className="resources-item-category"> */}

@@ -116,6 +116,41 @@ class ResourcesContainerBase extends Component {
 			await this.forceUpdate();
 		}
 
+		const getByCategory = async (category) => {
+			this.setState({
+				loading: true
+			})
+			let links = [];
+			const { resourcesCollection } = this.props.firebase;
+			try {
+				await resourcesCollection
+					.where("type", "==", "story")
+					.where("category", "==", category)
+					.limit(30)
+					.get()
+					.then((querySnapshot) => {
+						querySnapshot.forEach((doc) => {
+							let link = doc.data();
+							// SET UP ID
+							link.id = doc.id;
+							// SET UP TIMEAGO
+							const date = doc.data().created.toDate()
+							link.created = timeago.format(date)
+							// PUSH TO STATE
+							links.push(link)
+						})
+					})
+					if (links) {
+						this.setState({
+							links,
+							loading: false
+						})
+					}
+				} catch(e) {
+					console.log(e.message)
+				}
+		}
+
 		return (
 			<>
 				<nav className="resources-header">
@@ -143,6 +178,7 @@ class ResourcesContainerBase extends Component {
 								created={item.created}
 								upvote={upvote}
 								active={this.state.links[index].active}
+								getByCategory={getByCategory}
 							/>
 						)
 					): null}
