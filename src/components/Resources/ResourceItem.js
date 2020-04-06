@@ -38,13 +38,14 @@ const ResourceItem = (props) => (
             {props.created}
           </p>
         </div>
+        <div className="resources-item-category-mobile">
+          <button onClick={() => props.getByCategory(props.category)}><b>{props.category}</b></button>
+        </div>
       </div>
       <div className="resources-item-category-desktop">
         <button onClick={() => props.getByCategory(props.category)}><b>{props.category}</b></button>
       </div>
-    </div>
-    <div className="resources-item-category-mobile">
-      <button onClick={() => props.getByCategory(props.category)}><b>{props.category}</b></button>
+
     </div>
   </div>
 );
