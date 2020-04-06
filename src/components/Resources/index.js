@@ -106,7 +106,6 @@ class ResourcesContainerBase extends Component {
 			const { links } = this.state;
 			links[index].score = score;
 			links[index].active = true;
-			await this.forceUpdate();
 			// UPDATE DB SCORE
 			const docRef = resourcesCollection.doc(links[index].id);
 			try {
@@ -114,6 +113,42 @@ class ResourcesContainerBase extends Component {
 			} catch (e) {
 				console.log(e.message)
 			}
+			await this.forceUpdate();
+		}
+
+		const getByCategory = async (category) => {
+			this.setState({
+				loading: true
+			})
+			let links = [];
+			const { resourcesCollection } = this.props.firebase;
+			try {
+				await resourcesCollection
+					.where("type", "==", "story")
+					.where("category", "==", category)
+					.limit(30)
+					.get()
+					.then((querySnapshot) => {
+						querySnapshot.forEach((doc) => {
+							let link = doc.data();
+							// SET UP ID
+							link.id = doc.id;
+							// SET UP TIMEAGO
+							const date = doc.data().created.toDate()
+							link.created = timeago.format(date)
+							// PUSH TO STATE
+							links.push(link)
+						})
+					})
+					if (links) {
+						this.setState({
+							links,
+							loading: false
+						})
+					}
+				} catch(e) {
+					console.log(e.message)
+				}
 		}
 
 		return (
@@ -138,10 +173,12 @@ class ResourcesContainerBase extends Component {
 								score={item.score}
 								title={item.title}
 								url={item.url}
-								createdBy={item.createdBy}
+								by={item.by}
+								category={item.category}
 								created={item.created}
 								upvote={upvote}
 								active={this.state.links[index].active}
+								getByCategory={getByCategory}
 							/>
 						)
 					): null}
