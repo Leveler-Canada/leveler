@@ -153,7 +153,7 @@ class ResourcesContainerBase extends Component {
 
 		return (
 			<>
-				<nav className="resources-header">
+				<nav className="resources-header"> 
 					<ul>
 						<Link to="/" id="leveler-icon"><Leveler /></Link>
 						<li onClick={() => {this.getTopLinks()}}>top</li>
