@@ -63,26 +63,27 @@ section {
     font-weight: bold;
   }
 }
+.main-btn-container {
+  .btn {
+    padding: 4px 14px;
+    margin: 20px 0;
+    margin-right: 24px;
+    border: 2px solid black;
+    background: white;
+    outline: none;
+    font-size: 25px;
+    font-weight: bold;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
 
-.btn {
-  padding: 4px 14px;
-  border: 2px solid black;
-  background: white;
-  outline: none;
-  font-size: 25px;
-  margin: 20px 0;
-  margin-right: 24px;
-  font-weight: bold;
-  transition: 0.5s ease-in-out;
-  cursor: pointer;
+    &:disabled {
+      border: 2px solid silver;
+    }
 
-  &:disabled {
-    border: 2px solid silver;
-  }
-
-  &:hover:enabled {
-    background: black;
-    color: white;
+    &:hover:enabled {
+      background: black;
+      color: white;
+    }
   }
 }
 @media (max-width: 480px) {
@@ -91,6 +92,14 @@ section {
   }
   .wrapper {
     padding: 20px;
+
+    .main-btn-container {
+      display: grid;
+      .btn {
+        width: 100%;
+        margin: 15px 0;
+      }
+    }
   }
 
   section h3 {
