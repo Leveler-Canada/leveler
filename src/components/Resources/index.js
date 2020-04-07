@@ -32,6 +32,7 @@ class ResourcesContainerBase extends Component {
 		this.setState({
 			loading: true
 		})
+
 		let links = [];
 		const { resourcesCollection } = this.props.firebase;
 		try {
@@ -63,10 +64,18 @@ class ResourcesContainerBase extends Component {
 		}
 	}
 
+	newLinksClicked = () => {
+		const { logEvent } = this.props.firebase;
+		logEvent("new_resources_clicked");
+	}
+
 	async getNewLinks() {
 		this.setState({
 			loading: true
 		})
+		// LOG GA EVENT
+		this.newLinksClicked();
+
 		let links = [];
 		const { resourcesCollection } = this.props.firebase;
 		try {
@@ -99,7 +108,13 @@ class ResourcesContainerBase extends Component {
 	}
 
 	render() {
+		const { logEvent } = this.props.firebase;
 
+		const linkClicked = async (url) => {
+			await logEvent("resource_link_clicked", {url});
+			console.log('clicked', url)
+		}
+		
 		const upvote = async (index, score) => {
 			const { fieldValue, resourcesCollection } = this.props.firebase;
 
@@ -192,6 +207,7 @@ class ResourcesContainerBase extends Component {
 								upvote={upvote}
 								active={this.state.links[index].active}
 								getByCategory={getByCategory}
+								linkClicked={linkClicked}
 							/>
 						)
 					): null}

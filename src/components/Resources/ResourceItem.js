@@ -7,17 +7,17 @@ const ResourceItem = (props) => (
     <div id={props.id} className="resources-item-container">
       <div className="resources-item-votes">
         {!props.active && (
-        <>
-          <button onClick={() => props.upvote(props.index, props.score + 1)}>⬆️</button>
-          <p>{props.score}</p>
-        </>
+          <>
+            <button onClick={() => props.upvote(props.index, props.score + 1)}>⬆️</button>
+            <p>{props.score}</p>
+          </>
         )}
         {props.active && (
-        <>
-          <button>👍🏼</button>
-          <p>{props.score}</p>
+          <>
+            <button>👍🏼</button>
+            <p>{props.score}</p>
 
-        </>
+          </>
         )}
       </div>
       <div className="resources-item-title">
@@ -25,6 +25,7 @@ const ResourceItem = (props) => (
           href={props.url}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => props.linkClicked(props.url)}
         >
           {props.title}
         </a>
