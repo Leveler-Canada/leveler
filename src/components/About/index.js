@@ -1,8 +1,8 @@
 // import React, { Component } from "react";
 import React, { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
-import ReactMarkdown from 'react-markdown';
 import aboutPath from './About.md';
 
 const AboutPage = () => (
@@ -14,26 +14,26 @@ const AboutPage = () => (
 );
 
 const AboutBody = () => {
-	const [pageText, setText]= useState('');
+  const [pageText, setText] = useState('');
 
-	useEffect(() => {
-		fetch(aboutPath)
-			.then((response) => {
-				if (response.ok) return response.text();
-				else return Promise.reject("Didn't fetch text correctly");
-			})
-			.then((text) => {
-				setText(text);
-			})
-			.catch((error) => console.error(error));
-	});
+  useEffect(() => {
+    fetch(aboutPath)
+      .then((response) => {
+        if (response.ok) return response.text();
+        return Promise.reject("Didn't fetch text correctly");
+      })
+      .then((text) => {
+        setText(text);
+      })
+      .catch((error) => console.error(error));
+  });
 
-	return (
+  return (
     <section>
-		  <ReactMarkdown parserOptions={{ commonmark: true }} source={pageText}/>
+      <ReactMarkdown parserOptions={{ commonmark: true }} source={pageText} />
     </section>
-	)
-}
+  );
+};
 
 export default AboutPage;
 

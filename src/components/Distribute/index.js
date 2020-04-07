@@ -23,6 +23,7 @@ class DistributeTableBase extends Component {
 	state = { ...INITIAL_STATE };
 
 	async componentDidMount() {
+		document.title = "leveler: distribute"
 		await this.getEntries()
 	}
 

@@ -4,23 +4,65 @@ import { Field, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import FormikPlacesAutocomplete from './FormikPlacesAutocomplete.jsx';
+import PaymentInstruction from '../Modal/PaymentInstruction.js';
 import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
 
-const URL_REGEX = /^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/;
 const REQUIRED_ERROR = 'required';
+
+const addURLScheme = (url) => (/^https?:\/\//.test(url) ? url : `https://${url}`);
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().trim().required(REQUIRED_ERROR),
   industry: Yup.string().min(1),
   description: Yup.string().min(1).required(REQUIRED_ERROR),
-  social_url: Yup.string().matches(URL_REGEX, 'we need a real URL here'),
-  payment: Yup.string().matches(URL_REGEX, 'we need a real URL here').required(REQUIRED_ERROR),
+  social_url: Yup.string()
+    .transform(addURLScheme)
+    .url('we need a real URL here'),
+  payment: Yup.string()
+    .transform(addURLScheme)
+    .url('we need a real URL here')
+    .test('validPaymentLink', '', function (value) {
+      if (!value) return false;
+
+      const hostname = value.split('/')[2].toLowerCase();
+      const path = value.split('/')[3];
+
+      const [regex, errMsg] = (function (hostname) {
+        switch (hostname) {
+          case 'cash.app':
+            return [/^\$[a-zA-Z]+$/, "⛔️ looks like you're adding a Cash App link improperly"];
+          case 'paypal.com':
+          case 'www.paypal.com':
+            return [/^$/, "⛔️ looks like you're adding a Paypal link improperly"];
+          case 'paypal.me':
+          case 'www.paypal.me':
+            return [/^.+$/, "⛔️ looks like you're adding a Paypal link improperly"];
+          case 'venmo.com':
+            return [/^code\?user_id=[0-9]{19}$/, "⛔️ looks like you're adding a Venmo link improperly"];
+          default:
+            return [null, "⛔️ looks like you're not adding a valid payment link"];
+        }
+      }(hostname));
+
+      return (!!path && !!regex && regex.test(path)) ? true : this.createError({ message: errMsg });
+    })
+    .required(REQUIRED_ERROR),
 });
 
 const Registration = (props) => {
   const [submitted, setSubmitted] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
+  // MODAL STATE MANAGEMENT
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  // ADD ENTRY TO entriesIndex UPON SUBMISSION
   const addToEntriesIndex = (entriesIndexPayload, entriesIndexCollection) => {
     const { id } = entriesIndexCollection.doc();
     entriesIndexCollection.doc(id).set(entriesIndexPayload);
@@ -31,9 +73,7 @@ const Registration = (props) => {
       values.industry = values.other_industry;
       delete values.other_industry;
     }
-    if (values.payment.search(/https?:\/\//) === -1) {
-      values.payment = 'https://' + values.payment;
-    }
+    values.payment = addURLScheme(values.payment);
     const { fieldValue, entriesCollection, entriesIndexCollection } = props.firebase;
     const random = entriesCollection.doc().id;
     const entriesCollectionPayload = {
@@ -179,8 +219,7 @@ const Registration = (props) => {
           <fieldset>
             <label htmlFor="payment">payment*</label>
             <span className="description">
-              please post the full public url to your preferred payment
-              method(s)
+              please post the full url to your venmo, paypal, or cashapp payment method
             </span>
             <input
               type="text"
@@ -188,7 +227,21 @@ const Registration = (props) => {
               value={values.payment}
               name="payment"
             />
-            <span className="error">{errors.payment}</span>
+
+            {errors.payment && (
+            <>
+              <span className="error">
+                {errors.payment}
+                <button className="instructions-btn" onClick={openModal}>instructions</button>
+              </span>
+            </>
+            )}
+            <PaymentInstruction
+              openModal={openModal}
+              closeModal={closeModal}
+              isOpen={modalIsOpen}
+              data={errors.payment}
+            />
           </fieldset>
           <fieldset>
             <label htmlFor="social_url">social</label>

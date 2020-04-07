@@ -1,0 +1,128 @@
+.resources-header {
+	background-color: gray;
+	#leveler-icon {
+		position: relative;
+		top: 5px;
+	}
+	ul {
+		padding: 5px 10px;
+		list-style: none;
+	}
+	li {
+		display: inline-flex;
+		margin: 0 15px;
+		font-size: 1.1rem;
+		color: white;
+		cursor: pointer;
+	}
+}
+
+.resources-body {
+	background-color: lightgrey;
+	font-size: 1.2rem;
+}
+
+.resources-item {
+	&-container {
+		display: flex;
+		align-items: baseline;
+		padding: 10px;
+		&:last-child {
+			border-bottom: 1px solid darkgray;
+		}
+		& > div {
+			margin-right: 8px;
+			align-items: baseline;
+		}
+
+		.resources-item-votes {
+			button {
+				cursor: pointer;
+				background-color: transparent;
+				font-size: 1.1rem;
+					border: 0;
+					&:focus {
+						outline:0;
+					}
+				}
+			p {
+				font-size: 1rem;
+				&:last-child {
+					text-align: center;
+					margin-left: -3px;
+				}
+			}
+		}
+		
+		
+		.resources-item-title {
+			display: block;
+			width:100%;
+			a {
+				font-size: 1.1rem;
+				color: black;
+			}
+			p {
+				font-size: 0.8rem;
+			}
+
+			.resources-item-footer {
+				display: flex;
+				align-self: center;
+			}
+		}
+		.resources-item-category-desktop {
+			button {
+				cursor: pointer;
+				white-space: nowrap;
+   			text-align: center;
+				border: 1px solid black;
+				background-color: transparent;
+			}
+		}
+	}
+}
+.resources-item-category-mobile {
+	display: none;
+}
+
+@media (max-width: 480px) {
+	.resources-body {
+		font-size: 1rem;
+	}
+	.resources-item {
+		&-container {
+
+			.resources-item-votes {
+				align-self: center;
+				p {
+					font-size: 1rem;
+				}
+			}
+			.resources-item-title {
+					display: block;
+					a {
+						font-size: 1rem;
+					}
+					p {
+						margin-left: 0;
+					}
+					.resources-item-footer {
+						display: block;
+					}
+				}
+				.resources-item-category-desktop {
+					display: none;
+				}
+			}
+		}
+		.resources-item-category-mobile {
+			display: block;
+			button {
+				white-space: nowrap;
+				text-align: center;
+				border: 1px solid black;
+				background-color: transparent;
+			}
+		}
+}
