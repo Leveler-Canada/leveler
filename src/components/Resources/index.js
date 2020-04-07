@@ -111,8 +111,7 @@ class ResourcesContainerBase extends Component {
 		const { logEvent } = this.props.firebase;
 
 		const linkClicked = async (url) => {
-			await logEvent("resource_link_clicked", {url});
-			console.log('clicked', url)
+			await logEvent("resource_link_clicked", {url: url});
 		}
 		
 		const upvote = async (index, score) => {
@@ -148,6 +147,8 @@ class ResourcesContainerBase extends Component {
 			this.setState({
 				loading: true
 			})
+			// GA EVENT
+			logEvent("resource_category_clicked", {category: category});
 			let links = [];
 			const { resourcesCollection } = this.props.firebase;
 			try {
