@@ -33,13 +33,18 @@ const PaymentInstruction = (props) => (
                 If you do not already have a paypal.me link,
                 go to
                 {' '}
-                <b><a href="www.paypal.me">www.paypal.me</a></b>
+                <b><a href="https://www.paypal.me">www.paypal.me</a></b>
                 {' '}
                 and click
                 {' '}
                 <b>get started</b>
                 {' '}
                 to create your personal url.
+                {' '}
+                paypal.com links can be problematic for peer-to-peer payments so if you do not have a paypal.me link already you can sign up for one at
+                {' '}
+                <b><a href="https://www.paypal.me">www.paypal.me</a></b>
+                .
               </p>
               <p>
                 Please remember to post the full url, it should look like:
