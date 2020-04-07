@@ -25,6 +25,7 @@ class ResourcesContainerBase extends Component {
 	state = { ...INITIAL_STATE };
 
 	componentDidMount() {
+		document.title = "leveler: resources"
 		this.getTopLinks()
 	}
 
@@ -187,7 +188,6 @@ class ResourcesContainerBase extends Component {
 						<Link to="/" id="leveler-icon"><Leveler /></Link>
 						<li onClick={() => {this.getTopLinks()}}>top</li>
 						<li onClick={() => {this.getNewLinks()}}>new</li>
-						<li>submit</li>
 					</ul>
 				</nav>
 				<div className="resources-body">
