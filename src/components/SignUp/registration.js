@@ -62,11 +62,6 @@ const Registration = (props) => {
     setIsOpen(false);
   };
 
-  // ADD ENTRY TO entriesIndex UPON SUBMISSION
-  const addToEntriesIndex = (entriesIndexPayload, entriesIndexCollection) => {
-    const { id } = entriesIndexCollection.doc();
-    entriesIndexCollection.doc(id).set(entriesIndexPayload);
-  };
 
   const updateLastSignup = async (updated) => {
     const { miscCollection } = props.firebase;
@@ -85,28 +80,26 @@ const Registration = (props) => {
       delete values.other_industry;
     }
     values.payment = addURLScheme(values.payment);
-    const { fieldValue, entriesCollection, entriesIndexCollection } = props.firebase;
-    const random = entriesCollection.doc().id;
-    const entriesCollectionPayload = {
-      location: values.location.trim(),
-      industry: values.industry.trim(),
-      description: values.description.trim(),
-      payment_url: [values.payment],
-      suggestion: values.suggestion.trim(),
-      random,
-      created: fieldValue.serverTimestamp(),
-    };
-    const entriesIndexPayload = {
-      parent_id: random,
-      email: values.email.trim(),
-      social_url: values.social_url.trim(),
-      shown: 0,
-      potential_contrib: 0,
-      created: fieldValue.serverTimestamp(),
-    };
-    entriesCollection.doc(random).set(entriesCollectionPayload).then(() => {
-      addToEntriesIndex(entriesIndexPayload, entriesIndexCollection);
-    });
+    const { entriesCollection } = props.firebase;
+
+    entriesCollection
+      .add({
+        location: values.location.trim(),
+        industry: values.industry.trim(),
+        description: values.description.trim(),
+        payment_url: [values.payment],
+        suggestion: values.suggestion.trim(),
+        shown: 0,
+        potential_contrib: 0,
+        random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+      })
+      .then((docRef) => {
+        docRef.collection('private').add({
+          email: values.email.trim(),
+          social_url: values.social_url.trim(),
+        });
+      });
+
     updateLastSignup(fieldValue.serverTimestamp());
     resetForm({});
     setSubmitted(true);
