@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
+import * as timeago from 'timeago.js';
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
-import { Link } from 'react-router-dom';
 
 const HomePage = () => (
 	<div className="wrapper">
@@ -13,12 +14,19 @@ const HomePage = () => (
 );
 
 class HomeLandingBase extends Component {
+  state = {
+    lastContrib: '',
+    lastSignup: '',
+    lastUpvote: ''
+  }
 
   	componentDidMount() {
-		  document.title = "leveler"
+      document.title = "leveler"
+      this.getLastUpdates()
     }
 
   render() {
+    const { lastContrib, lastSignup, lastUpvote } = this.state;
     return (
       <section>
         <p>
@@ -35,18 +43,44 @@ class HomeLandingBase extends Component {
           <Link to="/distribute" className="dist-btn" onClick={this.onDistributeClick}>
             <button className="btn">distribute</button>
           </Link>
-          <p className="home-misc">help people here. last likely contribution 5 minutes ago</p>
+          <p className="home-misc">last likely contribution {lastContrib}</p>
           <Link to="/signup" onClick={this.onReceiveClick}>
             <button className="btn">receive</button>
           </Link>
-          <p className="home-misc">sign up for help here, last likely signup 5 minutes ago</p>
+          <p className="home-misc">last signup {lastSignup}</p>
           <Link to="/resources" onClick={this.onResourcesClick}>
             <button className="btn">resources</button>
           </Link>
-          <p className="home-misc">helpful links here, last upvote 1 minute ago</p>
+          <p className="home-misc">last upvote {lastUpvote}</p>
         </div>
       </section>
     );
+  }
+
+  getLastUpdates = async () => {
+    const { miscCollection } = this.props.firebase;
+    try {
+      await miscCollection
+        .get()
+        .then((querySnapshot) => {
+					querySnapshot.forEach((doc) => {
+            const date = doc.data().updated.toDate()
+
+            switch (doc.id) {
+              case 'lastContrib':
+                return this.setState({lastContrib: timeago.format(date)})
+              case 'lastSignup':
+                return this.setState({lastSignup: timeago.format(date)})
+              case 'lastUpvote':
+                  return this.setState({lastUpvote: timeago.format(date)})
+              default:
+                break
+            }
+          })
+        })
+    } catch(e) {
+      console.log(e.message)
+    }
   }
 
   onDistributeClick = () => {
