@@ -58,7 +58,10 @@ class DistributeTableBase extends Component {
 		const { fieldValue, entriesCollection } = this.props.firebase;
 		const docRef = entriesCollection.doc(docId)
 		try {
-			await docRef.update({shown: fieldValue.increment(1)})
+			await docRef.update({
+				shown: fieldValue.increment(1),
+				random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+			})
 		} catch (e) {
 			console.log(e.message)
 		}
