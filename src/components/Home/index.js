@@ -35,13 +35,15 @@ class HomeLandingBase extends Component {
           <Link to="/distribute" className="dist-btn" onClick={this.onDistributeClick}>
             <button className="btn">distribute</button>
           </Link>
+          <p className="home-misc">help people here. last likely contribution 5 minutes ago</p>
           <Link to="/signup" onClick={this.onReceiveClick}>
             <button className="btn">receive</button>
           </Link>
-
+          <p className="home-misc">sign up for help here, last likely signup 5 minutes ago</p>
           <Link to="/resources" onClick={this.onResourcesClick}>
             <button className="btn">resources</button>
           </Link>
+          <p className="home-misc">helpful links here, last upvote 1 minute ago</p>
         </div>
       </section>
     );

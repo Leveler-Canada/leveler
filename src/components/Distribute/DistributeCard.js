@@ -25,11 +25,11 @@ export default class DistributeCard extends Component {
   handleCheckboxChange = event => {
 		this.setState({ contributeChecked: event.target.checked })
 		if (event.target.checked) {
-			this.updateLikelyContribution();
+			this.updateLikelyContribCount();
 		}
 	}
 
-	async updateLikelyContribution() {
+	async updateLikelyContribCount() {
 		// add to DB
 		const { fieldValue, entriesCollection } = this.props;
 		const { id } = this.props.entry;
@@ -39,10 +39,23 @@ export default class DistributeCard extends Component {
 		} catch (e) {
 			console.log(e.message)
 		}
+		// update last contrib timestamp
+		this.updateLastLikelyContrib(fieldValue.serverTimestamp())
 		// fire off GA event
 		const { logEvent } = this.props;
 		logEvent("likely_contrib_dist_card");
 	}
+
+	async updateLastLikelyContrib (updated) {
+    const { miscCollection } = this.props;
+    try {
+      await miscCollection.doc('lastContrib').update({
+        updated,
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
 	render() {
 		const { entry } = this.props;

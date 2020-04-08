@@ -66,7 +66,7 @@ class DistributeTableBase extends Component {
 
 	render() {
 		const { entries } = this.state;
-		const { fieldValue, entriesCollection, logEvent } = this.props.firebase;
+		const { fieldValue, entriesCollection, miscCollection, logEvent } = this.props.firebase;
 		return (
 			<div>
 				<DistributeHeader />
@@ -77,6 +77,7 @@ class DistributeTableBase extends Component {
 						key={entry.id}
 						fieldValue={fieldValue}
 						entriesCollection={entriesCollection}
+						miscCollection={miscCollection}
 						logEvent={logEvent}
 					/>
 					))}
