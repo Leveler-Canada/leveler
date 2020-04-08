@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
 import { Paypal } from '../Icons';
+import localizationBundle from '../../constants/dictionary';
 
 const ContributePage = () => (
   <div className="wrapper">
@@ -15,12 +16,10 @@ const ContributePage = () => (
 const ContributeBody = () => (
   <section>
     <h3>
-      contribute to leveler
+      {localizationBundle.contributePage.header}
     </h3>
     <p>
-      leveler is run by volunteers. We are not funded, and are currently organizing
-      communities outside of the United States.
-      If you like this project and would like to help us, please contribute below:
+      {localizationBundle.contributePage.text}
     </p>
     <a
       href="http://paypal.me/studiodba"

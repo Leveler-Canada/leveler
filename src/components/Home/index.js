@@ -26,20 +26,21 @@ class HomeLandingBase extends Component {
           {localizationBundle.intro.main}
         </p>
         <p>
-          Click <b>distribute</b> below to be shown 10 individuals to contribute to. Click the payment link
-            for each one, and hit send. We recommend sending each person $5.00 to $10.00.
-          </p>
-        <p>This is a <b>mobile-first</b> tool. Please participate from your phone instead of your computer.</p>
+           {localizationBundle.intro.distribute}
+        </p>
+        <p>
+          {localizationBundle.intro.mobile}
+        </p>
         <div className="main-btn-container">
           <Link to="/distribute" className="dist-btn" onClick={this.onDistributeClick}>
-            <button className="btn">distribute</button>
+            <button className="btn">{localizationBundle.distribute}</button>
           </Link>
           <Link to="/signup" onClick={this.onReceiveClick}>
-            <button className="btn">receive</button>
+            <button className="btn">{localizationBundle.recive}</button>
           </Link>
 
           <Link to="/resources" onClick={this.onResourcesClick}>
-            <button className="btn">resources</button>
+            <button className="btn">{localizationBundle.resources}</button>
           </Link>
         </div>
       </section>
