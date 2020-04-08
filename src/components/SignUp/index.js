@@ -3,6 +3,7 @@ import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
 import Registration from './registration';
+import localizationBundle from '../../constants/dictionary';
 
 const SignUpPage = () => (
   <div className="wrapper">
@@ -20,13 +21,13 @@ class SignUpFormBase extends Component {
   render() {
     return (
       <section className="signup-form">
-        <p><b>GUIDELINES:</b></p>
+        <p><b>{localizationBundle.guidelinesPage.header}:</b></p>
         <ol>
-          <li className="bold">Only submit to the database if you are directly impacted.</li>
-          <li>If you got what you need, ask to be removed by emailing leveler.info@gmail.com</li>
-          <li>If you've received too much, consider redistributing it.</li>
+          <li className="bold">{localizationBundle.guidelinesPage.important}</li>
+          <li>{localizationBundle.guidelinesPage.listSecond}</li>
+          <li>{localizationBundle.guidelinesPage.listThird}</li>
         </ol>
-        <p className="legend">* fields with an asterisk will be made public.</p>
+        <p className="legend">{localizationBundle.guidelinesPage.legend}</p>
         <Registration firebase={this.props.firebase} />
       </section>
     );
