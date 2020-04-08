@@ -3,6 +3,7 @@ import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
 import { Link } from 'react-router-dom';
+import localizationBundle from '../../constants/dictionary';
 
 const HomePage = () => (
 	<div className="wrapper">
@@ -22,10 +23,8 @@ class HomeLandingBase extends Component {
     return (
       <section>
         <p>
-          <b>leveler</b> is a tool for people with job security to help people whose work status
-          has been impacted by COVID-19.
-          The list includes freelancers, service industry, and gig economy workers.
-          </p>
+          {localizationBundle.intro.main}
+        </p>
         <p>
           Click <b>distribute</b> below to be shown 10 individuals to contribute to. Click the payment link
             for each one, and hit send. We recommend sending each person $5.00 to $10.00.

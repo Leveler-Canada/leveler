@@ -30,3 +30,4 @@ const localizationBundle = {
     legend: '* Los campos con asterisco serán públicos.',
   },
 };
+export default localizationBundle;
