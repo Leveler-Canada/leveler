@@ -80,7 +80,7 @@ const Registration = (props) => {
       delete values.other_industry;
     }
     values.payment = addURLScheme(values.payment);
-    const { entriesCollection } = props.firebase;
+    const { entriesCollection, fieldValue } = props.firebase;
 
     entriesCollection
       .add({
