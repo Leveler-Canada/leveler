@@ -19,7 +19,7 @@ const Login = (props) => (
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-          props.signUpUser(values);
+          props.loginUser(values);
           setSubmitting(false);
         }, 0);
       }}
@@ -30,6 +30,7 @@ const Login = (props) => (
         <Field name="password" type="password" placeholder="password" />
 
         <button type="submit">Log In</button>
+        {props.error && <div><span>{props.error}</span></div>}
       </Form>
     </Formik>
   </>

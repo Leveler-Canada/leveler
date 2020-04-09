@@ -34,8 +34,9 @@ const SignUp = (props) => (
         <Field name="email" type="text" placeholder="email" />
         <ErrorMessage component="span" name="email" />
         <Field name="password" type="password" placeholder="password" />
-
         <button type="submit">Sign Up</button>
+        {props.error && <div><span>{props.error}</span></div>}
+
       </Form>
     </Formik>
   </>
