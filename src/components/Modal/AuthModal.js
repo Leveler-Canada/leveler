@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SignUp from '../Form/SignUp';
 import LogIn from '../Form/Login';
 
-const Auth = (props) => {
+const AuthModal = (props) => {
   const [submitted, setSubmitted] = useState(false);
   const [signupError, setSignUpError] = useState('');
   const [loginError, setLoginError] = useState('');
@@ -13,18 +13,48 @@ const Auth = (props) => {
   const {
     doCreateUserWithEmailAndPassword,
     doSignInWithEmailAndPassword,
+    fieldValue,
     userCollection,
   } = props.firebase;
 
+  const addUserToDb = async (username, userId) => {
+    const payload = {
+      id: username,
+      karma: 0,
+      about: '',
+      submitted: [],
+      created: fieldValue.serverTimestamp(),
+    };
+    try {
+      await userCollection
+        .doc(userId)
+        .set(payload).then(() => {
+          userCollection
+            .doc(userId)
+            .collection('private').add({
+              role: 'user',
+            });
+        });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
   const signUpUser = async (valuesObj) => {
     const { username, email, password } = valuesObj;
+    // signup using firebase auth
     try {
-      await doCreateUserWithEmailAndPassword(email, password);
-      setSubmitted(true);
-      setSuccessMessage(SIGN_UP_SUCCESS);
+      const authUser = await doCreateUserWithEmailAndPassword(email, password);
+      if (authUser) {
+        addUserToDb(username, authUser.user.uid);
+        setSubmitted(true);
+        setSuccessMessage(SIGN_UP_SUCCESS);
+      }
     } catch (e) {
       setSignUpError(e.message);
     }
+
+    // add user to userCollection in DB
   };
 
   const loginUser = async (valuesObj) => {
@@ -66,4 +96,4 @@ const Auth = (props) => {
   );
 };
 
-export default Auth;
+export default AuthModal;

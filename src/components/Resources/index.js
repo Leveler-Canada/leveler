@@ -5,7 +5,7 @@ import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import { Loading } from '../Animations'
 import { Leveler } from '../Icons'
-import Auth from '../Modal/Auth'
+import AuthModal from '../Modal/AuthModal'
 import ResourceItem from './ResourceItem'
 import FooterNav from '../FooterNav';
 
@@ -208,7 +208,7 @@ class ResourcesContainerBase extends Component {
 		return (
 			
 			<>
-				<Auth
+				<AuthModal
 					toggleModal={toggleModal}
 					modalIsOpen={modalIsOpen}
 					firebase={firebase}
