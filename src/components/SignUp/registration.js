@@ -35,14 +35,14 @@ const validationSchema = Yup.object().shape({
             return [/^\$[a-zA-Z]+$/, "⛔️ looks like you're adding a Cash App link improperly"];
           case 'paypal.com':
           case 'www.paypal.com':
-            return [/^$/, "⛔️ looks like you're adding a Paypal link improperly"];
+            return [/^$/, "⛔️ parece que tu link de Paypal no es correcto"];
           case 'paypal.me':
           case 'www.paypal.me':
-            return [/^.+$/, "⛔️ looks like you're adding a Paypal link improperly"];
+            return [/^.+$/, "⛔️ parece que tu link de Paypal no es correcto"];
           case 'venmo.com':
             return [/^code\?user_id=[0-9]{19}$/, "⛔️ looks like you're adding a Venmo link improperly"];
           default:
-            return [null, "⛔️ looks like you're not adding a valid payment link"];
+            return [null, "⛔️ parece que tu link de pago no es correcto"];
         }
       }(hostname));
 

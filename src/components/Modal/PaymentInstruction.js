@@ -30,31 +30,31 @@ const PaymentInstruction = (props) => (
             <>
               <h4>Adding your Paypal link</h4>
               <p>
-                If you do not already have a paypal.me link,
-                go to
+                Si aún no tienes un link de paypal.me,
+                ve a
                 {' '}
                 <b><a href="https://www.paypal.me">www.paypal.me</a></b>
                 {' '}
-                and click
+                y da click
                 {' '}
-                <b>get started</b>
+                <b>crear tu link</b>
                 {' '}
-                to create your personal url.
+                para crear tu url único.
                 {' '}
-                paypal.com links can be problematic for peer-to-peer payments so if you do not have a paypal.me link already you can sign up for one at
+                los links de paypal.com pueden ser problemáticos para pagos de persona a persona, por lo cuál recomendamos usar paypal.me
                 {' '}
                 <b><a href="https://www.paypal.me">www.paypal.me</a></b>
                 .
               </p>
               <p>
-                Please remember to post the full url, it should look like:
+                Por favor recuerda poner el url completo, se debería de ver así:
               </p>
               <p>
-                <b>paypal.me/yourusername </b>
+                <b>paypal.me/tunombredeusuario </b>
                 <br />
                 or
                 <br />
-                <b>https://paypal.me/yourusername </b>
+                <b>https://paypal.me/tunombredeusuario </b>
               </p>
             </>
           )}

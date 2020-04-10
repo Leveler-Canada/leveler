@@ -26,6 +26,11 @@ const localizationBundle = {
     text: 'El equipo de leveler está formado por voluntarios. No tenemos fondos y estamos organizando comunidades dentro y fuera de\n'
             + 'Estados Unidos. Si te gusta el proyecto y te gustaría ayudarnos haz click en el icono de paypal.',
   },
+  contributeBand: {
+    volunteerLed: 'leveler es llevada acabo por voluntarios',
+    volunteerContribute: 'para contribuir al equipo ❤',
+  },
+  clickHere: 'Da Click Aquí',
   guidelinesPage: {
     header: 'Instrucciones',
     important: 'Llena la forma sólo si has sido directamente impactadx económicamente por el COVID-19.',
@@ -55,6 +60,9 @@ const localizationBundle = {
     suggestionsDescription: 'Contáctanos si tienes ideas para mejorar leveler.',
     submit: 'Enviar',
     urlError: 'Agrega un URL válido',
+  },
+  footer: {
+    about: 'Acerca de',
   },
 };
 export default localizationBundle;

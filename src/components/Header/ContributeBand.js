@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as ROUTES from '../../constants/routes';
 import { withFirebase } from '../Firebase';
+import localizationBundle from "../../constants/dictionary";
 
 const ContributeBand = (props) => {
   const onBandClick = () => {
@@ -15,9 +16,9 @@ const ContributeBand = (props) => {
   return (
 		<div className="contribute-band">
 			<Link to={ROUTES.CONTRIBUTE} onClick={onBandClick}>
-					📢 leveler is volunteer-led.
-					<b> Click here </b>
-					to contribute to the team ❤️
+                📢{localizationBundle.contributeBand.volunteerLed}
+					<b>{localizationBundle.clickHere}</b>
+                {localizationBundle.contributeBand.volunteerContribute}
 			</Link>
 		</div>
   );

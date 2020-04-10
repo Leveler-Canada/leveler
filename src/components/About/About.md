@@ -35,7 +35,10 @@ Si eres programador, o puedes ser administrador para tu ciudad o región por fav
 
 ### El equipo.
 El equipo leveler México está formado por:
-Tania: diseñadora independiente y maestra. Website | Twitter
-Óscar: 
-Palmidia:
+
+Tania: diseñadora independiente y maestra. Website | Twitter  
+Óscar: developer. | [Twitter](https://twitter.com/oscarcb)  
+Palmidia: JavaScript Developer, Entusiasta de VueJs | [Twitter](https://twitter.com/jetzable)  
+
+
 El equipo base de leveler está en NY y está formado por: Alessandra, Sam, Sabina and Adam. 
