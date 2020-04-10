@@ -4,7 +4,6 @@ import * as timeago from 'timeago.js';
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
-import { Link } from 'react-router-dom';
 import localizationBundle from '../../constants/dictionary';
 
 const HomePage = () => (
@@ -48,11 +47,11 @@ class HomeLandingBase extends Component {
           <Link to="/signup" onClick={this.onReceiveClick}>
             <button className="btn">{localizationBundle.recive}</button>
           </Link>
-
+          <p className="home-misc">{localizationBundle.intro.lastSignup} {lastSignup}</p>
           <Link to="/resources" onClick={this.onResourcesClick}>
             <button className="btn">{localizationBundle.resources}</button>
           </Link>
-          <p className="home-misc">last upvote {lastUpvote}</p>
+          <p className="home-misc">{localizationBundle.intro.lastUpvote} {lastUpvote}</p>
         </div>
       </section>
     );
@@ -68,12 +67,12 @@ class HomeLandingBase extends Component {
             const date = doc.data().updated.toDate()
 
             switch (doc.id) {
-              case 'lastContrib':
-                return this.setState({lastContrib: timeago.format(date)})
+                case 'lastContrib':
+                return this.setState({lastContrib: timeago.format(date,'es')})
               case 'lastSignup':
-                return this.setState({lastSignup: timeago.format(date)})
+                return this.setState({lastSignup: timeago.format(date,'es')})
               case 'lastUpvote':
-                  return this.setState({lastUpvote: timeago.format(date)})
+                  return this.setState({lastUpvote: timeago.format(date,'es')})
               default:
                 break
             }

@@ -9,10 +9,15 @@ const localizationBundle = {
     distribute: 'Haz click en "Distribuye" y leveler seleccionará al azar 10 usuarios que necesitan tu ayuda.\n'
             + 'Haz click en el link de paypal de cada usuario y envia dinero. Cualquier cantidad es bienvenida."',
     mobile: 'Esta es un herramienta mobile. Participa desde tu teléfono.',
+    lastSignup: 'último registro',
+    lastUpvote: 'último voto',
+    lastContrib: 'última distribución',
   },
   distributePage: {
     contribute: 'Contribuí.',
-    text: 'Los siguientes 10 usuarios han sido seleccionados de <b><i>manera aleatoria</b></i>. Procura mandar la <b><i>misma cantidad</b></i> a todos. ',
+    textIntro: 'Los siguientes 10 usuarios han sido seleccionados de ',
+    textImportant: 'manera aleatoria.',
+    textOutro: ' Procura mandar la misma cantidad a todos.',
     main: 'Leveler es una base de datos de trabajadorxs independientes que se quedaron sin ingresos a causa de la pandemia. ',
     thanks: '¡Gracias!',
   },
