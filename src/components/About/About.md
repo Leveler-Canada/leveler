@@ -1,44 +1,44 @@
-### About leveler
+### Acerca de leveler:
+Leveler fue creada para ayudar a trabajadores en la comunidad creativa y en la industria de servicios que han sido afectados económicamente por las restricciones de COVID19 ( (cierres y cancelaciones de eventos, comisiones o encargos, proyectos cancelados, etc.).
 
-The leveler database was created to help out my friends in the creative community and service industry who are currently being hit hard by COVID health and safety restrictions (venue closures/tour cancellations/shifts lost/commissions canceled/etc and so on).
+### Funciones del sitio:
+1. Leveler hospeda una base de datos formada por freelancers y trabajadores independientes que han sido afectados económicamente por la pandemia y sus respectivos enlaces a paypal.
 
-#### The functions of the site
-1. It hosts the database of freelancers impacted, along with their venmo/paypal direct payment links
-2. It hosts a mechanism allowing our friends with salaried positions and/or who are not at immediate risk of losing their jobs to distribute a small portion of wealth in an **egalitarian format**. Think: peer-to-peer emergency relief stimulus.
+2. La plataforma cuenta con un mecanismo que permite a quienes tienen un sueldo seguro aportar y ayudar de manera más equitativa a quienes no están en esa posición. Imagínalo como un fondo de emergencia de persona-a-persona. 
 
-**No money passes through the site. The site is not a business.** It is meant to be a **tool** to connect people who **can** help with people who **need** help. I’ve set guidelines in place as a suggestion, which you should read below.
+**El dinero no pasa por nosotros. Este sitio no busca lucrar de ningún modo,** es tan sólo una herramienta para conectar gente que puede ayudar con gente que necesita ayuda. Por favor lee las pautas de participación. 
 
-#### The goal
-If our freelancing/gig economy friends can be in a position to receive a critical mass of micro-distributions, then it will start to add up. The database will keep cycling through itself indefinitely, so the cadence of payments you see will likely ebb and flow until it gets a steady traction. **THEREFORE, please share this far and wide. **
+### La Meta
+Si nuestra red de freelancers recibe varias contribuciones pequeñas de dinero todo eso puede sustituir su salario de manera temporal. La base de datos entonces entraría en un ciclo de pagos por tiempo indefinido, logrando así una entrada de dinero constante que ayude a las personas a cubrir sus necesidades más básicas.  ¡Comparte con todos los que puedas!
+ 
+### ¡Quiero realizar una aportación!
+Si tienes soltura económica, trabajo fijo o simplemente quieres ayudar esta herramienta te ayuda a distribuir una pequeña parte de tu dinero a personas que lo necesitan.   
+El proceso toma unos minutos y lo único que necesitas en un teléfono y una cuenta de paypal.
 
-#### I'm in! I want to distribute!
-If you are a salaried human or don’t feel like you’re at risk of losing your job this week or next, this site has made it relatively easy for you to distribute a small portion of your wealth to our friends in the gig economy while we all make it through this extremely weird moment. 
+1. Haz click en ""Distribuye"" y leveler seleccionará al azar 10 usuarios que necesitan tu ayuda.
+2. Haz click en el link de paypal de cada usuario y realiza un pago. Cualquier cantidad es bienvenida.
+3. Sugerimos enviar pagos iguales a cada persona (por ejemplo: 50.00 x 10 = 500 en total)
+4. Si deseas contribuir con una cantidad mayor a 1000 pesos (MXN) repite los pasos uno y dos hasta que estés satisfecho.
 
-This process will take a few minutes and MUST BE DONE FROM YOUR PHONE.  You can not make venmo payments outside of the mobile app!!!!!
+#### Perdí mi trabajo y quiero registrarme en la base de datos.
+La base de datos está formada por personas freelance/trabajadores independientes en la industria creativa y de servicios cuyos trabajos han sido cancelados, incluye sus datos e información para realizar una aportación. Si llenas el formulario, tus datos de paypal estarán en línea. 
+Nota importante: Sólo registrate en la base de datos si tienes trabajo que  ha sido cancelado.
 
-1. Click "Distribute" to be assigned a group of 10 people.
-2. Venmo, Paypal each of them via their payment link. 
-3. When you're done with each person, check the box that says 'I Contributed'.
-3. We strongly suggest sending the same amount to each person (ie: 5.00 x 10 = 50.00 total).
-4. If you wish to distribute an amount larger than 100 dollars, we suggest you repeat steps 1 and 2 until you are satisfied with the amount that you have distributed.
+1. Si alcanzas la cantidad que necesitas, por favor considera eliminarte de la lista enviando un correo a:  mx.leveler@gmail.com
+2. Esta es una iniciativa autónoma, persona-a-persona. Cuidemos al otro. No te agregues dos veces a la lista o serás eliminado. Y házlo, solamente, si lo necesitas.
+3. Si alcanzas la cantidad que necesitas, equivalente a tu salario perdido, sugerimos que re-distribuyas los excedentes a otros miembros de la base de datos.
+4. Te puedes registrar en el siguiente enlace: xxxxxxxx
+5. La lista está siendo actualizada en tiempo real. Si ves una estafa, repórtala.
+
+### ¡Quiero ayudar!
+Si eres programador, o puedes ser administrador para tu ciudad o región por favor manda un correo a mx.leveler@gmail.com
+
+### El equipo.
+El equipo leveler México está formado por:
+
+Tania: diseñadora independiente y maestra. Website | Twitter  
+Óscar: developer. | [Twitter](https://twitter.com/oscarcb)  
+Palmidia: JavaScript Developer, Entusiasta de VueJs | [Twitter](https://twitter.com/jetzable)  
 
 
-#### Suggested Guidelines for those who wish to be listed in the database
-The leveler database is made up of freelancers/gig economy/service industry workers whose jobs are getting canceled, along with their payment information. People who add themselves to the database should understand that they are putting their venmo/paypal/payment link into a database that will be surfaced online. 
-1. If you reach your minimum needed amount, please consider removing yourself from the database by emailing an admin: [leveler.info@gmail.com](mailto:leveler.info@gmail.com)
-2. This is self-governed and self-policed. Please look out for each other and people you know. Do not add yourself twice. If you add yourself twice you will be removed.
-3. If your needs have been met based on the amount of money you lost due to already booked job cancellations, we highly suggest distributing excess funds back to your peers through the database.  
-
-#### I want to help
-If you are a dev that can help, or can be an admin for your locale, please email: [leveler.info@gmail.com](mailto:leveler.info@gmail.com)
-
-#### our team
-leveler’s team is based in NY, NY.  
-
-Alessandra - Brand studio and startup cofounder, left startup world in 2019 to focus on other impact and sustainability projects. [linkedin](https://www.linkedin.com/in/alessandra-de-benedetti-0895548/) | [twitter](https://www.twitter.com/oftheblessed)
-
-Sam - Product developer working in emerging technologies. [linkedin](https://www.linkedin.com/in/samuel-mlodozeniec-ab1b9323/)
-
-Sabina - Agency-side product, with a focus on tech for Good, currently at Originate. [linkedin](https://www.linkedin.com/in/sabinamamedova/)
-
-Adam - Writer, digital artist, and product manager in news media. [website](https://www.adamklevy.com) | [twitter](https://www.twitter.com/adamklevy)
+El equipo base de leveler está en NY y está formado por: Alessandra, Sam, Sabina and Adam. 

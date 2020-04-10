@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
+import * as timeago from 'timeago.js';
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
-import { Link } from 'react-router-dom';
+import localizationBundle from '../../constants/dictionary';
 
 const HomePage = () => (
 	<div className="wrapper">
@@ -13,38 +15,72 @@ const HomePage = () => (
 );
 
 class HomeLandingBase extends Component {
+  state = {
+    lastContrib: '',
+    lastSignup: '',
+    lastUpvote: ''
+  }
 
   	componentDidMount() {
-		  document.title = "leveler"
+      document.title = "leveler"
+      this.getLastUpdates()
     }
 
   render() {
+    const { lastContrib, lastSignup, lastUpvote } = this.state;
     return (
       <section>
         <p>
-          <b>leveler</b> is a tool for people with job security to help people whose work status
-          has been impacted by COVID-19.
-          The list includes freelancers, service industry, and gig economy workers.
-          </p>
+          {localizationBundle.intro.main}
+        </p>
         <p>
-          Click <b>distribute</b> below to be shown 10 individuals to contribute to. Click the payment link
-            for each one, and hit send. We recommend sending each person $5.00 to $10.00.
-          </p>
-        <p>This is a <b>mobile-first</b> tool. Please participate from your phone instead of your computer.</p>
+           {localizationBundle.intro.distribute}
+        </p>
+        <p>
+          {localizationBundle.intro.mobile}
+        </p>
         <div className="main-btn-container">
           <Link to="/distribute" className="dist-btn" onClick={this.onDistributeClick}>
-            <button className="btn">distribute</button>
+            <button className="btn">{localizationBundle.distribute}</button>
           </Link>
+          <p className="home-misc">last likely contribution {lastContrib}</p>
           <Link to="/signup" onClick={this.onReceiveClick}>
-            <button className="btn">receive</button>
+            <button className="btn">{localizationBundle.recive}</button>
           </Link>
-
+          <p className="home-misc">{localizationBundle.intro.lastSignup} {lastSignup}</p>
           <Link to="/resources" onClick={this.onResourcesClick}>
-            <button className="btn">resources</button>
+            <button className="btn">{localizationBundle.resources}</button>
           </Link>
+          <p className="home-misc">{localizationBundle.intro.lastUpvote} {lastUpvote}</p>
         </div>
       </section>
     );
+  }
+
+  getLastUpdates = async () => {
+    const { miscCollection } = this.props.firebase;
+    try {
+      await miscCollection
+        .get()
+        .then((querySnapshot) => {
+					querySnapshot.forEach((doc) => {
+            const date = doc.data().updated.toDate()
+
+            switch (doc.id) {
+                case 'lastContrib':
+                return this.setState({lastContrib: timeago.format(date,'es')})
+              case 'lastSignup':
+                return this.setState({lastSignup: timeago.format(date,'es')})
+              case 'lastUpvote':
+                  return this.setState({lastUpvote: timeago.format(date,'es')})
+              default:
+                break
+            }
+          })
+        })
+    } catch(e) {
+      console.log(e.message)
+    }
   }
 
   onDistributeClick = () => {

@@ -7,6 +7,7 @@ import FormikPlacesAutocomplete from './FormikPlacesAutocomplete.jsx';
 import PaymentInstruction from '../Modal/PaymentInstruction.js';
 import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
+import localizationBundle from "../../constants/dictionary";
 
 const REQUIRED_ERROR = 'required';
 
@@ -34,14 +35,14 @@ const validationSchema = Yup.object().shape({
             return [/^\$[a-zA-Z]+$/, "⛔️ looks like you're adding a Cash App link improperly"];
           case 'paypal.com':
           case 'www.paypal.com':
-            return [/^$/, "⛔️ looks like you're adding a Paypal link improperly"];
+            return [/^$/, "⛔️ parece que tu link de Paypal no es correcto"];
           case 'paypal.me':
           case 'www.paypal.me':
-            return [/^.+$/, "⛔️ looks like you're adding a Paypal link improperly"];
+            return [/^.+$/, "⛔️ parece que tu link de Paypal no es correcto"];
           case 'venmo.com':
             return [/^code\?user_id=[0-9]{19}$/, "⛔️ looks like you're adding a Venmo link improperly"];
           default:
-            return [null, "⛔️ looks like you're not adding a valid payment link"];
+            return [null, "⛔️ parece que tu link de pago no es correcto"];
         }
       }(hostname));
 
@@ -66,6 +67,17 @@ const Registration = (props) => {
   const addToEntriesIndex = (entriesIndexPayload, entriesIndexCollection) => {
     const { id } = entriesIndexCollection.doc();
     entriesIndexCollection.doc(id).set(entriesIndexPayload);
+  };
+
+  const updateLastSignup = async (updated) => {
+    const { miscCollection } = props.firebase;
+    try {
+      await miscCollection.doc('lastSignup').update({
+        updated,
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   const onSubmit = (values, { resetForm }) => {
@@ -96,6 +108,7 @@ const Registration = (props) => {
     entriesCollection.doc(random).set(entriesCollectionPayload).then(() => {
       addToEntriesIndex(entriesIndexPayload, entriesIndexCollection);
     });
+    updateLastSignup(fieldValue.serverTimestamp());
     resetForm({});
     setSubmitted(true);
   };
@@ -124,164 +137,156 @@ const Registration = (props) => {
         isValid,
       }) => (
         <form onSubmit={handleSubmit}>
-          <fieldset>
-            <label htmlFor="email">email:</label>
-            <span className="error">{errors.email}</span>
-            <input
-              type="text"
-              onChange={handleChange}
-              value={values.email}
-              name="email"
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="location">location*</label>
-            <span className="description">
-              begin typing your city to select the appropriate state and/or
-              country
-            </span>
-            <Field
-              name="location"
-              component={FormikPlacesAutocomplete}
-              value={values.location}
-            />
-            <span className="error">{errors.location}</span>
-          </fieldset>
-          <RadioButtonGroup
-            id="radioGroup"
-            label="industry*"
-            value={values.industry}
-            error={errors.industry}
-            touched={touched.industry}
-          >
-            <Field
-              component={RadioButton}
-              name="industry"
-              id="Arts"
-              label="arts"
-            />
-            <Field
-              component={RadioButton}
-              name="industry"
-              id="Nightlife"
-              label="nightlife"
-            />
-            <Field
-              component={RadioButton}
-              name="industry"
-              id="Production"
-              label="production"
-            />
-            <Field
-              component={RadioButton}
-              name="industry"
-              id="Food Service/Hospitality"
-              label="hospitality"
-            />
-            <Field
-              component={RadioButton}
-              name="industry"
-              id="Music"
-              label="music"
-            />
-            <Field
-              component={RadioButton}
-              name="industry"
-              id="other"
-              label="other"
-            />
-            {values.industry === 'other' && (
-              <div>
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  value={values.custom_industry}
-                  name="other_industry"
-                  placeholder="other industry here"
-                />
-              </div>
-            )}
-          </RadioButtonGroup>
-          <fieldset>
-            <label>context*</label>
-            <span className="description">
-              tell us what you feel comfortable sharing about your situation
-            </span>
-            <textarea
-              type="text"
-              maxLength="300"
-              onChange={handleChange}
-              value={values.description}
-              name="description"
-            />
-            <span className="error">{errors.description}</span>
-          </fieldset>
-          <fieldset>
-            <label htmlFor="payment">payment*</label>
-            <span className="description">
-              please post the full url to your venmo, paypal, or cashapp payment method
-            </span>
-            <input
-              type="text"
-              onChange={handleChange}
-              value={values.payment}
-              name="payment"
-            />
+        <fieldset>
+          <label htmlFor="email">email:</label>
+          <span className="error">{errors.email}</span>
+          <input
+            type="text"
+            onChange={handleChange}
+            value={values.email}
+            name="email"
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="location">{localizationBundle.registrationPage.location}*</label>
+          <span className="description">
+            {localizationBundle.registrationPage.locationDescription}
+          </span>
+          <Field
+            name="location"
+            component={FormikPlacesAutocomplete}
+            value={values.location}
+          />
+          <span className="error">{errors.location}</span>
+        </fieldset>
+        <RadioButtonGroup
+          id="radioGroup"
+          label={`${localizationBundle.registrationPage.industry}*`}
+          value={values.industry}
+          error={errors.industry}
+          touched={touched.industry}
+        >
+          <Field
+            component={RadioButton}
+            name="industry"
+            id="Arts"
+            label="arts"
+          />
+          <Field
+            component={RadioButton}
+            name="industry"
+            id="Nightlife"
+            label={`${localizationBundle.registrationPage.nightLife}`}
+          />
+          <Field
+            component={RadioButton}
+            name="industry"
+            id="Production"
+            label={`${localizationBundle.registrationPage.production}`}
+          />
+          <Field
+            component={RadioButton}
+            name="industry"
+            id="Food Service/Hospitality"
+            label={`${localizationBundle.registrationPage.hospitality}`}
+          />
+          <Field
+            component={RadioButton}
+            name="industry"
+            id="Music"
+            label={`${localizationBundle.registrationPage.music}`}
+          />
+          <Field
+            component={RadioButton}
+            name="industry"
+            id="other"
+            label={`${localizationBundle.registrationPage.other}`}
+          />
+          {values.industry === 'other' && <div>
+              <input
+                type="text"
+                onChange={handleChange}
+                value={values.custom_industry}
+                name="other_industry"
+                placeholder={`${localizationBundle.registrationPage.otherPlaceHolder}`}
+              />
+            </div>}
+        </RadioButtonGroup>
+        <fieldset>
+          <label>{localizationBundle.registrationPage.context}*</label>
+          <span className="description">
+            {localizationBundle.registrationPage.contextDescription}
+          </span>
+          <textarea
+            type="text"
+            maxLength="300"
+            onChange={handleChange}
+            value={values.description}
+            name="descripción"
+          />
+          <span className="error">{errors.description}</span>
+        </fieldset>
+        <fieldset>
+          <label htmlFor="payment">{localizationBundle.registrationPage.payment}*</label>
+          <span className="description">
+            {localizationBundle.registrationPage.paymentURL}
+          </span>
+          <input
+            type="text"
+            onChange={handleChange}
+            value={values.payment}
+            name="payment"
+          />
 
-            {errors.payment && (
-            <>
-              <span className="error">
-                {errors.payment}
-                <button className="instructions-btn" onClick={openModal}>instructions</button>
-              </span>
-            </>
-            )}
-            <PaymentInstruction
-              openModal={openModal}
-              closeModal={closeModal}
-              isOpen={modalIsOpen}
-              data={errors.payment}
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="social_url">social</label>
-            <span className="description">
-              please provide full url for your social media handle. Will not be
-              made public, however you may get DM'ed by an admin to verify your
-              identity.
+          {errors.payment && <>
+            <span className="error">
+              {errors.payment}
+              <button className="instructions-btn" onClick={openModal}>Instrucciones</button>
             </span>
-            <input
-              type="text"
-              onChange={handleChange}
-              value={values.social_url}
-              name="social_url"
-            />
-            <span className="error">{errors.social_url}</span>
-          </fieldset>
-          <fieldset>
-            <label>suggestions</label>
-            <span className="description">
-              let us know if you see room for improvement or have ideas on how
-              to help make leveler better.
-            </span>
-            <textarea
-              type="text"
-              maxLength="300"
-              onChange={handleChange}
-              value={values.suggestion}
-              name="suggestion"
-            />
-          </fieldset>
-          <button
-            className="btn"
-            type="submit"
-            disabled={!(dirty && isValid)}
-          >
-            Submit
-          </button>
-          {submitted ? <Redirect to="/success" /> : null}
-        </form>
-      )}
+          </>}
+          <PaymentInstruction
+            openModal={openModal}
+            closeModal={closeModal}
+            isOpen={modalIsOpen}
+            data={errors.payment}
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="social_url">{localizationBundle.registrationPage.social}</label>
+          <span className="description">
+            {localizationBundle.registrationPage.socialDescription}
+          </span>
+          <input
+            type="text"
+            onChange={handleChange}
+            value={values.social_url}
+            name="social_url"
+          />
+          <span className="error">{errors.social_url}</span>
+        </fieldset>
+        <fieldset>
+          <label>{localizationBundle.registrationPage.suggestions}</label>
+          <span className="description">
+            {localizationBundle.registrationPage.suggestionsDescription}
+          </span>
+          <textarea
+            type="text"
+            maxLength="300"
+            onChange={handleChange}
+            value={values.suggestion}
+            name="suggestion"
+          />
+        </fieldset>
+        <button
+          className="btn"
+          type="submit"
+          disabled={!(dirty && isValid)}
+        >
+          {localizationBundle.registrationPage.submit}
+        </button>
+        {submitted ? <Redirect to="/success" /> : null}
+      </form>
+    )}
     </Formik>
   );
 };

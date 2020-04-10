@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PlacesAutocomplete from "react-places-autocomplete";
 
-const ERROR_MESSAGE = "No places found.";
+const ERROR_MESSAGE = "No se encontró";
 
 class FormikPlacesAutoComplete extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ class FormikPlacesAutoComplete extends Component {
           <div>
             <input
               {...getInputProps({
-                placeholder: "search for your city",
+                placeholder: "busca tu ciudad",
                 className: "location-search-input form-control"
               })}
             />
