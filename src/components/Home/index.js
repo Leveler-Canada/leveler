@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
+import * as timeago from 'timeago.js';
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
@@ -14,12 +16,19 @@ const HomePage = () => (
 );
 
 class HomeLandingBase extends Component {
+  state = {
+    lastContrib: '',
+    lastSignup: '',
+    lastUpvote: ''
+  }
 
   	componentDidMount() {
-		  document.title = "leveler"
+      document.title = "leveler"
+      this.getLastUpdates()
     }
 
   render() {
+    const { lastContrib, lastSignup, lastUpvote } = this.state;
     return (
       <section>
         <p>
@@ -35,6 +44,7 @@ class HomeLandingBase extends Component {
           <Link to="/distribute" className="dist-btn" onClick={this.onDistributeClick}>
             <button className="btn">{localizationBundle.distribute}</button>
           </Link>
+          <p className="home-misc">last likely contribution {lastContrib}</p>
           <Link to="/signup" onClick={this.onReceiveClick}>
             <button className="btn">{localizationBundle.recive}</button>
           </Link>
@@ -42,9 +52,36 @@ class HomeLandingBase extends Component {
           <Link to="/resources" onClick={this.onResourcesClick}>
             <button className="btn">{localizationBundle.resources}</button>
           </Link>
+          <p className="home-misc">last upvote {lastUpvote}</p>
         </div>
       </section>
     );
+  }
+
+  getLastUpdates = async () => {
+    const { miscCollection } = this.props.firebase;
+    try {
+      await miscCollection
+        .get()
+        .then((querySnapshot) => {
+					querySnapshot.forEach((doc) => {
+            const date = doc.data().updated.toDate()
+
+            switch (doc.id) {
+              case 'lastContrib':
+                return this.setState({lastContrib: timeago.format(date)})
+              case 'lastSignup':
+                return this.setState({lastSignup: timeago.format(date)})
+              case 'lastUpvote':
+                  return this.setState({lastUpvote: timeago.format(date)})
+              default:
+                break
+            }
+          })
+        })
+    } catch(e) {
+      console.log(e.message)
+    }
   }
 
   onDistributeClick = () => {

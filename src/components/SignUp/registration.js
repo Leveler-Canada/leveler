@@ -69,6 +69,17 @@ const Registration = (props) => {
     entriesIndexCollection.doc(id).set(entriesIndexPayload);
   };
 
+  const updateLastSignup = async (updated) => {
+    const { miscCollection } = props.firebase;
+    try {
+      await miscCollection.doc('lastSignup').update({
+        updated,
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
   const onSubmit = (values, { resetForm }) => {
     if (values.industry === 'other') {
       values.industry = values.other_industry;
@@ -97,6 +108,7 @@ const Registration = (props) => {
     entriesCollection.doc(random).set(entriesCollectionPayload).then(() => {
       addToEntriesIndex(entriesIndexPayload, entriesIndexCollection);
     });
+    updateLastSignup(fieldValue.serverTimestamp());
     resetForm({});
     setSubmitted(true);
   };
@@ -123,7 +135,8 @@ const Registration = (props) => {
         errors,
         dirty,
         isValid,
-      }) => <form onSubmit={handleSubmit}>
+      }) => (
+        <form onSubmit={handleSubmit}>
         <fieldset>
           <label htmlFor="email">email:</label>
           <span className="error">{errors.email}</span>
@@ -272,7 +285,8 @@ const Registration = (props) => {
           {localizationBundle.registrationPage.submit}
         </button>
         {submitted ? <Redirect to="/success" /> : null}
-      </form>}
+      </form>
+    )}
     </Formik>
   );
 };

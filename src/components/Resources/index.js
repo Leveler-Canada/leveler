@@ -123,13 +123,15 @@ class ResourcesContainerBase extends Component {
 			links[index].active = true;
 
 			updateUserKarma(links[index].by)
-			// UPDATE DB SCORE
+			// UPDATE LINK SCORE
 			const docRef = resourcesCollection.doc(links[index].id);
 			try {
 				await docRef.update({score: fieldValue.increment(1)});
 			} catch (e) {
 				console.log(e.message)
 			}
+			// UPDATE LAST UPDATED TIME OF UPVOTE
+			updateLastUpvote(fieldValue.serverTimestamp());
 			await this.forceUpdate();
 		}
 
@@ -142,6 +144,17 @@ class ResourcesContainerBase extends Component {
 				userRef.update({karma: fieldValue.increment(1)});
 				});
 			})
+		}
+
+		const updateLastUpvote = async (updated) => {
+			const { miscCollection } = this.props.firebase;
+			try {
+				await miscCollection.doc('lastUpvote').update({
+					updated,
+				});
+			} catch (e) {
+				console.log(e.message);
+			}
 		}
 
 		const getByCategory = async (category) => {

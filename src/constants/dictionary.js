@@ -12,8 +12,8 @@ const localizationBundle = {
   },
   distributePage: {
     contribute: 'Contribuí.',
+    text: 'Los siguientes 10 usuarios han sido seleccionados de <b><i>manera aleatoria</b></i>. Procura mandar la <b><i>misma cantidad</b></i> a todos. ',
     main: 'Leveler es una base de datos de trabajadorxs independientes que se quedaron sin ingresos a causa de la pandemia. ',
-    text: 'Los siguientes usuarios han sido seleccionados de manera aleatoria. Procura mandar la misma cantidad a todos. ',
     thanks: '¡Gracias!',
   },
   contributePage: {
