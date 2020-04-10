@@ -8,7 +8,7 @@ import FooterNav from '../FooterNav';
 
 const DistributePage = () => (
 	<div className="wrapper">
-		<Header /> 		
+		<Header />
 		<DistributeTable />
 		<FooterNav />
 	</div>
@@ -30,7 +30,7 @@ class DistributeTableBase extends Component {
 	async getEntries() {
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
-		const random = entriesCollection.doc().id;
+		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 		try {
 			await entriesCollection
 				.where("random", ">=", random)
@@ -40,7 +40,7 @@ class DistributeTableBase extends Component {
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
 						entries.push(doc.data());
-						this.updateShownCount(doc.data().random)
+						this.updateShownCount(doc.id)
 					})
 					if (entries) {
 						this.setState({
@@ -58,7 +58,10 @@ class DistributeTableBase extends Component {
 		const { fieldValue, entriesCollection } = this.props.firebase;
 		const docRef = entriesCollection.doc(docId)
 		try {
-			await docRef.update({shown: fieldValue.increment(1)})
+			await docRef.update({
+				shown: fieldValue.increment(1),
+				random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+			})
 		} catch (e) {
 			console.log(e.message)
 		}
