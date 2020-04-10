@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withFirebase } from '../Firebase';
+import localizationBundle from "../../constants/dictionary";
 
 const FooterNav = (props) => {
   const onAboutClick = () => {
@@ -32,28 +33,28 @@ const FooterNav = (props) => {
   return (
     <footer>
       <Link to="/about" onClick={onAboutClick}>
-        about leveler
+        {localizationBundle.footer.about} leveler
       </Link>
 
       <Link
         to="/distribute"
         onClick={onDistributeClick}
       >
-        distribute
+        {localizationBundle.distribute}
       </Link>
 
       <Link
         to="/signup"
         onClick={onReceiveClick}
       >
-        receive
+        {localizationBundle.recive}
       </Link>
 
       <Link
         to="/resources"
         onClick={onResourcesClick}
       >
-        resources
+        {localizationBundle.resources}
       </Link>
 
       <a

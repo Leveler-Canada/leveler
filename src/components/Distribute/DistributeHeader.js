@@ -1,10 +1,21 @@
 import React from 'react';
+import localizationBundle from '../../constants/dictionary';
 
- const DistributeHeader = props => (
-	<div>
-		<p className="distribute-header-main"><b>The leveler is a database of freelancers, service industry and gig economy folks currently without income due to COVID-19.</b></p>
-		<p className="distribute-header">Below are 10 people <b><i>chosen at random</i></b>, send the <b><i>same amount</i></b> to each person</p>
-	</div>
-)
+const DistributeHeader = (props) => (
+  <div>
+    <p className="distribute-header-main"><b>{localizationBundle.distributePage.main}</b></p>
+    <p className="distribute-header">
+      <b>{localizationBundle.distributePage.interimSignUpPrompt}</b>
+      {/* {localizationBundle.distributePage.textIntro} */}
+      <b>
+        <i>
+          {/* {localizationBundle.distributePage.textImportant} */}
+        </i>
+      </b>
+      {/* {localizationBundle.distributePage.textOutro}
+      {' '} */}
+    </p>
+  </div>
+);
 
 export default DistributeHeader;

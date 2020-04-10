@@ -45,6 +45,16 @@ header {
     width: 100%;
   }
 
+  .intl-header {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    span {
+      font-size: 3rem;
+      margin-right: 15px;
+    }
+  }
+
   .top {
     margin: -15px 0 20px 0;
   }
@@ -57,7 +67,11 @@ section {
   h4, p {
     padding-bottom: 20px;
   }
-
+  .home-misc {
+    padding-bottom: 10px;
+    font-size: .9rem;
+    color: blue;
+  }
   ol {
     padding-left: 22px;
     font-weight: bold;
@@ -66,7 +80,6 @@ section {
 .main-btn-container {
   .btn {
     padding: 4px 14px;
-    margin: 20px 0;
     margin-right: 24px;
     border: 2px solid black;
     background: white;
@@ -97,7 +110,6 @@ section {
       display: grid;
       .btn {
         width: 100%;
-        margin: 15px 0;
       }
     }
   }
