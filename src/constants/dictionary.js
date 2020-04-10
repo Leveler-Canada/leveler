@@ -20,6 +20,7 @@ const localizationBundle = {
     textOutro: ' Procura mandar la misma cantidad a todos.',
     main: 'Leveler es una base de datos de trabajadorxs independientes que se quedaron sin ingresos a causa de la pandemia. ',
     thanks: '¡Gracias!',
+    interimSignUpPrompt: 'Actualmente estamos buscando más personas para inscribirse. Si usted o alguien que conoce está interesado, ¡haga clic en el botón a continuación!',
   },
   contributePage: {
     header: '¿Cómo puedo ayudar?',
@@ -28,7 +29,7 @@ const localizationBundle = {
   },
   contributeBand: {
     volunteerLed: 'leveler es llevada acabo por voluntarios',
-    volunteerContribute: 'para contribuir al equipo ❤',
+    volunteerContribute: 'para contribuir al equipo ❤️',
   },
   clickHere: 'Da Click Aquí',
   guidelinesPage: {
