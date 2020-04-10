@@ -31,10 +31,10 @@ const localizationBundle = {
     volunteerLed: 'leveler es llevada acabo por voluntarios',
     volunteerContribute: 'para contribuir al equipo ❤️',
   },
-  clickHere: 'Da Click Aquí',
+  clickHere: ' Da Click Aquí ',
   guidelinesPage: {
     header: 'Instrucciones',
-    important: 'Llena la forma sólo si has sido directamente impactadx económicamente por el COVID-19.',
+    important: 'Llena la forma sólo si has sido impactadx económicamente por el COVID-19.',
     listSecond: 'Si ya recibiste dinero suficiente por favor escríbenos para hacérnoslo saber y quitarte de la lista. Nuestro contacto \n'
             + 'es mx.leveler@gmail.com',
     listThird: 'Si recibiste más dinero de lo que necesitas, redistribúyelo.',
