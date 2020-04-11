@@ -38,9 +38,11 @@ class DistributeTableBase extends Component {
 				.limit(10)
 				.get()
 				.then((querySnapshot) => {
-					querySnapshot.forEach((doc) => {
-						entries.push(doc.data());
-						this.updateShownCount(doc.id)
+					querySnapshot.forEach((docSnap) => {
+						let docData = docSnap.data();
+						docData.id = docSnap.id
+						entries.push(docData);
+						this.updateShownCount(docSnap.id)
 					})
 					if (entries) {
 						this.setState({
