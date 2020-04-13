@@ -7,7 +7,7 @@ const localizationBundle = {
     main: 'Leveler es una herramienta para que la población económicamente estable pueda ayudar a trabajadorxs independientes \n'
             + 'que han perdido trabajo o han sido afectados económicamente por la pandemia',
     distribute: 'Haz click en "Distribuye" y leveler seleccionará al azar 10 usuarios que necesitan tu ayuda.\n'
-            + 'Haz click en el link de paypal de cada usuario y envia dinero. Cualquier cantidad es bienvenida."',
+            + 'Haz click en el link de paypal de cada usuario y envia dinero. Cualquier cantidad es bienvenida.',
     mobile: 'Esta es un herramienta mobile. Participa desde tu teléfono.',
     lastSignup: 'último registro',
     lastUpvote: 'último voto',
@@ -35,9 +35,8 @@ const localizationBundle = {
   guidelinesPage: {
     header: 'Instrucciones',
     important: 'Llena la forma sólo si has sido impactadx económicamente por el COVID-19.',
-    listSecond: 'Si ya recibiste dinero suficiente por favor escríbenos para hacérnoslo saber y quitarte de la lista. Nuestro contacto \n'
-            + 'es mx.leveler@gmail.com',
-    listThird: 'Si recibiste más dinero de lo que necesitas, redistribúyelo.',
+    listSecond: 'Si ya recibiste suficiente dinero por favor escríbenos a mx.leveler@gmail.com y te quitaremos de la lista.',
+    listThird: 'Si recibiste más dinero del que necesitas, redistribúyelo.',
     legend: '* Los campos con asterisco serán públicos.',
   },
   registrationPage: {
