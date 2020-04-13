@@ -16,7 +16,7 @@ const DistributePage = () => (
 );
 
 class DistributeTableBase extends Component {
-  async componentDidMount() {
+  componentDidMount() {
     document.title = 'leveler: distribute';
   }
 
