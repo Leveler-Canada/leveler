@@ -4,11 +4,11 @@
 
 ## master branch
 
-The master branch deploys direct to leveler.info
+The master branch will deploy direct to mexico.leveler.info
 
 ## staging branch
 The staging branch is used to test all new branches before pushing to master.
-The staging url is [https://eager-darwin-19a12c.netlify.com/](https://eager-darwin-19a12c.netlify.com/)
+The staging url will be [https://hardcore-tereshkova-9054ba.netlify.com/](https://hardcore-tereshkova-9054ba.netlify.com/)
 
 ## Available Scripts
 
