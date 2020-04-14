@@ -87,16 +87,16 @@ const Registration = (props) => {
     }
     values.payment = addURLScheme(values.payment);
     const { fieldValue, entriesCollection, entriesIndexCollection } = props.firebase;
-    const random = entriesCollection.doc().id;
-    console.log('check ', random);
+
+
     const entriesCollectionPayload = {
       location: values.location,
       industry: values.industry.trim(),
       description: values.description.trim(),
       payment_url: [values.payment],
       suggestion: values.suggestion.trim(),
-      random,
       created: fieldValue.serverTimestamp(),
+      random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
     };
 
     entriesCollection.doc(random).set(entriesCollectionPayload);
