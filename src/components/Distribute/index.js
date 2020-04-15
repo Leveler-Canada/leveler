@@ -26,16 +26,15 @@ class DistributeTableBase extends Component {
 	componentDidMount() {
 		document.title = "leveler: distribute"
 		// await this.getUserLocation();
-		axios.get('https://ipapi.co/json/')
-      .then(res => {
-        const persons = res.data;
-        console.log(res)
-      })
+		getUserLocation()
 	}
 
-	getUserLocation() {
-		// axios.get('http://ip-api.com/json').then(resp => {
-	}
+	getUserLocation = async () => {
+    let res = await axios.get("https://ipapi.co/json/");
+		let { data } = res.data;
+		console.log(res)
+};
+
 
 	async getEntries() {
 		let entries = [];
