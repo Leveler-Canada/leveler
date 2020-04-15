@@ -91,9 +91,9 @@ class DistributeTableBase extends Component {
 								entries,
 								loading: false
 							})
-							for (let i; i<entries.length;i++) {
+							for (let i in entries) {
+								console.log('update ', entries[i].id)
 								this.updateShownCount(entries[i].id)
-								console.log('updated ', entries[i].id)
 							}
 						} else {
 							this.setState({
