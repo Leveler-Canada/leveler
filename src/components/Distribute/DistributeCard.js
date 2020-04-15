@@ -67,7 +67,7 @@ export default class DistributeCard extends Component {
 						<p><b>{entry.location.city}</b></p>
 						{entry.location.state && <p><b>, {entry.location.state}</b></p>}
 					</div>
-					
+					<p><b>{entry.industry}</b></p>
 					{this.state.linkClicked ? (
 					<div>
 						<a 
