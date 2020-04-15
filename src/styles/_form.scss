@@ -38,6 +38,18 @@ form {
   width: 100%;
   max-width: 600px;
 
+  .btn {
+    padding: 4px 14px;
+    margin-right: 24px;
+    border: 2px solid black;
+    background: white;
+    outline: none;
+    font-size: 25px;
+    font-weight: bold;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+  }
+  
   fieldset {
     border: none;
     margin: 0;
@@ -51,8 +63,9 @@ form {
       display: block;
       text-transform: lowercase;
     }
+
     .description {
-      font-family: "HelveticaNeue-UltraLight", Arial, Helvetica, sans-serif;
+      font-family: "HelveticaNeue-Light", Arial, Helvetica, sans-serif;
       font-size: 18px;
       display: block;
     }
@@ -130,5 +143,10 @@ form {
         margin-right: 100px;
       }
     }
+  }
+}
+@media (max-width: 480px) {
+  .btn {
+    width: 100%;
   }
 }

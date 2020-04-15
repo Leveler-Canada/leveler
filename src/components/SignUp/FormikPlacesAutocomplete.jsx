@@ -33,11 +33,21 @@ class FormikPlacesAutoComplete extends Component {
   };
 
   handleSelect = location => {
-    let fragments = location.split(",");
-    fragments = fragments.filter(el => el.trim() !== "USA" && el.trim() !== "US");
-    const formattedLocation = fragments.join(",").trim();
-    this.setState({ location: formattedLocation }, () => {
-      this.props.form.setFieldValue(this.state.name, formattedLocation);
+    let payload = {};
+    const fragments = location.split(',');
+    if (fragments.length === 3) {
+      payload.city = fragments[0].trim();
+      payload.state = fragments[1].trim();
+      payload.country = fragments[2].trim();
+    } else {
+      payload.city = fragments[0].trim();
+      payload.state = "";
+      payload.country = fragments[1].trim();
+    }
+
+    this.setState(() => {
+      this.props.form.setFieldValue(this.state.name, payload);
+      return { location };
     });
   };
 

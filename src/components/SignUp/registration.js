@@ -74,7 +74,7 @@ const Registration = (props) => {
     }
   };
 
-  const onSubmit = (values, { resetForm }) => {
+  const onSubmit = async (values, { resetForm }) => {
     if (values.industry === 'other') {
       values.industry = values.other_industry;
       delete values.other_industry;
@@ -82,27 +82,32 @@ const Registration = (props) => {
     values.payment = addURLScheme(values.payment);
     const { entriesCollection, fieldValue } = props.firebase;
 
-    entriesCollection
-      .add({
-        location: values.location.trim(),
-        industry: values.industry.trim(),
-        description: values.description.trim(),
-        payment_url: [values.payment],
-        suggestion: values.suggestion.trim(),
-        shown: 0,
-        potential_contrib: 0,
-        random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
-      })
-      .then((docRef) => {
-        docRef.collection('private').add({
-          email: values.email.trim(),
-          social_url: values.social_url.trim(),
+    try {
+      await entriesCollection
+        .add({
+          location: values.location,
+          industry: values.industry.trim(),
+          description: values.description.trim(),
+          payment_url: [values.payment],
+          suggestion: values.suggestion.trim(),
+          shown: 0,
+          potential_contrib: 0,
+          random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+        })
+        .then((docRef) => {
+          docRef.collection('private').add({
+            email: values.email.trim(),
+            social_url: values.social_url.trim(),
+          });
+          console.log(docRef);
         });
-      });
 
-    updateLastSignup(fieldValue.serverTimestamp());
-    resetForm({});
-    setSubmitted(true);
+      updateLastSignup(fieldValue.serverTimestamp());
+      resetForm({});
+      setSubmitted(true);
+    } catch (e) {
+      console.error(e.message);
+    }
   };
 
   return (
