@@ -34,7 +34,6 @@ class DistributeTableBase extends Component {
 		
 		if (res.data !== undefined || res.data !== '') {
 			const { country_code_iso3, country, region_code } = res.data;
-			console.log(res.data)
 			let ipLocale = {
 				country_code_iso3,
 				country,
@@ -72,7 +71,7 @@ class DistributeTableBase extends Component {
 						}
 					})
 			} catch(e) {
-				console.log(e.message)
+				console.error(e.message)
 			}
 		} else {
 			try {
@@ -92,7 +91,6 @@ class DistributeTableBase extends Component {
 								loading: false
 							})
 							for (let i in entries) {
-								console.log('update ', entries[i].id)
 								this.updateShownCount(entries[i].id)
 							}
 						} else {
@@ -103,7 +101,7 @@ class DistributeTableBase extends Component {
 						}
 					})
 			} catch(e) {
-				console.log(e.message)
+				console.error(e.message)
 			}
 		}
 	}
@@ -131,7 +129,7 @@ class DistributeTableBase extends Component {
 				random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
 			})
 		} catch (e) {
-			console.log(e.message)
+			console.error(e.message)
 		}
 	}
 
