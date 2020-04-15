@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import { Loading } from '../Animations'
@@ -22,9 +23,18 @@ const INITIAL_STATE = {
 class DistributeTableBase extends Component {
 	state = { ...INITIAL_STATE };
 
-	async componentDidMount() {
+	componentDidMount() {
 		document.title = "leveler: distribute"
-		await this.getEntries()
+		// await this.getUserLocation();
+		axios.get(`http://ip-api.com/json`)
+      .then(res => {
+        const persons = res.data;
+        console.log(res)
+      })
+	}
+
+	getUserLocation() {
+		// axios.get('http://ip-api.com/json').then(resp => {
 	}
 
 	async getEntries() {
