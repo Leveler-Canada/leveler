@@ -88,10 +88,10 @@ class DistributeTableBase extends Component {
 						})
 						if (entries) {
 							this.setState({
-								entries,
+								entries: this.getRandom(entries, 10),
 								loading: false
 							})
-							this.getRandom(entries, 10)
+							
 						}
 					})
 			} catch(e) {
