@@ -27,7 +27,7 @@ class DistributeTableBase extends Component {
 
     try {
       await entriesCollection
-        .where('location.country', '>=', 'Mexico')
+        .where('location.country', '==', 'Mexico')
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((docSnap) => {
