@@ -86,7 +86,7 @@ class DistributeTableBase extends Component {
 							entries.push(docData);
 						})
 						if (entries.length > 10) {
-							let entries = this.getRandom(entries, 10);
+							entries = this.getRandom(entries, 10);
 							this.setState({
 								entries,
 								loading: false
