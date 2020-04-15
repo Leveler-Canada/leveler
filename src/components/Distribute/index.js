@@ -17,7 +17,8 @@ const DistributePage = () => (
 
 const INITIAL_STATE = {
 	entries: [],
-	loading: true
+	loading: true,
+	ipLocale: {}
 };
 
 class DistributeTableBase extends Component {
@@ -25,46 +26,114 @@ class DistributeTableBase extends Component {
 
 	componentDidMount() {
 		document.title = "leveler: distribute"
-		// await this.getUserLocation();
-		getUserLocation()
+		this.getUserLocation()
 	}
 
 	getUserLocation = async () => {
     let res = await axios.get("https://ipapi.co/json/");
-		let { data } = res.data;
-		console.log(res)
-};
+		
+		if (res.data !== undefined || res.data !== '') {
+			const { country_code_iso3, region, region_code } = res.data;
+			// let ipLocale = {
+			// 	country_code_iso3,
+			// 	region,
+			// 	region_code
+			// }
+			this.getEntries(country_code_iso3, region_code)
+		}
+	};
 
-
-	async getEntries() {
+	async getEntries(country, region) {
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
-		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
-		try {
-			await entriesCollection
-				.where("random", ">=", random)
-				.where("location.country", "==", "USA")
-				.orderBy("random")
-				.limit(10)
-				.get()
-				.then((querySnapshot) => {
-					querySnapshot.forEach((docSnap) => {
-						let docData = docSnap.data();
-						docData.id = docSnap.id
-						entries.push(docData);
-						this.updateShownCount(docSnap.id)
-					})
-					if (entries) {
-						this.setState({
-							entries,
-							loading: false
+
+		if (country !== "USA") {
+			console.log('not usa being called')
+			try {
+				await entriesCollection
+					// .where("random", ">=", random)
+					.where("location.country", "==", country)
+					// .orderBy("random")
+					// .limit(10)
+					.get()
+					.then((querySnapshot) => {
+						querySnapshot.forEach((docSnap) => {
+							let docData = docSnap.data();
+							docData.id = docSnap.id
+							entries.push(docData);
+							this.updateShownCount(docSnap.id)
 						})
-					}
-				})
-		} catch(e) {
-			console.log(e.message)
+						if (entries) {
+							this.setState({
+								entries,
+								loading: false
+							})
+						}
+					})
+			} catch(e) {
+				console.log(e.message)
+			}
+		} else {
+			console.log('usa being called')
+			try {
+				await entriesCollection
+					// .where("random", ">=", random)
+					.where("location.state", "==", region)
+					// .orderBy("random")
+					// .limit(10)
+					.get()
+					.then((querySnapshot) => {
+						querySnapshot.forEach((docSnap) => {
+							let docData = docSnap.data();
+							docData.id = docSnap.id
+							entries.push(docData);
+							this.updateShownCount(docSnap.id)
+						})
+						if (entries) {
+							this.setState({
+								entries,
+								loading: false
+							})
+						}
+					})
+			} catch(e) {
+				console.log(e.message)
+			}
 		}
+
 	}
+		
+
+
+	// async getEntries() {
+	// 	let entries = [];
+	// 	const { entriesCollection } = this.props.firebase;
+	// 	const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+		// try {
+		// 	await entriesCollection
+		// 		.where("random", ">=", random)
+		// 		.where("location.country", "==", "USA")
+		// 		.orderBy("random")
+		// 		.limit(10)
+		// 		.get()
+		// 		.then((querySnapshot) => {
+		// 			querySnapshot.forEach((docSnap) => {
+		// 				let docData = docSnap.data();
+		// 				docData.id = docSnap.id
+		// 				entries.push(docData);
+		// 				this.updateShownCount(docSnap.id)
+		// 			})
+		// 			if (entries) {
+		// 				this.setState({
+		// 					entries,
+		// 					loading: false
+		// 				})
+		// 			}
+		// 		})
+		// } catch(e) {
+		// 	console.log(e.message)
+		// }
+	// }
 
 	async updateShownCount(docId) {
 		const { fieldValue, entriesCollection } = this.props.firebase;
