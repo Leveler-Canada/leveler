@@ -26,7 +26,7 @@ class DistributeTableBase extends Component {
 	componentDidMount() {
 		document.title = "leveler: distribute"
 		// await this.getUserLocation();
-		axios.get(`http://ip-api.com/json`)
+		axios.get('https://ipapi.co/json/')
       .then(res => {
         const persons = res.data;
         console.log(res)
