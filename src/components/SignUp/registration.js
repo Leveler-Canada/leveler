@@ -170,40 +170,40 @@ const Registration = (props) => {
             <Field
               component={RadioButton}
               name="industry"
-              id="Arts"
-              label="arts"
+              id="Las Artes"
+              label="las artes"
             />
             <Field
               component={RadioButton}
               name="industry"
-              id="Nightlife"
+              id="Vida Nocturna"
               label={`${localizationBundle.registrationPage.nightLife}`}
             />
             <Field
               component={RadioButton}
               name="industry"
-              id="Production"
+              id="Producción"
               label={`${localizationBundle.registrationPage.production}`}
             />
             <Field
               component={RadioButton}
               name="industry"
-              id="Food Service/Hospitality"
+              id="Hospitalidad"
               label={`${localizationBundle.registrationPage.hospitality}`}
             />
             <Field
               component={RadioButton}
               name="industry"
-              id="Music"
+              id="Música"
               label={`${localizationBundle.registrationPage.music}`}
             />
             <Field
               component={RadioButton}
               name="industry"
-              id="other"
+              id="otro"
               label={`${localizationBundle.registrationPage.other}`}
             />
-            {values.industry === 'other' && (
+            {values.industry === 'otro' && (
             <div>
               <input
                 type="text"
