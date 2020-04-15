@@ -70,7 +70,7 @@ const Registration = (props) => {
         updated,
       });
     } catch (e) {
-      console.log(e.message);
+      console.error(e.message);
     }
   };
 
@@ -99,7 +99,6 @@ const Registration = (props) => {
             email: values.email.trim(),
             social_url: values.social_url.trim(),
           });
-          console.log(docRef);
         });
 
       updateLastSignup(fieldValue.serverTimestamp());
