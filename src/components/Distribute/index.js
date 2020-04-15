@@ -87,13 +87,15 @@ class DistributeTableBase extends Component {
 							this.updateShownCount(docSnap.id)
 						})
 						if (entries.length > 10) {
-							console.log(entries.length, ' > 10')
+							let entries = this.getRandom(entries, 10);
 							this.setState({
-								entries: this.getRandom(entries, 10),
+								entries,
 								loading: false
 							})
+							for (let i in entries) {
+								console.log(entries[i])
+							}
 						} else {
-							console.log(entries.length, ' < 10')
 							this.setState({
 								entries,
 								loading: false
@@ -107,51 +109,18 @@ class DistributeTableBase extends Component {
 	}
 
 	getRandom(arr, n) {
-    var result = new Array(n),
+    let result = new Array(n),
         len = arr.length,
         taken = new Array(len);
     if (n > len)
         throw new RangeError("getRandom: more elements taken than available");
     while (n--) {
-        var x = Math.floor(Math.random() * len);
+			let x = Math.floor(Math.random() * len);
         result[n] = arr[x in taken ? taken[x] : x];
         taken[x] = --len in taken ? taken[len] : len;
 		}
-		console.log(result)
     return result;
-}
-		
-
-
-	// async getEntries() {
-	// 	let entries = [];
-	// 	const { entriesCollection } = this.props.firebase;
-	// 	const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
-		// try {
-		// 	await entriesCollection
-		// 		.where("random", ">=", random)
-		// 		.where("location.country", "==", "USA")
-		// 		.orderBy("random")
-		// 		.limit(10)
-		// 		.get()
-		// 		.then((querySnapshot) => {
-		// 			querySnapshot.forEach((docSnap) => {
-		// 				let docData = docSnap.data();
-		// 				docData.id = docSnap.id
-		// 				entries.push(docData);
-		// 				this.updateShownCount(docSnap.id)
-		// 			})
-		// 			if (entries) {
-		// 				this.setState({
-		// 					entries,
-		// 					loading: false
-		// 				})
-		// 			}
-		// 		})
-		// } catch(e) {
-		// 	console.log(e.message)
-		// }
-	// }
+	}
 
 	async updateShownCount(docId) {
 		const { fieldValue, entriesCollection } = this.props.firebase;
