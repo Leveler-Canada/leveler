@@ -22,16 +22,7 @@ class HomeLandingBase extends Component {
 
   async componentDidMount() {
     document.title = "leveler"
-    this.getEntryCount();
     this.getLastUpdates()
-	}
-
-	async getEntryCount() {
-		await this.props.firebase.entriesCollection.get().then(snap => {
-			this.setState({
-				entryCount: snap.size
-			})
-		})
 	}
 
   render() {
