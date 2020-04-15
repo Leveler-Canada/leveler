@@ -84,7 +84,6 @@ class DistributeTableBase extends Component {
 							let docData = docSnap.data();
 							docData.id = docSnap.id
 							entries.push(docData);
-							this.updateShownCount(docSnap.id)
 						})
 						if (entries.length > 10) {
 							let entries = this.getRandom(entries, 10);
@@ -92,8 +91,9 @@ class DistributeTableBase extends Component {
 								entries,
 								loading: false
 							})
-							for (let i in entries) {
-								console.log(entries[i])
+							for (let i; i<entries.length;i++) {
+								this.updateShownCount(entries[i].id)
+								console.log('updated ', entries[i].id)
 							}
 						} else {
 							this.setState({
