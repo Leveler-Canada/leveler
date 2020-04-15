@@ -18,7 +18,7 @@ export default class DistributeCard extends Component {
 
 	onPaymentLinkClick = (link) => {
 		const { logEvent } = this.props;
-		logEvent("p2p_link_clicked_dist_card", { link });
+		logEvent("mex_p2p_link_clicked_dist_card", { link });
 		this.setState({ linkClicked: true });
 	}
 
@@ -43,7 +43,7 @@ export default class DistributeCard extends Component {
 		this.updateLastLikelyContrib(fieldValue.serverTimestamp())
 		// fire off GA event
 		const { logEvent } = this.props;
-		logEvent("likely_contrib_dist_card");
+		logEvent("mex_likely_contrib_dist_card");
 	}
 
 	async updateLastLikelyContrib (updated) {

@@ -15,13 +15,19 @@ const SignUpPage = () => (
 
 class SignUpFormBase extends Component {
   componentDidMount() {
-    document.title = 'leveler: receive';
+    document.title = 'leveler: recibe';
   }
 
   render() {
     return (
       <section className="signup-form">
-        <p><b>{localizationBundle.guidelinesPage.header}:</b></p>
+        <p>
+          <b>
+            {localizationBundle.guidelinesPage.header}
+            :
+          </b>
+
+        </p>
         <ol>
           <li className="bold">{localizationBundle.guidelinesPage.important}</li>
           <li>{localizationBundle.guidelinesPage.listSecond}</li>

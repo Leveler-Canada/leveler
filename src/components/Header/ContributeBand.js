@@ -6,19 +6,19 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as ROUTES from '../../constants/routes';
 import { withFirebase } from '../Firebase';
-import localizationBundle from "../../constants/dictionary";
+import localizationBundle from '../../constants/dictionary';
 
 const ContributeBand = (props) => {
   const onBandClick = () => {
     const { logEvent } = props.firebase;
-    logEvent('contribute_url_clicked_contrib_band');
+    logEvent('mex_contribute_url_clicked_contrib_band');
   };
   return (
 		<div className="contribute-band">
 			<Link to={ROUTES.CONTRIBUTE} onClick={onBandClick}>
-                📢{localizationBundle.contributeBand.volunteerLed}
-					<b>{localizationBundle.clickHere}</b>
-                {localizationBundle.contributeBand.volunteerContribute}
+        {localizationBundle.contributeBand.volunteerLed}
+        <b>{localizationBundle.clickHere}</b>
+        {localizationBundle.contributeBand.volunteerContribute}
 			</Link>
 		</div>
   );

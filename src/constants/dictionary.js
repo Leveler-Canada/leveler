@@ -28,7 +28,7 @@ const localizationBundle = {
             + 'Estados Unidos. Si te gusta el proyecto y te gustaría ayudarnos haz click en el icono de paypal.',
   },
   contributeBand: {
-    volunteerLed: 'leveler es llevada acabo por voluntarios',
+    volunteerLed: '📢 leveler es llevada acabo por voluntarios',
     volunteerContribute: 'para contribuir al equipo ❤️',
   },
   clickHere: ' Da Click Aquí ',

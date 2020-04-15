@@ -25,7 +25,7 @@ class ResourcesContainerBase extends Component {
 	state = { ...INITIAL_STATE };
 
 	componentDidMount() {
-		document.title = "leveler: resources"
+		document.title = "leveler: recursos"
 		this.getTopLinks()
 	}
 
@@ -67,7 +67,7 @@ class ResourcesContainerBase extends Component {
 
 	newLinksClicked = () => {
 		const { logEvent } = this.props.firebase;
-		logEvent("new_resources_clicked");
+		logEvent("mex_new_resources_clicked");
 	}
 
 	async getNewLinks() {
@@ -112,7 +112,7 @@ class ResourcesContainerBase extends Component {
 		const { logEvent } = this.props.firebase;
 
 		const linkClicked = async (url) => {
-			await logEvent("resource_link_clicked", {url: url});
+			await logEvent("mex_resource_link_clicked", {url: url});
 		}
 		
 		const upvote = async (index, score) => {
@@ -162,7 +162,7 @@ class ResourcesContainerBase extends Component {
 				loading: true
 			})
 			// GA EVENT
-			logEvent("resource_category_clicked", {category: category});
+			logEvent("mex_resource_category_clicked", {category: category});
 			let links = [];
 			const { resourcesCollection } = this.props.firebase;
 			try {

@@ -9,7 +9,7 @@ import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
 import localizationBundle from '../../constants/dictionary';
 
-const REQUIRED_ERROR = 'required';
+const REQUIRED_ERROR = 'necesario';
 
 const addURLScheme = (url) => (/^https?:\/\//.test(url) ? url : `https://${url}`);
 
@@ -19,10 +19,10 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().min(1).required(REQUIRED_ERROR),
   social_url: Yup.string()
     .transform(addURLScheme)
-    .url('we need a real URL here'),
+    .url('nosotros necesitamos una url'),
   payment: Yup.string()
     .transform(addURLScheme)
-    .url('we need a real URL here')
+    .url('nosotros necesitamos una url de Paypal')
     .test('validPaymentLink', '', function (value) {
       if (!value) return false;
 
@@ -31,18 +31,14 @@ const validationSchema = Yup.object().shape({
 
       const [regex, errMsg] = (function (hostname) {
         switch (hostname) {
-          case 'cash.app':
-            return [/^\$[a-zA-Z]+$/, "⛔️ looks like you're adding a Cash App link improperly"];
           case 'paypal.com':
           case 'www.paypal.com':
             return [/^$/, '⛔️ parece que tu link de Paypal no es correcto'];
           case 'paypal.me':
           case 'www.paypal.me':
             return [/^.+$/, '⛔️ parece que tu link de Paypal no es correcto'];
-          case 'venmo.com':
-            return [/^code\?user_id=[0-9]{19}$/, "⛔️ looks like you're adding a Venmo link improperly"];
           default:
-            return [null, '⛔️ parece que tu link de pago no es correcto'];
+            return [null, '⛔️ parece que tu link de pago no es correcto - nosotros solo apoyamos Paypal'];
         }
       }(hostname));
 
@@ -80,30 +76,39 @@ const Registration = (props) => {
     }
   };
 
-  const onSubmit = (values, { resetForm }) => {
+  const onSubmit = async (values, { resetForm }) => {
     if (values.industry === 'other') {
       values.industry = values.other_industry;
       delete values.other_industry;
     }
     values.payment = addURLScheme(values.payment);
-    const { fieldValue, entriesCollection, entriesIndexCollection } = props.firebase;
+    const { entriesCollection, fieldValue } = props.firebase;
 
+    try {
+      await entriesCollection
+        .add({
+          location: values.location,
+          industry: values.industry.trim(),
+          description: values.description.trim(),
+          payment_url: [values.payment],
+          suggestion: values.suggestion.trim(),
+          shown: 0,
+          potential_contrib: 0,
+          random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+        })
+        .then((docRef) => {
+          docRef.collection('private').add({
+            email: values.email.trim(),
+            social_url: values.social_url.trim(),
+          });
+        });
 
-    const entriesCollectionPayload = {
-      location: values.location,
-      industry: values.industry.trim(),
-      description: values.description.trim(),
-      payment_url: [values.payment],
-      suggestion: values.suggestion.trim(),
-      created: fieldValue.serverTimestamp(),
-      random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
-    };
-
-    entriesCollection.doc(random).set(entriesCollectionPayload);
-
-    updateLastSignup(fieldValue.serverTimestamp());
-    resetForm({});
-    setSubmitted(true);
+      updateLastSignup(fieldValue.serverTimestamp());
+      resetForm({});
+      setSubmitted(true);
+    } catch (e) {
+      console.error(e.message);
+    }
   };
 
   return (

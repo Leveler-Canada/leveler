@@ -2,38 +2,40 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withFirebase } from '../Firebase';
-import localizationBundle from "../../constants/dictionary";
+import localizationBundle from '../../constants/dictionary';
 
 const FooterNav = (props) => {
   const onAboutClick = () => {
     const { logEvent } = props.firebase;
-    logEvent('contribute_url_clicked_footer_nav');
+    logEvent('mex_contribute_url_clicked_footer_nav');
   };
 
   const onDistributeClick = () => {
     const { logEvent } = props.firebase;
-    logEvent('distribute_url_clicked_footer_nav');
+    logEvent('mex_distribute_url_clicked_footer_nav');
   };
 
   const onReceiveClick = () => {
     const { logEvent } = props.firebase;
-    logEvent('receive_url_clicked_footer_nav');
+    logEvent('mex_receive_url_clicked_footer_nav');
   };
 
   const onResourcesClick = () => {
     const { logEvent } = props.firebase;
-    logEvent('resources_url_clicked_footer_nav');
+    logEvent('mex_resources_url_clicked_footer_nav');
   };
 
   const onContributeClick = () => {
     const { logEvent } = props.firebase;
-    logEvent('contribute_url_clicked_footer_nav');
+    logEvent('mex_contribute_url_clicked_footer_nav');
   };
 
   return (
     <footer>
       <Link to="/about" onClick={onAboutClick}>
-        {localizationBundle.footer.about} leveler
+        {localizationBundle.footer.about}
+        {' '}
+        leveler
       </Link>
 
       <Link
