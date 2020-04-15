@@ -34,6 +34,7 @@ class DistributeTableBase extends Component {
 		try {
 			await entriesCollection
 				.where("random", ">=", random)
+				.where("location.country", "==", "USA")
 				.orderBy("random")
 				.limit(10)
 				.get()
