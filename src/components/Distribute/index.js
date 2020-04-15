@@ -86,12 +86,18 @@ class DistributeTableBase extends Component {
 							entries.push(docData);
 							this.updateShownCount(docSnap.id)
 						})
-						if (entries) {
+						if (entries.length > 10) {
+							console.log(entries.length, ' > 10')
 							this.setState({
 								entries: this.getRandom(entries, 10),
 								loading: false
 							})
-							
+						} else {
+							console.log(entries.length, ' < 10')
+							this.setState({
+								entries,
+								loading: false
+							})
 						}
 					})
 			} catch(e) {
