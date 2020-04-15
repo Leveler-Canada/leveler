@@ -136,7 +136,7 @@ const Registration = (props) => {
       }) => (
         <form onSubmit={handleSubmit}>
           <fieldset>
-            <label htmlFor="email">email:</label>
+            <label htmlFor="email">email:*</label>
             <span className="error">{errors.email}</span>
             <input
               type="text"
