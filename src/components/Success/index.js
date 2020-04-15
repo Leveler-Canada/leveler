@@ -12,7 +12,7 @@ const SuccessPage = () => (
 	</div>
 );
 
-const MAILCHIMP_URL = "https://leveler.us19.list-manage.com/subscribe/post?u=684bbb5a5125c30c1f0016222&amp;id=dc37d76685";
+const MAILCHIMP_URL = "http://eepurl.com/gZL3IP";
 
 const INITIAL_STATE = {
 	entries: []
