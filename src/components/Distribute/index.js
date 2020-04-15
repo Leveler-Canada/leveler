@@ -33,28 +33,29 @@ class DistributeTableBase extends Component {
     let res = await axios.get("https://ipapi.co/json/");
 		
 		if (res.data !== undefined || res.data !== '') {
-			const { country_code_iso3, region, region_code } = res.data;
-			// let ipLocale = {
-			// 	country_code_iso3,
-			// 	region,
-			// 	region_code
-			// }
-			this.getEntries(country_code_iso3, region_code)
+			const { country_code_iso3, country, region_code } = res.data;
+			console.log(res.data)
+			let ipLocale = {
+				country_code_iso3,
+				country,
+				region_code
+			}
+			this.getEntries(ipLocale)
 		}
 	};
 
-	async getEntries(country, region) {
+	async getEntries(locale) {
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
-
-		if (country !== "USA") {
-			console.log('not usa being called')
+		const { country_code_iso3, country, region_code } = locale;
+		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+		
+		if (country_code_iso3 !== "USA") {
 			try {
 				await entriesCollection
-					// .where("random", ">=", random)
-					.where("location.country", "==", country)
-					// .orderBy("random")
-					// .limit(10)
+					.where("random", ">=", random)
+					.orderBy("random")
+					.limit(10)
 					.get()
 					.then((querySnapshot) => {
 						querySnapshot.forEach((docSnap) => {
@@ -74,13 +75,9 @@ class DistributeTableBase extends Component {
 				console.log(e.message)
 			}
 		} else {
-			console.log('usa being called')
 			try {
 				await entriesCollection
-					// .where("random", ">=", random)
-					.where("location.state", "==", region)
-					// .orderBy("random")
-					// .limit(10)
+					.where("location.state", "==", region_code)
 					.get()
 					.then((querySnapshot) => {
 						querySnapshot.forEach((docSnap) => {
