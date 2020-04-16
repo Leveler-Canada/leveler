@@ -48,10 +48,6 @@ class HomeLandingBase extends Component {
             <button className="btn">{localizationBundle.recive}</button>
           </Link>
           <p className="home-misc">{localizationBundle.intro.lastSignup} {lastSignup}</p>
-          <Link to="/resources" onClick={this.onResourcesClick}>
-            <button className="btn">{localizationBundle.resources}</button>
-          </Link>
-          <p className="home-misc">{localizationBundle.intro.lastUpvote} {lastUpvote}</p>
         </div>
       </section>
     );
