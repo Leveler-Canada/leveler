@@ -5,6 +5,7 @@ import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import { Loading } from '../Animations'
 import { Leveler } from '../Icons'
+import AuthModal from '../Modal/AuthModal'
 import ResourceItem from './ResourceItem'
 import FooterNav from '../FooterNav';
 
@@ -18,7 +19,8 @@ const ResourcesPage = () => (
 
 const INITIAL_STATE = {
 	links: [],
-	loading: true
+	loading: true,
+	modalIsOpen: false
 };
 
 class ResourcesContainerBase extends Component {
@@ -110,6 +112,8 @@ class ResourcesContainerBase extends Component {
 
 	render() {
 		const { logEvent } = this.props.firebase;
+		const { firebase } = this.props;
+		const { modalIsOpen } = this.state;
 
 		const linkClicked = async (url) => {
 			await logEvent("resource_link_clicked", {url: url});
@@ -194,13 +198,28 @@ class ResourcesContainerBase extends Component {
 				}
 		}
 
+		// MODAL STATE MANAGEMENT
+		const toggleModal = (modalIsOpen) => {
+			this.setState({
+				modalIsOpen: !modalIsOpen
+			})
+		}
+
 		return (
+			
 			<>
+				<AuthModal
+					toggleModal={toggleModal}
+					modalIsOpen={modalIsOpen}
+					firebase={firebase}
+				/>
 				<nav className="resources-header"> 
 					<ul>
 						<Link to="/" id="leveler-icon"><Leveler /></Link>
 						<li onClick={() => {this.getTopLinks()}}>top</li>
 						<li onClick={() => {this.getNewLinks()}}>new</li>
+						<li onClick={() => {this.getNewLinks()}}>submit</li>
+						<li onClick={() => {toggleModal(this.state.modalIsOpen)}}>login</li>
 					</ul>
 				</nav>
 				<div className="resources-body">
