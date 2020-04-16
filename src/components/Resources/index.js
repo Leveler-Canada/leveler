@@ -8,6 +8,7 @@ import { Leveler } from '../Icons'
 import AuthModal from '../Modal/AuthModal'
 import ResourceItem from './ResourceItem'
 import FooterNav from '../FooterNav';
+import { withAuthentication } from '../Session';
 
 const ResourcesPage = () => (
 	<div className="wrapper">
@@ -114,6 +115,7 @@ class ResourcesContainerBase extends Component {
 		const { logEvent } = this.props.firebase;
 		const { firebase } = this.props;
 		const { modalIsOpen } = this.state;
+		const { authUser } = this.props;
 
 		const linkClicked = async (url) => {
 			await logEvent("resource_link_clicked", {url: url});
@@ -206,7 +208,6 @@ class ResourcesContainerBase extends Component {
 		}
 
 		return (
-			
 			<>
 				<AuthModal
 					toggleModal={toggleModal}
@@ -219,7 +220,10 @@ class ResourcesContainerBase extends Component {
 						<li onClick={() => {this.getTopLinks()}}>top</li>
 						<li onClick={() => {this.getNewLinks()}}>new</li>
 						<li onClick={() => {this.getNewLinks()}}>submit</li>
-						<li onClick={() => {toggleModal(this.state.modalIsOpen)}}>login</li>
+						{authUser ? 
+							<li onClick={() => {toggleModal(this.state.modalIsOpen)}}>{authUser.uid}</li> 
+							: 
+							<li onClick={() => {toggleModal(this.state.modalIsOpen)}}>login</li>}
 					</ul>
 				</nav>
 				<div className="resources-body">
@@ -250,7 +254,7 @@ class ResourcesContainerBase extends Component {
 	}
 }
 
-const ResourcesContainer = withFirebase(ResourcesContainerBase);
+const ResourcesContainer = withAuthentication(ResourcesContainerBase);
 
 export default ResourcesPage;
 

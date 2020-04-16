@@ -3,20 +3,21 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
-import ContributeBand from '../Header/ContributeBand'
+import ContributeBand from '../Header/ContributeBand';
 import HomePage from '../Home';
 import SignUpPage from '../SignUp';
-import ContributePage from '../Contribute/'
-import DistributePage from '../Distribute'
-import SuccessPage from '../Success'
-import AboutPage from '../About'
-import ResourcesPage from '../Resources'
+import ContributePage from '../Contribute';
+import DistributePage from '../Distribute';
+import SuccessPage from '../Success';
+import AboutPage from '../About';
+import ResourcesPage from '../Resources';
 import * as ROUTES from '../../constants/routes';
+import { withAuthentication } from '../Session';
 
 const App = () => (
   <Router>
     <div>
-      <ContributeBand /> 
+      <ContributeBand />
       <Route exact path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.SIGNUP} component={SignUpPage} />
       <Route path={ROUTES.CONTRIBUTE} component={ContributePage} />
@@ -27,4 +28,4 @@ const App = () => (
     </div>
   </Router>
 );
-export default App;
+export default withAuthentication(App);
