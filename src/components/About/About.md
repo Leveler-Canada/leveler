@@ -22,7 +22,8 @@ El proceso toma unos minutos y lo único que necesitas es un teléfono y una cue
 
 
 
-#### Perdí mi trabajo y quiero registrarme en la base de datos.
+
+### Perdí mi trabajo y quiero registrarme en la base de datos.
 La base de datos está formada por personas freelance/trabajadores independientes en la industria creativa y de servicios cuyos trabajos han sido cancelados, incluye sus datos e información para realizar una aportación. Si llenas el formulario, tus datos de paypal estarán en línea. 
 Nota importante: Sólo registrate en la base de datos si tienes trabajo que  ha sido cancelado.
 
@@ -38,7 +39,7 @@ Si eres programador, o puedes ser administrador para tu ciudad o región por fav
 ### El equipo.
 El equipo leveler México está formado por:
 
-Tania: diseñadora independiente y maestra. Website | Twitter  
+Tania: diseñadora independiente y maestra. [Website](https://tanialili.me/) | [Twitter](https://twitter.com/tanialili)  
 Óscar: developer. | [Twitter](https://twitter.com/oscarcb)  
 Palmidia: JavaScript Developer, Entusiasta de VueJs | [Twitter](https://twitter.com/jetzable)  
 
