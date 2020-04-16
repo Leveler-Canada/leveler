@@ -52,20 +52,6 @@ const FooterNav = (props) => {
         {localizationBundle.recive}
       </Link>
 
-      <a
-        href="https://docs.google.com/document/d/1OqjFn7f5YRxzD71v-ieGSruQUdTST5K3woPl-yrDDkc/edit?usp=sharing"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        updates
-      </a>
-
-      <Link
-        to="/contribute"
-        onClick={onContributeClick}
-      >
-        contribute
-      </Link>
     </footer>
   );
 };
