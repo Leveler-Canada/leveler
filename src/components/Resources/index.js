@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import * as timeago from 'timeago.js';
-import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import { Loading } from '../Animations'
 import { Leveler } from '../Icons'
@@ -115,7 +114,7 @@ class ResourcesContainerBase extends Component {
 		const { logEvent } = this.props.firebase;
 		const { firebase } = this.props;
 		const { modalIsOpen } = this.state;
-		const { authUser } = this.props;
+		const { authUser, userData } = this.props;
 
 		const linkClicked = async (url) => {
 			await logEvent("resource_link_clicked", {url: url});
@@ -200,6 +199,11 @@ class ResourcesContainerBase extends Component {
 				}
 		}
 
+		const logout = () => {
+			const { doSignOut } = this.props.firebase;
+				doSignOut()
+		}
+
 		// MODAL STATE MANAGEMENT
 		const toggleModal = (modalIsOpen) => {
 			this.setState({
@@ -220,8 +224,11 @@ class ResourcesContainerBase extends Component {
 						<li onClick={() => {this.getTopLinks()}}>top</li>
 						<li onClick={() => {this.getNewLinks()}}>new</li>
 						<li onClick={() => {this.getNewLinks()}}>submit</li>
-						{authUser ? 
-							<li onClick={() => {toggleModal(this.state.modalIsOpen)}}>{authUser.uid}</li> 
+						{userData ? 
+							<>
+							<li>{userData.id} ({userData.karma})</li>
+							<li onClick={() => {logout()}}>logout</li>
+							</>
 							: 
 							<li onClick={() => {toggleModal(this.state.modalIsOpen)}}>login</li>}
 					</ul>

@@ -45,7 +45,9 @@ const AuthModal = (props) => {
     // signup using firebase auth
     try {
       const authUser = await doCreateUserWithEmailAndPassword(email, password);
+
       if (authUser) {
+        await authUser.user.updateProfile({ displayName: username });
         addUserToDb(username, authUser.user.uid);
         setSubmitted(true);
         setSuccessMessage(SIGN_UP_SUCCESS);
@@ -53,8 +55,6 @@ const AuthModal = (props) => {
     } catch (e) {
       setSignUpError(e.message);
     }
-
-    // add user to userCollection in DB
   };
 
   const loginUser = async (valuesObj) => {
