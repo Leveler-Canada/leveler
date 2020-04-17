@@ -1,5 +1,5 @@
 ### Acerca de leveler:
-Leveler fue creada para ayudar a trabajadores en la comunidad creativa y en la industria de servicios que han sido afectados económicamente por las restricciones de COVID19 ( (cierres y cancelaciones de eventos, comisiones o encargos, proyectos cancelados, etc.).
+Leveler fue creada para ayudar a trabajadores en la comunidad creativa y en la industria de servicios que han sido afectados económicamente por las restricciones de COVID19 (cierres y cancelaciones de eventos, comisiones o encargos, proyectos cancelados, etc.).
 
 ### Funciones del sitio:
 1. Leveler hospeda una base de datos formada por freelancers y trabajadores independientes que han sido afectados económicamente por la pandemia y sus respectivos enlaces a paypal.
@@ -13,14 +13,17 @@ Si nuestra red de freelancers recibe varias contribuciones pequeñas de dinero t
  
 ### ¡Quiero realizar una aportación!
 Si tienes soltura económica, trabajo fijo o simplemente quieres ayudar esta herramienta te ayuda a distribuir una pequeña parte de tu dinero a personas que lo necesitan.   
-El proceso toma unos minutos y lo único que necesitas en un teléfono y una cuenta de paypal.
+El proceso toma unos minutos y lo único que necesitas es un teléfono y una cuenta de paypal.
 
 1. Haz click en ""Distribuye"" y leveler seleccionará al azar 10 usuarios que necesitan tu ayuda.
 2. Haz click en el link de paypal de cada usuario y realiza un pago. Cualquier cantidad es bienvenida.
 3. Sugerimos enviar pagos iguales a cada persona (por ejemplo: 50.00 x 10 = 500 en total)
 4. Si deseas contribuir con una cantidad mayor a 1000 pesos (MXN) repite los pasos uno y dos hasta que estés satisfecho.
 
-#### Perdí mi trabajo y quiero registrarme en la base de datos.
+
+
+
+### Perdí mi trabajo y quiero registrarme en la base de datos.
 La base de datos está formada por personas freelance/trabajadores independientes en la industria creativa y de servicios cuyos trabajos han sido cancelados, incluye sus datos e información para realizar una aportación. Si llenas el formulario, tus datos de paypal estarán en línea. 
 Nota importante: Sólo registrate en la base de datos si tienes trabajo que  ha sido cancelado.
 
@@ -36,7 +39,7 @@ Si eres programador, o puedes ser administrador para tu ciudad o región por fav
 ### El equipo.
 El equipo leveler México está formado por:
 
-Tania: diseñadora independiente y maestra. Website | Twitter  
+Tania: diseñadora independiente y maestra. [Website](https://tanialili.me/) | [Twitter](https://twitter.com/tanialili)  
 Óscar: developer. | [Twitter](https://twitter.com/oscarcb)  
 Palmidia: JavaScript Developer, Entusiasta de VueJs | [Twitter](https://twitter.com/jetzable)  
 

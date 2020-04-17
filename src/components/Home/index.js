@@ -43,15 +43,11 @@ class HomeLandingBase extends Component {
           <Link to="/distribute" className="dist-btn" onClick={this.onDistributeClick}>
             <button className="btn">{localizationBundle.distribute}</button>
           </Link>
-          <p className="home-misc">last likely contribution {lastContrib}</p>
+          <p className="home-misc">última contribución probable {lastContrib}</p>
           <Link to="/signup" onClick={this.onReceiveClick}>
             <button className="btn">{localizationBundle.recive}</button>
           </Link>
           <p className="home-misc">{localizationBundle.intro.lastSignup} {lastSignup}</p>
-          <Link to="/resources" onClick={this.onResourcesClick}>
-            <button className="btn">{localizationBundle.resources}</button>
-          </Link>
-          <p className="home-misc">{localizationBundle.intro.lastUpvote} {lastUpvote}</p>
         </div>
       </section>
     );
@@ -85,16 +81,16 @@ class HomeLandingBase extends Component {
 
   onDistributeClick = () => {
     const { logEvent } = this.props.firebase;
-    logEvent("distribute_btn_clicked_home");
+    logEvent("mex_distribute_btn_clicked_home");
   };
 
   onReceiveClick = () => {
     const { logEvent } = this.props.firebase;
-    logEvent("receive_btn_clicked_home");
+    logEvent("mex_receive_btn_clicked_home");
   };
   onResourcesClick = () => {
     const { logEvent } = this.props.firebase;
-    logEvent("resources_btn_clicked_home");
+    logEvent("mex_resources_btn_clicked_home");
   };
 }
 
