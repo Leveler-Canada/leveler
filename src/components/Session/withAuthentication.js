@@ -28,9 +28,9 @@ const withAuthentication = (Component) => {
 
     async getUserData(authUser) {
       const { userCollection } = this.props.firebase;
-      if (authUser) {
+      if (authUser !== null) {
         try {
-          const userData = await userCollection
+          await userCollection
           .doc(authUser.uid)
           .get()
           .then((doc) => {
@@ -41,6 +41,10 @@ const withAuthentication = (Component) => {
         } catch(e) {
           console.log(e.message)
         }
+      } else {
+        this.setState({
+          userData: null
+        })
       }
     }
 
