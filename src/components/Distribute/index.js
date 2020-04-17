@@ -18,38 +18,47 @@ const DistributePage = () => (
 const INITIAL_STATE = {
 	entries: [],
 	loading: true,
-	ipLocale: {}
+	ipLocale: null
 };
+
+const { REACT_APP_IPDATA_KEY } = process.env;
 
 class DistributeTableBase extends Component {
 	state = { ...INITIAL_STATE };
 
 	componentDidMount() {
 		document.title = "leveler: distribute"
-		this.getUserLocation()
+		this.getUserLocation();
 	}
 
 	getUserLocation = async () => {
-    let res = await axios.get("https://ipapi.co/json/");
-		
-		if (res.data !== undefined || res.data !== '') {
-			const { country_code_iso3, country, region_code } = res.data;
-			let ipLocale = {
-				country_code_iso3,
-				country,
-				region_code
+		try {
+			const res = await axios.get(`https://api.ipdata.co?api-key=${REACT_APP_IPDATA_KEY}`);
+			if (res.data) {
+				const { country_code, country_name, region_code } = res.data;
+				console.log(res.data)
+				const ipLocale = {
+					country_code, 
+					country_name, 
+					region_code
+				}
+				this.getEntries(ipLocale)
 			}
-			this.getEntries(ipLocale)
+		} catch(e) {
+			console.log(e.message)
 		}
-	};
+	}
+  
 
 	async getEntries(locale) {
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
-		const { country_code_iso3, country, region_code } = locale;
+
+		const { country_code, region_code } = locale;
 		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 		
-		if (country_code_iso3 !== "USA") {
+		if (country_code !== "US") {
+
 			try {
 				await entriesCollection
 					.where("random", ">=", random)
@@ -120,6 +129,20 @@ class DistributeTableBase extends Component {
     return result;
 	}
 
+	getRandom(arr, n) {
+    let result = new Array(n),
+        len = arr.length,
+        taken = new Array(len);
+    if (n > len)
+        throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+			let x = Math.floor(Math.random() * len);
+        result[n] = arr[x in taken ? taken[x] : x];
+        taken[x] = --len in taken ? taken[len] : len;
+		}
+    return result;
+	}
+
 	async updateShownCount(docId) {
 		const { fieldValue, entriesCollection } = this.props.firebase;
 		const docRef = entriesCollection.doc(docId)
@@ -134,6 +157,7 @@ class DistributeTableBase extends Component {
 	}
 
 	render() {
+		
 		const { entries } = this.state;
 		const { fieldValue, entriesCollection, miscCollection, logEvent } = this.props.firebase;
 		return (
