@@ -18,22 +18,7 @@ const DistributePage = () => (
 class DistributeTableBase extends Component {
   async componentDidMount() {
     document.title = 'leveler: distribuye';
-    await this.getEntries();
-    this.getMexico();
-  }
-
-  async getMexico() {
-    const { entriesCollection } = this.props.firebase;
-    try {
-      await entriesCollection
-        .where('location.country', '==', 'Mexico')
-        .get()
-        .then((querySnapshot) => {
-          console.log(querySnapshot);
-        });
-    } catch (e) {
-      console.log(e);
-    }
+    this.getEntries();
   }
 
   async getEntries() {
