@@ -52,15 +52,18 @@ class DistributeTableBase extends Component {
 		} catch(e) {
 			console.log(e.message)
 		}
-	};
+	}
+  
 
 	async getEntries(locale) {
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
+
 		const { country_code, country_name, region_code } = locale;
 		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 		
 		if (country_code !== "US") {
+
 			try {
 				await entriesCollection
 					.where("random", ">=", random)
@@ -115,6 +118,20 @@ class DistributeTableBase extends Component {
 				console.error(e.message)
 			}
 		}
+	}
+
+	getRandom(arr, n) {
+    let result = new Array(n),
+        len = arr.length,
+        taken = new Array(len);
+    if (n > len)
+        throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+			let x = Math.floor(Math.random() * len);
+        result[n] = arr[x in taken ? taken[x] : x];
+        taken[x] = --len in taken ? taken[len] : len;
+		}
+    return result;
 	}
 
 	getRandom(arr, n) {
