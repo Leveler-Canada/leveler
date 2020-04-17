@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import Header from '../Header';
+import { Loading } from '../Animations';
 import DistributeHeader from './DistributeHeader';
+import DistributeCard from './DistributeCard';
 import FooterNav from '../FooterNav';
-import localizationBundle from '../../constants/dictionary';
-
 
 const DistributePage = () => (
   <div className="wrapper">
@@ -15,8 +15,15 @@ const DistributePage = () => (
   </div>
 );
 
+const INITIAL_STATE = {
+  entries: [],
+  loading: true,
+};
+
 class DistributeTableBase extends Component {
-  async componentDidMount() {
+  state = { ...INITIAL_STATE };
+
+  componentDidMount() {
     document.title = 'leveler: distribuye';
     this.getEntries();
   }
@@ -69,17 +76,40 @@ class DistributeTableBase extends Component {
     return result;
   }
 
+  async updateShownCount(docId) {
+    const { fieldValue, entriesCollection } = this.props.firebase;
+    const docRef = entriesCollection.doc(docId);
+    try {
+      await docRef.update({
+        shown: fieldValue.increment(1),
+        random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+      });
+    } catch (e) {
+      console.error(e.message);
+    }
+  }
+
 
   render() {
+    const { entries } = this.state;
+    const {
+      fieldValue, entriesCollection, miscCollection, logEvent,
+    } = this.props.firebase;
     return (
-      <>
+      <div>
         <DistributeHeader />
-        <div className="main-btn-container">
-          <Link to="/signup" onClick={this.onReceiveClick}>
-            <button className="btn">{localizationBundle.recive}</button>
-          </Link>
-        </div>
-      </>
+        {this.state.loading && <Loading height="100" width="100" />}
+        {entries.map((entry) => (
+          <DistributeCard
+            entry={entry}
+            key={entry.id}
+            fieldValue={fieldValue}
+            entriesCollection={entriesCollection}
+            miscCollection={miscCollection}
+            logEvent={logEvent}
+          />
+        ))}
+      </div>
     );
   }
 }
