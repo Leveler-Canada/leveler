@@ -33,12 +33,7 @@ class DistributeTableBase extends Component {
 
 	getUserLocation = async () => {
 		try {
-			console.log(REACT_APP_IPDATA_KEY)
-			// const res = await axios.get(`https://api.ipdata.co?api-key=${REACT_APP_IPDATA_KEY}`);
 			const res = await axios.get(`https://api.ipdata.co?api-key=${REACT_APP_IPDATA_KEY}`);
-			
-
-			// const res = await axios.get(`https://api.ipdata.co?api-key=test`);
 			if (res.data) {
 				const { country_code, country_name, region_code } = res.data;
 				console.log(res.data)
@@ -59,7 +54,7 @@ class DistributeTableBase extends Component {
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
 
-		const { country_code, country_name, region_code } = locale;
+		const { country_code, region_code } = locale;
 		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 		
 		if (country_code !== "US") {
