@@ -227,7 +227,8 @@ class ResourcesContainerBase extends Component {
 						{userData ? 
 							<>
 							<li>{userData.id} ({userData.karma})</li>
-							<li onClick={() => {logout()}}>logout</li>
+							<span>|</span>
+							<button onClick={() => {logout()}}>logout</button>
 							</>
 							: 
 							<li onClick={() => {toggleModal(this.state.modalIsOpen)}}>login</li>}
