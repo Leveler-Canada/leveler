@@ -241,14 +241,7 @@ class ResourcesContainerBase extends Component {
 						this.state.links.map((item, index) =>
 							<ResourceItem
 								index={index}
-								key={item.id}
-								id={item.id}
-								score={item.score}
-								title={item.title}
-								url={item.url}
-								by={item.by}
-								category={item.category}
-								created={item.created}
+								item={item}
 								upvote={upvote}
 								active={this.state.links[index].active}
 								getByCategory={getByCategory}

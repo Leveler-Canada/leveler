@@ -1,44 +1,71 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
-import { withFirebase } from '../Firebase';
+import CommentModal from '../Modal/CommentModal';
 
 const ResourceItem = (props) => {
+  const {
+    id,
+    title,
+    score,
+    url,
+    by,
+    created,
+    category,
+    kids,
+    descendants,
+  } = props.item;
+
+  const {
+    active,
+    upvote,
+    index,
+    logEvent,
+    getByCategory,
+    linkClicked,
+    view,
+  } = props;
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const toggleModal = () => {
+    setIsOpen(!modalIsOpen);
+  };
+
   const onCommentsClick = () => {
-    const { logEvent } = props;
     logEvent('resource_item_comments_clicked');
+    toggleModal();
   };
   return (
     <>
-      {/* <CommentsModal
+      <CommentModal
+        isOpen={modalIsOpen}
         toggleModal={toggleModal}
-        modalIsOpen={modalIsOpen}
-        firebase={firebase}
-      /> */}
-      <div id={props.id} className="resources-item-container">
+        item={props.item}
+      />
+      <div id={id} className="resources-item-container">
         <div className="resources-item-votes">
-          {!props.active && (
+          {!active && (
           <>
-            <button onClick={() => props.upvote(props.index, props.score + 1)}>⬆️</button>
-            <p>{props.score}</p>
+            <button onClick={() => upvote(index, score + 1)}>⬆️</button>
+            <p>{score}</p>
           </>
           )}
-          {props.active && (
+          {active && (
           <>
             <button>👍🏼</button>
-            <p>{props.score}</p>
+            <p>{score}</p>
 
           </>
           )}
         </div>
         <div className="resources-item-title">
           <a
-            href={props.url}
+            href={url}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => props.linkClicked(props.url)}
+            onClick={() => linkClicked(url)}
           >
-            {props.title}
+            {title}
           </a>
           <a
             id="comments"
@@ -51,22 +78,27 @@ const ResourceItem = (props) => {
             <p>
               by
               {' '}
-              {props.by}
+              {by}
               ,
               {' '}
-              {props.created}
+              {created}
             </p>
           </div>
+          {view !== 'comment'
+          && (
           <div className="resources-item-category-mobile">
-            <button onClick={() => props.getByCategory(props.category)}><b>{props.category}</b></button>
+            <button onClick={() => getByCategory(category)}><b>{category}</b></button>
           </div>
+          )}
         </div>
+        {view !== 'comment'
+        && (
         <div className="resources-item-category-desktop">
-          <button onClick={() => props.getByCategory(props.category)}><b>{props.category}</b></button>
+          <button onClick={() => getByCategory(category)}><b>{category}</b></button>
         </div>
-
+        )}
       </div>
     </>
   );
 };
-export default withFirebase(ResourceItem);
+export default ResourceItem;
