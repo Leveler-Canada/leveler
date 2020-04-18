@@ -34,7 +34,7 @@ class DistributeTableBase extends Component {
 
     try {
       await entriesCollection
-        .where('location.country', '==', 'Mexico')
+        .where('location.country', 'in', ['Mexico','México','Méx']) //HOTFIX to get all variants
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((docSnap) => {
