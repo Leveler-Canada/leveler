@@ -253,6 +253,7 @@ class ResourcesContainerBase extends Component {
 								active={this.state.links[index].active}
 								getByCategory={getByCategory}
 								linkClicked={linkClicked}
+								logEvent={logEvent}
 							/>
 						)
 					): null}
