@@ -5,15 +5,14 @@ const DistributeHeader = (props) => (
   <div>
     <p className="distribute-header-main"><b>{localizationBundle.distributePage.main}</b></p>
     <p className="distribute-header">
-      <b>{localizationBundle.distributePage.interimSignUpPrompt}</b>
-      {/* {localizationBundle.distributePage.textIntro} */}
+      {localizationBundle.distributePage.textIntro}
       <b>
         <i>
-          {/* {localizationBundle.distributePage.textImportant} */}
+          {localizationBundle.distributePage.textImportant}
         </i>
       </b>
-      {/* {localizationBundle.distributePage.textOutro}
-      {' '} */}
+      {localizationBundle.distributePage.textOutro}
+      {' '}
     </p>
   </div>
 );
