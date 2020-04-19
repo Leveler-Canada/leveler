@@ -1,8 +1,8 @@
 import React from 'react';
-import ResourceItem from '../Resources/ResourceItem';
+import ResourceItem from "./ResourceItem";
 import { withAuthentication } from '../Session';
 
-const CommentModal = (props) => {
+const CommentItems = (props) => {
   const {
     id,
     title,
