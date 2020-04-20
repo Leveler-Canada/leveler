@@ -80,33 +80,38 @@ const Registration = (props) => {
       delete values.other_industry;
     }
     values.payment = addURLScheme(values.payment);
-    const { entriesCollection, fieldValue } = props.firebase;
+    const { entriesCollection, fieldValue, dbFs } = props.firebase;
 
-    try {
-      await entriesCollection
-        .add({
-          location: values.location,
-          industry: values.industry.trim(),
-          description: values.description.trim(),
-          payment_url: [values.payment],
-          suggestion: values.suggestion.trim(),
-          shown: 0,
-          potential_contrib: 0,
-          random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
-        })
-        .then((docRef) => {
-          docRef.collection('private').add({
-            email: values.email.trim(),
-            social_url: values.social_url.trim(),
-          });
-        });
+    let writeBatch = dbFs.batch();
 
-      updateLastSignup(fieldValue.serverTimestamp());
-      resetForm({});
-      setSubmitted(true);
-    } catch (e) {
-      console.error(e.message);
-    }
+    let entriesRef = entriesCollection.doc();
+    let privateRef = entriesRef.collection('private').doc();
+
+    writeBatch
+      .set(entriesRef, {
+        location: values.location,
+        industry: values.industry.trim(),
+        description: values.description.trim(),
+        payment_url: [values.payment],
+        suggestion: values.suggestion.trim(),
+        shown: 0,
+        potential_contrib: 0,
+        random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+      })
+      .set(privateRef, {
+        email: values.email.trim(),
+        social_url: values.social_url.trim(),
+      })
+      .commit()
+      .then(() => {
+        updateLastSignup(fieldValue.serverTimestamp());
+        resetForm({});
+        setSubmitted(true);
+        console.log('Sucessfully wrote to entries.');
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
   };
 
   return (
