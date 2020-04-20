@@ -82,10 +82,10 @@ const Registration = (props) => {
     values.payment = addURLScheme(values.payment);
     const { entriesCollection, fieldValue, dbFs } = props.firebase;
 
-    let writeBatch = dbFs.batch();
+    const writeBatch = dbFs.batch();
 
-    let entriesRef = entriesCollection.doc();
-    let privateRef = entriesRef.collection('private').doc();
+    const entriesRef = entriesCollection.doc();
+    const privateRef = entriesRef.collection('private').doc();
 
     writeBatch
       .set(entriesRef, {
@@ -107,7 +107,6 @@ const Registration = (props) => {
         updateLastSignup(fieldValue.serverTimestamp());
         resetForm({});
         setSubmitted(true);
-        console.log('Sucessfully wrote to entries.');
       })
       .catch((err) => {
         console.error(err.message);
