@@ -35,9 +35,9 @@ const localizationBundle = {
   guidelinesPage: {
     header: 'Instrucciones',
     important: 'Llena la forma sólo si has sido impactadx económicamente por el COVID-19.',
-    listSecond: 'Si ya recibiste suficiente dinero por favor escríbenos a mx.leveler@gmail.com y te quitaremos de la lista.',
+    listSecond: 'Si ya recibiste suficiente dinero por favor escríbenos a mexico@leveler.info y te quitaremos de la lista.',
     listThird: 'Si recibiste más dinero del que necesitas, redistribúyelo.',
-    legend: '* Los campos con asterisco serán públicos.',
+    legend: '* Los campos con asterisco son públicos y obligatorios',
   },
   registrationPage: {
     location: 'Ciudad',
@@ -50,7 +50,7 @@ const localizationBundle = {
     music: 'Música',
     other: 'Otro',
     otherPlaceHolder: 'Ingresa Otra Industria',
-    context: 'Contexto',
+    context: 'Contexto *',
     contextDescription: 'Si te sientes cómodo, comparte tu situación actual y cómo fuiste afectado por la pandemia.',
     payment: 'Pago',
     paymentURL: 'Postea el url público de tu paypal',
