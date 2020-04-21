@@ -27,10 +27,10 @@ El proceso toma unos minutos y lo único que necesitas es un teléfono y una cue
 La base de datos está formada por personas freelance/trabajadores independientes en la industria creativa y de servicios cuyos trabajos han sido cancelados, incluye sus datos e información para realizar una aportación. Si llenas el formulario, tus datos de paypal estarán en línea. 
 Nota importante: Sólo registrate en la base de datos si tienes trabajo que  ha sido cancelado.
 
-1. Si alcanzas la cantidad que necesitas, por favor considera eliminarte de la lista enviando un correo a:  mx.leveler@gmail.com
+1. Si alcanzas la cantidad que necesitas, por favor considera eliminarte de la lista enviando un correo a:  mexico@leveler.info
 2. Esta es una iniciativa autónoma, persona-a-persona. Cuidemos al otro. No te agregues dos veces a la lista o serás eliminado. Y házlo, solamente, si lo necesitas.
 3. Si alcanzas la cantidad que necesitas, equivalente a tu salario perdido, sugerimos que re-distribuyas los excedentes a otros miembros de la base de datos.
-4. Te puedes registrar en el siguiente enlace: xxxxxxxx
+4. Te puedes registrar en el siguiente enlace: https://mx.leveler.info/signup
 5. La lista está siendo actualizada en tiempo real. Si ves una estafa, repórtala.
 
 ### ¡Quiero ayudar!
