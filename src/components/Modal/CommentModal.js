@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { comment } from 'postcss-selector-parser';
 import ResourceItem from '../Resources/ResourceItem';
 import { withAuthentication } from '../Session';
 
 const CommentModal = (props) => {
+  const [comments, setComments] = useState(null);
+
+  useEffect(() => {
+    const getComments = async () => {
+      const {
+        commentsCollection,
+      } = props.firebase;
+      try {
+        const commentsObj = await commentsCollection
+          .where('parent', '==', id)
+          .get();
+          // .then(((querySnapshot) => {
+          //   console.log(querySnapshot);
+          // }));
+        if (commentsObj.docs.length > 0) {
+          const commentsArr = [];
+          commentsObj.docs.forEach(((doc) => {
+            commentsArr.push(doc.data());
+          }));
+          setComments(commentsArr);
+        }
+      } catch (e) {
+        console.error(e.message);
+      }
+    };
+    if (isOpen) {
+      getComments();
+    }
+  }, [props.isOpen]);
+
   const {
     id,
     title,
@@ -40,6 +71,7 @@ const CommentModal = (props) => {
               linkClicked={linkClicked}
               logEvent={logEvent}
               view="comment"
+              comments={comments}
             />
             {descendants ? (
               <div>

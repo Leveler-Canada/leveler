@@ -35,6 +35,7 @@ const ResourceItem = (props) => {
     logEvent('resource_item_comments_clicked');
     toggleModal();
   };
+
   return (
     <>
       <CommentModal
