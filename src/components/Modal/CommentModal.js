@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import zip from 'lodash/zip';
 import ResourceItem from '../Resources/ResourceItem';
+import Comment from '../Form/Comment';
 import { withAuthentication } from '../Session';
 
 const CommentModal = (props) => {
@@ -26,8 +27,10 @@ const CommentModal = (props) => {
         querySnapshot.forEach((documentSnapshot) => {
           snapshots.push(documentSnapshot);
         });
+        console.log(snapshots);
 
-        const commentsArr = await Promise.all(snapshots.map(getComments));
+
+        // const commentsArr = await Promise.all(snapshots.map(getComments));
         // const result = zip(snapshots, commentsArr).map((item) => {
         //   const [snap, comment] = item;
         //   const data = snap.data();
@@ -86,6 +89,7 @@ const CommentModal = (props) => {
               view="comment"
               comments={comments}
             />
+            <Comment />
             <div comments={comments}>
               {comments
                 ? (comments.map((comment) => <li>{comment.text}</li>)) : null}
