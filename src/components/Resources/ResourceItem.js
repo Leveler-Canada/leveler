@@ -43,7 +43,7 @@ const ResourceItem = (props) => {
         toggleModal={toggleModal}
         item={props.item}
       />
-      <div id={id} className="resources-item-container">
+      <div key={id} className="resources-item-container">
         <div className="resources-item-votes">
           {!active && (
           <>
