@@ -3,9 +3,57 @@ import {
   Formik, Field, Form, ErrorMessage,
 } from 'formik';
 import * as Yup from 'yup';
+import { withAuthentication } from '../Session';
 
-const Comment = (props) => (
-  <>
+const Comment = (props) => {
+  const updateUser = async (commentId) => {
+    const { authUser } = props;
+    const { fieldValue, userCollection } = props.firebase;
+    try {
+      await userCollection.doc(authUser.uid)
+        .update({
+          karma: fieldValue.increment(2),
+          submitted: fieldValue.arrayUnion(commentId),
+        });
+  	} catch (e) {
+      console.log(e);
+    }
+  };
+
+  const writeComment = async (comment) => {
+    let { path } = props;
+    const { dbFs } = props.firebase;
+    path += '/comments';
+
+    try {
+      const write = await dbFs.collection(path).add({
+        comment,
+      });
+      await updateUser(write.id);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onSubmit = async (values) => {
+    const { text } = values;
+    const { id } = props.userData;
+    const { parent } = props;
+    const { fieldValue } = props.firebase;
+
+    const comment = {
+      text,
+      by: id,
+      score: 1,
+      parent,
+      created: fieldValue.serverTimestamp(),
+    };
+
+    writeComment(comment);
+    values.text = '';
+  };
+
+  return (
     <Formik
       initialValues={{ text: '' }}
       validationSchema={Yup.object({
@@ -16,19 +64,28 @@ const Comment = (props) => (
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-          // props.loginUser(values);
+          onSubmit(values);
           setSubmitting(false);
         }, 0);
       }}
     >
-      <Form className="auth-form">
-        <Field name="text" type="text" component="textarea" />
-        <button type="submit">add comment</button>
-        {props.error && <div><span>{props.error}</span></div>}
+      <Form className="comment-form">
+        <Field
+          name="text"
+          type="text"
+          component="textarea"
+        />
+        <button
+          className="btn"
+          type="submit"
+        >
+          add comment
+
+        </button>
+        <ErrorMessage name="text" />
       </Form>
     </Formik>
-  </>
+  );
+};
 
-);
-
-export default Comment;
+export default withAuthentication(Comment);

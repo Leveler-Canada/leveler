@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 const SignUp = (props) => (
   <>
     <h4>Sign Up</h4>
-    <p>signing up will allow you to submit links</p>
+    <p>signing up will allow you to submit links and comments</p>
     <Formik
       initialValues={{ username: '', email: '', password: '' }}
       validationSchema={Yup.object({
@@ -36,7 +36,6 @@ const SignUp = (props) => (
         <Field name="password" type="password" placeholder="password" />
         <button type="submit">Sign Up</button>
         {props.error && <div><span>{props.error}</span></div>}
-
       </Form>
     </Formik>
   </>

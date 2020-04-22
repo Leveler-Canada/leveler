@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import zip from 'lodash/zip';
 import ResourceItem from '../Resources/ResourceItem';
-import Comment from '../Form/Comment';
+import CommentForm from '../Form/Comment';
 import { withAuthentication } from '../Session';
 
 const CommentModal = (props) => {
@@ -23,13 +23,11 @@ const CommentModal = (props) => {
           .orderBy('score', 'desc')
           .get();
 
+        console.log(querySnapshot);
         const snapshots = [];
         querySnapshot.forEach((documentSnapshot) => {
           snapshots.push(documentSnapshot);
         });
-        console.log(snapshots);
-
-
         // const commentsArr = await Promise.all(snapshots.map(getComments));
         // const result = zip(snapshots, commentsArr).map((item) => {
         //   const [snap, comment] = item;
@@ -60,6 +58,7 @@ const CommentModal = (props) => {
     category,
     kids,
     descendants,
+    path,
   } = props.item;
 
   const {
@@ -89,7 +88,10 @@ const CommentModal = (props) => {
               view="comment"
               comments={comments}
             />
-            <Comment />
+            <CommentForm
+              path={path}
+              parent={id}
+            />
             <div comments={comments}>
               {comments
                 ? (comments.map((comment) => <li>{comment.text}</li>)) : null}

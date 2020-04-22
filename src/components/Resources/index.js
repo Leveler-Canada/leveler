@@ -49,6 +49,7 @@ class ResourcesContainerBase extends Component {
 						let link = doc.data();
 						// SET UP ID
 						link.id = doc.id;
+						link.path = doc.ref.path;
 						// SET UP TIMEAGO
 						const date = doc.data().created.toDate()
 						link.created = timeago.format(date)
