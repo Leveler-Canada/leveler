@@ -8,38 +8,33 @@ const CommentModal = (props) => {
   const [comments, setComments] = useState(null);
 
   useEffect(() => {
-    const {
-      dbFs, resourcesCollection,
-    } = props.firebase;
+    const { dbFs } = props.firebase;
 
     const getComments = async () => {
-      const {
-        commentsCollection,
-      } = props.firebase;
+      const comments = await getCommentsHelper(path);
+      setComments(comments);
+    };
 
+    const getCommentsHelper = async (docPath) => {
       try {
-        const querySnapshot = await commentsCollection
-          .where('parent', '==', id)
-          .orderBy('score', 'desc')
-          .get();
+        let querySnapshot = await dbFs.collection(`${docPath}/comments`).orderBy('score', 'desc').get();
 
-        console.log(querySnapshot);
-        const snapshots = [];
+        let snapshots = [];
         querySnapshot.forEach((documentSnapshot) => {
           snapshots.push(documentSnapshot);
         });
-        // const commentsArr = await Promise.all(snapshots.map(getComments));
-        // const result = zip(snapshots, commentsArr).map((item) => {
-        //   const [snap, comment] = item;
-        //   const data = snap.data();
-        //   data._path = snap.ref.path;
-        //   data.commentsArr = comment;
-        //   return data;
-        // });
-        // setComments(commentsArr);
-        // return result;
-      } catch (e) {
-        console.log(e.message);
+
+        let responses = await Promise.all(snapshots.map((snapshot) => getCommentsHelper(snapshot.ref.path)));
+        const result = zip(snapshots, responses).map((item) => {
+          const [snapshot, comments] = item;
+          let data = snapshot.data();
+          data.path = snapshot.ref.path;
+          data.comments = comments;
+          return data;
+        });
+        return result;
+      } catch(e) {
+        console.error(e.message);
       }
     };
 
