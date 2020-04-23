@@ -1,0 +1,29 @@
+.comment-container {
+	padding-left: 15px;
+
+	.comment-header {
+		display: flex;
+		p {
+			font-size: .9rem;
+			margin-right: .5rem;
+		}
+		button {
+			margin-right: .2rem;
+			padding: 0;
+			cursor: pointer;
+			background-color: transparent;
+			font-size: 1.1rem;
+				border: 0;
+				&:focus {
+					outline:0;
+				}
+			}
+	}
+	.comment-body {
+		padding-bottom: 10px;
+		font-size: 1.1rem;
+		p {
+			margin-left: 1.5rem;
+		}
+	}
+}

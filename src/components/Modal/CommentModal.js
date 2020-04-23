@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import zip from 'lodash/zip';
 import ResourceItem from '../Resources/ResourceItem';
 import CommentForm from '../Form/Comment';
+import CommentItem from '../Comments/CommentItem';
 import { withAuthentication } from '../Session';
 
 const CommentModal = (props) => {
@@ -10,32 +11,33 @@ const CommentModal = (props) => {
   useEffect(() => {
     const { dbFs } = props.firebase;
 
-    const getComments = async () => {
-      const comments = await getCommentsHelper(path);
-      setComments(comments);
-    };
-
     const getCommentsHelper = async (docPath) => {
       try {
-        let querySnapshot = await dbFs.collection(`${docPath}/comments`).orderBy('score', 'desc').get();
+        const querySnapshot = await dbFs.collection(`${docPath}/comments`).orderBy('score', 'desc').get();
 
-        let snapshots = [];
+        const snapshots = [];
         querySnapshot.forEach((documentSnapshot) => {
           snapshots.push(documentSnapshot);
         });
 
-        let responses = await Promise.all(snapshots.map((snapshot) => getCommentsHelper(snapshot.ref.path)));
+        const responses = await Promise.all(snapshots.map((snapshot) => getCommentsHelper(snapshot.ref.path)));
         const result = zip(snapshots, responses).map((item) => {
           const [snapshot, comments] = item;
-          let data = snapshot.data();
+          const data = snapshot.data();
           data.path = snapshot.ref.path;
           data.comments = comments;
           return data;
         });
         return result;
-      } catch(e) {
+      } catch (e) {
         console.error(e.message);
       }
+    };
+
+    const getComments = async () => {
+      const comments = await getCommentsHelper(path);
+      console.log(comments);
+      setComments(comments);
     };
 
     if (isOpen) {
@@ -45,14 +47,6 @@ const CommentModal = (props) => {
 
   const {
     id,
-    title,
-    score,
-    url,
-    by,
-    created,
-    category,
-    kids,
-    descendants,
     path,
   } = props.item;
 
@@ -89,7 +83,7 @@ const CommentModal = (props) => {
             />
             <div comments={comments}>
               {comments
-                ? (comments.map((comment) => <li>{comment.text}</li>)) : null}
+                ? (comments.map((comment) => <CommentItem comment={comment} />)) : null}
             </div>
           </div>
           <div className="modal-overlay" onClick={() => props.toggleModal()} />
