@@ -24,10 +24,17 @@ const Comment = (props) => {
     let { path } = props;
     const { dbFs } = props.firebase;
     path += '/comments';
+    const {
+      by, created, parent, score, text,
+    } = comment;
 
     try {
       const write = await dbFs.collection(path).add({
-        comment,
+        by,
+        created,
+        parent,
+        score,
+        text,
       });
       await updateUser(write.id);
     } catch (e) {
@@ -60,7 +67,7 @@ const Comment = (props) => {
         text: Yup.string()
           .trim()
           .max(1000)
-          .required('an email is required'),
+          .required(),
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {

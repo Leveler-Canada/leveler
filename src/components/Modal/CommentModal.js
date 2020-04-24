@@ -13,7 +13,10 @@ const CommentModal = (props) => {
 
     const getCommentsHelper = async (docPath) => {
       try {
-        const querySnapshot = await dbFs.collection(`${docPath}/comments`).orderBy('score', 'desc').get();
+        const querySnapshot = await dbFs
+          .collection(`${docPath}/comments`)
+          .orderBy('score', 'desc')
+          .get();
 
         const snapshots = [];
         querySnapshot.forEach((documentSnapshot) => {
@@ -81,7 +84,7 @@ const CommentModal = (props) => {
               path={path}
               parent={id}
             />
-            <div comments={comments}>
+            <div className="comments-container" comments={comments}>
               {comments
                 ? (comments.map((comment) => <CommentItem comment={comment} />)) : null}
             </div>

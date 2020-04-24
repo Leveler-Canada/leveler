@@ -1,5 +1,14 @@
+.comments-container {
+	padding-top: 20px;
+	div:first-child {
+		padding-left: 0
+	}
+}
 .comment-container {
-	padding-left: 15px;
+
+	&.sub-comment {
+		padding-left: 25px;
+	}
 
 	.comment-header {
 		display: flex;
