@@ -13,7 +13,11 @@ const REQUIRED_ERROR = 'required';
 const addURLScheme = (url) => (/^https?:\/\//.test(url) ? url : `https://${url}`);
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().email().trim().required(REQUIRED_ERROR),
+  email: Yup.string().email().trim().test(
+    'validate unique email',
+    'this email is in our system already. reach out to us at leveler.info@gmail.com if you think this is a mistake!',
+    (value) => fetch(`https://us-central1-leveler-test.cloudfunctions.net/validateUniqueEmail?email=${value}`).then( resp => resp.status === 200)
+    ).required(REQUIRED_ERROR),
   industry: Yup.string().min(1),
   description: Yup.string().min(1).required(REQUIRED_ERROR),
   social_url: Yup.string()
@@ -126,6 +130,8 @@ const Registration = (props) => {
       }}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      validateOnBlur
+      validateOnChange={false}
     >
       {({
         handleSubmit,

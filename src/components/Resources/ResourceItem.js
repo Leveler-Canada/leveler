@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import React, { useState } from 'react';
+import React from 'react';
 import { withFirebase } from '../Firebase';
 
 const ResourceItem = (props) => (
@@ -8,13 +8,17 @@ const ResourceItem = (props) => (
       <div className="resources-item-votes">
         {!props.active && (
           <>
-            <button onClick={() => props.upvote(props.index, props.score + 1)}>⬆️</button>
+            <button onClick={() => props.upvote(props.index, props.score + 1)}>
+              <span role="img" aria-label="upvote">⬆️</span>
+            </button>
             <p>{props.score}</p>
           </>
         )}
         {props.active && (
           <>
-            <button>👍🏼</button>
+            <button>
+              <span role="img" aria-label="thumbs-up">👍🏼</span>
+            </button>
             <p>{props.score}</p>
 
           </>
