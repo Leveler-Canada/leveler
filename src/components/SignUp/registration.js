@@ -7,6 +7,7 @@ import FormikPlacesAutocomplete from './FormikPlacesAutocomplete.jsx';
 import PaymentInstruction from '../Modal/PaymentInstruction';
 import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
+import { FUNCTIONS_URL } from './../../constants/routes';
 
 const REQUIRED_ERROR = 'required';
 
@@ -16,7 +17,7 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email().trim().test(
     'validate unique email',
     'this email is in our system already. reach out to us at leveler.info@gmail.com if you think this is a mistake!',
-    (value) => fetch(`https://us-central1-leveler-test.cloudfunctions.net/validateUniqueEmail?email=${value}`).then((resp) => resp.status === 200),
+    (value) => fetch(`${FUNCTIONS_URL}/validateUniqueEmail?email=${value}`).then((resp) => resp.status === 200),
   ).required(REQUIRED_ERROR),
   industry: Yup.string().min(1),
   description: Yup.string().min(1).required(REQUIRED_ERROR),
@@ -145,13 +146,13 @@ const Registration = (props) => {
         <form onSubmit={handleSubmit}>
           <fieldset>
             <label htmlFor="email">email:</label>
-            <span className="error">{errors.email}</span>
             <input
               type="text"
               onChange={handleChange}
               value={values.email}
               name="email"
             />
+            <span className="error">{errors.email}</span>
           </fieldset>
           <fieldset>
             <label htmlFor="location">location*</label>
