@@ -4,7 +4,7 @@ import { Field, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import FormikPlacesAutocomplete from './FormikPlacesAutocomplete.jsx';
-import PaymentInstruction from '../Modal/PaymentInstruction.js';
+import PaymentInstruction from '../Modal/PaymentInstruction';
 import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
 
@@ -16,8 +16,8 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email().trim().test(
     'validate unique email',
     'this email is in our system already. reach out to us at leveler.info@gmail.com if you think this is a mistake!',
-    (value) => fetch(`https://us-central1-leveler-test.cloudfunctions.net/validateUniqueEmail?email=${value}`).then( resp => resp.status === 200)
-    ).required(REQUIRED_ERROR),
+    (value) => fetch(`https://us-central1-leveler-test.cloudfunctions.net/validateUniqueEmail?email=${value}`).then((resp) => resp.status === 200),
+  ).required(REQUIRED_ERROR),
   industry: Yup.string().min(1),
   description: Yup.string().min(1).required(REQUIRED_ERROR),
   social_url: Yup.string()
