@@ -167,9 +167,24 @@ form {
       color: white;
       background-color: black;
     }
+  }
+}
 
-    .ErrorMessage {
-      color: red;
-    }
+@media (max-width: 480px) {
+  /* COMMENT FORM */
+.comment-form {
+  textarea {
+    height: 50px;
+    font-size: 1rem;
+    border: 1px solid gainsboro;
+  }
+  .btn {
+    padding: 2px 7px;
+    border: 1px solid black;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+  }
   }
 }

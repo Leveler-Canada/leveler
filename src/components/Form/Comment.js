@@ -104,7 +104,7 @@ const CommentForm = ({
             </Form>
           </Formik>
         )
-        : <p>Thanks for submitting!</p>}
+        : <p className="success-msg">Thanks for submitting!</p>}
     </>
   );
 };

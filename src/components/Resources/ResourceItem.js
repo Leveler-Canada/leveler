@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 import CommentModal from '../Modal/CommentModal';
 
-const ResourceItem = (props) => {
+const ResourceItem = ({
+  item, active, upvote, index, logEvent, getByCategory, linkClicked, view,
+}) => {
   const {
     id,
     title,
@@ -14,17 +16,8 @@ const ResourceItem = (props) => {
     category,
     kids,
     descendants,
-  } = props.item;
+  } = item;
 
-  const {
-    active,
-    upvote,
-    index,
-    logEvent,
-    getByCategory,
-    linkClicked,
-    view,
-  } = props;
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const toggleModal = () => {
@@ -41,19 +34,19 @@ const ResourceItem = (props) => {
       <CommentModal
         isOpen={modalIsOpen}
         toggleModal={toggleModal}
-        item={props.item}
+        item={item}
       />
       <div key={id} className="resources-item-container">
         <div className="resources-item-votes">
           {!active && (
           <>
-            <button onClick={() => upvote(index, score + 1)}>⬆️</button>
+            <button type="submit" onClick={() => upvote(index, score + 1)}>⬆️</button>
             <p>{score}</p>
           </>
           )}
           {active && (
           <>
-            <button>👍🏼</button>
+            <button type="submit">👍🏼</button>
             <p>{score}</p>
 
           </>
