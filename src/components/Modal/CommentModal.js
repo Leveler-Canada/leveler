@@ -3,6 +3,7 @@ import zip from 'lodash/zip';
 import ResourceItem from '../Resources/ResourceItem';
 import CommentForm from '../Form/Comment';
 import CommentItem from '../Comments/CommentItem';
+import Loading from '../Animations/Loading';
 import { withAuthentication } from '../Session';
 
 const CommentModal = (props) => {
@@ -86,7 +87,7 @@ const CommentModal = (props) => {
             />
             <div className="comments-container" comments={comments}>
               {comments
-                ? (comments.map((comment) => <CommentItem comment={comment} />)) : null}
+                ? (comments.map((comment) => <CommentItem comment={comment} />)) : <Loading height="70" width="70" />}
             </div>
           </div>
           <div className="modal-overlay" onClick={() => props.toggleModal()} />
