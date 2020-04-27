@@ -161,7 +161,15 @@ form {
     outline: none;
     font-size: 1rem;
     cursor: pointer;
-    margin-right: 0;
     font-weight: 600;
+
+    &:hover {
+      color: white;
+      background-color: black;
+    }
+
+    .ErrorMessage {
+      color: red;
+    }
   }
 }

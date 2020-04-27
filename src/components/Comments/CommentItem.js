@@ -59,6 +59,7 @@ const CommentItem = ({
       {comment.comments ? (comment.comments.map((subComment) => (
         <CommentItem
           sub
+          key={path}
           authUser={authUser}
           comment={subComment}
           firebase={firebase}
@@ -80,7 +81,7 @@ CommentItem.propTypes = {
     text: PropTypes.string.isRequired,
   }).isRequired,
   authUser: PropTypes.object.isRequired,
-  sub: PropTypes.bool.isRequired,
+  sub: PropTypes.bool,
 };
 
 export default withAuthentication(CommentItem);

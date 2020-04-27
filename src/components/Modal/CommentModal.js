@@ -6,11 +6,22 @@ import CommentItem from '../Comments/CommentItem';
 import Loading from '../Animations/Loading';
 import { withAuthentication } from '../Session';
 
-const CommentModal = (props) => {
+const CommentModal = ({
+  item,
+  active,
+  upvote,
+  index,
+  logEvent,
+  getByCategory,
+  linkClicked,
+  isOpen,
+  firebase,
+  toggleModal,
+}) => {
   const [comments, setComments] = useState(null);
 
   useEffect(() => {
-    const { dbFs } = props.firebase;
+    const { dbFs } = firebase;
 
     const getCommentsHelper = async (docPath) => {
       try {
@@ -47,23 +58,13 @@ const CommentModal = (props) => {
     if (isOpen) {
       getComments();
     }
-  }, [props.isOpen]);
+  }, [isOpen]);
 
   const {
     id,
     path,
-  } = props.item;
+  } = item;
 
-  const {
-    item,
-    active,
-    upvote,
-    index,
-    logEvent,
-    getByCategory,
-    linkClicked,
-    isOpen,
-  } = props;
   return (
     <>
       {isOpen ? (
@@ -71,6 +72,7 @@ const CommentModal = (props) => {
           <div className="modal">
             <h1>Comments</h1>
             <ResourceItem
+              key={id}
               index={index}
               item={item}
               upvote={upvote}
@@ -83,14 +85,13 @@ const CommentModal = (props) => {
             />
             <CommentForm
               path={path}
-              parent={id}
             />
             <div className="comments-container" comments={comments}>
               {comments
-                ? (comments.map((comment) => <CommentItem comment={comment} />)) : <Loading height="70" width="70" />}
+                ? (comments.map((comment) => <CommentItem key={comment.path} comment={comment} />)) : <Loading height="70" width="70" />}
             </div>
           </div>
-          <div className="modal-overlay" onClick={() => props.toggleModal()} />
+          <div className="modal-overlay" onClick={() => toggleModal()} />
         </>
       ) : null}
     </>

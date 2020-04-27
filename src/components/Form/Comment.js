@@ -1,38 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Formik, Field, Form, ErrorMessage,
 } from 'formik';
 import * as Yup from 'yup';
+import PropTypes from 'prop-types';
 import { withAuthentication } from '../Session';
 
-const Comment = (props) => {
+const errorStyle = {
+  color: 'red',
+  fontSize: '1rem',
+};
+
+const CommentForm = ({
+  firebase, authUser, userData, path,
+}) => {
+  const [didSubmit, setSubmit] = useState(false);
+
   const updateUser = async (commentId) => {
-    const { authUser } = props;
-    const { fieldValue, userCollection } = props.firebase;
+    const { fieldValue, userCollection } = firebase;
     try {
       await userCollection.doc(authUser.uid)
         .update({
           karma: fieldValue.increment(2),
           submitted: fieldValue.arrayUnion(commentId),
         });
-  	} catch (e) {
+
+      setSubmit(true);
+    } catch (e) {
       console.log(e);
     }
   };
 
   const writeComment = async (comment) => {
-    let { path } = props;
-    const { dbFs } = props.firebase;
+    const { dbFs } = firebase;
+    // eslint-disable-next-line no-param-reassign
     path += '/comments';
     const {
-      by, created, parent, score, text,
+      by, created, score, text,
     } = comment;
 
     try {
       const write = await dbFs.collection(path).add({
         by,
         created,
-        parent,
         score,
         text,
       });
@@ -44,15 +54,13 @@ const Comment = (props) => {
 
   const onSubmit = async (values) => {
     const { text } = values;
-    const { id } = props.userData;
-    const { parent } = props;
-    const { fieldValue } = props.firebase;
+    const { id } = userData;
+    const { fieldValue } = firebase;
 
     const comment = {
       text,
       by: id,
       score: 1,
-      parent,
       created: fieldValue.serverTimestamp(),
     };
 
@@ -61,38 +69,51 @@ const Comment = (props) => {
   };
 
   return (
-    <Formik
-      initialValues={{ text: '' }}
-      validationSchema={Yup.object({
-        text: Yup.string()
-          .trim()
-          .max(1000)
-          .required(),
-      })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          onSubmit(values);
-          setSubmitting(false);
-        }, 0);
-      }}
-    >
-      <Form className="comment-form">
-        <Field
-          name="text"
-          type="text"
-          component="textarea"
-        />
-        <button
-          className="btn"
-          type="submit"
-        >
-          add comment
-
-        </button>
-        <ErrorMessage name="text" />
-      </Form>
-    </Formik>
+    <>
+      {!didSubmit
+        ? (
+          <Formik
+            initialValues={{ text: '' }}
+            validationSchema={Yup.object({
+              text: Yup.string()
+                .trim()
+                .min(10)
+                .max(1000)
+                .required('To submit, you have to actually write something!'),
+            })}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                onSubmit(values);
+                setSubmitting(false);
+              }, 0);
+            }}
+          >
+            <Form className="comment-form">
+              <Field
+                name="text"
+                type="text"
+                component="textarea"
+              />
+              <button
+                className="btn"
+                type="submit"
+              >
+                add comment
+              </button>
+              <p style={errorStyle}><ErrorMessage name="text" /></p>
+            </Form>
+          </Formik>
+        )
+        : <p>Thanks for submitting!</p>}
+    </>
   );
 };
 
-export default withAuthentication(Comment);
+CommentForm.propTypes = {
+  firebase: PropTypes.object.isRequired,
+  authUser: PropTypes.object.isRequired,
+  userData: PropTypes.object.isRequired,
+  path: PropTypes.string,
+};
+
+export default withAuthentication(CommentForm);
