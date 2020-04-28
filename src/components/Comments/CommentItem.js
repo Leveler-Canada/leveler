@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
+import * as timeago from 'timeago.js';
 import PropTypes from 'prop-types';
 import { withAuthentication } from '../Session';
 import usePersistedState from '../../utils/usePersistedState';
@@ -51,7 +52,7 @@ const CommentItem = ({
         {!didVote && <button type="button" onClick={() => updateCommentScore()}>⬆️</button>}
         {didVote && <p>👍🏼</p>}
         <p>{comment.by}</p>
-        <p>1 min ago</p>
+        <p>{timeago.format(comment.created.toDate())}</p>
       </div>
       <div className="comment-body">
         <p>{comment.text}</p>
