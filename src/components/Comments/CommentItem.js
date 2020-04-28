@@ -7,7 +7,7 @@ import { withAuthentication } from '../Session';
 import usePersistedState from '../../utils/usePersistedState';
 
 const CommentItem = ({
-  comment, sub, authUser, firebase,
+  comment, sub, authUser, firebase, handleNewComment,
 }) => {
   const [didVote, setVote] = usePersistedState(`didVote-${comment.path}`, null);
   const [score, setScore] = useState(comment.score);
@@ -55,7 +55,7 @@ const CommentItem = ({
         {!didVote && <button type="button" onClick={() => updateCommentScore()}>⬆️</button>}
         {didVote && <p>👍🏼</p>}
         <p>{comment.by}</p>
-        <p>{timeago.format(comment.created.toDate())}</p>
+        {/* {comment.created ? <p>{timeago.format(comment.created.toDate())}</p> : null} */}
         {score > 1 ? (
           <p>
             {score}
@@ -85,6 +85,7 @@ const CommentItem = ({
         <CommentForm
           reply
           path={path}
+          handleNewComment={handleNewComment}
         />
         )}
       </div>
@@ -95,6 +96,7 @@ const CommentItem = ({
           authUser={authUser}
           comment={subComment}
           firebase={firebase}
+          handleNewComment={handleNewComment}
         />
       )))
         : null}
@@ -114,6 +116,7 @@ CommentItem.propTypes = {
   }).isRequired,
   authUser: PropTypes.object.isRequired,
   sub: PropTypes.bool,
+  handleNewComment: PropTypes.func.isRequired,
 };
 
 export default withAuthentication(CommentItem);
