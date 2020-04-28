@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React from 'react';
+import React, { useState } from 'react';
 import * as timeago from 'timeago.js';
 import PropTypes from 'prop-types';
 import { withAuthentication } from '../Session';
@@ -9,7 +9,7 @@ const CommentItem = ({
   comment, sub, authUser, firebase,
 }) => {
   const [didVote, setVote] = usePersistedState(`didVote-${comment.path}`, null);
-
+  const [score, setScore] = useState(comment.score);
   const { path } = comment;
 
   const {
@@ -41,6 +41,7 @@ const CommentItem = ({
         });
       updateUserKarma();
       setVote(true);
+      setScore(score + 1);
     } catch (e) {
       console.log(e.message);
     }
@@ -53,6 +54,19 @@ const CommentItem = ({
         {didVote && <p>👍🏼</p>}
         <p>{comment.by}</p>
         <p>{timeago.format(comment.created.toDate())}</p>
+        {score > 1 ? (
+          <p>
+            {score}
+            {' '}
+            points
+          </p>
+        ) : (
+          <p>
+            {score}
+            {' '}
+            point
+          </p>
+        )}
       </div>
       <div className="comment-body">
         <p>{comment.text}</p>

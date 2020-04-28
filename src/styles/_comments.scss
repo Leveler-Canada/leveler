@@ -12,6 +12,9 @@
 
 	.comment-header {
 		display: flex;
+		:last-of-type  {
+			color: dodgerblue;
+		}
 		p {
 			font-size: .9rem;
 			margin-right: .5rem;
