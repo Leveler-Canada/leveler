@@ -85,6 +85,7 @@ const CommentModal = ({
             />
             <CommentForm
               path={path}
+              comments={comments}
             />
             <div className="comments-container" comments={comments}>
               {comments

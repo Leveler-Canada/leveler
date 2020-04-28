@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useState } from 'react';
 import {
   Formik, Field, Form, ErrorMessage,
@@ -12,7 +13,7 @@ const errorStyle = {
 };
 
 const CommentForm = ({
-  firebase, authUser, userData, path,
+  firebase, authUser, userData, path, comments,
 }) => {
   const [didSubmit, setSubmit] = useState(false);
 
@@ -24,7 +25,6 @@ const CommentForm = ({
           karma: fieldValue.increment(2),
           submitted: fieldValue.arrayUnion(commentId),
         });
-
       setSubmit(true);
     } catch (e) {
       console.log(e);
@@ -104,7 +104,12 @@ const CommentForm = ({
             </Form>
           </Formik>
         )
-        : <p className="success-msg">Thanks for submitting!</p>}
+        : (
+          <div className="success-msg">
+            <p>💭Thanks for sharing!🗣</p>
+            <p>(👀 look for your comment at the bottom, as comments are sorted by score)</p>
+          </div>
+        )}
     </>
   );
 };
