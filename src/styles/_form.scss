@@ -148,13 +148,20 @@ form {
 
 /* COMMENT FORM */
 .comment-form {
-  max-width: 100%;
+  &.reply {
+    margin-left: 1.5rem;
+    margin-right: 20px;
+    width: calc(100% - 1.5rem);
+    margin-top: 20px;
+  }
+
   margin-top: 0;
   textarea {
     width: 100%;
     height: 100px;
     font-size: 1rem;
   }
+
   .btn {
     padding: 2px 7px;
     border: 1px solid black;
@@ -162,6 +169,7 @@ form {
     font-size: 1rem;
     cursor: pointer;
     font-weight: 600;
+    margin-left: 0 !important;
 
     &:hover {
       color: white;

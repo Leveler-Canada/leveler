@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 import * as timeago from 'timeago.js';
 import PropTypes from 'prop-types';
-import CommentForm from '../Form/Comment';
+import CommentItem from './CommentItem';
 import { withAuthentication } from '../Session';
 import usePersistedState from '../../utils/usePersistedState';
 
-const CommentItem = ({
+const CommentItems = ({
   comment, sub, authUser, firebase,
 }) => {
   const [didVote, setVote] = usePersistedState(`didVote-${comment.path}`, null);
@@ -74,20 +74,11 @@ const CommentItem = ({
         <p>{comment.text}</p>
       </div>
       <div className="comment-footer">
-        {!replyVisible
-        && (
         <button onClick={() => setReplyVisible(true)} className="btn" type="submit">
           reply
         </button>
-        )}
-        {replyVisible
-        && (
-        <CommentForm
-          reply
-          path={path}
-        />
-        )}
       </div>
+
       {comment.comments ? (comment.comments.map((subComment) => (
         <CommentItem
           sub

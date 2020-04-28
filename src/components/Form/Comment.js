@@ -13,7 +13,7 @@ const errorStyle = {
 };
 
 const CommentForm = ({
-  firebase, authUser, userData, path, handleNewComment,
+  firebase, authUser, userData, path, handleNewComment, reply,
 }) => {
   const [didSubmit, setSubmit] = useState(false);
 
@@ -98,7 +98,7 @@ const CommentForm = ({
               }, 0);
             }}
           >
-            <Form className="comment-form">
+            <Form className={`comment-form ${reply ? 'reply' : ''}`}>
               <Field
                 name="text"
                 type="text"
