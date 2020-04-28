@@ -19,8 +19,18 @@ const CommentModal = ({
   toggleModal,
 }) => {
   const [comments, setComments] = useState(null);
+  const [newComment, setNewComment] = useState(false);
+
+  const handleNewComment = async (comment) => {
+    if (comment) {
+      comments.push(comment);
+      setNewComment(true);
+    }
+    setNewComment(false);
+  };
 
   useEffect(() => {
+    // get initial comments
     const { dbFs } = firebase;
 
     const getCommentsHelper = async (docPath) => {
@@ -51,14 +61,16 @@ const CommentModal = ({
 
     const getComments = async () => {
       const comments = await getCommentsHelper(path);
-      console.log(comments);
       setComments(comments);
     };
 
     if (isOpen) {
       getComments();
     }
-  }, [isOpen]);
+    if (newComment) {
+      handleNewComment();
+    }
+  }, [isOpen, newComment]);
 
   const {
     id,
@@ -85,9 +97,9 @@ const CommentModal = ({
             />
             <CommentForm
               path={path}
-              comments={comments}
+              handleNewComment={handleNewComment}
             />
-            <div className="comments-container" comments={comments}>
+            <div className="comments-container">
               {comments
                 ? (comments.map((comment) => <CommentItem key={comment.path} comment={comment} />)) : <Loading height="70" width="70" />}
             </div>

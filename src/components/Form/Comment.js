@@ -13,7 +13,7 @@ const errorStyle = {
 };
 
 const CommentForm = ({
-  firebase, authUser, userData, path, comments,
+  firebase, authUser, userData, path, handleNewComment,
 }) => {
   const [didSubmit, setSubmit] = useState(false);
 
@@ -47,6 +47,16 @@ const CommentForm = ({
         text,
       });
       await updateUser(write.id);
+
+      const newComment = {
+        by,
+        created,
+        score,
+        text,
+        path,
+      };
+
+      handleNewComment(newComment);
     } catch (e) {
       console.log(e);
     }
@@ -118,7 +128,8 @@ CommentForm.propTypes = {
   firebase: PropTypes.object.isRequired,
   authUser: PropTypes.object.isRequired,
   userData: PropTypes.object.isRequired,
-  path: PropTypes.string,
+  path: PropTypes.string.isRequired,
+  handleNewComment: PropTypes.func.isRequired,
 };
 
 export default withAuthentication(CommentForm);
