@@ -12,9 +12,6 @@
 
 	.comment-header {
 		display: flex;
-		:last-of-type  {
-			color: dodgerblue;
-		}
 		p {
 			font-size: .9rem;
 			margin-right: .5rem;
@@ -30,12 +27,28 @@
 					outline:0;
 				}
 			}
+			:last-of-type  {
+				color: dodgerblue;
+			}
 	}
+
 	.comment-body {
-		padding-bottom: 10px;
 		font-size: 1rem;
 		p {
 			margin-left: 1.5rem;
+		}
+	}
+
+	.comment-footer {
+		margin-bottom: 20px;
+		button {
+			margin-left: 1.5rem;
+			padding: 2px 7px;
+			border: 1px solid black;
+			outline: none;
+			font-size: .8rem;
+			cursor: pointer;
+			font-weight: 600;
 		}
 	}
 }

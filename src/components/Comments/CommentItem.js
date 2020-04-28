@@ -71,6 +71,11 @@ const CommentItem = ({
       <div className="comment-body">
         <p>{comment.text}</p>
       </div>
+      <div className="comment-footer">
+        <button className="btn" type="submit">
+          reply
+        </button>
+      </div>
       {comment.comments ? (comment.comments.map((subComment) => (
         <CommentItem
           sub
