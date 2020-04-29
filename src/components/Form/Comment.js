@@ -35,11 +35,9 @@ const CommentForm = ({
     const { dbFs } = firebase;
     // eslint-disable-next-line no-param-reassign
     path += '/comments';
-    console.log(path, 'path');
     const {
       by, created, score, text,
     } = comment;
-    console.log(comment, 'ln.41');
     try {
       const write = await dbFs.collection(path).add({
         by,
@@ -48,7 +46,7 @@ const CommentForm = ({
         text,
       });
       await updateUser(write.id);
-      console.log('u made it to area 51');
+
       const newComment = {
         by,
         created,
@@ -56,7 +54,7 @@ const CommentForm = ({
         text,
         path,
       };
-      console.log(newComment, 'newComment');
+
       handleNewComment(newComment);
     } catch (e) {
       console.log(e);
@@ -119,9 +117,6 @@ const CommentForm = ({
         && (
         <div className="success-msg">
           <p>💭Thanks for sharing!🗣</p>
-          <p>
-            (👀 look for your comment near the bottom, as comments are sorted by score)
-          </p>
         </div>
         )}
     </>

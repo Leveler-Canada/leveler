@@ -60,8 +60,8 @@ const CommentModal = ({
     };
 
     const getComments = async () => {
-      const comments = await getCommentsHelper(path);
-      setComments(comments);
+      const commentsArr = await getCommentsHelper(path);
+      setComments(commentsArr);
     };
 
     if (isOpen) {
@@ -70,6 +70,7 @@ const CommentModal = ({
     if (newComment) {
       handleNewComment();
     }
+    console.log('calling');
   }, [isOpen, newComment]);
 
   const {

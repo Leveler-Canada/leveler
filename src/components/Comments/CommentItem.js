@@ -12,6 +12,7 @@ const CommentItem = ({
   const [didVote, setVote] = usePersistedState(`didVote-${comment.path}`, null);
   const [score, setScore] = useState(comment.score);
   const [replyVisible, setReplyVisible] = useState(false);
+
   const { path } = comment;
 
   const {
@@ -55,7 +56,6 @@ const CommentItem = ({
         {!didVote && <button type="button" onClick={() => updateCommentScore()}>⬆️</button>}
         {didVote && <p>👍🏼</p>}
         <p>{comment.by}</p>
-        {/* {comment.created ? <p>{timeago.format(comment.created.toDate())}</p> : null} */}
         {score > 1 ? (
           <p>
             {score}
