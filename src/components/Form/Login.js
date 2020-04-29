@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Formik, Field, Form, ErrorMessage,
 } from 'formik';
 import * as Yup from 'yup';
 
-const Login = (props) => (
+const Login = ({ loginUser, error }) => (
   <>
     <h4>Log In</h4>
     <Formik
@@ -19,7 +19,7 @@ const Login = (props) => (
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-          props.loginUser(values);
+          loginUser(values);
           setSubmitting(false);
         }, 0);
       }}
@@ -30,7 +30,7 @@ const Login = (props) => (
         <Field name="password" type="password" placeholder="password" />
 
         <button type="submit">Log In</button>
-        {props.error && <div><span>{props.error}</span></div>}
+        {error && <div><span>{error}</span></div>}
       </Form>
     </Formik>
   </>

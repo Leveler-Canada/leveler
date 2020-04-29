@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Formik, Field, Form, ErrorMessage,
 } from 'formik';
 import * as Yup from 'yup';
 
-const SignUp = (props) => (
+const SignUp = ({ signUpUser, error }) => (
   <>
     <h4>Sign Up</h4>
     <p>signing up will allow you to submit links and comments</p>
@@ -23,7 +23,7 @@ const SignUp = (props) => (
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-          props.signUpUser(values);
+          signUpUser(values);
           setSubmitting(false);
         }, 0);
       }}
@@ -34,8 +34,9 @@ const SignUp = (props) => (
         <Field name="email" type="text" placeholder="email" />
         <ErrorMessage component="span" name="email" />
         <Field name="password" type="password" placeholder="password" />
+        <ErrorMessage component="span" name="password" />
         <button type="submit">Sign Up</button>
-        {props.error && <div><span>{props.error}</span></div>}
+        {error && <div><span>{error}</span></div>}
       </Form>
     </Formik>
   </>

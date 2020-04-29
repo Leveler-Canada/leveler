@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SignUp from '../Form/SignUp';
 import LogIn from '../Form/Login';
 
-const AuthModal = (props) => {
+const AuthModal = ({ firebase, toggleModal, modalIsOpen }) => {
   const [signupError, setSignUpError] = useState('');
   const [loginError, setLoginError] = useState('');
 
@@ -11,9 +11,7 @@ const AuthModal = (props) => {
     doSignInWithEmailAndPassword,
     fieldValue,
     userCollection,
-  } = props.firebase;
-
-  const { toggleModal, modalIsOpen } = props;
+  } = firebase;
 
   const addUserToDb = async (username, userId) => {
     const payload = {
@@ -67,7 +65,7 @@ const AuthModal = (props) => {
 
   return (
     <>
-      {props.modalIsOpen ? (
+      {modalIsOpen ? (
         <>
           <div className="modal" id="auth-modal">
             <SignUp
