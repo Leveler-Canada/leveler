@@ -20,7 +20,7 @@ const ResourcesPage = () => (
 const INITIAL_STATE = {
 	links: [],
 	loading: true,
-	modalIsOpen: false
+	modalIsOpen: false,
 };
 
 class ResourcesContainerBase extends Component {

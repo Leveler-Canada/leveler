@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useState } from 'react';
-import * as timeago from 'timeago.js';
 import PropTypes from 'prop-types';
 import CommentForm from '../Form/Comment';
 import { withAuthentication } from '../Session';
