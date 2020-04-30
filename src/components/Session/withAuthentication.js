@@ -16,8 +16,10 @@ const withAuthentication = (Component) => {
         (authUser) => {
           authUser
             ? this.setState({ authUser })
-            : this.setState({ authUser: null });
-            this.getUserData(authUser)
+            : this.setState({ authUser: null, userData: null });
+            if (authUser !== null) {
+              this.getUserData(authUser)
+            }
         },
       );
     }
@@ -28,26 +30,24 @@ const withAuthentication = (Component) => {
 
     async getUserData(authUser) {
       const { userCollection } = this.props.firebase;
-      if (authUser !== null) {
         try {
-          await userCollection
+          const user = await userCollection
           .doc(authUser.uid)
           .get()
           .then((doc) => {
-            this.setState({
-              userData: doc.data()
-            })
+            return doc.data()
           })
+          if (user) {
+            console.log('there is a user')
+            this.setState({
+              userData: user
+            })
+          }
         } catch(e) {
           console.log(e.message)
         }
-      } else {
-        this.setState({
-          userData: null
-        })
       }
-    }
-
+      
     render() {
       return (
         <AuthUserContext.Provider value={this.state.authUser}>
