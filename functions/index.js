@@ -1,27 +1,6 @@
 const functions = require('firebase-functions');
-const {Firestore, FieldValue} = require('@google-cloud/firestore');
+const entriesCounter = require('./entries-counter')
 
-const db = new Firestore();
-
-const entriesCounter = db.doc('misc/entriesCounter');
-
-exports.onEntryCreate = functions.firestore
-  .document('entries/{entryId}')
-  .onCreate((_snap, _context) => {
-    entriesCounter
-      .update({
-        size: FieldValue.increment(1),
-      })
-      .catch(err => console.error(err));
-  })
-
-
-exports.onEntryDelete = functions.firestore
-  .document('entries/{entryId}')
-  .onDelete((_snap, _context) => {
-    entriesCounter
-      .update({
-        size: FieldValue.increment(-1),
-      })
-      .catch(err => console.error(err));
-  })
+// increment counter if document is added to entries, decrement if document is deleted
+exports.onEntryCreate = functions.firestore.document('entries/{entryId}').onCreate(entriesCounter.incrementCounter);
+exports.onEntryDelete = functions.firestore.document('entries/{entryId}').onDelete(entriesCounter.decrementCounter);
