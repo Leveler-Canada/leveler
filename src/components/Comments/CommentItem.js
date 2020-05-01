@@ -8,7 +8,7 @@ import usePersistedState from '../../utils/usePersistedState';
 const CommentItem = ({
   comment, sub, authUser, firebase, handleNewComment,
 }) => {
-  const [didVote, setVote] = usePersistedState(`didVote-${comment.path}`, null);
+  const [didVote, setVote] = usePersistedState(`didVoteComment-${comment.path}`, null);
   const [score, setScore] = useState(comment.score);
   const [replyVisible, setReplyVisible] = useState(false);
 

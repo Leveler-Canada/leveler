@@ -11,9 +11,6 @@ const CommentModal = ({
   active,
   upvote,
   index,
-  logEvent,
-  getByCategory,
-  linkClicked,
   isOpen,
   firebase,
   toggleModal,
@@ -70,7 +67,6 @@ const CommentModal = ({
     if (newComment) {
       handleNewComment();
     }
-    console.log('calling');
   }, [isOpen, newComment]);
 
   const {
@@ -90,9 +86,9 @@ const CommentModal = ({
               item={item}
               upvote={upvote}
               active={active}
-              getByCategory={getByCategory}
-              linkClicked={linkClicked}
-              logEvent={logEvent}
+              // getByCategory={getByCategory}
+              // linkClicked={linkClicked}
+              // logEvent={logEvent}
               view="comment"
               comments={comments}
             />

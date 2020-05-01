@@ -2,10 +2,13 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import CommentModal from '../Modal/CommentModal';
+import usePersistedState from '../../utils/usePersistedState';
 
 const ResourceItem = ({
   item, active, upvote, index, logEvent, getByCategory, linkClicked, view,
 }) => {
+  const [didVote, setVote] = usePersistedState(`didVoteLink-${item.id}`, null);
+
   const {
     id,
     title,
@@ -24,6 +27,11 @@ const ResourceItem = ({
     setIsOpen(!modalIsOpen);
   };
 
+  const resourceUpvote = async () => {
+    await upvote(index, score + 1);
+    setVote(true);
+  };
+
   const onCommentsClick = () => {
     logEvent('resource_item_comments_clicked');
     toggleModal();
@@ -35,20 +43,23 @@ const ResourceItem = ({
         isOpen={modalIsOpen}
         toggleModal={toggleModal}
         item={item}
+        upvote={upvote}
+        index={index}
       />
       <div key={id} className="resources-item-container">
         <div className="resources-item-votes">
-          {!active && (
+          {!didVote
+          && (
           <>
-            <button type="submit" onClick={() => upvote(index, score + 1)}>⬆️</button>
+            <button type="submit" onClick={() => resourceUpvote()}>⬆️</button>
             <p>{score}</p>
           </>
           )}
-          {active && (
+          {didVote
+          && (
           <>
             <button type="submit">👍🏼</button>
             <p>{score}</p>
-
           </>
           )}
         </div>
