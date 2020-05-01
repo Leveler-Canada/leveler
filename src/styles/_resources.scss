@@ -41,6 +41,9 @@
 
 .resources-item {
 	&-container {
+		&.comment-modal-resource {
+			padding-left: 0;
+		}
 		display: flex;
 		align-items: baseline;
 		padding: 10px;

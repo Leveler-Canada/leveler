@@ -8,7 +8,6 @@ import { withAuthentication } from '../Session';
 
 const CommentModal = ({
   item,
-  active,
   upvote,
   index,
   isOpen,
@@ -85,12 +84,12 @@ const CommentModal = ({
               index={index}
               item={item}
               upvote={upvote}
-              active={active}
               // getByCategory={getByCategory}
               // linkClicked={linkClicked}
               // logEvent={logEvent}
               view="comment"
               comments={comments}
+              commentModalResource
             />
             <CommentForm
               path={path}

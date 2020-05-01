@@ -126,7 +126,6 @@ class ResourcesContainerBase extends Component {
 
 			const { links } = this.state;
 			links[index].score = score;
-			links[index].active = true;
 
 			updateUserKarma(links[index].by)
 			// UPDATE LINK SCORE
@@ -244,7 +243,6 @@ class ResourcesContainerBase extends Component {
 								index={index}
 								item={item}
 								upvote={upvote}
-								active={this.state.links[index].active}
 								getByCategory={getByCategory}
 								linkClicked={linkClicked}
 								logEvent={logEvent}

@@ -5,7 +5,7 @@ import CommentModal from '../Modal/CommentModal';
 import usePersistedState from '../../utils/usePersistedState';
 
 const ResourceItem = ({
-  item, active, upvote, index, logEvent, getByCategory, linkClicked, view,
+  item, upvote, index, logEvent, getByCategory, linkClicked, view, commentModalResource,
 }) => {
   const [didVote, setVote] = usePersistedState(`didVoteLink-${item.id}`, null);
 
@@ -46,7 +46,8 @@ const ResourceItem = ({
         upvote={upvote}
         index={index}
       />
-      <div key={id} className="resources-item-container">
+      <div key={id} className={`resources-item-container ${commentModalResource ? 'comment-modal-resource' : ''}`}>
+        {/* <div key={id} className="resources-item-container"> */}
         <div className="resources-item-votes">
           {!didVote
           && (
