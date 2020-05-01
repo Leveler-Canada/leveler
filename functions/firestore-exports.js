@@ -5,12 +5,14 @@ const exportFirestoreToBucket = (_ctx) => {
   // create Firestore Admin client
   const client = new firestore.v1.FirestoreAdminClient();
 
+  // get current Firebase project ID
+  const projectId = process.env.GCP_PROJECT || process.env.GCLOUD_PROJECT;
+
   // use the current datetime as part of the path name for the dump
   const now = new Date();
-  const bucket = `gs://leveler-8fcc7.appspot.com/firestore_backups/${now.toISOString()}`;
+  const bucket = `gs://${projectId}.appspot.com/firestore_backups/${now.toISOString()}`;
 
   // connect to Firestore
-  const projectId = process.env.GCP_PROJECT || process.env.GCLOUD_PROJECT;
   const databaseName = client.databasePath(projectId, '(default)');
 
   // copy Firestore database to folder in bucket
