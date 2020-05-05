@@ -31,14 +31,10 @@ const withAuthentication = (Component) => {
     async getUserData(authUser) {
       const { userCollection } = this.props.firebase;
         try {
-          const user = await userCollection
-          .doc(authUser.uid)
-          .get()
-          .then((doc) => {
-            return doc.data()
-          })
+          const doc = await userCollection.doc(authUser.uid).get()
+          const user = doc.data()
+
           if (user) {
-            console.log('there is a user')
             this.setState({
               userData: user
             })

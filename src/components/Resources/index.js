@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
 import * as timeago from 'timeago.js';
 import Header from '../Header';
 import { Loading } from '../Animations'
@@ -220,7 +219,7 @@ class ResourcesContainerBase extends Component {
 				/>
 				<nav className="resources-header"> 
 					<ul>
-						<Link to="/" id="leveler-icon"><Leveler /></Link>
+						<li onClick={() => {this.getTopLinks()}} id="leveler-icon"><Leveler /></li>
 						<li onClick={() => {this.getTopLinks()}}>top</li>
 						<li onClick={() => {this.getNewLinks()}}>new</li>
 						<li onClick={() => {this.getNewLinks()}}>submit</li>
