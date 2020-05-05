@@ -1,6 +1,6 @@
 {
   "projects": {
-    "production": "leveler-8fcc7",
-    "test": "leveler-test"
+    "default": "leveler-test",
+    "production": "leveler-8fcc7"
   }
 }

@@ -104,7 +104,7 @@ const Registration = (props) => {
         random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
       })
       .set(privateRef, {
-        email: values.email.trim(),
+        email: values.email.trim().toLowerCase(),
         social_url: values.social_url.trim(),
       })
       .commit()
