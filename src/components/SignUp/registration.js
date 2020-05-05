@@ -1,19 +1,24 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
-import { Field, Formik } from 'formik';
+import { Field, Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import FormikPlacesAutocomplete from './FormikPlacesAutocomplete.jsx';
-import PaymentInstruction from '../Modal/PaymentInstruction.js';
+import PaymentInstruction from '../Modal/PaymentInstruction';
 import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
+import { FUNCTIONS_URL } from './../../constants/routes';
 
 const REQUIRED_ERROR = 'required';
 
 const addURLScheme = (url) => (/^https?:\/\//.test(url) ? url : `https://${url}`);
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().email().trim().required(REQUIRED_ERROR),
+  email: Yup.string().email().trim().test(
+    'validate unique email',
+    'this email is in our system already. reach out to us at leveler.info@gmail.com if you think this is a mistake!',
+    (value) => fetch(`${FUNCTIONS_URL}/validateUniqueEmail?email=${value}`).then((resp) => resp.status === 200),
+  ).required(REQUIRED_ERROR),
   industry: Yup.string().min(1),
   description: Yup.string().min(1).required(REQUIRED_ERROR),
   social_url: Yup.string()
@@ -126,6 +131,8 @@ const Registration = (props) => {
       }}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      validateOnBlur
+      validateOnChange
     >
       {({
         handleSubmit,
@@ -136,16 +143,16 @@ const Registration = (props) => {
         dirty,
         isValid,
       }) => (
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <fieldset>
             <label htmlFor="email">email:</label>
-            <span className="error">{errors.email}</span>
-            <input
-              type="text"
-              onChange={handleChange}
-              value={values.email}
+            <Field 
+              type="email"
               name="email"
+              placeholder="email"
+              value={values.email}
             />
+            <span className="error">{errors.email}</span>
           </fieldset>
           <fieldset>
             <label htmlFor="location">location*</label>
@@ -220,12 +227,11 @@ const Registration = (props) => {
             <span className="description">
               tell us what you feel comfortable sharing about your situation
             </span>
-            <textarea
-              type="text"
-              maxLength="300"
-              onChange={handleChange}
-              value={values.description}
+            <Field 
+              as="textarea"
               name="description"
+              maxLength="300"
+              value={values.description}
             />
             <span className="error">{errors.description}</span>
           </fieldset>
@@ -277,10 +283,9 @@ const Registration = (props) => {
               let us know if you see room for improvement or have ideas on how
               to help make leveler better.
             </span>
-            <textarea
-              type="text"
+            <Field
+              as="textarea"
               maxLength="300"
-              onChange={handleChange}
               value={values.suggestion}
               name="suggestion"
             />
@@ -293,7 +298,7 @@ const Registration = (props) => {
             Submit
           </button>
           {submitted ? <Redirect to="/success" /> : null}
-        </form>
+        </Form>
       )}
     </Formik>
   );

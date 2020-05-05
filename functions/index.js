@@ -1,7 +1,10 @@
 const functions = require('firebase-functions');
-
+const validateUniqueEmail = require('./validateUniqueEmail');
 const firestoreExports = require('./firestore-exports');
 const entriesCounter = require('./entries-counter')
+
+// validate that email is not already in firestore
+exports.validateUniqueEmail = functions.https.onRequest(validateUniqueEmail);
 
 // dump Firestore database to Google Cloud bucket once every 24 hours
 exports.scheduledFirestoreExport = functions.pubsub.schedule('every 24 hours').onRun(firestoreExports.exportFirestoreToBucket);
