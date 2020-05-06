@@ -245,6 +245,7 @@ class ResourcesContainerBase extends Component {
 								getByCategory={getByCategory}
 								linkClicked={linkClicked}
 								logEvent={logEvent}
+								userData={userData}
 							/>
 						)
 					): null}

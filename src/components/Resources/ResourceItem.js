@@ -5,7 +5,7 @@ import CommentModal from '../Modal/CommentModal';
 import usePersistedState from '../../utils/usePersistedState';
 
 const ResourceItem = ({
-  item, upvote, index, logEvent, getByCategory, linkClicked, view, commentModalResource,
+  item, upvote, index, logEvent, getByCategory, linkClicked, view, userData, commentModalResource,
 }) => {
   const [didVote, setVote] = usePersistedState(`didVoteLink-${item.id}`, null);
 
@@ -20,7 +20,6 @@ const ResourceItem = ({
     kids,
     descendants,
   } = item;
-
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const toggleModal = () => {
@@ -37,6 +36,33 @@ const ResourceItem = ({
     toggleModal();
   };
 
+  const renderItemVotes = () => {
+    if (userData) {
+      if (userData.id !== by && !didVote) {
+        return (
+          <>
+            <button type="submit" onClick={() => resourceUpvote()}>⬆️</button>
+            <p>{score}</p>
+          </>
+        );
+      } if (userData.id === by && !didVote) {
+        return (
+          <>
+            <button>📝</button>
+            <p>{score}</p>
+          </>
+        );
+      } if (didVote) {
+        return (
+          <>
+            <button type="submit">👍🏼</button>
+            <p>{score}</p>
+          </>
+        );
+      }
+    }
+  };
+
   return (
     <>
       <CommentModal
@@ -49,20 +75,7 @@ const ResourceItem = ({
       <div key={id} className={`resources-item-container ${commentModalResource ? 'comment-modal-resource' : ''}`}>
         {/* <div key={id} className="resources-item-container"> */}
         <div className="resources-item-votes">
-          {!didVote
-          && (
-          <>
-            <button type="submit" onClick={() => resourceUpvote()}>⬆️</button>
-            <p>{score}</p>
-          </>
-          )}
-          {didVote
-          && (
-          <>
-            <button type="submit">👍🏼</button>
-            <p>{score}</p>
-          </>
-          )}
+          {renderItemVotes()}
         </div>
         <div className="resources-item-title">
           <a
