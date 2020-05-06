@@ -2,11 +2,11 @@ const {Firestore, FieldValue} = require('@google-cloud/firestore');
 
 const db = new Firestore();
 
-const entriesCounter = db.doc('misc/entriesCounter');
+const entriesMeta = db.doc('misc/entriesMeta');
 
 // increment collection size
 module.exports.incrementCounter = (_snap, _context) => {
-  entriesCounter
+  entriesMeta
     .update({
       size: FieldValue.increment(1),
     })
@@ -15,7 +15,7 @@ module.exports.incrementCounter = (_snap, _context) => {
 
 // decrement collection size
 module.exports.decrementCounter = (_snap, _context) => {
-  entriesCounter
+  entriesMeta
     .update({
       size: FieldValue.increment(-1),
     })
