@@ -71,8 +71,8 @@ const Registration = (props) => {
   const updateLastSignup = async (updated) => {
     const { miscCollection } = props.firebase;
     try {
-      await miscCollection.doc('lastSignup').update({
-        updated,
+      await miscCollection.doc('entriesMeta').update({
+        lastSignup: updated,
       });
     } catch (e) {
       console.error(e.message);
@@ -146,7 +146,7 @@ const Registration = (props) => {
         <Form onSubmit={handleSubmit}>
           <fieldset>
             <label htmlFor="email">email:</label>
-            <Field 
+            <Field
               type="email"
               name="email"
               placeholder="email"
@@ -227,7 +227,7 @@ const Registration = (props) => {
             <span className="description">
               tell us what you feel comfortable sharing about your situation
             </span>
-            <Field 
+            <Field
               as="textarea"
               name="description"
               maxLength="300"

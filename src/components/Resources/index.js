@@ -10,7 +10,7 @@ import FooterNav from '../FooterNav';
 
 const ResourcesPage = () => (
 	<div className="wrapper">
-		<Header /> 		
+		<Header />
 		<ResourcesContainer />
 		<FooterNav />
 	</div>
@@ -114,7 +114,7 @@ class ResourcesContainerBase extends Component {
 		const linkClicked = async (url) => {
 			await logEvent("resource_link_clicked", {url: url});
 		}
-		
+
 		const upvote = async (index, score) => {
 			const { fieldValue, resourcesCollection } = this.props.firebase;
 
@@ -136,7 +136,7 @@ class ResourcesContainerBase extends Component {
 		}
 
 		const updateUserKarma = async (uid) => {
-			const { fieldValue, userCollection } = this.props.firebase;			
+			const { fieldValue, userCollection } = this.props.firebase;
 			const user = userCollection.where('id', '==', uid);
 			await user.get().then(function (querySnapshot) {
 			querySnapshot.forEach(function (doc) {
@@ -149,8 +149,8 @@ class ResourcesContainerBase extends Component {
 		const updateLastUpvote = async (updated) => {
 			const { miscCollection } = this.props.firebase;
 			try {
-				await miscCollection.doc('lastUpvote').update({
-					updated,
+				await miscCollection.doc('entriesMeta').update({
+					lastUpvote: updated,
 				});
 			} catch (e) {
 				console.log(e.message);
@@ -196,7 +196,7 @@ class ResourcesContainerBase extends Component {
 
 		return (
 			<>
-				<nav className="resources-header"> 
+				<nav className="resources-header">
 					<ul>
 						<Link to="/" id="leveler-icon"><Leveler /></Link>
 						<li onClick={() => {this.getTopLinks()}}>top</li>
