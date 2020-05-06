@@ -79,8 +79,6 @@ const CommentItem = ({
   return (
     <div className={`comment-container ${sub ? 'sub-comment' : ''}`}>
       <div className="comment-header">
-        {/* {!didVote && <button type="button" onClick={() => updateCommentScore()}>⬆️</button>}
-        {didVote && <p>👍🏼</p>} */}
         {renderCommentVotes()}
         <p>{comment.by}</p>
         {score > 1 ? (
