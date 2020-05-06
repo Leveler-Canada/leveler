@@ -6,7 +6,7 @@ import { withAuthentication } from '../Session';
 import usePersistedState from '../../utils/usePersistedState';
 
 const CommentItem = ({
-  comment, sub, authUser, firebase, handleNewComment,
+  comment, sub, authUser, userData, firebase, handleNewComment,
 }) => {
   const [didVote, setVote] = usePersistedState(`didVoteComment-${comment.path}`, null);
   const [score, setScore] = useState(comment.score);
@@ -49,11 +49,39 @@ const CommentItem = ({
     }
   };
 
+  const renderCommentVotes = () => {
+    if (userData) {
+      if (userData.id !== comment.by && !didVote) {
+        return (
+          <>
+            <button type="submit" onClick={() => updateCommentScore()}>⬆️</button>
+            <p>{score}</p>
+          </>
+        );
+      } if (userData.id === comment.by && !didVote) {
+        return (
+          <>
+            <button>📝</button>
+            <p>{score}</p>
+          </>
+        );
+      } if (didVote) {
+        return (
+          <>
+            <button type="submit">👍🏼</button>
+            <p>{score}</p>
+          </>
+        );
+      }
+    }
+  };
+
   return (
     <div className={`comment-container ${sub ? 'sub-comment' : ''}`}>
       <div className="comment-header">
-        {!didVote && <button type="button" onClick={() => updateCommentScore()}>⬆️</button>}
-        {didVote && <p>👍🏼</p>}
+        {/* {!didVote && <button type="button" onClick={() => updateCommentScore()}>⬆️</button>}
+        {didVote && <p>👍🏼</p>} */}
+        {renderCommentVotes()}
         <p>{comment.by}</p>
         {score > 1 ? (
           <p>
@@ -96,6 +124,7 @@ const CommentItem = ({
           comment={subComment}
           firebase={firebase}
           handleNewComment={handleNewComment}
+          userData={userData}
         />
       )))
         : null}
