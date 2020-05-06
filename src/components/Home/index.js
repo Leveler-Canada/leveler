@@ -35,7 +35,7 @@ class HomeLandingBase extends Component {
           </p>
         <p>
           Click <b>distribute</b> below to be shown 10 individuals to contribute to. Click the payment link
-            for each one, and hit send. 
+            for each one, and hit send.
           </p>
         <p>This is a <b>mobile-first</b> tool. Please participate from your phone instead of your computer.</p>
         <div className="main-btn-container">
@@ -63,15 +63,19 @@ class HomeLandingBase extends Component {
         .get()
         .then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
-            const date = doc.data().updated.toDate()
-
             switch (doc.id) {
-              case 'lastContrib':
-                return this.setState({lastContrib: timeago.format(date)})
-              case 'lastSignup':
-                return this.setState({lastSignup: timeago.format(date)})
-              case 'lastUpvote':
-                  return this.setState({lastUpvote: timeago.format(date)})
+              case 'lastContrib': {
+                const date = doc.data().updated.toDate();
+                return this.setState({lastContrib: timeago.format(date)});
+              }
+              case 'lastSignup': {
+                const date = doc.data().updated.toDate();
+                return this.setState({lastSignup: timeago.format(date)});
+              }
+              case 'lastUpvote': {
+                const date = doc.data().updated.toDate();
+                return this.setState({lastUpvote: timeago.format(date)});
+              }
               default:
                 break
             }
