@@ -21,6 +21,11 @@ const INITIAL_STATE = {
 	ipLocale: null
 };
 
+const DEFAULT_LOCALE = {
+	country_code: '',
+	region_code: -1,
+};
+
 const { REACT_APP_IPDATA_KEY } = process.env;
 
 class DistributeTableBase extends Component {
@@ -52,14 +57,10 @@ class DistributeTableBase extends Component {
   
 
 	async getEntries(locale) {
-		const defaultLocale = {
-			country_code: '',
-			region_code: -1,
-		};
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
 
-		const { country_code, region_code } = locale || defaultLocale;
+		const { country_code, region_code } = locale || DEFAULT_LOCALE;
 		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 		
 		if (country_code !== "US") {
