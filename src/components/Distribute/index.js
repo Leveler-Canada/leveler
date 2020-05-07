@@ -26,9 +26,10 @@ const { REACT_APP_IPDATA_KEY } = process.env;
 class DistributeTableBase extends Component {
 	state = { ...INITIAL_STATE };
 
-	componentDidMount() {
+	async componentDidMount() {
 		document.title = "leveler: distribute"
-		this.getUserLocation();
+		const ipLocale = await this.getUserLocation();
+		this.getEntries(ipLocale)
 	}
 
 	getUserLocation = async () => {
@@ -42,7 +43,7 @@ class DistributeTableBase extends Component {
 					country_name, 
 					region_code
 				}
-				this.getEntries(ipLocale)
+				return ipLocale;
 			}
 		} catch(e) {
 			console.log(e.message)
@@ -51,10 +52,14 @@ class DistributeTableBase extends Component {
   
 
 	async getEntries(locale) {
+		const defaultLocale = {
+			country_code: '',
+			region_code: -1,
+		};
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
 
-		const { country_code, region_code } = locale;
+		const { country_code, region_code } = locale || defaultLocale;
 		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 		
 		if (country_code !== "US") {
