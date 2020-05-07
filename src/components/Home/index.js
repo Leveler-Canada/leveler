@@ -60,27 +60,16 @@ class HomeLandingBase extends Component {
     const { miscCollection } = this.props.firebase;
     try {
       await miscCollection
+        .doc('entriesMeta')
         .get()
-        .then((querySnapshot) => {
-					querySnapshot.forEach((doc) => {
-            switch (doc.id) {
-              case 'lastContrib': {
-                const date = doc.data().updated.toDate();
-                return this.setState({lastContrib: timeago.format(date)});
-              }
-              case 'lastSignup': {
-                const date = doc.data().updated.toDate();
-                return this.setState({lastSignup: timeago.format(date)});
-              }
-              case 'lastUpvote': {
-                const date = doc.data().updated.toDate();
-                return this.setState({lastUpvote: timeago.format(date)});
-              }
-              default:
-                break
-            }
+        .then((docSnap) => {
+          const data = docSnap.data();
+          this.setState({
+            lastContrib: timeago.format(data.lastContrib.toDate()),
+            lastSignup: timeago.format(data.lastSignup.toDate()),
+            lastUpvote: timeago.format(data.lastUpvote.toDate())
           })
-        })
+        });
     } catch(e) {
       console.log(e.message)
     }
