@@ -23,7 +23,7 @@ const INITIAL_STATE = {
 
 const DEFAULT_LOCALE = {
 	country_code: '',
-	region_code: -1,
+	region_code: '',
 };
 
 const { REACT_APP_IPDATA_KEY } = process.env;
