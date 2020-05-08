@@ -6,6 +6,9 @@ import { Loading } from '../Animations'
 import DistributeHeader from './DistributeHeader';
 import DistributeCard from './DistributeCard';
 import FooterNav from '../FooterNav';
+import Modal from 'react-modal';
+import {TwitterShareButton, FacebookShareButton, EmailShareButton, FacebookIcon, TwitterIcon, EmailIcon} from 'react-share';
+
 
 const DistributePage = () => (
 	<div className="wrapper">
@@ -15,10 +18,32 @@ const DistributePage = () => (
 	</div>
 )
 
+const modalStyles = {
+	content: {
+		top: '50%',
+    	left: '50%',
+    	right: 'auto',
+    	bottom: 'auto',
+    	marginRight: '-50%',
+    	transform: 'translate(-50%, -50%)'
+	}
+}
+
+const shareOptions = {
+	url: 'https://leveler.info',
+	text: 'i distributed funds to those impacted by COVID-19.',
+	subject: 'leveler.info'
+}
+
+Modal.setAppElement('#root');
+
 const INITIAL_STATE = {
 	entries: [],
 	loading: true,
-	ipLocale: null
+	ipLocale: null,
+	distributed: true,
+	showModal: false,
+	modalHasBeenShown: false
 };
 
 const DEFAULT_LOCALE = {
@@ -29,7 +54,13 @@ const DEFAULT_LOCALE = {
 const { REACT_APP_IPDATA_KEY } = process.env;
 
 class DistributeTableBase extends Component {
-	state = { ...INITIAL_STATE };
+
+	constructor(props) {
+		super(props);
+		this.state = { ...INITIAL_STATE };
+		this.distributeClick = this.distributeClick.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+	}
 
 	async componentDidMount() {
 		document.title = "leveler: distribute"
@@ -162,6 +193,21 @@ class DistributeTableBase extends Component {
 		}
 	}
 
+	distributeClick = () => {
+		if (!this.state.modalHasBeenShown) {
+			this.setState({
+				showModal: true,
+				modalHasBeenShown: true
+			})			
+		}
+	}
+
+	closeModal() {
+		this.setState({
+			showModal: false
+		})
+	}
+
 	render() {
 		
 		const { entries } = this.state;
@@ -178,8 +224,49 @@ class DistributeTableBase extends Component {
 						entriesCollection={entriesCollection}
 						miscCollection={miscCollection}
 						logEvent={logEvent}
+						onCheckboxClick={this.distributeClick}
 					/>
 					))}
+				<Modal
+				  isOpen={this.state.showModal}
+				  style={modalStyles}
+				  contentLabel="Share Prompt"
+				>
+					<p>thank you for contributing!</p>
+					<p>please consider sharing this platform with your network, and give others the opportunity to contribute.</p>
+					<div className="share-options">
+						<div className="network">
+							<FacebookShareButton
+            					url={shareOptions.url}
+            					quote={shareOptions.text}
+            					className="share-button"
+          					>
+            					<FacebookIcon size={32} round />
+          					</FacebookShareButton>
+						</div>
+						<div className="network">
+							<TwitterShareButton
+            					url={shareOptions.url}
+            					title={shareOptions.text}
+            					className="share-button"
+          					>
+            					<TwitterIcon size={32} round />
+          					</TwitterShareButton>
+						</div>
+						<div className="network">
+							<EmailShareButton
+								url={shareOptions.url}
+								subject={shareOptions.subject}
+            					body={shareOptions.text}
+            					className="share-button"
+          					>
+            					<EmailIcon size={32} round />
+          					</EmailShareButton>
+						</div>
+						<button className="btn" onClick={this.closeModal}>no, thanks</button>
+					</div>
+					<button className="close" onClick={this.closeModal}>x</button>
+				</Modal>
 			</div>
 		)
 	}
