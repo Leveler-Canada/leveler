@@ -101,6 +101,7 @@ const Registration = (props) => {
         suggestion: values.suggestion.trim(),
         shown: 0,
         potential_contrib: 0,
+        group: 'leveler',
         random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
       })
       .set(privateRef, {
