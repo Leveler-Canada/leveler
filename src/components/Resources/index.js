@@ -239,6 +239,7 @@ class ResourcesContainerBase extends Component {
 					{!this.state.loading ? (
 						this.state.links.map((item, index) =>
 							<ResourceItem
+								key={item.id}
 								index={index}
 								item={item}
 								upvote={upvote}
