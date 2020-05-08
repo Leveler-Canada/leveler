@@ -11,6 +11,7 @@ import DistributePage from '../Distribute';
 import SuccessPage from '../Success';
 import AboutPage from '../About';
 import ResourcesPage from '../Resources';
+import AddResourcePage from '../AddResource';
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 
@@ -25,6 +26,7 @@ const App = () => (
       <Route path={ROUTES.SUCCESS} component={SuccessPage} />
       <Route path={ROUTES.ABOUT} component={AboutPage} />
       <Route path={ROUTES.RESOURCES} component={ResourcesPage} />
+      <Route path={ROUTES.ADD_RESOURCE} component={AddResourcePage} />
     </div>
   </Router>
 );
