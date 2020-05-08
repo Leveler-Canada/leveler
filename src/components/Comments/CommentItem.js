@@ -118,7 +118,7 @@ const CommentItem = ({
       {comment.comments ? (comment.comments.map((subComment) => (
         <CommentItem
           sub
-          key={path}
+          key={Math.random(comment.created.seconds)}
           authUser={authUser}
           comment={subComment}
           firebase={firebase}
