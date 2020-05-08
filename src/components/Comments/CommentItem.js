@@ -116,6 +116,7 @@ const CommentItem = ({
         )}
       </div>
       {comment.comments ? (comment.comments.map((subComment) => (
+        // TODO: key IS A TEMP FIX
         <CommentItem
           sub
           key={Math.random(comment.created.seconds)}

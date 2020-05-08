@@ -17,6 +17,11 @@ const CommentModal = ({
   const [comments, setComments] = useState(null);
   const [newComment, setNewComment] = useState(false);
 
+  const {
+    id,
+    path,
+  } = item;
+
   const handleNewComment = async (comment) => {
     if (comment) {
       comments.push(comment);
@@ -67,11 +72,6 @@ const CommentModal = ({
       handleNewComment();
     }
   }, [isOpen, newComment]);
-
-  const {
-    id,
-    path,
-  } = item;
 
   return (
     <>
