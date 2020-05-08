@@ -91,7 +91,9 @@ const ResourceItem = ({
             to="/comments"
             onClick={onCommentsClick}
           >
-            (49)💬
+            (
+            {descendants}
+            )💬
           </a>
           <div className="resources-item-footer">
             <p>

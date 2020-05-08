@@ -13,7 +13,7 @@ const errorStyle = {
 };
 
 const CommentForm = ({
-  firebase, authUser, userData, path, handleNewComment, reply,
+  firebase, authUser, userData, path, handleNewComment, reply, parent,
 }) => {
   const [didSubmit, setSubmit] = useState(false);
 
@@ -31,6 +31,19 @@ const CommentForm = ({
     }
   };
 
+  const updateResourceDescendants = async () => {
+    const { fieldValue, resourcesCollection } = firebase;
+    const resourceRef = resourcesCollection.doc(parent);
+    try {
+      await resourceRef
+        .update({
+          descendants: fieldValue.increment(1),
+        });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
   const writeComment = async (comment) => {
     const { dbFs } = firebase;
     // eslint-disable-next-line no-param-reassign
@@ -44,6 +57,7 @@ const CommentForm = ({
         created,
         score,
         text,
+        parent,
       });
       await updateUser(write.id);
 
@@ -54,7 +68,7 @@ const CommentForm = ({
         text,
         path,
       };
-
+      updateResourceDescendants();
       handleNewComment(newComment);
     } catch (e) {
       console.log(e);

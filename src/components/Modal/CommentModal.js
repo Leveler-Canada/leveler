@@ -94,10 +94,11 @@ const CommentModal = ({
             <CommentForm
               path={path}
               handleNewComment={handleNewComment}
+              parent={id}
             />
             <div className="comments-container">
               {comments
-                ? (comments.map((comment) => <CommentItem key={comment.path} handleNewComment={handleNewComment} comment={comment} />)) : <Loading height="70" width="70" />}
+                ? (comments.map((comment) => <CommentItem key={comment.path} parent={id} handleNewComment={handleNewComment} comment={comment} />)) : <Loading height="70" width="70" />}
             </div>
           </div>
           <div className="modal-overlay" onClick={() => toggleModal()} />

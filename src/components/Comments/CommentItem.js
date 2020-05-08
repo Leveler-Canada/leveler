@@ -6,7 +6,7 @@ import { withAuthentication } from '../Session';
 import usePersistedState from '../../utils/usePersistedState';
 
 const CommentItem = ({
-  comment, sub, authUser, userData, firebase, handleNewComment,
+  comment, sub, authUser, userData, firebase, parent, handleNewComment,
 }) => {
   const [didVote, setVote] = usePersistedState(`didVoteComment-${comment.path}`, null);
   const [score, setScore] = useState(comment.score);
@@ -111,6 +111,7 @@ const CommentItem = ({
           reply
           path={path}
           handleNewComment={handleNewComment}
+          parent={parent}
         />
         )}
       </div>
@@ -141,6 +142,13 @@ CommentItem.propTypes = {
     text: PropTypes.string.isRequired,
   }).isRequired,
   authUser: PropTypes.object.isRequired,
+  userData: PropTypes.shape({
+    about: PropTypes.string,
+    created: PropTypes.element,
+    id: PropTypes.string,
+    karma: PropTypes.number,
+    submitted: PropTypes.array,
+  }),
   sub: PropTypes.bool,
   handleNewComment: PropTypes.func.isRequired,
 };
