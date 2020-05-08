@@ -93,7 +93,8 @@ const ResourceItem = ({
           >
             (
             {descendants}
-            )💬
+            )
+            <span> 💬</span>
           </a>
           <div className="resources-item-footer">
             <p>
