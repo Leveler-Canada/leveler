@@ -73,6 +73,7 @@ const AddResourceForm = ({ authUser, firebase }) => {
           }}
         >
           <Form className="resource-form">
+            <h4>Add a Resource</h4>
             <label htmlFor="title">title*</label>
             <Field name="title" type="text" />
             <ErrorMessage component="span" name="title" />
