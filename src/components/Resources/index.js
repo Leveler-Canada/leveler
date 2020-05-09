@@ -19,7 +19,7 @@ const ResourcesPage = () => (
 const INITIAL_STATE = {
 	links: [],
 	loading: true,
-	modalIsOpen: false,
+	isOpen: false,
 };
 
 class ResourcesContainerBase extends Component {
@@ -113,7 +113,7 @@ class ResourcesContainerBase extends Component {
 	render() {
 		const { logEvent } = this.props.firebase;
 		const { firebase } = this.props;
-		const { modalIsOpen } = this.state;
+		const { isOpen } = this.state;
 		const { authUser, userData } = this.props;
 
 		const linkClicked = async (url) => {
@@ -204,9 +204,9 @@ class ResourcesContainerBase extends Component {
 		}
 
 		// MODAL STATE MANAGEMENT
-		const toggleModal = (modalIsOpen) => {
+		const toggleModal = (isOpen) => {
 			this.setState({
-				modalIsOpen: !modalIsOpen
+				isOpen: !isOpen
 			})
 		}
 
@@ -214,7 +214,7 @@ class ResourcesContainerBase extends Component {
 			<>
 				<AuthModal
 					toggleModal={toggleModal}
-					modalIsOpen={modalIsOpen}
+					isOpen={isOpen}
 					firebase={firebase}
 				/>
 				<nav className="resources-header"> 
@@ -230,7 +230,7 @@ class ResourcesContainerBase extends Component {
 							<button onClick={() => {logout()}}>logout</button>
 							</>
 							: 
-							<li onClick={() => {toggleModal(this.state.modalIsOpen)}}>login</li>}
+							<li onClick={() => {toggleModal(this.state.isOpen)}}>login</li>}
 					</ul>
 				</nav>
 				<div className="resources-body">

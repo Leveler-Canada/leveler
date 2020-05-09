@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SignUp from '../Form/SignUp';
 import LogIn from '../Form/Login';
 
-const AuthModal = ({ firebase, toggleModal, modalIsOpen }) => {
+const AuthModal = ({ firebase, toggleModal, isOpen }) => {
   const [signupError, setSignUpError] = useState('');
   const [loginError, setLoginError] = useState('');
 
@@ -45,7 +45,7 @@ const AuthModal = ({ firebase, toggleModal, modalIsOpen }) => {
       if (authUser) {
         await authUser.user.updateProfile({ displayName: username });
         await addUserToDb(username, authUser.user.uid);
-        toggleModal(modalIsOpen);
+        toggleModal(isOpen);
       }
     } catch (e) {
       setSignUpError(e.message);
@@ -57,7 +57,7 @@ const AuthModal = ({ firebase, toggleModal, modalIsOpen }) => {
 
     try {
       await doSignInWithEmailAndPassword(email, password);
-      toggleModal(modalIsOpen);
+      toggleModal(isOpen);
     } catch (e) {
       setLoginError(e.message);
     }
@@ -65,7 +65,7 @@ const AuthModal = ({ firebase, toggleModal, modalIsOpen }) => {
 
   return (
     <>
-      {modalIsOpen ? (
+      {isOpen ? (
         <>
           <div className="modal" id="auth-modal">
             <SignUp
@@ -77,7 +77,7 @@ const AuthModal = ({ firebase, toggleModal, modalIsOpen }) => {
               error={loginError}
             />
           </div>
-          <div className="modal-overlay" onClick={() => toggleModal(modalIsOpen)} />
+          <div className="modal-overlay" onClick={() => toggleModal(isOpen)} />
         </>
       ) : null}
     </>

@@ -7,6 +7,7 @@ import usePersistedState from '../../utils/usePersistedState';
 const ResourceItem = ({
   item, upvote, index, logEvent, getByCategory, linkClicked, view, userData, commentModalResource,
 }) => {
+  const [modalIsOpen, setIsOpen] = useState(false);
   const [didVote, setVote] = usePersistedState(`didVoteLink-${item.id}`, null);
 
   const {
@@ -21,7 +22,6 @@ const ResourceItem = ({
     descendants,
   } = item;
 
-  const [modalIsOpen, setIsOpen] = useState(false);
   const toggleModal = () => {
     setIsOpen(!modalIsOpen);
   };
