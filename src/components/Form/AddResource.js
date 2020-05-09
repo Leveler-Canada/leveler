@@ -45,13 +45,12 @@ const AddResourceForm = () => {
       validationSchema={Yup.object({
         title: Yup.string()
           .max(100, 'Must be 100 characters or less')
-          .required('Required'),
-        url: Yup.string()
-          .required('Required'),
+          .required('A Title is required'),
+        category: Yup.string()
+          .required('A Category is required'),
+        url: Yup.string(),
         text: Yup.string()
           .max(500, 'Must be 500 characters or less'),
-        category: Yup.string()
-          .required('Required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -61,23 +60,32 @@ const AddResourceForm = () => {
       }}
     >
       <Form className="resource-form">
-        <label htmlFor="title">Title</label>
+        <label htmlFor="title">title*</label>
         <Field name="title" type="text" />
         <ErrorMessage component="span" name="title" />
-        <label htmlFor="url">URL</label>
-        <Field name="url" type="text" />
-        <ErrorMessage component="span" name="url" />
-        <label htmlFor="text">description</label>
-        <Field name="text" type="text" component="textarea" />
-        <ErrorMessage component="span" name="text" />
-        <label htmlFor="category">Category</label>
+        <label htmlFor="category">category*</label>
         <Field name="category" as="select">
           <option value="">select a category</option>
           {categories.map((category) => (
             <option value={category}>{category}</option>
           ))}
         </Field>
-        <button type="submit">Submit</button>
+        <ErrorMessage component="span" name="category" />
+        <label htmlFor="url">
+          url
+          {' '}
+          <span>(optional)</span>
+        </label>
+        <Field name="url" type="text" />
+        <ErrorMessage component="span" name="url" />
+        <label htmlFor="text">
+          description
+          {' '}
+          <span>(optional)</span>
+        </label>
+        <Field name="text" type="text" component="textarea" />
+        <ErrorMessage component="span" name="text" />
+        <button type="submit" className="btn">Submit</button>
       </Form>
     </Formik>
   );

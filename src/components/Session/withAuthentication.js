@@ -26,7 +26,7 @@ const withAuthentication = (Component) => {
 
     componentWillUnmount() {
       this.listener();
-    }
+  }
 
     async getUserData(authUser) {
       const { userCollection } = this.props.firebase;
