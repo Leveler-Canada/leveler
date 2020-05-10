@@ -66,7 +66,11 @@ const AddResourceForm = ({ authUser, userData, firebase }) => {
     // TRIM WHITESPACE
     title = title.trim();
     url = url.trim();
-    text = text.trim();
+    if (text) {
+      text = text.trim();
+    } else {
+      text = '';
+    }
 
     const writeObj = {
       created: fieldValue.serverTimestamp(),
@@ -79,7 +83,7 @@ const AddResourceForm = ({ authUser, userData, firebase }) => {
       descendants: 0,
       kids: null,
       parent: null,
-      text: null,
+      text,
       group: 'USA',
     };
     writeToResources(writeObj);
@@ -134,6 +138,7 @@ const AddResourceForm = ({ authUser, userData, firebase }) => {
             </label>
             <Field name="text" type="text" component="textarea" />
             <ErrorMessage component="span" name="text" />
+
             <button type="submit" className="btn">Submit</button>
           </Form>
         </Formik>

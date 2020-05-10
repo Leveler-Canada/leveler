@@ -184,6 +184,10 @@ form {
 
   .btn {
     margin-right: 0;
+    &:hover {
+      color: white;
+      background-color: black;
+    }
   }
 
   span {
@@ -260,5 +264,12 @@ form {
       cursor: pointer;
       font-weight: 600;
       }
+  }
+}
+
+@media (hover: none) {
+  .btn {
+    color: black;
+    background-color: white;
   }
 }

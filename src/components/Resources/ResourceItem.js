@@ -20,6 +20,7 @@ const ResourceItem = ({
     category,
     kids,
     descendants,
+    text,
   } = item;
 
   const toggleModal = () => {
@@ -131,6 +132,8 @@ const ResourceItem = ({
         </div>
         )}
       </div>
+      {view === 'comment'
+       && <div className="resources-item-description"><p>{text}</p></div>}
     </>
   );
 };
