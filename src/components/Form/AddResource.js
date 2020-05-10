@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { withAuthentication } from '../Session';
 import AuthModal from '../Modal/AuthModal';
 
-const AddResourceForm = ({ authUser, firebase }) => {
+const AddResourceForm = ({ authUser, userData, firebase }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
@@ -29,27 +29,62 @@ const AddResourceForm = ({ authUser, firebase }) => {
     'DISCUSS',
   ];
 
-  // const prepResourceObject = (valuesObj) => {
-  //   const { title, url, category } = valuesObj;
-  //   const { fieldValue } = this.props.firebase;
-  //   // change
-  //   const { username } = this.state;
+  const updateUser = async (resourceId) => {
+    const { fieldValue, userCollection } = firebase;
+    try {
+      await userCollection.doc(authUser.uid)
+        .update({
+          karma: fieldValue.increment(3),
+          submitted: fieldValue.arrayUnion(resourceId),
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-  //   const writeObj = {
-  //     created: fieldValue.serverTimestamp(),
-  //     by: username,
-  //     title,
-  //     url,
-  //     category,
-  //     type: 'story',
-  //     score: 0,
-  //     descendants: null,
-  //     kids: null,
-  //     parent: null,
-  //     text: null,
-  //   };
-  //   writeToResources(writeObj);
-  // };
+  const writeToResources = async (writeObj) => {
+    const { resourcesCollection } = firebase;
+
+    try {
+      const resourceWrite = await resourcesCollection
+        .add(writeObj);
+      if (resourceWrite) {
+        updateUser(resourceWrite.id);
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  const prepResourceObject = (valuesObj) => {
+    let {
+      title, url, category, text,
+    } = valuesObj;
+    const { fieldValue } = firebase;
+    const { id } = userData;
+
+    // TRIM WHITESPACE
+    title = title.trim();
+    url = url.trim();
+    text = text.trim();
+
+    const writeObj = {
+      created: fieldValue.serverTimestamp(),
+      by: id,
+      title,
+      url,
+      category,
+      type: 'story',
+      score: 1,
+      descendants: 0,
+      kids: null,
+      parent: null,
+      text: null,
+      group: 'USA',
+    };
+    writeToResources(writeObj);
+  };
+
   return (
     <>
       {authUser ? (
@@ -67,7 +102,7 @@ const AddResourceForm = ({ authUser, firebase }) => {
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              // prepResourceObject(values);
+              prepResourceObject(values);
               setSubmitting(false);
             }, 400);
           }}
