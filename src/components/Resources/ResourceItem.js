@@ -78,14 +78,25 @@ const ResourceItem = ({
           {renderItemVotes()}
         </div>
         <div className="resources-item-title">
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => linkClicked(url)}
-          >
-            {title}
-          </a>
+          {url
+            ? (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => linkClicked(url)}
+              >
+                {title}
+              </a>
+            )
+            : (
+              <p
+                onClick={onCommentsClick}
+                id="no-link"
+              >
+                {title}
+              </p>
+            )}
           <a
             id="comments"
             to="/comments"
