@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import * as timeago from 'timeago.js';
 import Header from '../Header';
-import { Loading } from '../Animations'
-import { Leveler } from '../Icons'
-import AuthModal from '../Modal/AuthModal'
-import ResourceItem from './ResourceItem'
+import { Loading } from '../Animations';
+import { Leveler } from '../Icons';
+import AuthModal from '../Modal/AuthModal';
+import ResourceItem from './ResourceItem';
 import FooterNav from '../FooterNav';
 import { withAuthentication } from '../Session';
 
@@ -217,12 +218,12 @@ class ResourcesContainerBase extends Component {
 					isOpen={isOpen}
 					firebase={firebase}
 				/>
-				<nav className="resources-header"> 
+				<nav className="resources-header">
 					<ul>
 						<li onClick={() => {this.getTopLinks()}} id="leveler-icon"><Leveler /></li>
 						<li onClick={() => {this.getTopLinks()}}>top</li>
 						<li onClick={() => {this.getNewLinks()}}>new</li>
-						<li onClick={() => {this.getNewLinks()}}>submit</li>
+						<Link id="submit-link" to="/add-resource">submit</Link>
 						{userData ? 
 							<>
 							<li>{userData.id} ({userData.karma})</li>
