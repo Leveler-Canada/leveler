@@ -12,6 +12,7 @@ const CommentModal = ({
   index,
   isOpen,
   firebase,
+  userData,
   toggleModal,
 }) => {
   const [comments, setComments] = useState(null);
@@ -87,6 +88,7 @@ const CommentModal = ({
               view="comment"
               comments={comments}
               commentModalResource
+              userData={userData}
             />
             <CommentForm
               path={path}

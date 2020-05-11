@@ -25,7 +25,6 @@ const CommentForm = ({
           karma: fieldValue.increment(2),
           submitted: fieldValue.arrayUnion(commentId),
         });
-      setSubmit(true);
     } catch (e) {
       console.log(e);
     }
@@ -108,6 +107,7 @@ const CommentForm = ({
               setTimeout(() => {
                 onSubmit(values);
                 setSubmitting(false);
+                setSubmit(true);
               }, 0);
             }}
           >

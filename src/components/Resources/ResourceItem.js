@@ -82,7 +82,6 @@ const ResourceItem = ({
         index={index}
       />
       <div key={id} className={`resources-item-container ${commentModalResource ? 'comment-modal-resource' : ''}`}>
-        {/* <div key={id} className="resources-item-container"> */}
         <div className="resources-item-votes">
           {renderItemVotes()}
         </div>
