@@ -22,11 +22,12 @@ export default class DistributeCard extends Component {
 		this.setState({ linkClicked: true });
 	}
 
-  handleCheckboxChange = event => {
+  	handleCheckboxChange = event => {
 		this.setState({ contributeChecked: event.target.checked })
 		if (event.target.checked) {
 			this.updateLikelyContribCount();
 		}
+		this.props.onCheckboxClick()
 	}
 
 	async updateLikelyContribCount() {

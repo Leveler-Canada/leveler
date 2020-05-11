@@ -6,6 +6,8 @@ import { Loading } from '../Animations'
 import DistributeHeader from './DistributeHeader';
 import DistributeCard from './DistributeCard';
 import FooterNav from '../FooterNav';
+import ShareModal from '../Modal/ShareModal';
+
 
 const DistributePage = () => (
 	<div className="wrapper">
@@ -18,7 +20,10 @@ const DistributePage = () => (
 const INITIAL_STATE = {
 	entries: [],
 	loading: true,
-	ipLocale: null
+	ipLocale: null,
+	distributed: true,
+	showModal: false,
+	modalHasBeenShown: false
 };
 
 const DEFAULT_LOCALE = {
@@ -29,7 +34,13 @@ const DEFAULT_LOCALE = {
 const { REACT_APP_IPDATA_KEY } = process.env;
 
 class DistributeTableBase extends Component {
-	state = { ...INITIAL_STATE };
+
+	constructor(props) {
+		super(props);
+		this.state = { ...INITIAL_STATE };
+		this.distributeClick = this.distributeClick.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+	}
 
 	async componentDidMount() {
 		document.title = "leveler: distribute"
@@ -162,6 +173,21 @@ class DistributeTableBase extends Component {
 		}
 	}
 
+	distributeClick = () => {
+		if (!this.state.modalHasBeenShown) {
+			this.setState({
+				showModal: true,
+				modalHasBeenShown: true
+			})			
+		}
+	}
+
+	closeModal() {
+		this.setState({
+			showModal: false
+		})
+	}
+
 	render() {
 		
 		const { entries } = this.state;
@@ -178,8 +204,10 @@ class DistributeTableBase extends Component {
 						entriesCollection={entriesCollection}
 						miscCollection={miscCollection}
 						logEvent={logEvent}
+						onCheckboxClick={this.distributeClick}
 					/>
 					))}
+				<ShareModal closeModal={this.closeModal} modalIsOpen={this.state.showModal}/>
 			</div>
 		)
 	}
