@@ -116,10 +116,6 @@ class ResourcesContainerBase extends Component {
 		const { firebase } = this.props;
 		const { isOpen } = this.state;
 		const { authUser, userData } = this.props;
-
-		const linkClicked = async (url) => {
-			await logEvent("resource_link_clicked", {url: url});
-		}
 		
 		const upvote = async (index, score) => {
 			const { fieldValue, resourcesCollection } = this.props.firebase;
@@ -245,8 +241,6 @@ class ResourcesContainerBase extends Component {
 								item={item}
 								upvote={upvote}
 								getByCategory={getByCategory}
-								linkClicked={linkClicked}
-								logEvent={logEvent}
 								userData={userData}
 							/>
 						)

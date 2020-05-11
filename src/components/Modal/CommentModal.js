@@ -84,9 +84,6 @@ const CommentModal = ({
               index={index}
               item={item}
               upvote={upvote}
-              // getByCategory={getByCategory}
-              // linkClicked={linkClicked}
-              // logEvent={logEvent}
               view="comment"
               comments={comments}
               commentModalResource

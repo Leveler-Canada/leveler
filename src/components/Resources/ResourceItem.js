@@ -2,10 +2,12 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import CommentModal from '../Modal/CommentModal';
+import { withFirebase } from '../Firebase';
 import usePersistedState from '../../utils/usePersistedState';
 
+
 const ResourceItem = ({
-  item, upvote, index, logEvent, getByCategory, linkClicked, view, userData, commentModalResource,
+  item, upvote, index, getByCategory, view, userData, firebase, commentModalResource,
 }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [didVote, setVote] = usePersistedState(`didVoteLink-${item.id}`, null);
@@ -33,8 +35,14 @@ const ResourceItem = ({
   };
 
   const onCommentsClick = () => {
-    logEvent('resource_item_comments_clicked');
-    toggleModal();
+    if (view !== 'comment') {
+      toggleModal();
+    }
+  };
+
+  const linkClicked = async (url) => {
+    const { logEvent } = firebase;
+    await logEvent('resource_link_clicked', { url });
   };
 
   const renderItemVotes = () => {
@@ -80,34 +88,69 @@ const ResourceItem = ({
         </div>
         <div className="resources-item-title">
           {url
-            ? (
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => linkClicked(url)}
-              >
-                {title}
-              </a>
-            )
-            : (
+            && (
+              <>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => linkClicked(url)}
+                >
+                  {title}
+                </a>
+                <a
+                  id="comments"
+                  to="/comments"
+                  onClick={onCommentsClick}
+                >
+                  (
+                  {descendants}
+                  )
+                  <span> 💬</span>
+                </a>
+              </>
+            )}
+          {!url && view !== 'comment' && (
+            <>
               <p
                 onClick={onCommentsClick}
                 id="no-link"
               >
                 {title}
               </p>
-            )}
-          <a
-            id="comments"
-            to="/comments"
-            onClick={onCommentsClick}
-          >
-            (
-            {descendants}
-            )
-            <span> 💬</span>
-          </a>
+              <a
+                id="comments"
+                onClick={onCommentsClick}
+              >
+                (
+                {descendants}
+                )
+                <span> 💬</span>
+              </a>
+            </>
+          )}
+
+          {!url && view === 'comment' && (
+            <>
+              <p
+                id="no-link"
+                className="comment-view"
+              >
+                {title}
+              </p>
+              <a
+                id="comments"
+                className="cocksuckingbitch"
+                to="/comments"
+              >
+                (
+                {descendants}
+                )
+                <span> 💬</span>
+              </a>
+            </>
+          )}
+
           <div className="resources-item-footer">
             <p>
               by
@@ -137,4 +180,4 @@ const ResourceItem = ({
     </>
   );
 };
-export default ResourceItem;
+export default withFirebase(ResourceItem);
