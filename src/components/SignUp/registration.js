@@ -36,7 +36,7 @@ const validationSchema = Yup.object().shape({
       const [regex, errMsg] = (function (hostname) {
         switch (hostname) {
           case 'cash.app':
-            return [/^\$[a-zA-Z]+$/, "⛔️ looks like you're adding a Cash App link improperly"];
+            return [/^\$[a-zA-Z0-9]+$/, "⛔️ looks like you're adding a Cash App link improperly"];
           case 'paypal.com':
           case 'www.paypal.com':
             return [/^$/, "⛔️ looks like you're adding a Paypal link improperly"];
