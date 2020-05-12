@@ -15,8 +15,9 @@ const getUserData = async (authUser) => {
 };
 
 const withAuthentication = (Component) => withFirebase((props) => {
-  const authUser = props.firebase.auth().currentUser;
-  return <Component {...props} authUser={authUser} userData={async () => await getUserData(authUser)} />;
+  const authUser = props.firebase.auth.currentUser;
+  const userData = authUser ? getUserData(authUser) : null;
+  return <Component {...props} authUser={authUser} userData={userData} />;
 });
 
 export default withAuthentication;
