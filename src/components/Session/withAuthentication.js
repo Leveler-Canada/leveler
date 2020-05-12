@@ -2,8 +2,8 @@ import React from 'react';
 import AuthUserContext from './context';
 import { withFirebase } from '../Firebase';
 
-const getUserData = async (authUser) => {
-  const { userCollection } = this.props.firebase;
+const getUserData = async (firebase, authUser) => {
+  const { userCollection } = firebase;
   try {
     const doc = await userCollection.doc(authUser.uid).get()
     const user = doc.data()
@@ -16,7 +16,7 @@ const getUserData = async (authUser) => {
 
 const withAuthentication = (Component) => withFirebase((props) => {
   const authUser = props.firebase.auth.currentUser;
-  const userData = authUser ? getUserData(authUser) : null;
+  const userData = authUser ? getUserData(props.firebase, authUser) : null;
   return <Component {...props} authUser={authUser} userData={userData} />;
 });
 
