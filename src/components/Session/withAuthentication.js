@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthUserContext from './context';
-import { withFirebase, default as firebase } from '../Firebase';
+import { withFirebase } from '../Firebase';
+import firebase from 'firebase/app';
 
 const getUserData = async (authUser) => {
   const { userCollection } = this.props.firebase;
