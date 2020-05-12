@@ -16,7 +16,7 @@ If you are a salaried human or don’t feel like you’re at risk of losing your
 
 This process will take a few minutes and MUST BE DONE FROM YOUR PHONE.  You can not make venmo payments outside of the mobile app!!!!!
 
-1. Click "Distribute" to be assigned a group of 10 people.
+1. Click "Distribute" to be assigned a group of 5 people.
 2. Venmo, Paypal each of them via their payment link. 
 3. When you're done with each person, check the box that says 'I Contributed'.
 3. We strongly suggest sending the same amount to each person (ie: 5.00 x 10 = 50.00 total).
