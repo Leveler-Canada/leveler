@@ -25,14 +25,14 @@ const registerAuthChangeListener = (firebase, setUserContext) =>
 
 const AuthContextProvider = withFirebase(props => {
   const [userContext, setUserContext] = React.useState({});
-  const [authChangeListener, setAuthChangeListener] = React.useState(null);
+  const [removeAuthChangeListener, setRemoveAuthChangeListener] = React.useState(null);
 
   const { children, firebase } = props;
 
   React.useEffect(() => {
-    if (authChangeListener == null) {
-      const listener = registerAuthChangeListener(firebase, setUserContext);
-      setAuthChangeListener(listener);
+    if (removeAuthChangeListener == null) {
+      const unsubscribe = registerAuthChangeListener(firebase, setUserContext);
+      setRemoveAuthChangeListener(unsubscribe);
     }
   });
 
