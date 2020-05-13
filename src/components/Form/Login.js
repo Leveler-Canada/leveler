@@ -34,7 +34,6 @@ const Login = ({ loginUser, error }) => (
       </Form>
     </Formik>
   </>
-
 );
 
 export default Login;

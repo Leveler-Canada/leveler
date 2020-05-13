@@ -43,7 +43,19 @@
 			}
 
 			button {
-				margin-top: 10px;
+				padding: 2px 7px;
+				border: 1px solid black;
+				outline: none;
+				font-size: 1rem;
+				cursor: pointer;
+				font-weight: 600;
+				margin: 0 auto;
+				width: 100px;
+				margin-top: 20px;
+				&:hover {
+					color: white;
+					background-color: black;
+				}
 			}
 		}
 	}
@@ -75,5 +87,28 @@
 @media (max-width: 480px) {
 	.modal {
 		max-height: 500px;
+		&#auth-modal {
+			form.auth-form {
+				input {
+					border: 1px solid lightgray;
+				}
+				button {
+					background-color: white;
+				}
+			}
+		}
 	}	
+}
+
+@media (hover: none) {
+  .modal {
+		&#auth-modal {
+			form.auth-form {
+				button {
+					color: black;
+    			background-color: white;
+				}
+			}
+		}
+	}
 }

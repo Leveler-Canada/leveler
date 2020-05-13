@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import {
   Formik, Field, Form, ErrorMessage,
 } from 'formik';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { withAuthentication } from '../Session';
 import AuthModal from '../Modal/AuthModal';
 
 const AddResourceForm = ({ authUser, userData, firebase }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [submittedForm, setSubmittedForm] = useState(false);
 
   const toggleModal = () => {
     setIsOpen(!modalIsOpen);
@@ -50,6 +52,7 @@ const AddResourceForm = ({ authUser, userData, firebase }) => {
         .add(writeObj);
       if (resourceWrite) {
         updateUser(resourceWrite.id);
+        setSubmittedForm(true);
       }
     } catch (e) {
       console.log(e.message);
@@ -91,7 +94,7 @@ const AddResourceForm = ({ authUser, userData, firebase }) => {
 
   return (
     <>
-      {authUser ? (
+      {authUser && !submittedForm && (
         <Formik
           initialValues={{ title: '', url: '', category: '' }}
           validationSchema={Yup.object({
@@ -142,20 +145,29 @@ const AddResourceForm = ({ authUser, userData, firebase }) => {
             <button type="submit" className="btn">Submit</button>
           </Form>
         </Formik>
-      )
-        : (
-          <>
-            <AuthModal
-              isOpen={modalIsOpen}
-              toggleModal={toggleModal}
-              firebase={firebase}
-            />
-            <div>
-              <p>You have to be signed in to post!</p>
-              <button onClick={onLoginClick} className="btn">log in</button>
-            </div>
-          </>
-        )}
+      )}
+
+      {authUser && submittedForm && (
+        <div className="submission-msg">
+          <h3>Thanks for submitting!</h3>
+          <p>You can see your post in the Resources page, by clicking on 'new'</p>
+          <Link to="/resources"><button className="btn">back to resources</button></Link>
+        </div>
+      )}
+
+      {!authUser && (
+        <>
+          <AuthModal
+            isOpen={modalIsOpen}
+            toggleModal={toggleModal}
+            firebase={firebase}
+          />
+          <div className="login-prompt">
+            <p>You have to be signed in to post!</p>
+            <button onClick={onLoginClick} className="btn">log in</button>
+          </div>
+        </>
+      )}
 
     </>
   );
