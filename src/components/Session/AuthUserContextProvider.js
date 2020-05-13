@@ -15,9 +15,7 @@ const getUserData = async (firebase, authUser) => {
 };
 
 const registerAuthChangeListener = (firebase, setUserContext) => {
-  const { auth } = firebase;
-
-  const listener = auth.onAuthStateChanged(
+  const listener = firebase.auth.onAuthStateChanged(
     async (authUser) => {
       const userData = authUser ? await getUserData(firebase, authUser) : null; 
       setUserContext({ authUser, userData});
