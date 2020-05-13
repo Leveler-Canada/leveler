@@ -6,6 +6,7 @@ import {
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import { withAuthentication } from '../Session';
+import AuthModal from '../Modal/AuthModal';
 
 const errorStyle = {
   color: 'red',
@@ -16,6 +17,15 @@ const CommentForm = ({
   firebase, authUser, userData, path, handleNewComment, reply, parent,
 }) => {
   const [didSubmit, setSubmit] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!modalIsOpen);
+  };
+
+  const onLoginClick = () => {
+    toggleModal();
+  };
 
   const updateUser = async (commentId) => {
     const { fieldValue, userCollection } = firebase;
@@ -66,11 +76,12 @@ const CommentForm = ({
         score,
         text,
         path,
+        parent,
       };
       updateResourceDescendants();
       handleNewComment(newComment);
     } catch (e) {
-      console.log(e);
+      console.log(e.message);
     }
   };
 
@@ -92,7 +103,7 @@ const CommentForm = ({
 
   return (
     <>
-      {!didSubmit
+      {!didSubmit && authUser
           && (
           <Formik
             initialValues={{ text: '' }}
@@ -127,6 +138,20 @@ const CommentForm = ({
             </Form>
           </Formik>
           )}
+      {!authUser
+      && (
+        <>
+          <AuthModal
+            isOpen={modalIsOpen}
+            toggleModal={toggleModal}
+            firebase={firebase}
+          />
+          <div className="login-prompt">
+            <p>You have to be signed in to comment!</p>
+            <button onClick={onLoginClick} className="btn">log in</button>
+          </div>
+        </>
+      )}
       {didSubmit && !reply
         && (
         <div className="success-msg">

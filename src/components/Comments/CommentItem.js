@@ -99,7 +99,7 @@ const CommentItem = ({
         <p>{comment.text}</p>
       </div>
       <div className="comment-footer">
-        {!replyVisible
+        {!replyVisible && authUser
         && (
         <button onClick={() => setReplyVisible(true)} className="btn" type="submit">
           reply
@@ -125,6 +125,7 @@ const CommentItem = ({
           firebase={firebase}
           handleNewComment={handleNewComment}
           userData={userData}
+          parent={parent}
         />
       )))
         : null}
