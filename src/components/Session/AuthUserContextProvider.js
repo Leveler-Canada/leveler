@@ -14,25 +14,23 @@ const getUserData = async (firebase, authUser) => {
   }
 };
 
-const registerAuthChangeListener = (firebase, setUserContext) => {
-  const listener = firebase.auth.onAuthStateChanged(
+const registerAuthChangeListener = (firebase, setUserContext) => 
+  firebase.auth.onAuthStateChanged(
     async (authUser) => {
       const userData = authUser ? await getUserData(firebase, authUser) : null; 
       setUserContext({ authUser, userData});
     }
-  );
-
-  React.useEffect(listener);
-
-  return listener
-};
+  )
+;
 
 const AuthContextProvider = withFirebase(({ children, firebase }) => {
   const [userContext, setUserContext] = React.useState(null);
   const [authChangeListener, setAuthChangeListener] = React.useState(null);
 
   if (authChangeListener == null) {
-    setAuthChangeListener(registerAuthChangeListener(firebase, setUserContext));
+    const listener = registerAuthChangeListener(firebase, setUserContext);
+    setAuthChangeListener(listener);
+    React.useEffect(listener);
   }
 
   return (
