@@ -33,6 +33,7 @@ const AuthContextProvider = withFirebase(props => {
     if (removeAuthChangeListener == null) {
       const unsubscribe = registerAuthChangeListener(firebase, setUserContext);
       setRemoveAuthChangeListener(unsubscribe);
+      return unsubscribe; //return it so that useEffect can clean up when the component is unmounted
     }
   });
 
