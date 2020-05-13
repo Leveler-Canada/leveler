@@ -19,7 +19,7 @@ const registerAuthChangeListener = (firebase, setUserContext) => {
 
   const listener = auth.onAuthStateChanged(
     async (authUser) => {
-      const userData = authUser ? await this.getUserData(authUser) : null; 
+      const userData = authUser ? await getUserData(authUser) : null; 
       setUserContext({ authUser, userData});
     }
   );
