@@ -2,8 +2,8 @@ import React from 'react';
 import AuthUserContext from './context';
 import { withFirebase } from '../Firebase';
 
-const getUserData = async (authUser) => {
-  const { userCollection } = this.props.firebase;
+const getUserData = async (firebase, authUser) => {
+  const { userCollection } = firebase;
   try {
     const doc = await userCollection.doc(authUser.uid).get()
     const user = doc.data()
@@ -19,7 +19,7 @@ const registerAuthChangeListener = (firebase, setUserContext) => {
 
   const listener = auth.onAuthStateChanged(
     async (authUser) => {
-      const userData = authUser ? await getUserData(authUser) : null; 
+      const userData = authUser ? await getUserData(firebase, authUser) : null; 
       setUserContext({ authUser, userData});
     }
   );
