@@ -25,7 +25,7 @@ const setStateOnAuthChanged = () => {
   );
 };
 
-const AuthContextProvider = ({ children, firebase }) => {
+const AuthContextProvider = withFirebase(({ children, firebase }) => {
   const [userData, setUserData] = React.useState(null);
   React.useEffect(() => registerAuthChangeListener());
   return (
@@ -33,6 +33,6 @@ const AuthContextProvider = ({ children, firebase }) => {
       {children}
     </AuthUserContext.Provider>
   );
-};
+});
 
-export default withFirebase(AuthContextProvider);
+export default AuthContextProvider;
