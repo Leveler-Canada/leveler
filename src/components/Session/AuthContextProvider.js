@@ -14,20 +14,29 @@ const getUserData = async (authUser) => {
   }
 };
 
-const registerAuthChangeListener = firebase => () => {
+const registerAuthChangeListener = firebase => {
   const { auth } = firebase;
 
-  auth.onAuthStateChanged(
+  const listener = auth.onAuthStateChanged(
     async (authUser) => {
       const userData = authUser ? await this.getUserData(authUser) : null; 
       this.setState({ authUser, userData});
     }
   );
+
+  React.useEffect(registerAuthChangeListener(firebase));
+
+  return listener
 };
 
 const AuthContextProvider = withFirebase(({ children, firebase }) => {
   const [userData, setUserData] = React.useState(null);
-  React.useEffect(registerAuthChangeListener(firebase));
+  const [authChangeListener, setAuthChangeListener] = React.useState(null);
+
+  if (authChangeListener == null) {
+    setAuthChangeListener(registerAuthChangeListener());
+  }
+  
   return (
     <AuthUserContext.Provider value={getUserFromCookie()}>
       {children}
