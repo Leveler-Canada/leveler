@@ -13,13 +13,9 @@ const withAuthentication = (Component) => {
       const { auth } = this.props.firebase;
 
       this.listener = auth.onAuthStateChanged(
-        (authUser) => {
-          authUser
-            ? this.setState({ authUser })
-            : this.setState({ authUser: null, userData: null });
-          if (authUser !== null) {
-            this.getUserData(authUser)
-          }
+        async (authUser) => {
+          const userData = authUser ? await this.getUserData(authUser) : null; 
+          this.setState({ authUser, userData});
         },
       );
     }
@@ -33,11 +29,8 @@ const withAuthentication = (Component) => {
       try {
         const doc = await userCollection.doc(authUser.uid).get()
         const user = doc.data()
-        if (user) {
-          this.setState({
-            userData: user
-          })
-        }
+
+        return user;
       } catch (e) {
         console.log(e.message)
       }

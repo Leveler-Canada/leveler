@@ -8,11 +8,7 @@ const getUserData = async (authUser) => {
     const doc = await userCollection.doc(authUser.uid).get()
     const user = doc.data()
 
-    if (user) {
-      this.setState({
-        userData: user
-      })
-    }
+    return user;
   } catch (e) {
     console.log(e.message)
   }
@@ -22,14 +18,10 @@ const setStateOnAuthChanged = () => {
   const { auth } = this.props.firebase;
 
   this.listener = await auth.onAuthStateChanged(
-    (authUser) => {
-      authUser
-        ? this.setState({ authUser })
-        : this.setState({ authUser: null, userData: null });
-      if (authUser !== null) {
-        this.getUserData(authUser)
-      }
-    },
+    async (authUser) => {
+      const userData = authUser ? await this.getUserData(authUser) : null; 
+      this.setState({ authUser, userData});
+    }
   );
 };
 
