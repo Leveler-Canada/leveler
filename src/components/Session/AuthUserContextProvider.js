@@ -23,9 +23,11 @@ const registerAuthChangeListener = (firebase, setUserContext) =>
   )
 ;
 
-const AuthContextProvider = withFirebase(({ children, firebase }) => {
+const AuthContextProvider = withFirebase(props => {
   const [userContext, setUserContext] = React.useState({});
   const [authChangeListener, setAuthChangeListener] = React.useState(null);
+
+  const { children, firebase } = props;
 
   React.useEffect(() => {
     if (authChangeListener == null) {
