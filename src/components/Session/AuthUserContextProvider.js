@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthUserContext from './context';
 import { withFirebase } from '../Firebase';
+import isEqual from 'lodash.isequal';
 
 const getUserData = async (firebase, authUser) => {
   const { userCollection } = firebase;
@@ -14,11 +15,18 @@ const getUserData = async (firebase, authUser) => {
   }
 };
 
-const registerAuthChangeListener = (firebase, setUserContext) => 
+const registerAuthChangeListener = (firebase, setUserContext, userContext) => 
   firebase.auth.onAuthStateChanged(
     async (authUser) => {
       const userData = authUser ? await getUserData(firebase, authUser) : null; 
-      setUserContext({ authUser, userData});
+
+      // Since onAuthState will trigger minimum once per component mount if there is a user logged in, 
+      // AND since we set state once we have new userData,
+      // need to do a deep compare here to check if user is different before setting state
+      // otherwise we will trigger a loop
+      if (!isEqual(userData, userContext.userData)) {
+        setUserContext({ authUser, userData});
+      }
     }
   )
 ;
@@ -29,7 +37,7 @@ const AuthContextProvider = withFirebase(props => {
   const { children, firebase } = props;
 
   React.useEffect(() =>
-    registerAuthChangeListener(firebase, setUserContext)
+    registerAuthChangeListener(firebase, setUserContext, userContext)
   );
 
   return (
