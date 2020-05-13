@@ -38,7 +38,7 @@ const AuthContextProvider = withFirebase(({ children, firebase }) => {
   }
 
   return (
-    <AuthUserContext.Provider value={getUserFromCookie()}>
+    <AuthUserContext.Provider value={userContext}>
       {children}
     </AuthUserContext.Provider>
   );
