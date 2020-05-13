@@ -13,7 +13,6 @@ import AboutPage from '../About';
 import ResourcesPage from '../Resources';
 import AddResourcePage from '../AddResource';
 import * as ROUTES from '../../constants/routes';
-import { withAuthentication } from '../Session';
 
 const App = () => (
   <Router>
@@ -30,4 +29,4 @@ const App = () => (
     </div>
   </Router>
 );
-export default withAuthentication(App);
+export default App;
