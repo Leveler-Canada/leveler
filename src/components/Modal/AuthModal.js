@@ -43,8 +43,8 @@ const AuthModal = ({ firebase, toggleModal, isOpen }) => {
       const authUser = await doCreateUserWithEmailAndPassword(email, password);
 
       if (authUser) {
-        await authUser.user.updateProfile({ displayName: username });
         await addUserToDb(username, authUser.user.uid);
+        await authUser.user.updateProfile({ displayName: username });
         toggleModal(isOpen);
       }
     } catch (e) {

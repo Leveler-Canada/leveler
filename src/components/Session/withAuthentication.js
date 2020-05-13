@@ -12,7 +12,7 @@ const withAuthentication = (Component) => {
     async componentDidMount() {
 		  const { auth } = this.props.firebase;
       
-      this.listener = await auth.onAuthStateChanged(
+      this.listener = auth.onAuthStateChanged(
         (authUser) => {
           authUser
             ? this.setState({ authUser })
@@ -33,7 +33,6 @@ const withAuthentication = (Component) => {
         try {
           const doc = await userCollection.doc(authUser.uid).get()
           const user = doc.data()
-
           if (user) {
             this.setState({
               userData: user
