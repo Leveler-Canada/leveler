@@ -24,7 +24,7 @@ const registerAuthChangeListener = (firebase, setUserContext) => {
     }
   );
 
-  React.useEffect(registerAuthChangeListener(firebase));
+  React.useEffect(listener);
 
   return listener
 };
