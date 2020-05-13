@@ -33,12 +33,14 @@ const setStateOnAuthChanged = () => {
   );
 };
 
-const AuthContextProvider = ({ children }) => (
-  const [
-  React.useEffect(() => 
-  <AuthUserContext.Provider value={getUserFromCookie()}>
-    {children}
-  </AuthUserContext.Provider>
-);
+const AuthContextProvider = ({ children }) => {
+  const [userData, setUserData] = React.useState(null);
+  React.useEffect(() => registerAuthChangeListener());
+  return (
+    <AuthUserContext.Provider value={getUserFromCookie()}>
+      {children}
+    </AuthUserContext.Provider>
+  );
+};
 
 export default withFirebase(AuthContextProvider);
