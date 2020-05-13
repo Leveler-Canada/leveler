@@ -17,7 +17,7 @@ const getUserData = async (authUser) => {
 const registerAuthChangeListener = firebase => () => {
   const { auth } = firebase;
 
-  this.listener = await auth.onAuthStateChanged(
+  auth.onAuthStateChanged(
     async (authUser) => {
       const userData = authUser ? await this.getUserData(authUser) : null; 
       this.setState({ authUser, userData});
