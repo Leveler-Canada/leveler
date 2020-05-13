@@ -1,15 +1,16 @@
 import React from 'react';
 import AuthUserContext from './context';
 import { withFirebase } from '../Firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
-const setUserDataState = async (firebase, authUser, setUserData) => {
-  const { userCollection } = firebase;
+const setUserDataState = async (authUser, setUserData, userCollection) => {
   if ( authUser != null) {
     try {
       const doc = await userCollection.doc(authUser.uid).get()
       const user = doc.data()
 
-      return user;
+      setUserData(user);
     } catch (e) {
       console.log(e.message)
     }
@@ -18,8 +19,8 @@ const setUserDataState = async (firebase, authUser, setUserData) => {
 
 const withAuthentication = (Component) => withFirebase((props) => {
   const [userData, setUserData] = React.useState(null);
-  const authUser = props.firebase.auth.currentUser;
-  setUserDataState(props.firebase, authUser, setUserData);
+  const authUser = firebase.auth().currentUser;
+  setUserDataState(authUser, setUserData);
   return <Component {...props} authUser={authUser} userData={userData} />;
 });
 
