@@ -227,7 +227,7 @@ class ResourcesContainerBase extends Component {
 						<Link id="submit-link" to="/add-resource">submit</Link>
 						{userData ? 
 							<>
-							<li>{userData.id} ({userData.karma})</li>
+							<li id="user-id">{userData.id} ({userData.karma})</li>
 							<span>|</span>
 							<button onClick={() => {logout()}}>logout</button>
 							</>

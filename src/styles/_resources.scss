@@ -145,6 +145,13 @@
 }
 
 @media (max-width: 480px) {
+	.resources-header {
+		ul {
+			#user-id, span {
+				display: none;
+			}
+		}
+	}
 	.resources-body {
 		font-size: 1rem;
 	}
