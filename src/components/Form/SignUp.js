@@ -4,7 +4,13 @@ import {
 } from 'formik';
 import * as Yup from 'yup';
 
-const SignUp = ({ signUpUser, error }) => (
+const checkUsername = async (entry, fb) => {
+  const { userCollection } = fb;
+  const result = await userCollection.where('id', '==', entry).get();
+  return result.empty;
+};
+
+const SignUp = ({ signUpUser, error, firebase }) => (
   <>
     <h4>Sign Up</h4>
     <p>signing up will allow you to submit links and comments</p>
@@ -13,6 +19,7 @@ const SignUp = ({ signUpUser, error }) => (
       validationSchema={Yup.object({
         username: Yup.string()
           .min(3, 'username must be atleast 3 characters')
+          .test('username-taken', 'this username is taken', (value) => checkUsername(value, firebase))
           .required('a username is required'),
         email: Yup.string()
           .email().trim()

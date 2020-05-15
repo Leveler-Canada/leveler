@@ -71,6 +71,7 @@ const AuthModal = ({ firebase, toggleModal, isOpen }) => {
             <SignUp
               signUpUser={signUpUser}
               error={signupError}
+              firebase={firebase}
             />
             <LogIn
               loginUser={loginUser}
