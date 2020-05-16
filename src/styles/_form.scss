@@ -145,3 +145,174 @@ form {
     }
   }
 }
+
+/* RESOURCE FORM */
+.resource-form {
+  display: inline-grid;
+  
+  h3 {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    span {
+      font-size: 1rem;
+      color: black;
+    }
+  }
+
+  input {
+    border: 0;
+    font-size: 1rem;
+    border-bottom: 2px solid black;
+  }
+
+  select {
+    height: 24px;
+  }
+  
+  textarea {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 100px;
+    font-size: 1rem;
+  }
+
+  .btn {
+    margin-right: 0;
+    &:hover {
+      color: white;
+      background-color: black;
+    }
+  }
+
+  span {
+    color: red;
+    font-size: 1rem;
+  }
+}
+
+.submission-msg {
+  h3 { 
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 20px;
+  }
+  .btn {
+    padding: 2px 7px;
+    border: 1px solid black;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 0 !important;
+
+    &:hover {
+      color: white;
+      background-color: black;
+    }
+  }
+}
+
+.login-prompt {
+  p {
+    margin-bottom: 20px;
+  }
+  .btn {
+    padding: 2px 7px;
+    border: 1px solid black;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 0 !important;
+
+    &:hover {
+      color: white;
+      background-color: black;
+    }
+  }
+}
+
+/* COMMENT FORM */
+.comment-form {
+  max-width: 100%;
+  &.reply {
+    margin-left: 1.5rem;
+    margin-right: 20px;
+    width: calc(100% - 1.5rem);
+    margin-top: 20px;
+  }
+
+  margin-top: 0;
+  textarea {
+    width: 100%;
+    height: 100px;
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 2px 7px;
+    border: 1px solid black;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 0 !important;
+
+    &:hover {
+      color: white;
+      background-color: black;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  /* COMMENT FORM */
+.comment-form {
+  textarea {
+    height: 50px;
+    font-size: 1rem;
+    border: 1px solid gainsboro;
+  }
+  .btn {
+    padding: 2px 7px;
+    border: 1px solid black;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    }
+  }
+  
+  /* ADD RESOURCE FORM */
+  .resource-form {
+    
+    select {
+      border: 1px solid black;
+      height: 24px;
+    }
+    textarea {
+      border: 1px solid black;
+    }
+    .btn {
+      padding: 2px 7px;
+      border: 1px solid black;
+      outline: none;
+      cursor: pointer;
+      font-weight: 600;
+      }
+  }
+}
+
+@media (hover: none) {
+  .btn {
+    color: black;
+    background-color: white;
+  }
+}
