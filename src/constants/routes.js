@@ -9,3 +9,7 @@ export const SUCCESS = '/success'; // signup success page
 export const ABOUT = '/about';
 export const RESOURCES = '/resources';
 export const ADD_RESOURCE = '/add-resource';
+
+// NON-FIREBASE CONFIG ENV VARIABLES
+const { REACT_APP_prod_functionsURL, REACT_APP_dev_functionsURL } = process.env;
+export const FUNCTIONS_URL = process.env.NODE_ENV === 'production' ? REACT_APP_prod_functionsURL : REACT_APP_dev_functionsURL;

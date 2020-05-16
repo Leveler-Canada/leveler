@@ -11,7 +11,7 @@ import { withAuthentication } from '../Session';
 
 const ResourcesPage = () => (
 	<div className="wrapper">
-		<Header /> 		
+		<Header />
 		<ResourcesContainer />
 		<FooterNav />
 	</div>
@@ -119,7 +119,7 @@ class ResourcesContainerBase extends Component {
 		const { firebase } = this.props;
 		const { isOpen } = this.state;
 		const { authUser, userData } = this.props;
-		
+
 		const upvote = async (index, score) => {
 			const { fieldValue, resourcesCollection } = this.props.firebase;
 
@@ -140,7 +140,7 @@ class ResourcesContainerBase extends Component {
 		}
 
 		const updateUserKarma = async (uid) => {
-			const { fieldValue, userCollection } = this.props.firebase;			
+			const { fieldValue, userCollection } = this.props.firebase;
 			const user = userCollection.where('id', '==', uid);
 			await user.get().then(function (querySnapshot) {
 			querySnapshot.forEach(function (doc) {
@@ -153,8 +153,8 @@ class ResourcesContainerBase extends Component {
 		const updateLastUpvote = async (updated) => {
 			const { miscCollection } = this.props.firebase;
 			try {
-				await miscCollection.doc('lastUpvote').update({
-					updated,
+				await miscCollection.doc('entriesMeta').update({
+					lastUpvote: updated,
 				});
 			} catch (e) {
 				console.log(e.message);

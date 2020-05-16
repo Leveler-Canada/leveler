@@ -73,3 +73,53 @@
     }
   }
 }
+
+.ReactModalPortal {
+  p {
+    padding-bottom: 1rem;
+  }
+  .share-options {
+    .network {  
+      vertical-align: top;
+      display: inline-block;
+      margin-right: 10px;
+      text-align: center;
+      .share-button {
+        cursor: pointer;
+        &:hover:not(:active) {
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+
+  .btn {
+    padding: 2px 10px;
+    border: 2px solid black;
+    background: white;
+    outline: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+
+    &:disabled {
+      border: 2px solid silver;
+    }
+
+    &:hover:enabled {
+      background: black;
+      color: white;
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: grey;
+    background: none;
+    border: none;
+    font-size: 1rem;
+  }
+}
