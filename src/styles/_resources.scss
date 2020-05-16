@@ -27,9 +27,6 @@
 		display: flex;
 		align-items: baseline;
 		padding: 10px;
-		&:last-child {
-			border-bottom: 1px solid darkgray;
-		}
 		& > div {
 			margin-right: 8px;
 			align-items: baseline;
