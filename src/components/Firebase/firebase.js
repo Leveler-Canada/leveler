@@ -1,6 +1,6 @@
 import app from 'firebase/app';
-import 'firebase/database';
 import 'firebase/firestore';
+import 'firebase/auth';
 import 'firebase/analytics';
 import 'firebase/functions';
 
@@ -53,8 +53,8 @@ const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
 class Firebase {
   constructor() {
     app.initializeApp(config);
-    this.db = app.database();
     this.dbFs = app.firestore();
+    this.auth = app.auth();
     this.fieldValue = app.firestore.FieldValue;
     this.analytics = app.analytics();
     this.logEvent = app.analytics().logEvent;
@@ -62,7 +62,21 @@ class Firebase {
     this.userCollection = this.dbFs.collection('users');
     this.entriesCollection = this.dbFs.collection('entries');
     this.resourcesCollection = this.dbFs.collection('resources');
+    this.commentsCollection = this.dbFs.collectionGroup('comments');
     this.miscCollection = this.dbFs.collection('misc');
   }
+  // *** Auth API ***
+  doCreateUserWithEmailAndPassword = (email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password);
+  
+  doSignInWithEmailAndPassword = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
+  
+  doSignOut = () => this.auth.signOut();
+
+  doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+  
+  doPasswordUpdate = password =>
+    this.auth.currentUser.updatePassword(password);
 }
 export default Firebase;

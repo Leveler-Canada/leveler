@@ -71,8 +71,8 @@ class DistributeTableBase extends Component {
 	async getEntries(locale) {
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
-
 		const { country_code, region_code } = locale || DEFAULT_LOCALE;
+
 		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 
 		if (country_code !== "US") {
