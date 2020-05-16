@@ -6,6 +6,9 @@ import { Loading } from '../Animations'
 import DistributeHeader from './DistributeHeader';
 import DistributeCard from './DistributeCard';
 import FooterNav from '../FooterNav';
+import ShareModal from '../Modal/ShareModal';
+
+const numEntries = 5;
 
 const DistributePage = () => (
 	<div className="wrapper">
@@ -18,17 +21,32 @@ const DistributePage = () => (
 const INITIAL_STATE = {
 	entries: [],
 	loading: true,
-	ipLocale: null
+	ipLocale: null,
+	distributed: true,
+	showModal: false,
+	modalHasBeenShown: false
+};
+
+const DEFAULT_LOCALE = {
+	country_code: '',
+	region_code: '',
 };
 
 const { REACT_APP_IPDATA_KEY } = process.env;
 
 class DistributeTableBase extends Component {
-	state = { ...INITIAL_STATE };
 
-	componentDidMount() {
+	constructor(props) {
+		super(props);
+		this.state = { ...INITIAL_STATE };
+		this.distributeClick = this.distributeClick.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+	}
+
+	async componentDidMount() {
 		document.title = "leveler: distribute"
-		this.getUserLocation();
+		const ipLocale = await this.getUserLocation();
+		this.getEntries(ipLocale)
 	}
 
 	getUserLocation = async () => {
@@ -38,32 +56,32 @@ class DistributeTableBase extends Component {
 				const { country_code, country_name, region_code } = res.data;
 				console.log(res.data)
 				const ipLocale = {
-					country_code, 
-					country_name, 
+					country_code,
+					country_name,
 					region_code
 				}
-				this.getEntries(ipLocale)
+				return ipLocale;
 			}
 		} catch(e) {
 			console.log(e.message)
 		}
 	}
-  
+
 
 	async getEntries(locale) {
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
 
-		const { country_code, region_code } = locale;
+		const { country_code, region_code } = locale || DEFAULT_LOCALE;
 		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
-		
+
 		if (country_code !== "US") {
 
 			try {
 				await entriesCollection
 					.where("random", ">=", random)
 					.orderBy("random")
-					.limit(10)
+					.limit(numEntries)
 					.get()
 					.then((querySnapshot) => {
 						querySnapshot.forEach((docSnap) => {
@@ -93,8 +111,8 @@ class DistributeTableBase extends Component {
 							docData.id = docSnap.id
 							entries.push(docData);
 						})
-						if (entries.length > 10) {
-							entries = this.getRandom(entries, 10);
+						if (entries.length > numEntries) {
+							entries = this.getRandom(entries, numEntries);
 							this.setState({
 								entries,
 								loading: false
@@ -116,32 +134,32 @@ class DistributeTableBase extends Component {
 	}
 
 	getRandom(arr, n) {
-    let result = new Array(n),
-        len = arr.length,
-        taken = new Array(len);
-    if (n > len)
-        throw new RangeError("getRandom: more elements taken than available");
-    while (n--) {
-			let x = Math.floor(Math.random() * len);
-        result[n] = arr[x in taken ? taken[x] : x];
-        taken[x] = --len in taken ? taken[len] : len;
+		let result = new Array(n),
+			len = arr.length,
+			taken = new Array(len);
+		if (n > len)
+			throw new RangeError("getRandom: more elements taken than available");
+		while (n--) {
+				let x = Math.floor(Math.random() * len);
+			result[n] = arr[x in taken ? taken[x] : x];
+			taken[x] = --len in taken ? taken[len] : len;
+			}
+		return result;
 		}
-    return result;
-	}
 
 	getRandom(arr, n) {
-    let result = new Array(n),
-        len = arr.length,
-        taken = new Array(len);
-    if (n > len)
-        throw new RangeError("getRandom: more elements taken than available");
-    while (n--) {
-			let x = Math.floor(Math.random() * len);
-        result[n] = arr[x in taken ? taken[x] : x];
-        taken[x] = --len in taken ? taken[len] : len;
+		let result = new Array(n),
+			len = arr.length,
+			taken = new Array(len);
+		if (n > len)
+			throw new RangeError("getRandom: more elements taken than available");
+		while (n--) {
+				let x = Math.floor(Math.random() * len);
+			result[n] = arr[x in taken ? taken[x] : x];
+			taken[x] = --len in taken ? taken[len] : len;
+			}
+		return result;
 		}
-    return result;
-	}
 
 	async updateShownCount(docId) {
 		const { fieldValue, entriesCollection } = this.props.firebase;
@@ -156,8 +174,23 @@ class DistributeTableBase extends Component {
 		}
 	}
 
+	distributeClick = () => {
+		if (!this.state.modalHasBeenShown) {
+			this.setState({
+				showModal: true,
+				modalHasBeenShown: true
+			})
+		}
+	}
+
+	closeModal() {
+		this.setState({
+			showModal: false
+		})
+	}
+
 	render() {
-		
+
 		const { entries } = this.state;
 		const { fieldValue, entriesCollection, miscCollection, logEvent } = this.props.firebase;
 		return (
@@ -172,8 +205,10 @@ class DistributeTableBase extends Component {
 						entriesCollection={entriesCollection}
 						miscCollection={miscCollection}
 						logEvent={logEvent}
+						onCheckboxClick={this.distributeClick}
 					/>
 					))}
+				<ShareModal closeModal={this.closeModal} modalIsOpen={this.state.showModal}/>
 			</div>
 		)
 	}

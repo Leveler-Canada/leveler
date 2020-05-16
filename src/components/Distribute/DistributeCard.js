@@ -22,11 +22,12 @@ export default class DistributeCard extends Component {
 		this.setState({ linkClicked: true });
 	}
 
-  handleCheckboxChange = event => {
+  	handleCheckboxChange = event => {
 		this.setState({ contributeChecked: event.target.checked })
 		if (event.target.checked) {
 			this.updateLikelyContribCount();
 		}
+		this.props.onCheckboxClick()
 	}
 
 	async updateLikelyContribCount() {
@@ -49,8 +50,8 @@ export default class DistributeCard extends Component {
 	async updateLastLikelyContrib (updated) {
     const { miscCollection } = this.props;
     try {
-      await miscCollection.doc('lastContrib').update({
-        updated,
+      await miscCollection.doc('entriesMeta').update({
+        lastContrib: updated,
       });
     } catch (e) {
       console.log(e.message);
@@ -62,7 +63,7 @@ export default class DistributeCard extends Component {
 
 		return (
 			<div className="card-container">
-				<div className="card-header"> 
+				<div className="card-header">
 					<div className="location">
 						<p><b>{entry.location.city}</b></p>
 						{entry.location.state && <p><b>, {entry.location.state}</b></p>}
@@ -70,14 +71,14 @@ export default class DistributeCard extends Component {
 					<p><b>{entry.industry}</b></p>
 					{this.state.linkClicked ? (
 					<div>
-						<a 
+						<a
 							href="https://docs.google.com/forms/d/e/1FAIpQLSefrgYTWlmWYtO6l0rJJKTzxnHPLKThX5QazeMHIAkq6Qnh-Q/viewform?usp=sf_link"
 							target="_blank"
 							rel="noopener noreferrer"
 							>report error</a>
 					</div>
 					) : (null)}
-					
+
 				</div>
 
 				<div className="card-body">
