@@ -31,6 +31,18 @@ class ResourcesContainerBase extends Component {
 		this.getTopLinks()
 	}
 
+	sortByDate() {
+		const d = new Date();
+		const sortDate = new Date(d.setDate(d.getDate() - 3));
+		return sortDate;
+	}
+
+	sortByScore(arr) {
+		arr.sort((a,b) => {
+			return arr.score - arr.score
+		})
+	}
+
 	async getTopLinks() {
 		this.setState({
 			loading: true
@@ -38,10 +50,10 @@ class ResourcesContainerBase extends Component {
 
 		let links = [];
 		const { resourcesCollection } = this.props.firebase;
+
 		try {
 			await resourcesCollection
-				.where("type", "==", "story")
-				.orderBy("score", "desc")
+				.where("created", ">", this.sortByDate())
 				.limit(30)
 				.get()
 				.then((querySnapshot) => {
@@ -54,11 +66,12 @@ class ResourcesContainerBase extends Component {
 						// SET UP TIMEAGO
 						const date = doc.data().created.toDate()
 						link.created = timeago.format(date)
-						// PUSH TO STATE
+						// PREP FOR STATE
 						links.push(link)
 					})
 				})
 				if (links) {
+					this.sortByScore(links)
 					this.setState({
 						links,
 						loading: false
