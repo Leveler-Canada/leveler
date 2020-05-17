@@ -31,9 +31,9 @@ class ResourcesContainerBase extends Component {
 		this.getTopLinks()
 	}
 
-	sortByDate() {
+	sortByDate(numDays) {
 		const d = new Date();
-		const sortDate = new Date(d.setDate(d.getDate() - 7));
+		const sortDate = new Date(d.setDate(d.getDate() - numDays));
 		return sortDate;
 	}
 
@@ -43,18 +43,19 @@ class ResourcesContainerBase extends Component {
 		})
 	}
 
-	async getTopLinks() {
+	async getTopLinks(numDays = 3) {
 		this.setState({
 			loading: true
 		})
 
 		let links = [];
 		const { resourcesCollection } = this.props.firebase;
+		const limit = 30;
 
 		try {
 			await resourcesCollection
-				.where("created", ">", this.sortByDate())
-				.limit(30)
+				.where("created", ">", this.sortByDate(numDays))
+				.limit(limit)
 				.get()
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
@@ -70,12 +71,14 @@ class ResourcesContainerBase extends Component {
 						links.push(link)
 					})
 				})
-				if (links) {
+				if (links && links.length >= limit) {
 					this.sortByScore(links)
 					this.setState({
 						links,
 						loading: false
 					})
+				} else {
+					this.getTopLinks(numDays * 2); // TODO: Could instead add 1, 2, ... or multiply by a smaller number?
 				}
 		} catch(e) {
 			console.log(e.message)
