@@ -33,7 +33,7 @@ class ResourcesContainerBase extends Component {
 
 	sortByDate() {
 		const d = new Date();
-		const sortDate = new Date(d.setDate(d.getDate() - 3));
+		const sortDate = new Date(d.setDate(d.getDate() - 7));
 		return sortDate;
 	}
 
