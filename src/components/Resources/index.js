@@ -39,7 +39,7 @@ class ResourcesContainerBase extends Component {
 
 	sortByScore(arr) {
 		arr.sort((a,b) => {
-			return arr.score - arr.score
+			return b.score - a.score
 		})
 	}
 
@@ -238,13 +238,13 @@ class ResourcesContainerBase extends Component {
 						<li onClick={() => {this.getTopLinks()}}>top</li>
 						<li onClick={() => {this.getNewLinks()}}>new</li>
 						<Link id="submit-link" to="/add-resource">submit</Link>
-						{userData ? 
+						{userData ?
 							<>
 							<li id="user-id">{userData.id} ({userData.karma})</li>
 							<span>|</span>
 							<button onClick={() => {logout()}}>logout</button>
 							</>
-							: 
+							:
 							<li onClick={() => {toggleModal(this.state.isOpen)}}>login</li>}
 					</ul>
 				</nav>
