@@ -55,7 +55,6 @@ class ResourcesContainerBase extends Component {
 		try {
 			await resourcesCollection
 				.where("created", ">", this.sortByDate(numDays))
-				.limit(limit)
 				.get()
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
@@ -72,7 +71,9 @@ class ResourcesContainerBase extends Component {
 					})
 				})
 				if (links && links.length >= limit) {
-					this.sortByScore(links)
+					links = links
+						.sort((a, b) => b.score - a.score)
+						.slice(0, limit);
 					this.setState({
 						links,
 						loading: false
