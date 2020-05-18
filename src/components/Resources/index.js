@@ -31,18 +31,30 @@ class ResourcesContainerBase extends Component {
 		this.getTopLinks()
 	}
 
-	async getTopLinks() {
+	sortByDate(numDays) {
+		const d = new Date();
+		const sortDate = new Date(d.setDate(d.getDate() - numDays));
+		return sortDate;
+	}
+
+	sortByScore(arr) {
+		arr.sort((a,b) => {
+			return b.score - a.score
+		})
+	}
+
+	async getTopLinks(numDays = 3) {
 		this.setState({
 			loading: true
 		})
 
 		let links = [];
 		const { resourcesCollection } = this.props.firebase;
+		const limit = 30;
+
 		try {
 			await resourcesCollection
-				.where("type", "==", "story")
-				.orderBy("score", "desc")
-				.limit(30)
+				.where("created", ">", this.sortByDate(numDays))
 				.get()
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
@@ -54,15 +66,20 @@ class ResourcesContainerBase extends Component {
 						// SET UP TIMEAGO
 						const date = doc.data().created.toDate()
 						link.created = timeago.format(date)
-						// PUSH TO STATE
+						// PREP FOR STATE
 						links.push(link)
 					})
 				})
-				if (links) {
+				if (links && links.length >= limit) {
+					links = links
+						.sort((a, b) => b.score - a.score)
+						.slice(0, limit);
 					this.setState({
 						links,
 						loading: false
 					})
+				} else {
+					this.getTopLinks(numDays * 2); // TODO: Could instead add 1, 2, ... or multiply by a smaller number?
 				}
 		} catch(e) {
 			console.log(e.message)
@@ -225,13 +242,13 @@ class ResourcesContainerBase extends Component {
 						<li onClick={() => {this.getTopLinks()}}>top</li>
 						<li onClick={() => {this.getNewLinks()}}>new</li>
 						<Link id="submit-link" to="/add-resource">submit</Link>
-						{userData ? 
+						{userData ?
 							<>
 							<li id="user-id">{userData.id} ({userData.karma})</li>
 							<span>|</span>
 							<button onClick={() => {logout()}}>logout</button>
 							</>
-							: 
+							:
 							<li onClick={() => {toggleModal(this.state.isOpen)}}>login</li>}
 					</ul>
 				</nav>
