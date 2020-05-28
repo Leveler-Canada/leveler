@@ -51,6 +51,13 @@ class HomeLandingBase extends Component {
             <button className="btn">resources</button>
           </Link>
           <p className="home-misc">last upvote {lastUpvote}</p>
+          <a 
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfjHiWFg1CZpZJ7cfOE6v6f83m8Y92Ol0NrH3qXiqsII1H5GA/viewform"
+            onClick={this.onNewLevelerClick} 
+            target="_blank" 
+           >
+            <button className="btn">create your own leveler</button>
+          </a>
         </div>
       </section>
     );
@@ -88,6 +95,11 @@ class HomeLandingBase extends Component {
     const { logEvent } = this.props.firebase;
     logEvent("resources_btn_clicked_home");
   };
+
+  onNewLevelerClick = () => {
+    const { logEvent } = this.props.firebase;
+    logEvent("new_leveler_btn_clicked_home");
+  }
 }
 
 const HomeLanding = withFirebase(HomeLandingBase);
