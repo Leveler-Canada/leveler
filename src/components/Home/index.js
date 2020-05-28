@@ -94,7 +94,7 @@ class HomeLandingBase extends Component {
 
   onNewLevelerClick = () => {
     const { logEvent } = this.props.firebase;
-    logEvent("new_lelever_btn_clicked_home");
+    logEvent("new_leveler_btn_clicked_home");
   }
 }
 
