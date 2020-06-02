@@ -75,18 +75,16 @@ class DistributeTableBase extends Component {
 		const { groupStats } = this.props.firebase;
 		const docRef = groupStats.doc(group);
 		
-		const doc = await docRef.get();
-		const isDocCreated = doc.exists;
-		if (!isDocCreated) {
-			docRef.create({
+		try {
+			const doc = await docRef.get();
+		} catch(e) {
+			docRef.set({
 				size: 0,
 			})
 			.then((writeResult) => {
 				console.log(`created document at path ${docRef.path} at time ${writeResult.writeTime.toDate()}`);
 			})
 			.catch(err => console.error(err));
-		} else {
-			console.log(`document already exists at path ${docRef.path}`);
 		}
 				
 		const { country_code, region_code } = locale || DEFAULT_LOCALE;
