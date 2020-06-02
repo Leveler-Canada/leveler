@@ -9,6 +9,7 @@ import FooterNav from '../FooterNav';
 import ShareModal from '../Modal/ShareModal';
 
 const numEntries = 5;
+const group = process.env.REACT_APP_LEVELER_GROUP;
 
 const DistributePage = () => (
 	<div className="wrapper">
@@ -80,6 +81,7 @@ class DistributeTableBase extends Component {
 			try {
 				await entriesCollection
 					.where("random", ">=", random)
+					.where("group", "==", group)
 					.orderBy("random")
 					.limit(numEntries)
 					.get()

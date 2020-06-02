@@ -7,6 +7,8 @@ import * as Yup from 'yup';
 import { withAuthentication } from '../Session';
 import AuthModal from '../Modal/AuthModal';
 
+const group = process.env.REACT_APP_LEVELER_GROUP;
+
 const AddResourceForm = ({ authUser, userData, firebase }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [submittedForm, setSubmittedForm] = useState(false);
@@ -84,7 +86,7 @@ const AddResourceForm = ({ authUser, userData, firebase }) => {
       kids: null,
       parent: null,
       text,
-      group: 'leveler',
+      group: group,
     };
     writeToResources(writeObj);
   };
