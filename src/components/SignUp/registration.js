@@ -10,7 +10,7 @@ import RadioButtonGroup from './RadioButtonGroup';
 import { FUNCTIONS_URL } from './../../constants/routes';
 
 const REQUIRED_ERROR = 'required';
-
+const group = process.env.REACT_APP_LEVELER_GROUP;
 const addURLScheme = (url) => (/^https?:\/\//.test(url) ? url : `https://${url}`);
 
 const validationSchema = Yup.object().shape({
@@ -101,7 +101,7 @@ const Registration = (props) => {
         suggestion: values.suggestion.trim(),
         shown: 0,
         potential_contrib: 0,
-        group: 'leveler',
+        group: group,
         random: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
       })
       .set(privateRef, {

@@ -9,6 +9,8 @@ import ResourceItem from './ResourceItem';
 import FooterNav from '../FooterNav';
 import { withAuthentication } from '../Session';
 
+const group = process.env.REACT_APP_LEVELER_GROUP;
+
 const ResourcesPage = () => (
 	<div className="wrapper">
 		<Header />
@@ -190,6 +192,7 @@ class ResourcesContainerBase extends Component {
 				await resourcesCollection
 					.where("type", "==", "story")
 					.where("category", "==", category)
+					.where("group", "==", group)
 					.limit(30)
 					.get()
 					.then((querySnapshot) => {

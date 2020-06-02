@@ -5,6 +5,8 @@ import { withFirebase } from '../Firebase';
 import Header from '../Header';
 import FooterNav from '../FooterNav';
 
+const group = process.env.REACT_APP_LEVELER_GROUP;
+
 const HomePage = () => (
 	<div className="wrapper">
 		<Header />
@@ -67,7 +69,7 @@ class HomeLandingBase extends Component {
     const { miscCollection } = this.props.firebase;
     try {
       await miscCollection
-        .doc('entriesMeta')
+        .doc(`entriesMeta/${group}`)
         .get()
         .then((docSnap) => {
           const data = docSnap.data();
