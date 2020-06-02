@@ -53,7 +53,7 @@ const AuthModal = ({ firebase, toggleModal, isOpen }) => {
   };
 
   const loginUser = async (valuesObj) => {
-    const { username, email, password } = valuesObj;
+    const { email, password } = valuesObj;
 
     try {
       await doSignInWithEmailAndPassword(email, password);
