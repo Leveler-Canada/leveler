@@ -55,6 +55,7 @@ class HomeLandingBase extends Component {
             href="https://docs.google.com/forms/d/e/1FAIpQLSfjHiWFg1CZpZJ7cfOE6v6f83m8Y92Ol0NrH3qXiqsII1H5GA/viewform"
             onClick={this.onNewLevelerClick} 
             target="_blank" 
+            rel="noopener noreferrer"
            >
             <button className="btn">create your own leveler</button>
           </a>
