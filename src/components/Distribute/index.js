@@ -72,6 +72,22 @@ class DistributeTableBase extends Component {
 	async getEntries(locale) {
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
+		const { miscCollection } = this.props.firebase;
+		const docRef = miscCollection.doc(`entriesMeta/${group}`);
+		
+		const docExists = (await docRef.get()).exists;
+		if (!docExists) {
+			docRef.create({
+				size: 0,
+			})
+			.then((writeResult) => {
+				console.log(`created document at path ${docRef.path} at time ${writeResult.writeTime.toDate()}`);
+			})
+			.catch(err => console.error(err));
+		} else {
+			console.log(`document already exists at path ${docRef.path}`);
+		}
+				
 		const { country_code, region_code } = locale || DEFAULT_LOCALE;
 
 		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
