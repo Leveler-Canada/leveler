@@ -20,7 +20,6 @@ const ResourceItem = ({
     by,
     created,
     category,
-    kids,
     descendants,
     text,
   } = item;
