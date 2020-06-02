@@ -72,7 +72,7 @@ const CommentModal = ({
     if (newComment) {
       handleNewComment();
     }
-  }, [isOpen, newComment]);
+  }, [isOpen, newComment, firebase, handleNewComment, path]);
 
   return (
     <>
