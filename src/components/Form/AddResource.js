@@ -84,7 +84,7 @@ const AddResourceForm = ({ authUser, userData, firebase }) => {
       kids: null,
       parent: null,
       text,
-      group: 'USA',
+      group: 'leveler',
     };
     writeToResources(writeObj);
   };

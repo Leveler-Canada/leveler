@@ -35,27 +35,6 @@ const FooterNav = (props) => {
         about leveler
       </Link>
 
-      <Link
-        to="/distribute"
-        onClick={onDistributeClick}
-      >
-        distribute
-      </Link>
-
-      <Link
-        to="/signup"
-        onClick={onReceiveClick}
-      >
-        receive
-      </Link>
-
-      <Link
-        to="/resources"
-        onClick={onResourcesClick}
-      >
-        resources
-      </Link>
-
       <a
         href="https://docs.google.com/document/d/1OqjFn7f5YRxzD71v-ieGSruQUdTST5K3woPl-yrDDkc/edit?usp=sharing"
         target="_blank"

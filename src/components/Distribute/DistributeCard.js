@@ -87,9 +87,8 @@ export default class DistributeCard extends Component {
 
 				<div className="card-footer">
 					{entry.payment_url.map(link => (
-						<span onClick={() => this.onPaymentLinkClick(link)}>
+						<span key={link} onClick={() => this.onPaymentLinkClick(link)}>
 							<DistributeLink
-								key={link}
 								link={link}
 							/>
 						</span>
