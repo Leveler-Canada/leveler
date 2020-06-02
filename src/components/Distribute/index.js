@@ -75,8 +75,9 @@ class DistributeTableBase extends Component {
 		const { groupStats } = this.props.firebase;
 		const docRef = groupStats.doc(group);
 		
-		const docExists = (await docRef.get()).exists;
-		if (!docExists) {
+		const doc = await docRef.get();
+		const isDocCreated = doc.exists;
+		if (!isDocCreated) {
 			docRef.create({
 				size: 0,
 			})
