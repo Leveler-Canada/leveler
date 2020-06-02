@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import zip from 'lodash/zip';
 import ResourceItem from '../Resources/ResourceItem';
 import CommentForm from '../Form/Comment';
@@ -23,13 +23,16 @@ const CommentModal = ({
     path,
   } = item;
 
-  const handleNewComment = async (comment) => {
-    if (comment) {
-      comments.push(comment);
-      setNewComment(true);
-    }
-    setNewComment(false);
-  };
+  const handleNewComment = useCallback(
+    async (comment) => {
+      if (comment) {
+        comments.push(comment);
+        setNewComment(true);
+      }
+      setNewComment(false);
+    },
+    [comments, setNewComment]
+  );
 
   useEffect(() => {
     // get initial comments
