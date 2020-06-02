@@ -61,6 +61,7 @@ class Firebase {
     this.functions = app.functions();
     this.userCollection = this.dbFs.collection('users');
     this.entriesCollection = this.dbFs.collection('entries');
+    this.groupStats = this.dbFs.collection('groupStats');
     this.resourcesCollection = this.dbFs.collection('resources');
     this.commentsCollection = this.dbFs.collectionGroup('comments');
     this.miscCollection = this.dbFs.collection('misc');
