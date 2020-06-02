@@ -72,8 +72,8 @@ class DistributeTableBase extends Component {
 	async getEntries(locale) {
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
-		const { miscCollection } = this.props.firebase;
-		const docRef = miscCollection.doc(`entriesMeta/${group}`);
+		const { groupStats } = this.props.firebase;
+		const docRef = groupStats.doc(group);
 		
 		const docExists = (await docRef.get()).exists;
 		if (!docExists) {
