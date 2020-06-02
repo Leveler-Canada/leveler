@@ -146,8 +146,8 @@ const AddResourceForm = ({ authUser, userData, firebase }) => {
 
       {authUser && submittedForm && (
         <div className="submission-msg">
-          <h3>Thanks for submitting!</h3>
-          <p>You can see your post in the Resources page, by clicking on 'new'</p>
+          <h3>You're done ✅</h3>
+          <p>You'll see your post at the top of the list 🔼</p>
           <Link to="/resources"><button className="btn">back to resources</button></Link>
         </div>
       )}

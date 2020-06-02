@@ -28,7 +28,7 @@ class ResourcesContainerBase extends Component {
 
 	componentDidMount() {
 		document.title = "leveler: resources"
-		this.getTopLinks()
+		this.getNewLinks();
 	}
 
 	sortByDate(numDays) {
@@ -239,8 +239,8 @@ class ResourcesContainerBase extends Component {
 				<nav className="resources-header">
 					<ul>
 						<li onClick={() => {this.getTopLinks()}} id="leveler-icon"><Leveler /></li>
-						<li onClick={() => {this.getTopLinks()}}>top</li>
 						<li onClick={() => {this.getNewLinks()}}>new</li>
+						<li onClick={() => {this.getTopLinks()}}>top</li>
 						<Link id="submit-link" to="/add-resource">submit</Link>
 						{userData ?
 							<>
