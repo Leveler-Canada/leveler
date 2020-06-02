@@ -30,8 +30,7 @@ class HomeLandingBase extends Component {
     return (
       <section>
         <p>
-          <b>leveler</b> is a tool for people with job security to help people whose work status
-          has been impacted by COVID-19.
+          <b>leveler</b> is a community platform for people to directly distribute funds to others who need it.
           </p>
         <p>
           Click <b>distribute</b> below to be shown 5 individuals to contribute to. Click the payment link
