@@ -4,17 +4,12 @@ import DistributeLink from './DistributeLink';
 
 const INITIAL_STATE = {
 	linkClicked: false,
-	contributeChecked: false
+	contributeChecked: false,
+	errorClicked: false
 };
 
 export default class DistributeCard extends Component {
 	state = { ...INITIAL_STATE };
-
-	setClicked() {
-		this.setState({
-			linkClicked: true
-		})
-	}
 
 	onPaymentLinkClick = (link) => {
 		const { logEvent } = this.props;
@@ -31,9 +26,12 @@ export default class DistributeCard extends Component {
 			url: entry.payment_url[0],
 			timestamp: fieldValue.serverTimestamp()
 		};
-		errorCollection.add(payload).catch(function(error) {
+
+		errorCollection.add(payload).catch((error) => {
 			console.error("Error adding document: ", error);
-		});
+		})
+
+		this.setState({ errorClicked: true });
 	}
 
   	handleCheckboxChange = event => {
@@ -74,6 +72,7 @@ export default class DistributeCard extends Component {
 
 	render() {
 		const { entry } = this.props;
+		const { linkClicked, contributeChecked, errorClicked } = this.state;
 
 		return (
 			<div className="card-container">
@@ -83,15 +82,11 @@ export default class DistributeCard extends Component {
 						{entry.location.state && <p><b>, {entry.location.state}</b></p>}
 					</div>
 					<p><b>{entry.industry}</b></p>
-					{this.state.linkClicked ? (
-					<div onClick={() => this.onReportErrorClick(entry)}>
-						<a
-							href="https://docs.google.com/forms/d/e/1FAIpQLSefrgYTWlmWYtO6l0rJJKTzxnHPLKThX5QazeMHIAkq6Qnh-Q/viewform?usp=sf_link"
-							target="_blank"
-							rel="noopener noreferrer"
-							>report error</a>
-					</div>
-					) : (null)}
+					{/* {linkClicked ? (
+					<button onClick={() => this.onReportErrorClick(entry)}>
+						report error
+					</button>
+					) : (null)} */}
 
 				</div>
 
@@ -107,12 +102,23 @@ export default class DistributeCard extends Component {
 							/>
 						</span>
 					))}
-					{this.state.linkClicked ? (
-						<Checkbox
-							checked={this.state.contributeChecked}
-							onChange={this.handleCheckboxChange}
-          	/>
-					): (null)}
+					<div id="footer-right">
+						{linkClicked ? (
+							<Checkbox
+								checked={contributeChecked}
+								onChange={this.handleCheckboxChange}
+							/>
+						): (null)}
+						{!errorClicked ? (
+						<button type="button" onClick={() => this.onReportErrorClick(entry)}>
+							report error
+						</button>
+						) : (
+							<button type="button" disabled>
+								reported
+							</button>
+						)}
+					</div>
 				</div>
 			</div>
 		)
