@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import CommentModal from '../Modal/CommentModal';
@@ -20,7 +21,6 @@ const ResourceItem = ({
     by,
     created,
     category,
-    kids,
     descendants,
     text,
   } = item;

@@ -135,7 +135,7 @@ class ResourcesContainerBase extends Component {
 		const { logEvent } = this.props.firebase;
 		const { firebase } = this.props;
 		const { isOpen } = this.state;
-		const { authUser, userData } = this.props;
+		const { userData } = this.props;
 
 		const upvote = async (index, score) => {
 			const { fieldValue, resourcesCollection } = this.props.firebase;

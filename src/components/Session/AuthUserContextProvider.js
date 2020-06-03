@@ -37,7 +37,8 @@ const AuthContextProvider = withFirebase(props => {
   const { children, firebase } = props;
 
   React.useEffect(() =>
-    registerAuthChangeListener(firebase, setUserContext, userContext)
+    registerAuthChangeListener(firebase, setUserContext, userContext),
+    [firebase, userContext]
   );
 
   return (
