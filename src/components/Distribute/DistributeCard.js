@@ -22,6 +22,20 @@ export default class DistributeCard extends Component {
 		this.setState({ linkClicked: true });
 	}
 
+	onReportErrorClick = (entry) => {
+		const { errorCollection, fieldValue } = this.props;
+		const payload = {
+			collection: 'entries',
+			type: 'bad_url',
+			id: entry.id,
+			url: entry.payment_url[0],
+			timestamp: fieldValue.serverTimestamp()
+		};
+		errorCollection.add(payload).catch(function(error) {
+			console.error("Error adding document: ", error);
+		});
+	}
+
   	handleCheckboxChange = event => {
 		this.setState({ contributeChecked: event.target.checked })
 		if (event.target.checked) {
@@ -70,7 +84,7 @@ export default class DistributeCard extends Component {
 					</div>
 					<p><b>{entry.industry}</b></p>
 					{this.state.linkClicked ? (
-					<div>
+					<div onClick={() => this.onReportErrorClick(entry)}>
 						<a
 							href="https://docs.google.com/forms/d/e/1FAIpQLSefrgYTWlmWYtO6l0rJJKTzxnHPLKThX5QazeMHIAkq6Qnh-Q/viewform?usp=sf_link"
 							target="_blank"
