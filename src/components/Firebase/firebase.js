@@ -65,6 +65,7 @@ class Firebase {
     this.resourcesCollection = this.dbFs.collection('resources');
     this.commentsCollection = this.dbFs.collectionGroup('comments');
     this.miscCollection = this.dbFs.collection('misc');
+    this.errorCollection = this.dbFs.collection('userReportedError');
   }
   // *** Auth API ***
   doCreateUserWithEmailAndPassword = (email, password) =>

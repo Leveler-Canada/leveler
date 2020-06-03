@@ -178,7 +178,7 @@ class DistributeTableBase extends Component {
 	render() {
 
 		const { entries } = this.state;
-		const { fieldValue, entriesCollection, miscCollection, logEvent } = this.props.firebase;
+		const { fieldValue, entriesCollection, miscCollection, errorCollection, logEvent } = this.props.firebase;
 		return (
 			<div>
 				<DistributeHeader />
@@ -190,6 +190,7 @@ class DistributeTableBase extends Component {
 						fieldValue={fieldValue}
 						entriesCollection={entriesCollection}
 						miscCollection={miscCollection}
+						errorCollection={errorCollection}
 						logEvent={logEvent}
 						onCheckboxClick={this.distributeClick}
 					/>
