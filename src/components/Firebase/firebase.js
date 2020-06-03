@@ -49,6 +49,7 @@ const devConfig = {
 };
 
 const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+const group = process.env.REACT_APP_LEVELER_GROUP;
 
 class Firebase {
   constructor() {
@@ -57,7 +58,7 @@ class Firebase {
     this.auth = app.auth();
     this.fieldValue = app.firestore.FieldValue;
     this.analytics = app.analytics();
-    this.logEvent = app.analytics().logEvent;
+    this.logEvent = (name, ...args) => app.analytics().logEvent(`${group}_${name}`, ...args);
     this.functions = app.functions();
     this.userCollection = this.dbFs.collection('users');
     this.entriesCollection = this.dbFs.collection('entries');
