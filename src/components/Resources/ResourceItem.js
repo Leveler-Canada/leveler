@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
+import Linkify from 'react-linkify';
 import CommentModal from '../Modal/CommentModal';
 import { withFirebase } from '../Firebase';
 import usePersistedState from '../../utils/usePersistedState';
@@ -175,7 +176,7 @@ const ResourceItem = ({
         )}
       </div>
       {view === 'comment'
-       && <div className="resources-item-description"><p>{text}</p></div>}
+       && <div className="resources-item-description"><Linkify><p>{text}</p></Linkify></div>}
     </>
   );
 };
