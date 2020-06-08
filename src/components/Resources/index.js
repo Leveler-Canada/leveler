@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as timeago from 'timeago.js';
-import { withFirebase } from '../Firebase';
 import Header from '../Header';
-import { Loading } from '../Animations'
-import { Leveler } from '../Icons'
-import ResourceItem from './ResourceItem'
+import { Loading } from '../Animations';
+import { Leveler } from '../Icons';
+import AuthModal from '../Modal/AuthModal';
+import ResourceItem from './ResourceItem';
 import FooterNav from '../FooterNav';
+import { withAuthentication } from '../Session';
 
 const ResourcesPage = () => (
 	<div className="wrapper">
@@ -18,7 +19,8 @@ const ResourcesPage = () => (
 
 const INITIAL_STATE = {
 	links: [],
-	loading: true
+	loading: true,
+	isOpen: false,
 };
 
 class ResourcesContainerBase extends Component {
@@ -26,39 +28,58 @@ class ResourcesContainerBase extends Component {
 
 	componentDidMount() {
 		document.title = "leveler: resources"
-		this.getTopLinks()
+		this.getNewLinks();
 	}
 
-	async getTopLinks() {
+	sortByDate(numDays) {
+		const d = new Date();
+		const sortDate = new Date(d.setDate(d.getDate() - numDays));
+		return sortDate;
+	}
+
+	sortByScore(arr) {
+		arr.sort((a,b) => {
+			return b.score - a.score
+		})
+	}
+
+	async getTopLinks(numDays = 3) {
 		this.setState({
 			loading: true
 		})
 
 		let links = [];
 		const { resourcesCollection } = this.props.firebase;
+		const limit = 30;
+
 		try {
 			await resourcesCollection
-				.where("type", "==", "story")
-				.orderBy("score", "desc")
-				.limit(30)
+				.where("created", ">", this.sortByDate(numDays))
 				.get()
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
 						let link = doc.data();
 						// SET UP ID
 						link.id = doc.id;
+						// SET UP PATH
+						link.path = doc.ref.path;
 						// SET UP TIMEAGO
 						const date = doc.data().created.toDate()
 						link.created = timeago.format(date)
-						// PUSH TO STATE
+						// PREP FOR STATE
 						links.push(link)
 					})
 				})
-				if (links) {
+				if (links && links.length >= limit) {
+					links = links
+						.sort((a, b) => b.score - a.score)
+						.slice(0, limit);
 					this.setState({
 						links,
 						loading: false
 					})
+				} else {
+					this.getTopLinks(numDays * 2); // TODO: Could instead add 1, 2, ... or multiply by a smaller number?
 				}
 		} catch(e) {
 			console.log(e.message)
@@ -90,6 +111,8 @@ class ResourcesContainerBase extends Component {
 						let link = doc.data();
 						// SET UP ID
 						link.id = doc.id;
+						// SET UP PATH
+						link.path = doc.ref.path;
 						// SET UP TIMEAGO
 						const date = doc.data().created.toDate()
 						link.created = timeago.format(date)
@@ -110,17 +133,15 @@ class ResourcesContainerBase extends Component {
 
 	render() {
 		const { logEvent } = this.props.firebase;
-
-		const linkClicked = async (url) => {
-			await logEvent("resource_link_clicked", {url: url});
-		}
+		const { firebase } = this.props;
+		const { isOpen } = this.state;
+		const { userData } = this.props;
 
 		const upvote = async (index, score) => {
 			const { fieldValue, resourcesCollection } = this.props.firebase;
 
 			const { links } = this.state;
 			links[index].score = score;
-			links[index].active = true;
 
 			updateUserKarma(links[index].by)
 			// UPDATE LINK SCORE
@@ -176,6 +197,8 @@ class ResourcesContainerBase extends Component {
 							let link = doc.data();
 							// SET UP ID
 							link.id = doc.id;
+							// SET UP PATH
+							link.path = doc.ref.path;
 							// SET UP TIMEAGO
 							const date = doc.data().created.toDate()
 							link.created = timeago.format(date)
@@ -194,13 +217,39 @@ class ResourcesContainerBase extends Component {
 				}
 		}
 
+		const logout = () => {
+			const { doSignOut } = this.props.firebase;
+				doSignOut()
+		}
+
+		// MODAL STATE MANAGEMENT
+		const toggleModal = (isOpen) => {
+			this.setState({
+				isOpen: !isOpen
+			})
+		}
+
 		return (
 			<>
+				<AuthModal
+					toggleModal={toggleModal}
+					isOpen={isOpen}
+					firebase={firebase}
+				/>
 				<nav className="resources-header">
 					<ul>
-						<Link to="/" id="leveler-icon"><Leveler /></Link>
-						<li onClick={() => {this.getTopLinks()}}>top</li>
+						<li onClick={() => {this.getTopLinks()}} id="leveler-icon"><Leveler /></li>
 						<li onClick={() => {this.getNewLinks()}}>new</li>
+						<li onClick={() => {this.getTopLinks()}}>top</li>
+						<Link id="submit-link" to="/add-resource">submit</Link>
+						{userData ?
+							<>
+							<li id="user-id">{userData.id} ({userData.karma})</li>
+							<span>|</span>
+							<button onClick={() => {logout()}}>logout</button>
+							</>
+							:
+							<li onClick={() => {toggleModal(this.state.isOpen)}}>login</li>}
 					</ul>
 				</nav>
 				<div className="resources-body">
@@ -209,19 +258,12 @@ class ResourcesContainerBase extends Component {
 					{!this.state.loading ? (
 						this.state.links.map((item, index) =>
 							<ResourceItem
-								index={index}
 								key={item.id}
-								id={item.id}
-								score={item.score}
-								title={item.title}
-								url={item.url}
-								by={item.by}
-								category={item.category}
-								created={item.created}
+								index={index}
+								item={item}
 								upvote={upvote}
-								active={this.state.links[index].active}
 								getByCategory={getByCategory}
-								linkClicked={linkClicked}
+								userData={userData}
 							/>
 						)
 					): null}
@@ -231,7 +273,7 @@ class ResourcesContainerBase extends Component {
 	}
 }
 
-const ResourcesContainer = withFirebase(ResourcesContainerBase);
+const ResourcesContainer = withAuthentication(ResourcesContainerBase);
 
 export default ResourcesPage;
 

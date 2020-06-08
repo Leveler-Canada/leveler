@@ -9,21 +9,6 @@ const FooterNav = (props) => {
     logEvent('contribute_url_clicked_footer_nav');
   };
 
-  const onDistributeClick = () => {
-    const { logEvent } = props.firebase;
-    logEvent('distribute_url_clicked_footer_nav');
-  };
-
-  const onReceiveClick = () => {
-    const { logEvent } = props.firebase;
-    logEvent('receive_url_clicked_footer_nav');
-  };
-
-  const onResourcesClick = () => {
-    const { logEvent } = props.firebase;
-    logEvent('resources_url_clicked_footer_nav');
-  };
-
   const onContributeClick = () => {
     const { logEvent } = props.firebase;
     logEvent('contribute_url_clicked_footer_nav');
@@ -33,27 +18,6 @@ const FooterNav = (props) => {
     <footer>
       <Link to="/about" onClick={onAboutClick}>
         about leveler
-      </Link>
-
-      <Link
-        to="/distribute"
-        onClick={onDistributeClick}
-      >
-        distribute
-      </Link>
-
-      <Link
-        to="/signup"
-        onClick={onReceiveClick}
-      >
-        receive
-      </Link>
-
-      <Link
-        to="/resources"
-        onClick={onResourcesClick}
-      >
-        resources
       </Link>
 
       <a

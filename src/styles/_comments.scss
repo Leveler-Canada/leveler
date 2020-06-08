@@ -1,0 +1,57 @@
+.comments-container {
+	padding-top: 20px;
+	div:first-child {
+		padding-left: 0
+	}
+}
+.comment-container {
+
+	&.sub-comment {
+		padding-left: 25px;
+	}
+
+	.comment-header {
+		display: flex;
+		p {
+			font-size: .9rem;
+			margin-right: .5rem;
+		}
+		button {
+			margin-right: .2rem;
+			padding: 0;
+			cursor: pointer;
+			background-color: transparent;
+			font-size: 1.1rem;
+				border: 0;
+				&:focus {
+					outline:0;
+				}
+			}
+			:last-of-type  {
+				color: dodgerblue;
+			}
+	}
+
+	.comment-body {
+		font-size: 1rem;
+		margin-bottom: 10px;
+		p {
+			white-space: pre-line;
+			line-height: 1.5rem;
+			margin-left: 1.5rem;
+		}
+	}
+
+	.comment-footer {
+		margin-bottom: 20px;
+		button {
+			margin-left: 1.5rem;
+			padding: 2px 7px;
+			border: 1px solid black;
+			outline: none;
+			font-size: .8rem;
+			cursor: pointer;
+			font-weight: 600;
+		}
+	}
+}

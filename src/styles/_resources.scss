@@ -5,16 +5,41 @@
 		top: 5px;
 	}
 	ul {
+		display: flex;
+		align-items: center;
 		padding: 5px 10px;
 		list-style: none;
 	}
 	li {
-		display: inline-flex;
 		margin: 0 15px;
 		font-size: 1.1rem;
 		color: white;
 		cursor: pointer;
+
+		&:last-of-type {
+			margin-left: auto;
+			margin-right: 0;
+		}
 	}
+	#submit-link {
+		margin: 0 15px;
+		font-size: 1.1rem;
+		color: white;
+		cursor: pointer;
+		text-decoration: none;
+	}
+	span {
+		margin-left: 10px;
+		color: white;
+	}
+	button {
+		cursor: pointer;
+		background: transparent;
+		color: white; 
+		font-size: 1.1rem;
+		border: 0;
+	}
+
 }
 
 .resources-body {
@@ -24,12 +49,12 @@
 
 .resources-item {
 	&-container {
+		&.comment-modal-resource {
+			padding-left: 0;
+		}
 		display: flex;
 		align-items: baseline;
 		padding: 10px;
-		&:last-child {
-			border-bottom: 1px solid darkgray;
-		}
 		& > div {
 			margin-right: 8px;
 			align-items: baseline;
@@ -46,7 +71,7 @@
 					}
 				}
 			p {
-				font-size: 1rem;
+				font-size: .9rem;
 				&:last-child {
 					text-align: center;
 					margin-left: -3px;
@@ -57,10 +82,33 @@
 		
 		.resources-item-title {
 			display: block;
-			width:100%;
+			width: 100%;
 			a {
 				font-size: 1.1rem;
 				color: black;
+			}
+
+			#no-link {
+				display: inline-block;
+				cursor: pointer;
+				font-size: 1.1rem;
+				text-decoration: underline;
+				width: fit-content;
+
+
+				&.comment-view {
+					cursor: default;
+				}
+			}
+
+			#comments {
+				cursor: pointer;
+				margin-left: 5px;
+				font-size: 0.9rem;
+				text-decoration: none;
+				span {
+					font-size: 1.1rem;
+				}
 			}
 			p {
 				font-size: 0.8rem;
@@ -82,11 +130,28 @@
 		}
 	}
 }
+
+.resources-item-description  {
+	padding: 0 10px 10px 10px;
+	p {
+		white-space: pre-line;
+    line-height: 1.5rem;
+		font-size: 1rem;
+	}
+}
+
 .resources-item-category-mobile {
 	display: none;
 }
 
 @media (max-width: 480px) {
+	.resources-header {
+		ul {
+			#user-id, span {
+				display: none;
+			}
+		}
+	}
 	.resources-body {
 		font-size: 1rem;
 	}

@@ -34,11 +34,6 @@
     display: flex;
   }
 
-  a {
-    color: red;
-    text-decoration: underline;
-  }
-
   @media (max-width: 450px) {
     font-size: 0.9rem;
   }
@@ -60,6 +55,23 @@
 
   a {
     padding-right: 20px;
+  }
+  #footer-right {
+    display: flex;
+
+    button {
+      cursor: pointer;
+      margin-left: 15px;
+      background-color: transparent;
+      color: red;
+      text-decoration: underline;
+      border: 0;
+
+      &:disabled {
+        opacity: 0.75;
+        cursor: auto;
+      }
+    }
   }
 }
 

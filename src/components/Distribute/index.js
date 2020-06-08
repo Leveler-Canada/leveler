@@ -71,8 +71,8 @@ class DistributeTableBase extends Component {
 	async getEntries(locale) {
 		let entries = [];
 		const { entriesCollection } = this.props.firebase;
-
 		const { country_code, region_code } = locale || DEFAULT_LOCALE;
+
 		const random = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 
 		if (country_code !== "US") {
@@ -147,20 +147,6 @@ class DistributeTableBase extends Component {
 		return result;
 		}
 
-	getRandom(arr, n) {
-		let result = new Array(n),
-			len = arr.length,
-			taken = new Array(len);
-		if (n > len)
-			throw new RangeError("getRandom: more elements taken than available");
-		while (n--) {
-				let x = Math.floor(Math.random() * len);
-			result[n] = arr[x in taken ? taken[x] : x];
-			taken[x] = --len in taken ? taken[len] : len;
-			}
-		return result;
-		}
-
 	async updateShownCount(docId) {
 		const { fieldValue, entriesCollection } = this.props.firebase;
 		const docRef = entriesCollection.doc(docId)
@@ -192,7 +178,7 @@ class DistributeTableBase extends Component {
 	render() {
 
 		const { entries } = this.state;
-		const { fieldValue, entriesCollection, miscCollection, logEvent } = this.props.firebase;
+		const { fieldValue, entriesCollection, miscCollection, errorCollection, logEvent } = this.props.firebase;
 		return (
 			<div>
 				<DistributeHeader />
@@ -204,6 +190,7 @@ class DistributeTableBase extends Component {
 						fieldValue={fieldValue}
 						entriesCollection={entriesCollection}
 						miscCollection={miscCollection}
+						errorCollection={errorCollection}
 						logEvent={logEvent}
 						onCheckboxClick={this.distributeClick}
 					/>
