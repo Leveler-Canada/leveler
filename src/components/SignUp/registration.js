@@ -173,13 +173,13 @@ const Registration = (props) => {
           <RadioButtonGroup
             id="radioGroup"
             label="industry*"
-            <span className="description">
-              if your profession(s) fall under multiple industries, select what you feel most comfortable sharing.
-            </span>
             value={values.industry}
             error={errors.industry}
             touched={touched.industry}
           >
+            <span className="description">
+              if your profession(s) fall under multiple industries, select what you feel most comfortable sharing.
+            </span>
             <Field
               component={RadioButton}
               name="industry"
