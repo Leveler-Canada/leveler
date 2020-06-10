@@ -16,7 +16,7 @@ const addURLScheme = (url) => (/^https?:\/\//.test(url) ? url : `https://${url}`
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().trim().test(
     'validate unique email',
-    'this email is in our system already. reach out to us at leveler.info@gmail.com if you think this is a mistake!',
+    'this email is in our system already. reach out to us at canada@leveler.info if you think this is a mistake!',
     (value) => fetch(`${FUNCTIONS_URL}/validateUniqueEmail?email=${value}`).then((resp) => resp.status === 200),
   ).required(REQUIRED_ERROR),
   industry: Yup.string().min(1),
@@ -147,6 +147,9 @@ const Registration = (props) => {
         <Form onSubmit={handleSubmit}>
           <fieldset>
             <label htmlFor="email">email:</label>
+            <span className="description">
+              not public. we will not share this with anyone.
+            </span>
             <Field
               type="email"
               name="email"
@@ -158,8 +161,7 @@ const Registration = (props) => {
           <fieldset>
             <label htmlFor="location">location*</label>
             <span className="description">
-              begin typing your city to select the appropriate state and/or
-              country
+              begin typing your city to select the appropriate province and/or country.
             </span>
             <Field
               name="location"
@@ -171,6 +173,9 @@ const Registration = (props) => {
           <RadioButtonGroup
             id="radioGroup"
             label="industry*"
+            <span className="description">
+              if your profession(s) fall under multiple industries, select what you feel most comfortable sharing.
+            </span>
             value={values.industry}
             error={errors.industry}
             touched={touched.industry}
@@ -226,7 +231,7 @@ const Registration = (props) => {
           <fieldset>
             <label>context*</label>
             <span className="description">
-              tell us what you feel comfortable sharing about your situation
+              tell us what you feel comfortable sharing about your situation.
             </span>
             <Field
               as="textarea"
@@ -239,7 +244,7 @@ const Registration = (props) => {
           <fieldset>
             <label htmlFor="payment">payment*</label>
             <span className="description">
-              please post the full url to your venmo, paypal, or cashapp payment method
+              please post the full url to your <a href="https://www.paypal.me/">paypal.me</a> link to receive payment. note that your name may be visible to distributors who click your link. interac is not supported because we do not publically share email addresses.
             </span>
             <input
               type="text"
@@ -266,7 +271,7 @@ const Registration = (props) => {
           <fieldset>
             <label htmlFor="social_url">social</label>
             <span className="description">
-              please provide full url for your social media handle. Will not be
+              please provide full url for your social media handle. will not be
               made public, however you may get DM'ed by an admin to verify your
               identity.
             </span>
