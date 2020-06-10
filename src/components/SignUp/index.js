@@ -23,6 +23,7 @@ class SignUpFormBase extends Component {
         <p><b>GUIDELINES:</b></p>
         <ol>
           <li className="bold">Only submit to the database if you are directly impacted.</li>
+          <li>All professions are welcome.</li>
           <li>If you got what you need, ask to be removed by emailing leveler.info@gmail.com</li>
           <li>If you've received too much, consider redistributing it.</li>
         </ol>
