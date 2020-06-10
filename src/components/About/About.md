@@ -4,13 +4,13 @@ Leveler is a community platform that facilitates donations from people who have 
 
 ### How it works: 
 
-  **Recipients** who need funds can apply with their venmo/paypal direct payment links by clicking “receive”.
+  **Recipients** who need funds can apply with their paypal.me direct payment link by clicking “receive”. All professions welcome. We do not collect names, and email addresses are kept private.
 
   **Distributors** can donate funds to up to five individuals at a time, by clicking “distribute” and then completing payment to the five individual recipients they have been assigned. Recipients are pulled by geographic region based on the IP address of the distributor. If you are distributing funds using a VPN, you will be directed to individuals in your VPN’s locale.
 
   **Resources** are community-run and available publicly. Recipients, distributors and anyone interested can contribute helpful links, comments or discussion to our community by clicking “resources”.
 
-  **Micro-communities** are offshoots of the leveler database that contain only recipients from a specific community or that share a specific need. If you want to create a leveler database specific to your cause or community, contact us: leveler.info@gmail.com
+  **Micro-communities** are offshoots of the leveler database that contain only recipients from a specific community or that share a specific need. If you want to create a leveler database specific to your cause or community, contact us: canada@leveler.info
 
 ### Guiding Principles
 
@@ -18,7 +18,7 @@ Leveler is a community platform that facilitates donations from people who have 
 
   **Resources will be shared freely.** Even if you are not in a position to receive or distribute, through our resources page, anyone can add to the conversation. Our resources page is a place to strategize, organize and connect with other mutual aid efforts and funding opportunities.
 
-  **Our community is built on trust.** If you are a recipient and have received what you need, we ask that you remove yourself from the database by emailing remove@leveler.info. If you have received more than what you need, please consider distributing funds back to other recipients by visiting http://leveler.info and clicking “distribute”.
+  **Our community is built on trust.** If you are a recipient and have received what you need, we ask that you remove yourself from the database by emailing canada@leveler.info. If you have received more than what you need, please consider distributing funds back to other recipients by visiting http://canada.leveler.info and clicking “distribute”.
 
   **We can bail each other out.** We have a shared responsibility toward one another. By being part of leveler’s database, you are connected to people in your community who are also in a position to receive assistance. When you share leveler among your peers who are in salaried or financially stable positions, you are helping the entire community receive funding.
 
@@ -33,19 +33,19 @@ Leveler is a community platform that facilitates donations from people who have 
 
    1. Click "Distribute" to be assigned a group of 5 people.
 
-   2. Venmo, Paypal each of them via their payment link.
+   2. Send money each of them via their Paypal link.
 
    3. When you're done with each person, check the box that says 'I Contributed'.
 
-   4. We strongly suggest sending the same amount to each person (ie: 5.00 x 10 = 50.00 total).
+   4. We strongly suggest sending the same amount to each person (ie: 10.00 x 5 = 50.00 total).
 
    5. If you wish to distribute an amount larger than 100 dollars, we suggest you repeat steps 1 and 2 until you are satisfied with the amount that you have distributed.
 
 ### Guidelines for recipients:
 
-  People who add themselves to the database acknowledge that they are putting their venmo/paypal/payment link into a database that will be surfaced online. This means anyone can see it. We will always keep your email address private.
+  People who add themselves to the database acknowledge that they are putting their paypal link into a database that will be surfaced online. This means anyone can see it. We will always keep your email address private.
 
-   1. If you find that you no longer need to be listed as a recipient on leveler, please consider removing yourself from the database by emailing an admin: remove@leveler.info
+   1. If you find that you no longer need to be listed as a recipient on leveler, please consider removing yourself from the database by emailing an admin: canada@leveler.info
 
    2. This is self-governed and self-policed. Please look out for each other and people you know. Do not add yourself twice. If you add yourself twice you will be removed.
 
@@ -67,7 +67,7 @@ If you are a developer and you want to help, please email: **adb@leveler.info**
   Oneil, Front-End
 
 ### Leveler Canada
-  Alex, Organizer, alex@leveler.info
+  Alex, Organizer, alex@leveler.info [website](https://alexnawotka.fun/) [instagram](https://www.instagram.com/limen.fun/)
 
   Ben, Engineer
 
